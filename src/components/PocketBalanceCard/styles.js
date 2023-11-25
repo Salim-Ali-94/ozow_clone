@@ -26,7 +26,19 @@ export const styles = StyleSheet.create({
 
     balanceContainer: {
 
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center",
+        // backgroundColor: "#fff",
+        height: 50,
+        // paddingBottom: 5
+        marginBottom: 5
+    },
+
+    rightArrow: {
+
+        tintColor: constants.primary,
+        width: 18,
+        height: 18
     },
 
     valueText: {
@@ -44,3 +56,45 @@ export const styles = StyleSheet.create({
     }
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const boxShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
+
+//     if (Platform.OS === "ios") {
+
+//         styles.boxShadow = {
+
+//             shadowColor: shadowColourIOS,
+//             shadowOffset: { width: xOffset, height: yOffset },
+//             shadowOpacity,
+//             shadowRadius
+//         };
+
+//     } else if (Platform.OS === "android") {
+
+//         styles.boxShadow = {
+
+//             elevation,
+//             shadowColor: shadowColourAndroid
+//         };
+//     }
+// };
+
+
+// boxShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
+// export default styles;

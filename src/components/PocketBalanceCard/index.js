@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { styles } from "./styles";
 
 
@@ -12,9 +12,10 @@ export default function PocketBalanceCard() {
             
             <View style={styles.balanceContainer}>
 
-                <Text style={styles.valueText}>R0.0</Text>
+                <Text style={styles.valueText}>R0.00</Text>
                 {/* <View style={styles.valueText}>{">"}</View> */}
-                <Text style={styles.valueText}>{">"}</Text>
+                {/* <Text style={styles.valueText}>{">"}</Text> */}
+                <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} />
 
             </View>
 
