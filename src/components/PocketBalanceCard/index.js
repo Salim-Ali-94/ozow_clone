@@ -13,7 +13,8 @@ export default function PocketBalanceCard({ amount }) {
             <View style={styles.balanceContainer}>
 
                 <Text numberOfLines={1}
-                      style={styles.valueText}>R{amount.toFixed(2)}</Text>
+                      style={styles.valueText}
+                      testID="pocket-balance-amount">R{amount.toFixed(2)}</Text>
 
                 <View style={styles.space} />
 
