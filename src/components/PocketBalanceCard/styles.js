@@ -7,19 +7,16 @@ const styles = StyleSheet.create({
     card: {
 
         backgroundColor: "#ffffff",
-        // backgroundColor: "#000000",
         borderRadius: 20,
         width: "90%",
         height: 140,
         justifyContent: "space-between",
         padding: 20
-        // padding: 10
     },
 
     headingText: {
 
         color: "#000000",
-        // color: "#ffffff",
         fontFamily: "poppins_medium",
         fontSize: 16
     },
@@ -28,12 +25,13 @@ const styles = StyleSheet.create({
 
         flexDirection: "row",
         alignItems: "center",
-        // backgroundColor: "#fff",
         height: 50,
-        // paddingBottom: 5
-        marginBottom: 5,
-        width: "36%",
-        justifyContent: "space-between"
+        marginBottom: 5
+    },
+
+    space: {
+
+        width: 5
     },
 
     rightArrow: {
@@ -52,9 +50,8 @@ const styles = StyleSheet.create({
 
     plainText: {
 
-        color: "gray",
+        color: "grey",
         fontFamily: "poppins_regular",
-        fontSize: 14
     }
 
 });

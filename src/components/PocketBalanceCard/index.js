@@ -2,7 +2,7 @@ import { View, Text, Image } from "react-native";
 import styles from "./styles";
 
 
-export default function PocketBalanceCard() {
+export default function PocketBalanceCard({ amount }) {
 
     return (
 
@@ -12,7 +12,11 @@ export default function PocketBalanceCard() {
             
             <View style={styles.balanceContainer}>
 
-                <Text style={styles.valueText}>R0.00</Text>
+                <Text numberOfLines={1}
+                      style={styles.valueText}>R{amount.toFixed(2)}</Text>
+
+                <View style={styles.space} />
+
                 <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} />
 
             </View>
