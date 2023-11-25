@@ -1,0 +1,99 @@
+name: React.js Continuous Integartion Workflow Checks
+
+on:
+
+  push:
+
+jobs:
+
+  testing:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Checkout code from branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js for running react-based apps on the remote machine
+        uses: actions/setup-node@v3
+
+        with:
+
+          node-version: 18.15.0
+
+      - name: Install dependencies required to run the project on another computer
+        run: npm install --force
+
+      - name: Run test scripts
+        run: npm run test
+
+  linting:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code to prepare for linting checks on remote server
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js to run web apps on host machine
+        uses: actions/setup-node@v3
+
+        with:
+
+          node-version: 18.15.0
+
+      - name: Install all dependencies required for running the app on the server
+        run: npm install --force
+
+      - name: Run lint checks on all react.js project files
+        run: npm run lint
+
+  scanning:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code to prepare for vulnerability scans on remote server
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js to run app on remote computer
+        uses: actions/setup-node@v3
+
+        with:
+
+          node-version: 18.15.0
+
+      - name: Install dependencies required for running the app and security scans on the server
+        run: |
+
+          npm install
+          npm install snyk -g
+          snyk auth ${{ secrets.SNYK_AUTH_TOKEN }}
+
+      - name: Perform vulnerability scan on all project dependencies
+        run: snyk test --all-projects
+
+  # building:
+
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+
+  #     - name: Checkout codebase to prepare project for build job on remote server
+  #       uses: actions/checkout@v3
+
+  #     - name: Setup Node.js to run app on remote computer
+  #       uses: actions/setup-node@v3
+
+  #       with:
+
+  #         node-version: 18.15.0
+
+  #     - name: Install dependencies required for running the web app on Github host machine
+  #       run: npm install --force
+
+  #     - name: Build the project
+  #       run: npm run build
