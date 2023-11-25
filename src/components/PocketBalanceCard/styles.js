@@ -1,13 +1,13 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import * as constants from "../../utility/constants";
 
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
     card: {
 
-        // backgroundColor: "#ffffff",
-        backgroundColor: "#000",
+        backgroundColor: "#ffffff",
+        // backgroundColor: "#000000",
         borderRadius: 20,
         width: "90%",
         height: 140,
@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
 
     headingText: {
 
-        // color: "#000",
-        color: "#ffffff",
+        color: "#000000",
+        // color: "#ffffff",
         fontFamily: "poppins_medium",
         fontSize: 16
     },
@@ -31,7 +31,9 @@ export const styles = StyleSheet.create({
         // backgroundColor: "#fff",
         height: 50,
         // paddingBottom: 5
-        marginBottom: 5
+        marginBottom: 5,
+        width: "36%",
+        justifyContent: "space-between"
     },
 
     rightArrow: {
@@ -57,44 +59,27 @@ export const styles = StyleSheet.create({
 
 });
 
+const boxShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
 
+    if (Platform.OS === "ios") {
 
+        styles.boxShadow = {
 
+            shadowColor: shadowColourIOS,
+            shadowOffset: { width: xOffset, height: yOffset },
+            shadowOpacity,
+            shadowRadius
+        };
 
+    } else if (Platform.OS === "android") {
 
+        styles.boxShadow = {
 
+            elevation,
+            shadowColor: shadowColourAndroid
+        };
+    }
+};
 
-
-
-
-
-
-
-
-
-
-// const boxShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
-
-//     if (Platform.OS === "ios") {
-
-//         styles.boxShadow = {
-
-//             shadowColor: shadowColourIOS,
-//             shadowOffset: { width: xOffset, height: yOffset },
-//             shadowOpacity,
-//             shadowRadius
-//         };
-
-//     } else if (Platform.OS === "android") {
-
-//         styles.boxShadow = {
-
-//             elevation,
-//             shadowColor: shadowColourAndroid
-//         };
-//     }
-// };
-
-
-// boxShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
-// export default styles;
+boxShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
+export default styles;
