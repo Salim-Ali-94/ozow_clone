@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
+import * as constants from "./src/utility/constants";
 
 
 const Stack = createNativeStackNavigator();
@@ -69,10 +70,11 @@ export default function App() {
         {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="Analytics" component={Analytics} options={{ headerTintColor: "#ffffff", headerStyle: { backgroundColor: constants.lunar }, headerTitle: "", headerShadowVisible: false }} /> */}
         <Stack.Screen name="Home" component={Home} options={{ headerTitle: "", headerShadowVisible: false, headerBackground: () => <LinearGradient
-      colors={['#a13388', '#10356c']}
+      // colors={['#a13388', '#10356c']}
+      colors={[constants.primary, constants.secondary]}
       style={{ flex: 1 }}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
+      start={{x: 0, y: 0.5}}
+      end={{x: 1, y: 0.5}}
     />
         
         // navigationOptions: {

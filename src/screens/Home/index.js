@@ -10,26 +10,20 @@ export default function Home() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: "#ffffff", flex: 1 }}>
+    // <SafeAreaView style={{ backgroundColor: "#ffffff", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
 
       <ScrollView showVerticalScrollIndicator={false}>
 
-        {/* <StatusBar backgroundColor={<LinearGradient
-      colors={['#a13388', '#10356c']}
-      style={{ flex: 1 }}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 0}}
-    />}
-                   barStyle="dark-content" /> */}
+          {/* <LinearGradient colors={["#79e3fe", "#635df8", "#42385D"]}  style={{ flex: 1 }}> */}
+          <LinearGradient colors={[constants.primary, constants.secondary]} 
+                          style={{ flex: 1 }}
+                          start={{ x: 0, y: 0.5 }}
+                          end={{ x: 1, y: 0.5 }}>
 
+             <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-
-<LinearGradient colors={["#79e3fe","#635df8","#42385D"]}  style={{flex: 1}}>
-    <StatusBar translucent={true} backgroundColor={'transparent'} />
-  </LinearGradient >
-
-
-
+          </LinearGradient >
 
           <View style={styles.section}>
 
