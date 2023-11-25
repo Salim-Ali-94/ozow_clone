@@ -1,4 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import * as constants from "../../utility/constants";
@@ -13,8 +14,22 @@ export default function Home() {
 
       <ScrollView showVerticalScrollIndicator={false}>
 
-        <StatusBar backgroundColor="#ffffff"
-                   barStyle="dark-content" />
+        {/* <StatusBar backgroundColor={<LinearGradient
+      colors={['#a13388', '#10356c']}
+      style={{ flex: 1 }}
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 0}}
+    />}
+                   barStyle="dark-content" /> */}
+
+
+
+<LinearGradient colors={["#79e3fe","#635df8","#42385D"]}  style={{flex: 1}}>
+    <StatusBar translucent={true} backgroundColor={'transparent'} />
+  </LinearGradient >
+
+
+
 
           <View style={styles.section}>
 
