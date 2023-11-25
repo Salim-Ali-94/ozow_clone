@@ -8,7 +8,7 @@ export default function PocketBalanceCard({ amount }) {
 
         <View style={[styles.card, styles.boxShadow]}>
 
-            <Text style={styles.headingText}>POKET BALANCE</Text>
+            <Text style={styles.headingText}>POCKET BALANCE</Text>
             
             <View style={styles.balanceContainer}>
 

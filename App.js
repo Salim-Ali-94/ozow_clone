@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import PocketBalanceCard from "./src/components/PocketBalanceCard";
+import { styles } from "./src/screens/Home/styles";
 
 
 export default function App() {
@@ -13,9 +14,15 @@ export default function App() {
         <StatusBar backgroundColor="#ffffff"
                    barStyle="dark-content" />
 
-          <View>
+          <View style={styles.overviewSection}>
 
-            <PocketBalanceCard amount={1234567890.09876} />
+            <Text style={[styles.sectionText, { marginBottom: 20 }]}>Overview</Text>
+
+            <View style={styles.cardSection}>
+
+              <PocketBalanceCard amount={1234567890.09876} />
+
+            </View>
 
           </View>
 

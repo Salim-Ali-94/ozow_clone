@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     headingText: {
 
         color: "#000000",
-        fontFamily: "poppins_medium",
+        fontFamily: "poppins_bold",
         fontSize: 16
     },
 
