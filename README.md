@@ -5,4 +5,7 @@ full-stack project cloning the ozow.me app using react native (cli)
 
 # key concepts
 
-- ci actions
+- ci pipeline
+- modular component design
+- extensive automated component testing
+- responsive design principles
