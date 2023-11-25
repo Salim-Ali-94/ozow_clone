@@ -6,8 +6,8 @@ module.exports = {
 
     // quotes: ["error", "double"]
     quotes: "off",
-    comma_dangle: "off",
-    no_trailing_spaces: "off",
+    "comma-dangle": "off",
+    "no-trailing-spaces": "off",
     "prettier/prettier": 0
 
   }
