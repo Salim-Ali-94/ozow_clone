@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import styles from "./styles";
 
 
@@ -6,7 +6,8 @@ export default function PocketBalanceCard({ amount }) {
 
     return (
 
-        <View style={[styles.card, styles.boxShadow]}>
+        <Pressable style={[styles.card, styles.boxShadow]}
+                    onPress={() => alert("pocket balance card")}>
 
             <Text style={styles.headingText}>POCKET BALANCE</Text>
             
@@ -24,7 +25,7 @@ export default function PocketBalanceCard({ amount }) {
 
             <Text style={styles.plainText}>Top up your pocket safely and securely.</Text>
 
-        </View>
+        </Pressable>
 
     );
 
