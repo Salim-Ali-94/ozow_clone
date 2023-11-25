@@ -1,4 +1,4 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 
 
@@ -6,7 +6,8 @@ export default function ActionCard({ category, icon }) {
 
     return (
 
-        <View style={styles.card}>
+        <Pressable style={styles.card}
+                   onPress={() => alert("action card")}>
 
             <View style={styles.group}>
 
@@ -17,7 +18,7 @@ export default function ActionCard({ category, icon }) {
 
             </View>
 
-        </View>
+        </Pressable>
 
     );
 
