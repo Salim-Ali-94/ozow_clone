@@ -1,6 +1,7 @@
 
 export const primary = "#2de38d";
 export const secondary = "#96a6fc";
+export const accent = "#71b9dc";
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
