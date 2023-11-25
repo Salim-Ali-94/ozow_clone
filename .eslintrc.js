@@ -8,7 +8,8 @@ module.exports = {
     quotes: "off",
     "comma-dangle": "off",
     "no-trailing-spaces": "off",
-    "prettier/prettier": 0
+    "prettier/prettier": 0,
+    "react/react-in-jsx-scope": "off"
 
   }
 
