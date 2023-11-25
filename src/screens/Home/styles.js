@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 
-    overviewSection: {
+    section: {
 
         marginTop: 30,
         paddingBottom: 30
@@ -20,6 +20,6 @@ export const styles = StyleSheet.create({
         color: "#000000",
         fontSize: 16,
         marginLeft: "5%"
-    }
+    },
 
 });

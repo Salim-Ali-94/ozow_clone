@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
 import PocketBalanceCard from "./src/components/PocketBalanceCard";
 import ActionCard from "./src/components/ActionCard";
 import { styles } from "./src/screens/Home/styles";
+import * as constants from "./src/utility/constants";
 
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
         <StatusBar backgroundColor="#ffffff"
                    barStyle="dark-content" />
 
-          <View style={styles.overviewSection}>
+          <View style={styles.section}>
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Overview</Text>
 
@@ -27,17 +28,18 @@ export default function App() {
 
           </View>
 
-          <View style={styles.overviewSection}>
+          <View style={styles.section}>
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Quick actions</Text>
 
-            {/* <View style={styles.cardSection}> */}
-            <View style={{ marginLeft: "5%" }}>
-
-              <ActionCard category="Get Paid"
-                          icon={require("./src/assets/icons/cash.png")} />
-
-            </View>
+            <FlatList horizontal={true}
+                      data={constants.actions}
+                      showsHorizontalScrollIndicator={false}
+                      renderItem={({ item, index }) => (<ActionCard category={item.category}
+                                                              icon={item.icon}
+                                                              left_gap={(index == 0) ? 20 : 10}
+                                                              right_gap={(index == constants.actions.length - 1) ? 20 : 0}
+                                                              key={item.id} />)} />
 
           </View>
 
