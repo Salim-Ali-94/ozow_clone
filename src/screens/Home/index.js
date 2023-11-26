@@ -58,8 +58,8 @@ export default function Home() {
 
             <View style={styles.cardSection}>
 
-              <IconButton icon={""}
-                          category="" />
+              <IconButton icon={require("../../assets/icons/ozow.png")}
+                          category="Ozow.ME" />
 
             </View>
 
