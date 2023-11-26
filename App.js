@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Animated, TouchableOpacity, Alert, Text, View } from "react-native";
+import { StyleSheet, Image, Animated, Pressable, Alert, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import LinearGradient from "react-native-linear-gradient";
@@ -62,8 +62,8 @@ export default function App() {
 
     return (
 
-      <TouchableOpacity onPress={() => navigate(routeName)}
-                        style={styles.tabItem}>
+      <Pressable onPress={() => navigate(routeName)}
+                 style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
 
@@ -72,7 +72,7 @@ export default function App() {
                         // fontSize: 14, fontFamily: "poppins_semi_bold",
                        color: (routeName === selectedTab) ? "#000000" : "grey" }}>{routeName}</Text> */}
 
-      </TouchableOpacity>
+      </Pressable>
 
     );
 
@@ -101,14 +101,13 @@ export default function App() {
 
                                                   <Animated.View>
 
-                                                    <TouchableOpacity 
-                                                    style={styles.button}
-                                                                      onPress={() => Alert.alert("Click Action")} >
+                                                    <Pressable style={styles.button}
+                                                               onPress={() => Alert.alert("Click Action")} >
 
                                                       <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                          style={styles.circleButton}
-                                                                                          start={{x: 0, y: 0.5}}
-                                                                                          end={{x: 1, y: 0.5}}>
+                                                                      style={styles.circleButton}
+                                                                      start={{x: 0, y: 0.5}}
+                                                                      end={{x: 1, y: 0.5}}>
 
                                                       <Image source={require("./src/assets/icons/ozow_white.png")}
                                                              style={{width: 35, height: 35}}
@@ -116,7 +115,7 @@ export default function App() {
 
                                                       </LinearGradient>
 
-                                                    </TouchableOpacity>
+                                                    </Pressable>
 
                                                   </Animated.View>)}>
 
