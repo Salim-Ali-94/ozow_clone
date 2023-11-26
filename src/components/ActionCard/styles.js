@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
 
         backgroundColor: constants.primary,
         borderRadius: 20,
-        width: 120,
-        height: 120,
+        width: 110,
+        height: 110,
         justifyContent: "center",
         alignItems: "center"
     },
