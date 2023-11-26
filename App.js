@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Animated, Pressable, Alert, Text, View } from "react-native";
+import { StyleSheet, Image, Animated, Pressable, Alert, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import LinearGradient from "react-native-linear-gradient";
@@ -66,11 +66,6 @@ export default function App() {
                  style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
-
-
-        {/* <Text style={{ fontWeight: "bold",
-                        // fontSize: 14, fontFamily: "poppins_semi_bold",
-                       color: (routeName === selectedTab) ? "#000000" : "grey" }}>{routeName}</Text> */}
 
       </Pressable>
 
