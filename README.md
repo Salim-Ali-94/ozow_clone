@@ -7,10 +7,16 @@ full-stack project cloning the ozow.me app using react native (cli)
 
 # key concepts
 
+- backend logic
+- cloud functions
+- state management
+- data caching
+- system architecture
 - ci pipeline
 - screen navigation
+- environment variables
 - gradient colour styling
-- bottom tab bar
+- bottom nav bar
 - modular component design
 - infinite horizontal scroll section
 - performance optimization
