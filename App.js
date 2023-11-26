@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Animated, Pressable, Alert, View } from "react-native";
+import { StyleSheet, Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import LinearGradient from "react-native-linear-gradient";
@@ -97,7 +97,7 @@ export default function App() {
                                                   <Animated.View>
 
                                                     <Pressable style={styles.button}
-                                                               onPress={() => Alert.alert("Click Action")} >
+                                                               onPress={() => console.log("Click Action")} >
 
                                                       <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                       style={styles.circleButton}
