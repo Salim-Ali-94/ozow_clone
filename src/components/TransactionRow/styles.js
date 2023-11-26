@@ -11,6 +11,24 @@ export const styles = StyleSheet.create({
         flexDirection: "row"
     },
 
+    left: {
+
+        flexDirection: "row",
+        alignItems: "center"
+    },
+
+    info: {
+
+        marginLeft: 10
+    },
+
+    dateText: {
+
+        fontFamily: "poppins_regular",
+        fontSize: 10,
+        color: "grey"
+    },
+
     right: {
 
         alignItems: "flex-end"

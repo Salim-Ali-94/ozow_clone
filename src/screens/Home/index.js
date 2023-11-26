@@ -67,7 +67,7 @@ export default function Home() {
             <View style={styles.cardSection}>
 
               <TransactionRow amount={350.00}
-                              status={"Failed"}
+                              status={"Received"}
                               direction={"into"} />
 
             </View>

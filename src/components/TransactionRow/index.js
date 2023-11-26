@@ -13,7 +13,15 @@ export default function TransactionRow({ amount, status, direction }) {
 
             <View style={styles.left}>
 
-                <IconBox />
+                <IconBox icon={require("../../assets/icons/burger.png")} />
+
+                <View style={styles.info}>
+
+                    <Text style={styles.dateText}>29 March 2022, 9:00</Text>
+                    <Text style={[styles.priceText, { lineHeight: 18 }]}>Logan</Text>
+                    <Text style={styles.dateText}>Into pocket</Text>
+
+                </View>
 
             </View>
 
