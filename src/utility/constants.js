@@ -5,6 +5,9 @@ export const secondary = "#96a7ff";
 export const background = "#f9f9f7";
 export const primary_blend1 = "#01e189";
 export const primary_blend2 = "#00bbaa";
+export const cement = "#e6e5eb";
+export const nartjie = "#ffd700";
+export const cherry = "#ff2fa0";
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
