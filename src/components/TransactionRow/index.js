@@ -1,6 +1,7 @@
 import { View, Pressable, Text } from "react-native";
 import StatusIndicator from "../StatusIndicator";
 import { styles } from "./styles";
+import IconBox from "../IconBox";
 
 
 export default function TransactionRow({ amount, status, direction }) {
@@ -12,6 +13,7 @@ export default function TransactionRow({ amount, status, direction }) {
 
             <View style={styles.left}>
 
+                <IconBox />
 
             </View>
 
