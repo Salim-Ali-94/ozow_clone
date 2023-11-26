@@ -1,57 +1,31 @@
 import { StyleSheet, Platform } from "react-native";
-import * as constants from "../../utility/constants";
 
 
 const styles = StyleSheet.create({
 
-    card: {
+    container: {
+
+        width: 100,
+        height: 100,
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+
+    button: {
 
         backgroundColor: "#ffffff",
-        borderRadius: 20,
-        width: "90%",
-        height: 140,
-        justifyContent: "space-between",
-        padding: 20
+        width: 60,
+        height: 60,
+        borderRadius: 50,
+        justifyContent: "center",
+        alignItems: "center"
     },
 
-    headingText: {
+    text: {
 
         color: "#000000",
-        fontFamily: "poppins_bold",
-        fontSize: 16
-    },
-
-    balanceContainer: {
-
-        flexDirection: "row",
-        alignItems: "center",
-        height: 50,
-        marginBottom: 5
-    },
-
-    space: {
-
-        width: 5
-    },
-
-    rightArrow: {
-
-        tintColor: constants.primary,
-        width: 18,
-        height: 18
-    },
-
-    valueText: {
-
-        color: constants.primary,
-        fontFamily: "poppins_bold",
-        fontSize: 32
-    },
-
-    plainText: {
-
-        color: "grey",
         fontFamily: "poppins_regular",
+        fontSize: 16
     }
 
 });

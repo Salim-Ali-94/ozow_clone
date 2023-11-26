@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
+import IconButton from "../../components/IconButton";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -12,7 +13,7 @@ export default function Home() {
 
     <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
 
-      <ScrollView showVerticalScrollIndicator={false}>
+      <ScrollView showVerticalScrollIndicator={false} bounces={true}>
 
           <LinearGradient colors={[constants.primary, constants.secondary]} 
                           style={{ flex: 1 }}
@@ -48,6 +49,19 @@ export default function Home() {
                                                                     left_gap={(index == 0) ? 20 : 10}
                                                                     right_gap={(index == constants.actions.length - 1) ? 20 : 0}
                                                                     key={item.id} />)} />
+
+          </View>
+
+          <View style={styles.section}>
+
+            <Text style={[styles.sectionText, { marginBottom: 20 }]}>Transaction summary</Text>
+
+            <View style={styles.cardSection}>
+
+              <IconButton icon={require("../../assets/icons/ozow.png")}
+                          category="Ozow.ME" />
+
+            </View>
 
           </View>
 
