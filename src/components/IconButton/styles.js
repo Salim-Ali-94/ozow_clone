@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 });
 
-const boxShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
+const dropShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
 
     if (Platform.OS === "ios") {
 
@@ -52,5 +52,5 @@ const boxShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadiu
     }
 };
 
-boxShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
+dropShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
 export default styles;
