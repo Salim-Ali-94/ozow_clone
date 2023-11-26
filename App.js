@@ -15,10 +15,12 @@ export default function App() {
 
       <Stack.Navigator>
 
-        <Stack.Screen name="Home" component={Home} options={{ headerTitle: "", headerShadowVisible: false, headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                                                                                   style={{ flex: 1 }}
-                                                                                                                                                   start={{x: 0, y: 0.5}}
-                                                                                                                                                   end={{x: 1, y: 0.5}} /> }} />
+        <Stack.Screen name="Home" component={Home} options={{ headerTitle: "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
+                                                              headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
+                                                              headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                                      style={{ flex: 1 }}
+                                                                                                      start={{x: 0, y: 0.5}}
+                                                                                                      end={{x: 1, y: 0.5}} /> }} />
 
       </Stack.Navigator>
 
