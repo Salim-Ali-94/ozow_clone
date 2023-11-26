@@ -11,7 +11,7 @@ export default function ActionCard({ category, icon, left_gap, right_gap }) {
         <Pressable onPress={() => alert(category + " card")}>
 
             <LinearGradient colors={[constants.primary_blend1, constants.primary_blend2]} 
-            style={[styles.card, { marginLeft: left_gap, marginRight: right_gap, flex: 1 }]}
+                            style={[styles.card, { marginLeft: left_gap, marginRight: right_gap, flex: 1 }]}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}>
 
