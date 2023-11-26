@@ -24,5 +24,4 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
                         
                           { icon: require("../assets/icons/plot.png"),
                             category: "Trade Stocks",
-                            // category: "Invest in Stocks",
                             id: "trade_stocks_i8j9" }];

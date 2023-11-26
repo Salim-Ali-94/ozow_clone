@@ -10,12 +10,10 @@ export default function Home() {
 
   return (
 
-    // <SafeAreaView style={{ backgroundColor: "#ffffff", flex: 1 }}>
     <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
 
       <ScrollView showVerticalScrollIndicator={false}>
 
-          {/* <LinearGradient colors={["#79e3fe", "#635df8", "#42385D"]}  style={{ flex: 1 }}> */}
           <LinearGradient colors={[constants.primary, constants.secondary]} 
                           style={{ flex: 1 }}
                           start={{ x: 0, y: 0.5 }}
