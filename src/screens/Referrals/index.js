@@ -40,7 +40,9 @@ export default function Referrals() {
 
             <View style={styles.centerAlign}>
 
-                <DetailsCard />
+                <DetailsCard category={"Airtime"}
+                             details={"Buy/send airtime from your pocket fast!"}
+                             icon={require("../../assets/icons/arrow.png")} />
 
             </View>
 

@@ -2,7 +2,7 @@ import { Pressable, Image, View, Text } from "react-native";
 import styles from "./styles";
 
 
-export default function DetailsCard() {
+export default function DetailsCard({ category, icon, details }) {
 
     return (
 
@@ -14,12 +14,12 @@ export default function DetailsCard() {
             
             <View style={styles.textContainer}>
 
-                <Text style={styles.categoryText}>Airtime</Text>
-                <Text style={styles.detailsText}>Buy/send airtime from your pocket fast!</Text>
+                <Text style={styles.categoryText}>{category}</Text>
+                <Text style={styles.detailsText}>{details}</Text>
 
             </View>
 
-            <Image source={require("../../assets/icons/arrow.png")}
+            <Image source={icon}
                    style={styles.rightArrow} />
 
         </Pressable>
