@@ -25,11 +25,11 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Buy",
                           id: "buy_g6h7" },
                       
-                        { icon: require("../assets/icons/plot.png"),
+                        { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
                           id: "trade_stocks_i8j9" }];
                             
-export const icons = [{ icon: require("../assets/icons/coupon.png"),
+export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
                         id: "voucher_c2d3" },
 
@@ -45,7 +45,7 @@ export const icons = [{ icon: require("../assets/icons/coupon.png"),
                         category: "Top up",
                         id: "top_i8j9" },
 
-                      { icon: require("../assets/icons/trade.png"),
+                      { icon: require("../assets/icons/trading.png"),
                         category: "Buy stocks",
                         id: "stock_q16r17" },
                       

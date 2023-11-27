@@ -1,4 +1,5 @@
 import { View, Pressable, Image, Text } from "react-native";
+import * as constants from "../../utility/constants";
 import styles from "./styles" ;
 
 
@@ -9,10 +10,10 @@ export default function IconButton({ icon, category }) {
         <View style={styles.container}>
 
             <Pressable style={[styles.button, styles.boxShadow]}
-                       onPress={() => console.log("clicked")}>
+                       onPress={() => console.log(category)}>
 
                 <Image source={icon}
-                       style={{ width: 40, height: 40 }}/>
+                       style={{ width: 30, height: 30, tintColor: constants.primary }}/>
 
             </Pressable>
 
