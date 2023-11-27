@@ -51,15 +51,6 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-                {/* <View style={{ alignItems: "center" }}>
-                
-                    <Image source={require("../../assets/icons/box.png")}
-                            style={{ width: 200, height: 200 }} />
-
-                    <Text style={{ fontFamily: "poppins_bold", color: "grey", fontSize: 18 }}>No transactions</Text>
-
-                </View> */}
-                
                 <EmptyTransactions />
 
             </View>

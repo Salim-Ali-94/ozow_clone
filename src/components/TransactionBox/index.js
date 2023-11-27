@@ -1,4 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
+import EmptyTransactions from "../EmptyTransactions";
 import { styles } from "./styles";
 
 
@@ -25,6 +26,8 @@ export default function TransactionBox() {
                 </Pressable>
 
             </View>
+
+            <EmptyTransactions />
 
         </View>
 
