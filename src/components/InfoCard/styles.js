@@ -15,7 +15,6 @@ let styles = StyleSheet.create({
         // width: "46%",
         // width: "47%",
         height: 140,
-
         // height: 180,
         // height: 160,
         borderRadius: 20,
@@ -25,8 +24,6 @@ let styles = StyleSheet.create({
         // paddingVertical: 20,
         paddingTop: 20,
         paddingBottom: 10,
-        // justifyContent: "center",
-        // justifyContent: "space-between",
         justifyContent: "space-around",
         alignItems: "center"
     },
@@ -51,8 +48,7 @@ let styles = StyleSheet.create({
         fontFamily: "poppins_bold",
         color: "#000000",
         fontSize: 18,
-        textAlign: "center",
-        // lineHeight: 19
+        textAlign: "center"
     },
 
     infoText: {
