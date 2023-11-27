@@ -10,7 +10,9 @@ export const styles = StyleSheet.create({
         paddingVertical: 3,
         borderWidth: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        flexDirection: "row",
+        borderColor: "grey"
     },
 
     text: {
@@ -18,6 +20,17 @@ export const styles = StyleSheet.create({
         fontFamily: "poppins_regular",
         color: "#000000",
         fontSize: 18
+    },
+
+    space: {
+
+        width: 10
+    },
+
+    downIcon: {
+
+        width: 12,
+        height: 12
     }
 
 });
