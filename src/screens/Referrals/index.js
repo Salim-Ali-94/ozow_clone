@@ -1,4 +1,4 @@
-import { View, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
 import * as constants from "../../utility/constants";
@@ -34,7 +34,17 @@ export default function Referrals() {
 
         </View>
 
-        <DetailsCard />
+        <View style={styles.section}>
+
+            <Text style={[styles.sectionText, { marginBottom: 10 }]}>Buy</Text>
+
+            <View style={styles.centerAlign}>
+
+                <DetailsCard />
+
+            </View>
+
+        </View>
 
       </ScrollView>
 

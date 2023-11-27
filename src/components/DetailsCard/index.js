@@ -9,6 +9,8 @@ export default function DetailsCard() {
         <Pressable style={[styles.card, styles.boxShadow]}
                    onPress={() => console.log("details card")}>
 
+        
+
         </Pressable>
 
     );
