@@ -31,7 +31,9 @@ export default function Home() {
 
             <View style={styles.cardSection}>
 
-              <PocketBalanceCard amount={1234567890.09876} />
+              <PocketBalanceCard amount={1234567890.09876}
+                                 shadow={true}
+                                 arrow={true} />
 
             </View>
 

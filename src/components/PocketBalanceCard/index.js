@@ -2,11 +2,11 @@ import { View, Text, Image, Pressable } from "react-native";
 import styles from "./styles";
 
 
-export default function PocketBalanceCard({ amount }) {
+export default function PocketBalanceCard({ amount, shadow, arrow }) {
 
     return (
 
-        <Pressable style={[styles.card, styles.boxShadow]}
+        <Pressable style={[styles.card, shadow && styles.boxShadow]}
                     onPress={() => alert("pocket balance card")}>
 
             <Text style={styles.headingText}>POCKET BALANCE</Text>
@@ -19,7 +19,7 @@ export default function PocketBalanceCard({ amount }) {
 
                 <View style={styles.space} />
 
-                <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} />
+                { arrow && <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} /> }
 
             </View>
 
