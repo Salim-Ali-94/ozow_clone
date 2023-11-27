@@ -116,6 +116,7 @@ export default function App() {
 
                                                       { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                 style={styles.circleButton}
+                                                                                // locations={[0, 0.6]}
                                                                                 start={{x: 0, y: 0.5}}
                                                                                 end={{x: 1, y: 0.5}}>
 

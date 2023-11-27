@@ -1,6 +1,7 @@
 
 
-export const primary = "#00e588";
+// export const primary = "#00e588";
+export const primary = "#00D980";
 export const secondary = "#96a7ff";
 export const background = "#f9f9f7";
 export const primary_blend1 = "#01e189";

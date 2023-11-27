@@ -16,26 +16,15 @@ export default function Services() {
 
         <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-        {/* <LinearGradient colors={[constants.primary, constants.secondary]}
-                        style={{ height: 200}}
-                        start={{x: 0, y: 0.5}}
-                        end={{x: 1, y: 0.5}} /> */}
         <LinearGradient colors={[constants.primary, constants.secondary]}
-                        // style={{ height: 200, justifyContent: "center", alignItems: "center" }}
                         style={{ height: 260, alignItems: "center", paddingTop: 50 }}
-                        // style={{ height: 300 }}
                         start={{x: 0, y: 0.5}}
                         end={{x: 1, y: 0.5}} >
-
-          {/* <Image source={require("../../assets/icons/ozow_white.png")}
-                 style={{ width: 200, height: 200, tintColor: "rgba(255, 255, 255, 0.3)" }} /> */}
 
           <View style={{ position: "absolute", right: -58, top: -100 }}>
 
             <Image source={require("../../assets/icons/ozow_white.png")}
-                  //  style={{ width: 300, height: 300, tintColor: "rgba(255, 255, 255, 0.3)" }} />
                    style={{ width: 280, height: 280, tintColor: "rgba(255, 255, 255, 0.3)" }} />
-                  {/* //  style={{ width: "60%", tintColor: "rgba(255, 255, 255, 0.3)" }} /> */}
           
           </View>
 
@@ -47,8 +36,6 @@ export default function Services() {
 
         </LinearGradient>
 
-        {/* <View style={{ marginTop: 30 }}> */}
-        {/* <View style={{ marginTop: 30, position: "absolute", top: 100 }}> */}
         <View style={{ marginTop: -115 }}>
 
             <View style={styles.centerAlign}>
@@ -106,7 +93,7 @@ export default function Services() {
                              icon={require("../../assets/icons/trading.png")} />
 
             </View>
-            
+
         </View>
 
       </ScrollView>
