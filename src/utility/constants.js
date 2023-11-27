@@ -7,7 +7,7 @@ export const primary_blend1 = "#01e189";
 export const primary_blend2 = "#00bbaa";
 export const cement = "#e6e5eb";
 export const nartjie = "#ffd700";
-export const cherry = "#ff2f70";
+export const cherry = "#ff2fa0";
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
@@ -28,7 +28,7 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
                         { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
                           id: "trade_stocks_i8j9" }];
-                            
+
 export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
                         id: "voucher_c2d3" },
@@ -76,3 +76,20 @@ export const socials = [{ icon: require("../assets/icons/chat.png"),
                         { icon: require("../assets/icons/whatsapp.png"),
                           category: "Whatsapp",
                           id: "whatsapp_e4f5" }];
+                          
+export const transactionIcons = { burger: require("../assets/icons/burger.png"),
+                                  coffee: require("../assets/icons/coffee.png"),
+                                  // coffee: require("../assets/icons/cup.png"),
+                                  // coffee: require("../assets/icons/caffine.png"),
+                                  electricity: require("../assets/icons/electricity.png"),
+                                  transport: require("../assets/icons/transport.png"),
+                                  water: require("../assets/icons/water.png"),
+                                  internet: require("../assets/icons/internet.png"),
+                                  smoothie: require("../assets/icons/smoothie.png"),
+                                  pizza: require("../assets/icons/pizza.png"),
+                                  wrap: require("../assets/icons/wrap.png"),
+                                  milkshake: require("../assets/icons/milkshake.png"),
+                                  tea: require("../assets/icons/tea.png"),
+                                  donut: require("../assets/icons/donut.png"),
+                                  sushi: require("../assets/icons/sushi.png"),
+                                  "fast_food": require("../assets/icons/hot_dog.png") };
