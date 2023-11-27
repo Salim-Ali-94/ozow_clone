@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
-// import TransactionRow from "../../components/TransactionRow";
 import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
