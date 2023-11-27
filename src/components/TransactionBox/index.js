@@ -91,20 +91,21 @@ export default function TransactionBox() {
 
                                               <View style={styles.transactions}>
 
-                                                  <View style={{ paddingVertical: 20 }}>
+                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }}>
 
-                                                      <TransactionRow amount={350}
-                                                                      status={"Received"}
-                                                                      direction={"into"}
-                                                                      name={"Logan"}
-                                                                      category={"fast_food"}
-                                                                      date={"29 March 2022, 9:00"} />
+                                                                                            <TransactionRow amount={item.amount}
+                                                                                                            status={item.status}
+                                                                                                            direction={item.direction}
+                                                                                                            name={item.name}
+                                                                                                            category={item.category}
+                                                                                                            date={item.date}
+                                                                                                            key={item.id} />
 
-                                                  </View>
+                                                                                        </View>,
 
-                                                  <HorizontalDivider />
+                                                                                        (index < constants.data.slice(0, 4).length - 1) && <HorizontalDivider />]) }
 
-                                                  <View style={{ paddingVertical: 20 }}>
+                                                  {/* <View style={{ paddingVertical: 20 }}>
 
                                                       <TransactionRow amount={150}
                                                                       status={"Pending"}
@@ -139,9 +140,11 @@ export default function TransactionBox() {
                                                                       category={"burger"}
                                                                       date={"13 October 2024, 18:53"} />
 
-                                                  </View>
+                                                  </View> */}
 
-                                              </View> }
+                                              </View> 
+                                              
+                                              }
 
         </View>
 
