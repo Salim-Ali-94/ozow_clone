@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
+import Pocket from "./src/screens/Pocket";
 import * as constants from "./src/utility/constants";
 
 
@@ -14,22 +15,22 @@ export default function App() {
 
     switch (routeName) {
 
-      case "Home0":
+      case "Home":
 
         icon = "home";
         break;
 
-      case "Home1":
+      case "History":
 
         icon = "list";
         break;
 
-      case "Home2":
+      case "Pocket":
 
         icon = "pocket";
         break;
 
-      case "Home3":
+      case "Referrals":
 
         icon = "group";
         break;
@@ -114,19 +115,19 @@ export default function App() {
 
                                                   </Animated.View>)}>
 
-          <CurvedBottomBar.Screen name="Home0"
+          <CurvedBottomBar.Screen name="Home"
                                   position="LEFT"
                                   component={() => <Home />}/>
 
-          <CurvedBottomBar.Screen name="Home1"
+          <CurvedBottomBar.Screen name="History"
                                   component={() => <Home />}
                                   position="RIGHT"/>
 
-          <CurvedBottomBar.Screen name="Home2"
+          <CurvedBottomBar.Screen name="Pocket"
                                   position="LEFT"
-                                  component={() => <Home />}/>
+                                  component={() => <Pocket />}/>
 
-          <CurvedBottomBar.Screen name="Home3"
+          <CurvedBottomBar.Screen name="Referrals"
                                   component={() => <Home />}
                                   position="RIGHT"/>
 
