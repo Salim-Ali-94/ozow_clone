@@ -1,5 +1,6 @@
 import { View, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
 import InfoCard from "../../components/InfoCard";
+import DetailsCard from "../../components/DetailsCard";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -32,6 +33,8 @@ export default function Referrals() {
             </View>
 
         </View>
+
+        <DetailsCard />
 
       </ScrollView>
 
