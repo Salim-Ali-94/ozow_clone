@@ -61,6 +61,5 @@ let styles = StyleSheet.create({
 
 });
 
-
 styles = utility.dropShadow(styles, -2, 4, "#171717", 0.2, 3, 4, "#171717");
 export default styles;

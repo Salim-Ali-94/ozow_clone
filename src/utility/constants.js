@@ -113,3 +113,28 @@ export const info = [{ icon: require("../assets/icons/plus.png"),
                         category: "Scan to pay",
                         info: "any QR code to make a payment.",
                         id: "scan_pay_e4f5" }];
+
+export const details = [{ icon: require("../assets/icons/phone.png"),
+                          category: "Airtime",
+                          details: "Buy/send airtime from your pocket fast!",
+                          size: 50,
+                          id: "airtime_a0b1" },
+  
+                        { icon: require("../assets/icons/wifi.png"),
+                          category: "Data",
+                          details: "Buy/send data bundles from your pocket fast!",
+                          size: 40,
+                          id: "data_a0b1" },
+  
+                        { icon: require("../assets/icons/zap.png"),
+                          category: "Electricity",
+                          details: "Buy/send electricity from your pocket fast!",
+                          size: 50,
+                          id: "electricity_c2d3" },
+  
+                        { icon: require("../assets/icons/voucher.png"),
+                          category: "Vouchers",
+                          details: "Buy/send vouchers from your pocket fast!",
+                          size: 40,
+                          id: "coupon_e4f5" }];
+  

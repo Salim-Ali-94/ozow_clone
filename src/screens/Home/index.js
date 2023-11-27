@@ -28,7 +28,7 @@ export default function Home() {
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Overview</Text>
 
-            <View style={styles.cardSection}>
+            <View style={styles.centerAlign}>
 
               <PocketBalanceCard amount={1234567890.09876}
                                  shadow={true}

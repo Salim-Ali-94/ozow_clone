@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         paddingBottom: 30
     },
 
-    cardSection: {
+    centerAlign: {
 
         alignItems: "center"
     },
