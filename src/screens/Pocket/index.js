@@ -2,6 +2,8 @@ import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import IconButton from "../../components/IconButton";
 import EmptyTransactions from "../../components/EmptyTransactions";
+import TransactionRow from "../../components/TransactionRow";
+import HorizontalDivider from "../../components/HorizontalDivider";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -52,7 +54,29 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-                <EmptyTransactions />
+              <View style={{width: "90%"}}>
+
+                { (constants.data.length === 0) ? <EmptyTransactions /> :
+
+                                                  <View style={styles.transactions}>
+
+                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }}>
+
+                                                                                                <TransactionRow amount={item.amount}
+                                                                                                                status={item.status}
+                                                                                                                direction={item.direction}
+                                                                                                                name={item.name}
+                                                                                                                category={item.category}
+                                                                                                                date={item.date}
+                                                                                                                key={item.id} />
+
+                                                                                            </View>,
+
+                                                                                            (index < constants.data.length - 1) && <HorizontalDivider />]) }
+
+                                                  </View> }
+
+              </View>
 
             </View>
 
