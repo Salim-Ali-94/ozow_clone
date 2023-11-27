@@ -1,14 +1,18 @@
 import { StyleSheet, Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
+import { useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
 import Transactions from "./src/screens/Transactions";
+import Referrals from "./src/screens/Referrals";
 import * as constants from "./src/utility/constants";
 
 
 export default function App() {
+
+  const [ozow, setOzow] = useState(false);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -99,18 +103,25 @@ export default function App() {
                                                   <Animated.View>
 
                                                     <Pressable style={styles.button}
-                                                               onPress={() => console.log("Click Action")} >
+                                                               onPress={() => setOzow(!ozow)} >
 
-                                                      <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                      style={styles.circleButton}
-                                                                      start={{x: 0, y: 0.5}}
-                                                                      end={{x: 1, y: 0.5}}>
+                                                      { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                style={styles.circleButton}
+                                                                                start={{x: 0, y: 0.5}}
+                                                                                end={{x: 1, y: 0.5}}>
 
-                                                      <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                             style={{width: 35, height: 35}}
-                                                             tintColor={"white"} />
+                                                                  <Image source={require("./src/assets/icons/ozow_white.png")}
+                                                                        style={{width: 35, height: 35}}
+                                                                        tintColor={"white"} />
 
-                                                      </LinearGradient>
+                                                                </LinearGradient> : 
+
+                                                                <View style={styles.circleButton}>
+
+                                                                  <Image source={require("./src/assets/icons/x.png")}
+                                                                         style={{width: 20, height: 20}} /> 
+                                                                       
+                                                                </View> }
 
                                                     </Pressable>
 
@@ -129,7 +140,7 @@ export default function App() {
                                   component={() => <Pocket />}/>
 
           <CurvedBottomBar.Screen name="Referrals"
-                                  component={() => <Home />}
+                                  component={() => <Referrals />}
                                   position="RIGHT"/>
 
       </CurvedBottomBar.Navigator>
@@ -170,7 +181,8 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#e8e8e8",
+    // backgroundColor: "#e8e8e8",
+    backgroundColor: "#000000",
     bottom: 30,
     shadowColor: "#000000",
 
