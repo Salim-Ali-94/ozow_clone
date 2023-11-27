@@ -58,7 +58,7 @@ export default function Home() {
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Transaction summary</Text>
 
-            <View style={styles.cardSection}>
+            <View style={styles.centerAlign}>
 
               <TransactionBox />
 
