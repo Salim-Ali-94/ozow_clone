@@ -14,7 +14,7 @@ export default function Referrals() {
 
         <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-        <View style={{marginTop: 30}}>
+        <View style={{ marginTop: 30 }}>
 
             <View style={styles.centerAlign}>
 

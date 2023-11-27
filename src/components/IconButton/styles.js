@@ -1,7 +1,8 @@
 import { StyleSheet, Platform } from "react-native";
+import * as utility from "../../utility/utility";
 
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
 
     container: {
 
@@ -29,27 +30,5 @@ const styles = StyleSheet.create({
 
 });
 
-const dropShadow = (xOffset, yOffset, shadowColourIOS, shadowOpacity, shadowRadius, elevation, shadowColourAndroid) => {
-
-    if (Platform.OS === "ios") {
-
-        styles.boxShadow = {
-
-            shadowColor: shadowColourIOS,
-            shadowOffset: { width: xOffset, height: yOffset },
-            shadowOpacity,
-            shadowRadius
-        };
-
-    } else if (Platform.OS === "android") {
-
-        styles.boxShadow = {
-
-            elevation,
-            shadowColor: shadowColourAndroid
-        };
-    }
-};
-
-dropShadow(-2, 4, "#171717", 0.2, 3, 4, "#171717");
+styles = utility.dropShadow(styles, -2, 4, "#171717", 0.2, 3, 4, "#171717");
 export default styles;
