@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
 
         flexDirection: "row",
         alignItems: "center",
-        height: 50,
-        marginBottom: 5
+        height: 50
     },
 
     space: {
@@ -38,7 +37,8 @@ const styles = StyleSheet.create({
 
         tintColor: constants.primary,
         width: 18,
-        height: 18
+        height: 18,
+        marginBottom: 2
     },
 
     valueText: {

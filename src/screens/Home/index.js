@@ -2,7 +2,8 @@ import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
-import TransactionRow from "../../components/TransactionRow";
+// import TransactionRow from "../../components/TransactionRow";
+import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -54,15 +55,17 @@ export default function Home() {
 
           </View>
 
-          <View style={styles.section}>
+          <View style={[styles.section, { marginBottom: 80 }]}>
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Transaction summary</Text>
 
             <View style={styles.cardSection}>
 
-              <TransactionRow amount={350.00}
+              {/* <TransactionRow amount={350.00}
                               status={"Received"}
-                              direction={"into"} />
+                              direction={"into"} /> */}
+
+              <TransactionBox />
 
             </View>
 
