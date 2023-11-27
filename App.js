@@ -7,12 +7,14 @@ import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
 import Transactions from "./src/screens/Transactions";
 import Referrals from "./src/screens/Referrals";
+import Services from "./src/screens/Services";
 import * as constants from "./src/utility/constants";
 
 
 export default function App() {
 
   const [ozow, setOzow] = useState(false);
+  const [previous, setPrevious] = useState("Home");
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -46,19 +48,23 @@ export default function App() {
 
       (icon === "home") ? <Image source={require("./src/assets/icons/home.png")}
                                  style={{ width: 25, height: 25 }}
-                                 tintColor={routeName === selectedTab ? "black" : "grey"} /> :
+                                 tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
 
       (icon === "list") ? <View style={{ paddingLeft: 20 }}><Image source={require("./src/assets/icons/list.png")}
                                                                    style={{ width: 20, height: 20 }}
-                                                                   tintColor={routeName === selectedTab ? "black" : "grey"} /></View> :
+                                                                   tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
       (icon === "pocket") ? <View style={{ paddingRight: 20 }}><Image source={require("./src/assets/icons/pocket.png")}
                                                                       style={{ width: 20, height: 20 }}
-                                                                      tintColor={routeName === selectedTab ? "black" : "grey"} /></View> :
+                                                                      tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
-                         <Image source={require("./src/assets/icons/group.png")}
+      (icon === "referrals") ? <Image source={require("./src/assets/icons/group.png")}
+                                      style={{ width: 25, height: 25 }}
+                                      tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
+
+                          <Image source={require("./src/assets/icons/group.png")}
                                  style={{ width: 25, height: 25 }}
-                                 tintColor={routeName === selectedTab ? "black" : "grey"} />
+                                 tintColor={(routeName === selectedTab) ? "black" : "grey"} />
 
     );
 
@@ -68,7 +74,8 @@ export default function App() {
 
     return (
 
-      <Pressable onPress={() => navigate(routeName)}
+      <Pressable onPress={() => { ozow && setOzow(false);
+                                  navigate(routeName); } }
                  style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
@@ -103,16 +110,19 @@ export default function App() {
                                                   <Animated.View>
 
                                                     <Pressable style={styles.button}
-                                                               onPress={() => setOzow(!ozow)} >
+                                                               onPress={() => { !ozow && setPrevious(selectedTab);
+                                                                                !ozow ? navigate("Services") : navigate(previous);
+                                                                                setOzow(!ozow); } }>
 
                                                       { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                 style={styles.circleButton}
+                                                                                // locations={[0, 0.6]}
                                                                                 start={{x: 0, y: 0.5}}
                                                                                 end={{x: 1, y: 0.5}}>
 
                                                                   <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                                        style={{width: 35, height: 35}}
-                                                                        tintColor={"white"} />
+                                                                         style={{width: 35, height: 35}}
+                                                                         tintColor={"white"} />
 
                                                                 </LinearGradient> : 
 
@@ -142,6 +152,10 @@ export default function App() {
           <CurvedBottomBar.Screen name="Referrals"
                                   component={() => <Referrals />}
                                   position="RIGHT"/>
+
+          <CurvedBottomBar.Screen name="Services"
+                                  component={() => <Services />}
+                                  position="CIRCLE"/>
 
       </CurvedBottomBar.Navigator>
 
@@ -181,7 +195,6 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: "#e8e8e8",
     backgroundColor: "#000000",
     bottom: 30,
     shadowColor: "#000000",
