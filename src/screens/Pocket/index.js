@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import IconButton from "../../components/IconButton";
 import * as constants from "../../utility/constants";
@@ -11,7 +11,7 @@ export default function Pocket() {
 
     <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
 
-      <ScrollView showVerticalScrollIndicator={false} bounces={true}>
+      <ScrollView showVerticalScrollIndicator={false} bounces={false}>
 
           <StatusBar translucent={true} backgroundColor={"transparent"} />
 
@@ -39,6 +39,25 @@ export default function Pocket() {
                           contentContainerStyle={{ gap: 20 }}
                           renderItem={({ item }) => <IconButton icon={item.icon} 
                                                                 category={item.category}/>} />
+
+            </View>
+
+          </View>
+
+          <View style={[styles.section, { marginBottom: 80 }]}>
+
+            <Text style={[styles.sectionText, { marginBottom: 20 }]}>Latest Transactions</Text>
+
+            <View style={styles.centerAlign}>
+
+                <View style={{ alignItems: "center" }}>
+                
+                    <Image source={require("../../assets/icons/box.png")}
+                            style={{ width: 200, height: 200 }} />
+
+                    <Text style={{ fontFamily: "poppins_bold", color: "grey", fontSize: 18 }}>No transactions</Text>
+
+                </View>
 
             </View>
 
