@@ -8,7 +8,8 @@ module.exports = {
     "comma-dangle": "off",
     "no-trailing-spaces": "off",
     // "prettier/prettier": 0,
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    // endOfLine: "crlf"
 
   }
 
