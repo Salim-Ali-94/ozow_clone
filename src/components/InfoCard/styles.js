@@ -1,17 +1,60 @@
 import { StyleSheet } from "react-native";
+import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
 
 
 let styles = StyleSheet.create({
 
-    container: {
+    card: {
 
-        width: 200,
-        // width: "50%",
+        // width: 200,
+        width: "48.7%",
         // height: 180,
-        height: 160,
+        // height: 160,
+        height: 150,
         borderRadius: 20,
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
+        // padding: 10,
+        paddingHorizontal: 10,
+        // paddingVertical: 20,
+        paddingTop: 20,
+        paddingBottom: 10,
+        // justifyContent: "center",
+        // justifyContent: "space-between",
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+
+    image: {
+
+        // width: 50,
+        // height: 50,
+        width: 40,
+        height: 40,
+        tintColor: constants.primary
+    },
+
+    textContainer: {
+
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
+    categoryText: {
+
+        fontFamily: "poppins_bold",
+        color: "#000000",
+        fontSize: 18,
+        textAlign: "center",
+        // lineHeight: 19
+    },
+
+    infoText: {
+
+        fontFamily: "poppins_regular",
+        color: "#000000",
+        textAlign: "center",
+        lineHeight: 15
     }
 
 });

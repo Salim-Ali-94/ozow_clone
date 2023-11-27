@@ -16,7 +16,9 @@ export default function Referrals() {
 
         <View style={styles.section}>
 
-            <InfoCard />
+            <InfoCard category={"Top up"}
+                      icon={require("../../assets/icons/plus.png")}
+                      info={"your pocket safely and securely"} />
 
         </View>
 
