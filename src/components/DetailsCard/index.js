@@ -7,7 +7,7 @@ export default function DetailsCard({ category, icon, details, iconSize, gap }) 
     return (
 
         <Pressable style={[styles.card, styles.boxShadow, { marginBottom: gap ? gap : 0 }]}
-                   onPress={() => console.log("details card")}>
+                   onPress={() => console.log(category)}>
 
             <View style={styles.imageContainer}>
 

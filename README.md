@@ -28,7 +28,8 @@ full-stack project cloning the ozow.me app using react native (cli)
 - gradient colour styling
 - bottom nav bar
 - modular component design
+- grid section
 - infinite horizontal scroll section
 - performance optimization
-- extensive automated component testing
+- automated testing
 - responsive design principles
