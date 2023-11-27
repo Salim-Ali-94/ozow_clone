@@ -2,11 +2,11 @@ import { Pressable, Image, View, Text } from "react-native";
 import styles from "./styles";
 
 
-export default function DetailsCard({ category, icon, details, textWidth, iconSize }) {
+export default function DetailsCard({ category, icon, details, iconSize, gap }) {
 
     return (
 
-        <Pressable style={[styles.card, styles.boxShadow]}
+        <Pressable style={[styles.card, styles.boxShadow, { marginBottom: gap ? gap : 0 }]}
                    onPress={() => console.log("details card")}>
 
             <View style={styles.imageContainer}>
@@ -20,8 +20,7 @@ export default function DetailsCard({ category, icon, details, textWidth, iconSi
             <View style={styles.textContainer}>
 
                 <Text style={styles.categoryText}>{category}</Text>
-                {/* <Text style={styles.detailsText}>{details}</Text> */}
-                <Text style={[styles.detailsText, { width: textWidth ? textWidth : "85%" }]}>{details}</Text>
+                <Text style={styles.detailsText}>{details}</Text>
 
             </View>
 

@@ -9,9 +9,8 @@ let styles = StyleSheet.create({
 
         backgroundColor: "#ffffff",
         borderRadius: 20,
-        // width: "90%",
-        width: 361,
-
+        width: "90%",
+        // width: 361,
         height: 100,
         flexDirection: "row",
         padding: 10,
@@ -20,10 +19,7 @@ let styles = StyleSheet.create({
 
     textContainer: {
 
-        // justifyContent: "center",
-        // alignItems: "center"
         marginLeft: 5,
-        // backgroundColor: "lightblue",
         width: "76%"
     },
 
@@ -31,22 +27,15 @@ let styles = StyleSheet.create({
 
         fontFamily: "poppins_bold",
         color: "#000000",
-        fontSize: 18,
-        // textAlign: "center"
+        fontSize: 18
     },
 
     detailsText: {
 
         fontFamily: "poppins_regular",
         color: "#000000",
-        // textAlign: "center",
         lineHeight: 15,
-        // width: "70%",
-
-        // width: "85%",
-        // width: "98%",
-
-        // backgroundColor: "pink"
+        width: "85%"
     },
 
     imageContainer: {
@@ -59,19 +48,13 @@ let styles = StyleSheet.create({
 
     image: {
 
-        // width: 50,
-        // height: 50,
-
-        // width: 40,
-        // height: 40,
         tintColor: constants.primary
     },
 
     rightArrow: {
 
         width: 16,
-        height: 16,
-        // paddingRight: 5
+        height: 16
     }
 
 });
