@@ -47,7 +47,9 @@ export default function Services() {
 
         </LinearGradient>
 
-        <View style={{ marginTop: 30 }}>
+        {/* <View style={{ marginTop: 30 }}> */}
+        {/* <View style={{ marginTop: 30, position: "absolute", top: 100 }}> */}
+        <View style={{ marginTop: -115 }}>
 
             <View style={styles.centerAlign}>
 
