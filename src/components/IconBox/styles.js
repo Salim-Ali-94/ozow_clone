@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     box: {
 
         borderRadius: 50,
-        width: 45,
-        height: 45,
+        width: 50,
+        height: 50,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: constants.cement
@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
 
     icon: {
 
-        width: 25,
-        height: 25
+        width: 30,
+        height: 30
     }
 
 });
