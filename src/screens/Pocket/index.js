@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import IconButton from "../../components/IconButton";
+import EmptyTransactions from "../../components/EmptyTransactions";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -50,14 +51,16 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-                <View style={{ alignItems: "center" }}>
+                {/* <View style={{ alignItems: "center" }}>
                 
                     <Image source={require("../../assets/icons/box.png")}
                             style={{ width: 200, height: 200 }} />
 
                     <Text style={{ fontFamily: "poppins_bold", color: "grey", fontSize: 18 }}>No transactions</Text>
 
-                </View>
+                </View> */}
+                
+                <EmptyTransactions />
 
             </View>
 
