@@ -40,7 +40,7 @@ export default function Services() {
 
             <View style={styles.centerAlign}>
 
-                <FlatList data={constants.info}
+                {/* <FlatList data={constants.info}
                           scrollEnabled={false}
                           numColumns={2}
                           showsVerticalScrollIndicator={false}
@@ -49,7 +49,41 @@ export default function Services() {
                           renderItem={({ item }) => <InfoCard icon={item.icon}
                                                               info={item.info}
                                                               category={item.category}
-                                                              key={item.id} />} />
+                                                              key={item.id} />} /> */}
+
+              <View style={{flexDirection: "row" }}>
+
+                <InfoCard icon={constants.info[0].icon}
+                          info={constants.info[0].info}
+                          category={constants.info[0].category}
+                          key={constants.info[0].id} />
+
+                <View style={{width: 10}} />
+
+                <InfoCard icon={constants.info[1].icon}
+                          info={constants.info[1].info}
+                          category={constants.info[1].category}
+                          key={constants.info[1].id} />
+
+              </View>
+
+              <View style={{height: 20}} />
+
+              <View style={{flexDirection: "row"}}>
+  
+                <InfoCard icon={constants.info[2].icon}
+                          info={constants.info[2].info}
+                          category={constants.info[2].category}
+                          key={constants.info[2].id} />
+
+              <View style={{width: 10}} />
+
+                <InfoCard icon={constants.info[3].icon}
+                          info={constants.info[3].info}
+                          category={constants.info[3].category}
+                          key={constants.info[3].id} />
+
+              </View>
 
             </View>
 

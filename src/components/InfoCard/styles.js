@@ -7,21 +7,12 @@ let styles = StyleSheet.create({
 
     card: {
 
-        // width: "48.7%",
-        // height: 150,
-
-        // width: 200,
-        width: 189,
-        // width: "46%",
-        // width: "47%",
+        // width: 189,
+        width: "46%",
         height: 140,
-        // height: 180,
-        // height: 160,
         borderRadius: 20,
         backgroundColor: "#ffffff",
-        // padding: 10,
         paddingHorizontal: 10,
-        // paddingVertical: 20,
         paddingTop: 20,
         paddingBottom: 10,
         justifyContent: "space-around",
@@ -30,8 +21,6 @@ let styles = StyleSheet.create({
 
     image: {
 
-        // width: 50,
-        // height: 50,
         width: 40,
         height: 40,
         tintColor: constants.primary
