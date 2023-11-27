@@ -74,7 +74,8 @@ export default function App() {
 
     return (
 
-      <Pressable onPress={() => navigate(routeName)}
+      <Pressable onPress={() => { ozow && setOzow(false);
+                                  navigate(routeName); } }
                  style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
@@ -111,7 +112,7 @@ export default function App() {
                                                     <Pressable style={styles.button}
                                                                onPress={() => { !ozow && setPrevious(selectedTab);
                                                                                 !ozow ? navigate("Services") : navigate(previous);
-                                                                                setOzow(!ozow); }}>
+                                                                                setOzow(!ozow); } }>
 
                                                       { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                 style={styles.circleButton}
