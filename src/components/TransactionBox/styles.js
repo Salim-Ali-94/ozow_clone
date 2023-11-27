@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     container: {
 
         width: "90%",
-        height: 300,
+        height: 320,
         borderRadius: 20,
         backgroundColor: "#ffffff"
     },
@@ -30,6 +30,14 @@ export const styles = StyleSheet.create({
         fontFamily: "poppins_bold",
         fontSize: 16,
         color: "#000000"
+    },
+
+    transactions: {
+
+        marginTop: 20,
+        height: 240,
+        paddingHorizontal: 20,
+        justifyContent: "space-between"
     }
 
 });

@@ -1,10 +1,11 @@
 import { View, Pressable, Text } from "react-native";
 import StatusIndicator from "../StatusIndicator";
-import { styles } from "./styles";
 import IconBox from "../IconBox";
+import * as constants from "../../utility/constants";
+import { styles } from "./styles";
 
 
-export default function TransactionRow({ amount, status, direction }) {
+export default function TransactionRow({ amount, status, direction, name, date, category }) {
 
     return (
 
@@ -13,13 +14,13 @@ export default function TransactionRow({ amount, status, direction }) {
 
             <View style={styles.left}>
 
-                <IconBox icon={require("../../assets/icons/burger.png")} />
+                <IconBox icon={constants.transactionIcons[category]} />
 
                 <View style={styles.info}>
 
-                    <Text style={styles.dateText}>29 March 2022, 9:00</Text>
-                    <Text style={[styles.priceText, { lineHeight: 18 }]}>Logan</Text>
-                    <Text style={styles.dateText}>Into pocket</Text>
+                    <Text style={styles.dateText}>{date}</Text>
+                    <Text style={[styles.priceText, { lineHeight: 19 }]}>{name}</Text>
+                    <Text style={styles.dateText}>{direction[0].toUpperCase() + direction.slice(1)} pocket</Text>
 
                 </View>
 
