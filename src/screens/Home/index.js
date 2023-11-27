@@ -48,8 +48,8 @@ export default function Home() {
                       showsHorizontalScrollIndicator={false}
                       renderItem={({ item, index }) => (<ActionCard category={item.category}
                                                                     icon={item.icon}
-                                                                    left_gap={(index == 0) ? 20 : 10}
-                                                                    right_gap={(index == constants.actions.length - 1) ? 20 : 0}
+                                                                    left_gap={(index === 0) ? 20 : 10}
+                                                                    right_gap={(index === constants.actions.length - 1) ? 20 : 0}
                                                                     key={item.id} />)} />
 
           </View>

@@ -4,6 +4,7 @@ import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
+import Transactions from "./src/screens/Transactions";
 import * as constants from "./src/utility/constants";
 
 
@@ -120,7 +121,7 @@ export default function App() {
                                   component={() => <Home />}/>
 
           <CurvedBottomBar.Screen name="History"
-                                  component={() => <Home />}
+                                  component={() => <Transactions />}
                                   position="RIGHT"/>
 
           <CurvedBottomBar.Screen name="Pocket"
