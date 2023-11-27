@@ -9,7 +9,9 @@ let styles = StyleSheet.create({
 
         backgroundColor: "#ffffff",
         borderRadius: 20,
-        width: "90%",
+        // width: "90%",
+        width: 361,
+
         height: 100,
         flexDirection: "row",
         padding: 10,
@@ -21,8 +23,8 @@ let styles = StyleSheet.create({
         // justifyContent: "center",
         // alignItems: "center"
         marginLeft: 5,
-        // backgroundColor: "pink",
-        width: "75%"
+        // backgroundColor: "lightblue",
+        width: "76%"
     },
 
     categoryText: {
@@ -39,13 +41,27 @@ let styles = StyleSheet.create({
         color: "#000000",
         // textAlign: "center",
         lineHeight: 15,
-        width: "60%"
+        // width: "70%",
+
+        // width: "85%",
+        // width: "98%",
+
+        // backgroundColor: "pink"
+    },
+
+    imageContainer: {
+        
+        width: 50,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center"
     },
 
     image: {
 
-        width: 50,
-        height: 50,
+        // width: 50,
+        // height: 50,
+
         // width: 40,
         // height: 40,
         tintColor: constants.primary
@@ -53,8 +69,8 @@ let styles = StyleSheet.create({
 
     rightArrow: {
 
-        width: 20,
-        height: 20,
+        width: 16,
+        height: 16,
         // paddingRight: 5
     }
 
