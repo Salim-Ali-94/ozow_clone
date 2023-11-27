@@ -11,8 +11,10 @@ let styles = StyleSheet.create({
         // height: 150,
 
         // width: 200,
-        width: 189,
-        // width: "46%",
+        
+        // width: 189,
+        width: "46%",
+
         // width: "47%",
         height: 140,
         // height: 180,
