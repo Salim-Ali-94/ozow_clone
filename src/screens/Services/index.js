@@ -51,36 +51,39 @@ export default function Services() {
                                                               category={item.category}
                                                               key={item.id} />} /> */}
 
-              {/* { constants.info.map((item, index) => <InfoCard icon={item.icon}
-                                                              info={item.info}
-                                                              category={item.category}
-                                                              key={item.id} />) } */}
+              <View style={{flexDirection: "row" }}>
 
-<View style={{flexDirection: "row" }}>
-              <InfoCard icon={constants.info[0].icon}
-                        info={constants.info[0].info}
-                        category={constants.info[0].category}
-                        key={constants.info[0].id} />
-<View style={{width: 10}} />
+                <InfoCard icon={constants.info[0].icon}
+                          info={constants.info[0].info}
+                          category={constants.info[0].category}
+                          key={constants.info[0].id} />
 
-              <InfoCard icon={constants.info[1].icon}
-                        info={constants.info[1].info}
-                        category={constants.info[1].category}
-                        key={constants.info[1].id} />
-</View>
-<View style={{height: 20}} />
-<View style={{flexDirection: "row"}}>
-              <InfoCard icon={constants.info[2].icon}
-                        info={constants.info[2].info}
-                        category={constants.info[2].category}
-                        key={constants.info[2].id} />
-<View style={{width: 10}} />
+                <View style={{width: 10}} />
 
-              <InfoCard icon={constants.info[3].icon}
-                        info={constants.info[3].info}
-                        category={constants.info[3].category}
-                        key={constants.info[3].id} />
-</View>
+                <InfoCard icon={constants.info[1].icon}
+                          info={constants.info[1].info}
+                          category={constants.info[1].category}
+                          key={constants.info[1].id} />
+
+              </View>
+
+              <View style={{height: 20}} />
+
+              <View style={{flexDirection: "row"}}>
+  
+                <InfoCard icon={constants.info[2].icon}
+                          info={constants.info[2].info}
+                          category={constants.info[2].category}
+                          key={constants.info[2].id} />
+
+              <View style={{width: 10}} />
+
+                <InfoCard icon={constants.info[3].icon}
+                          info={constants.info[3].info}
+                          category={constants.info[3].category}
+                          key={constants.info[3].id} />
+
+              </View>
 
             </View>
 
