@@ -1,7 +1,7 @@
 
 
-// export const primary = "#00e588";
-export const primary = "#00D980";
+export const primary = "#00e588";
+// export const primary = "#00D980";
 export const secondary = "#96a7ff";
 export const background = "#f9f9f7";
 export const primary_blend1 = "#01e189";
@@ -139,3 +139,35 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
                           size: 40,
                           id: "coupon_e4f5" }];
   
+export const data = [{ name: "Logan",
+                       category: "fast_food",
+                       status: "Received",
+                       direction: "into",
+                       date: "29 March 2022, 9:00",
+                       amount: 350,
+                       id: "fast_food_a0b1" },
+
+                     { name: "Scott",
+                       category: "sushi",
+                       status: "Pending",
+                       direction: "from",
+                       date: "30 February 2023, 8:23",
+                       amount: 150,
+                       id: "sushi_a0b1" },
+
+                       { name: "Tony",
+                         category: "coffee",
+                         status: "Paid",
+                         direction: "into",
+                         date: "28 April 2021, 13:06",
+                         amount: 53.6,
+                         id: "coffee_a0b1" },
+
+                         { name: "Steve",
+                           category: "burger",
+                           status: "Failed",
+                           direction: "from",
+                           date: "13 October 2024, 18:43",
+                           amount: 107.9,
+                           id: "burger_a0b1" },];
+// export const data = [];
