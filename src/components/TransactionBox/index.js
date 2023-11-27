@@ -1,7 +1,7 @@
 import { View, Text, Pressable, Image } from "react-native";
 // import EmptyTransactions from "../EmptyTransactions";
 import TransactionRow from "../TransactionRow";
-import * as constants from "../../utility/constants"; 
+import HorizontalDivider from "../HorizontalDivider";
 import { styles } from "./styles";
 
 
@@ -44,7 +44,7 @@ export default function TransactionBox() {
 
                 </View>
 
-                <View style={{ borderBottomColor: constants.cement, borderBottomWidth: 0.7 }} />
+                <HorizontalDivider />
 
                 <View style={{ paddingVertical: 20 }}>
 
@@ -57,7 +57,7 @@ export default function TransactionBox() {
 
                 </View>
 
-                <View style={{ borderBottomColor: constants.cement, borderBottomWidth: 0.7 }} />
+                <HorizontalDivider />
 
                 <View style={{ paddingVertical: 20 }}>
 
@@ -70,7 +70,7 @@ export default function TransactionBox() {
 
                 </View>
 
-                <View style={{ borderBottomColor: constants.cement, borderBottomWidth: 0.7 }} />
+                <HorizontalDivider />
 
                 <View style={{ paddingVertical: 20 }}>
 
