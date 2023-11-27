@@ -76,7 +76,7 @@ export const socials = [{ icon: require("../assets/icons/chat.png"),
                         { icon: require("../assets/icons/whatsapp.png"),
                           category: "Whatsapp",
                           id: "whatsapp_e4f5" }];
-                          
+
 export const transactionIcons = { burger: require("../assets/icons/burger.png"),
                                   coffee: require("../assets/icons/coffee.png"),
                                   // coffee: require("../assets/icons/cup.png"),
@@ -93,3 +93,23 @@ export const transactionIcons = { burger: require("../assets/icons/burger.png"),
                                   donut: require("../assets/icons/donut.png"),
                                   sushi: require("../assets/icons/sushi.png"),
                                   "fast_food": require("../assets/icons/hot_dog.png") };
+
+export const info = [{ icon: require("../assets/icons/plus.png"),
+                       category: "Top up",
+                       info: "your pocket safely and securely.",
+                       id: "top_up_a0b1" },
+
+                      { icon: require("../assets/icons/plane.png"),
+                        category: "Send money",
+                        info: "from your pocket to another pocket.",
+                        id: "send_money_a0b1" },
+
+                      { icon: require("../assets/icons/cash.png"),
+                        category: "Get paid",
+                        info: "instantly by your friends and family.",
+                        id: "get_paid_c2d3" },
+
+                      { icon: require("../assets/icons/qr.png"),
+                        category: "Scan to pay",
+                        info: "any QR code to make a payment.",
+                        id: "scan_pay_e4f5" }];

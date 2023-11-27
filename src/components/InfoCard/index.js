@@ -12,9 +12,7 @@ export default function InfoCard({ category, icon, info }) {
             <Image source={icon}
                    style={styles.image} />
 
-            {/* <View style={{height: 20}} /> */}
-
-            <View style={styles.textConatiner}>
+            <View style={styles.textContainer}>
 
                 <Text style={styles.categoryText}>{category}</Text>
 
