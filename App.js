@@ -6,6 +6,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
 import Transactions from "./src/screens/Transactions";
+import Referrals from "./src/screens/Referrals";
 import * as constants from "./src/utility/constants";
 
 
@@ -139,7 +140,7 @@ export default function App() {
                                   component={() => <Pocket />}/>
 
           <CurvedBottomBar.Screen name="Referrals"
-                                  component={() => <Home />}
+                                  component={() => <Referrals />}
                                   position="RIGHT"/>
 
       </CurvedBottomBar.Navigator>
