@@ -20,7 +20,11 @@ export const styles = StyleSheet.create({
         color: "#000000",
         fontSize: 16,
         marginLeft: "5%"
-    }
+    },
 
+    horizontalSection: {
+
+        marginTop: 20
+    }
 
 });
