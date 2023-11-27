@@ -14,7 +14,7 @@ export default function Home() {
 
     <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
 
-      <ScrollView showVerticalScrollIndicator={false} bounces={true}>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
           <LinearGradient colors={[constants.primary, constants.secondary]} 
                           style={{ flex: 1 }}
@@ -60,10 +60,6 @@ export default function Home() {
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Transaction summary</Text>
 
             <View style={styles.cardSection}>
-
-              {/* <TransactionRow amount={350.00}
-                              status={"Received"}
-                              direction={"into"} /> */}
 
               <TransactionBox />
 
