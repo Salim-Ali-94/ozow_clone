@@ -7,11 +7,17 @@ let styles = StyleSheet.create({
 
     card: {
 
+        // width: "48.7%",
+        // height: 150,
+
         // width: 200,
-        width: "48.7%",
+        width: 189,
+        // width: "46%",
+        // width: "47%",
+        height: 140,
+
         // height: 180,
         // height: 160,
-        height: 150,
         borderRadius: 20,
         backgroundColor: "#ffffff",
         // padding: 10,

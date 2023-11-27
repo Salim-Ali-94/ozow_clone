@@ -6,12 +6,14 @@ export const styles = StyleSheet.create({
     section: {
 
         marginTop: 30,
-        paddingBottom: 30
+        paddingBottom: 30,
+        backgroundColor: "pink"
     },
 
     centerAlign: {
 
         alignItems: "center"
+        // justifyContent: "center"
     },
 
     sectionText: {
