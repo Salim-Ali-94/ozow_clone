@@ -111,7 +111,8 @@ export default function App() {
                                                   <Animated.View>
 
                                                     <Pressable style={styles.button}
-                                                               onPress={() => { !ozow && setPrevious(selectedTab);
+                                                               onPress={() => { constants.tabBarRef?.current?.setVisible(false);;
+                                                                                !ozow && setPrevious(selectedTab);
                                                                                 !ozow ? navigate("Services") : navigate(previous);
                                                                                 setOzow(!ozow); } }>
 

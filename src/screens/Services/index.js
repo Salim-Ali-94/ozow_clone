@@ -1,5 +1,4 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
-import { useEffect } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
@@ -8,26 +7,6 @@ import { styles } from "./styles";
 
 
 export default function Services() {
-
-  // const showSubscription = () => {
-  
-  //   constants.tabBarRef.current.setVisible(false)
-
-  // };
-
-  // const hideSubscription = () => {
-  
-  //   constants.tabBarRef.current.setVisible(true)
-  
-  // };
-
-  useEffect(() => {
-
-    // hideSubscription();
-    // showSubscription();
-    constants.tabBarRef?.current?.setVisible(false);
-
-  }, []);
 
   return (
 
