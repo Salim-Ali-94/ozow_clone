@@ -55,13 +55,13 @@ export default function Referrals() {
 
             <View style={{ width: "90%", backgroundColor: "#ffffff", borderRadius: 20, padding: 20, height: 300 }}>
 
-                <FlatList data={[{name: "Aadil", phone: "0123456789"}, {name: "Bilal", phone: "9876543210"}, {name: "Cooper", phone: "2468101214"}, {name: "Dawood", phone: "3691215181"}, {name: "Elias", phone: "1098726540"}, {name: "Fatima", phone: "0987152673"}, {name: "George", phone: "9807561229"}, {name: "Aadil", phone: "0123456789"}, {name: "Bilal", phone: "9876543210"}, {name: "Cooper", phone: "2468101214"}, {name: "Dawood", phone: "3691215181"}, {name: "Elias", phone: "1098726540"}, {name: "Fatima", phone: "0987152673"}, {name: "George", phone: "9807561229"}, {name: "Aadil", phone: "0123456789"}, {name: "Bilal", phone: "9876543210"}, {name: "Cooper", phone: "2468101214"}, {name: "Dawood", phone: "3691215181"}, {name: "Elias", phone: "1098726540"}, {name: "Fatima", phone: "0987152673"}, {name: "George", phone: "9807561229"}, {name: "Aadil", phone: "0123456789"}, {name: "Bilal", phone: "9876543210"}, {name: "Cooper", phone: "2468101214"}, {name: "Dawood", phone: "3691215181"}, {name: "Elias", phone: "1098726540"}, {name: "Fatima", phone: "0987152673"}, {name: "George", phone: "9807561229"}, {name: "Aadil", phone: "0123456789"}, {name: "Bilal", phone: "9876543210"}, {name: "Cooper", phone: "2468101214"}, {name: "Dawood", phone: "3691215181"}, {name: "Elias", phone: "1098726540"}, {name: "Fatima", phone: "0987152673"}, {name: "Zaheer", phone: "0981028364"}]}
+                <FlatList data={constants.contacts}
                           showsVerticalScrollIndicator={false}
-                          renderItem={({ item }) => [<Contact name={item.name}
+                          renderItem={({ item, index }) => [<Contact name={item.name}
                                                               phone={item.phone}
                                                               key={"refer_" + item.name} />,
                                                               
-                                                     (item.name !== "Zaheer") && <HorizontalDivider key={"refer_" + item.phone} />]} />
+                                                            (index < constants.contacts.length - 1) && <HorizontalDivider key={"refer_" + item.phone} />]} />
 
             </View>
 

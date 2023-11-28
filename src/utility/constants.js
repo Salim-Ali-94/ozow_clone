@@ -171,3 +171,29 @@ export const data = [{ name: "Logan",
                            amount: 107.9,
                            id: "burger_a0b1" },];
 // export const data = [];
+
+
+
+export const contacts = [{ name: "Aadil",
+                           phone: "0123456789" },
+
+                         { name: "Bilal",
+                           phone: "9876543210" },
+
+                         { name: "Cooper",
+                           phone: "2468101214" },
+
+                         { name: "Dawood",
+                           phone: "3691215181" },
+
+                         { name: "Elias",
+                           phone: "1098726540" },
+
+                         { name: "Fatima",
+                           phone: "0987152673" },
+
+                         { name: "George",
+                           phone: "9807561229" },
+
+                         { name: "Zaheer",
+                           phone: "0981028364" }];
