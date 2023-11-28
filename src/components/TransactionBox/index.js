@@ -30,7 +30,7 @@ export default function TransactionBox() {
 
             </View>
 
-            { (constants.data.length === 0) ? <EmptyTransactions /> :
+            { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
                                               <View style={styles.transactions}>
 
@@ -42,11 +42,12 @@ export default function TransactionBox() {
                                                                                                             name={item.name}
                                                                                                             category={item.category}
                                                                                                             date={item.date}
-                                                                                                            key={item.id} />
+                                                                                                            screen={"home"}
+                                                                                                            key={"transactions_box_" + item.id} />
 
                                                                                         </View>,
 
-                                                                                        (index < 3) && <HorizontalDivider key={index} />]) }
+                                                                                        (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
 
                                               </View> }
 

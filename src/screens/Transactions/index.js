@@ -22,7 +22,8 @@ export default function Transactions() {
 
                     <SearchInput placeholder={"Search EFT transactions"}
                                  onChangeText={() => {}}
-                                 value={""} />
+                                 value={""}
+                                 key={"transactions_search"} />
 
                 </View>
 
@@ -48,7 +49,7 @@ export default function Transactions() {
 
                     <View style={{width: "90%"}}>
 
-                        { (constants.data.length === 0) ? <EmptyTransactions /> :
+                        { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
                                                           <View style={styles.transactions}>
 
@@ -60,11 +61,12 @@ export default function Transactions() {
                                                                                                                           name={item.name}
                                                                                                                           category={item.category}
                                                                                                                           date={item.date}
-                                                                                                                          key={item.id} />
+                                                                                                                          screen={"transactions"}
+                                                                                                                          key={"transactions_" + item.id} />
 
                                                                                                       </View>,
 
-                                                                                                      (index < constants.data.length - 1) && <HorizontalDivider key={index} />]) }
+                                                                                                      (index < constants.data.length - 1) && <HorizontalDivider key={"trasnactions_" + index.toString()} />]) }
 
                                                           </View> }
 
