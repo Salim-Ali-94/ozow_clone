@@ -5,6 +5,7 @@ import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
 import Contact from "../../components/Contact";
 import * as constants from "../../utility/constants";
+import * as utility from "../../utility/utility";
 import { styles } from "./styles";
 
 
@@ -13,13 +14,13 @@ export default function Referrals() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(constants.contacts);
 
-  const handleSearch = (text) => {
+  // const searchAction = (text) => {
 
-    setSearchQuery(text);
-    const filteredItems = constants.contacts.filter((item) => item.name.toLowerCase().includes(text.toLowerCase()));
-    setFilteredData(filteredItems);
+  //   setSearchQuery(text);
+  //   const filteredItems = constants.contacts.filter((item) => item.name.toLowerCase().includes(text.toLowerCase()));
+  //   setFilteredData(filteredItems);
 
-  };
+  // };
 
   return (
 
@@ -36,7 +37,8 @@ export default function Referrals() {
             <View style={styles.centerAlign}>
 
               <SearchInput placeholder={"Search your contacts"}
-                           onChangeText={handleSearch}
+                          //  onChangeText={searchAction}
+                           onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery)}
                            value={searchQuery}
                            key={"refer_search"} />
 
