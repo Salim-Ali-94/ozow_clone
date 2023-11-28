@@ -32,7 +32,8 @@ export default function Home() {
 
               <PocketBalanceCard amount={1234567890.09876}
                                  shadow={true}
-                                 arrow={true} />
+                                 arrow={true}
+                                 key={"home_pocket_balance_card"} />
 
             </View>
 
@@ -50,7 +51,7 @@ export default function Home() {
                                                                     icon={item.icon}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}
-                                                                    key={item.id} />)} />
+                                                                    key={"home_" + item.id} />)} />
 
           </View>
 
@@ -60,7 +61,7 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <TransactionBox />
+              <TransactionBox key={"home_transaction_box"} />
 
             </View>
 

@@ -49,21 +49,21 @@ export default function Services() {
                           renderItem={({ item }) => <InfoCard icon={item.icon}
                                                               info={item.info}
                                                               category={item.category}
-                                                              key={item.id} />} /> */}
+                                                              key={"service_" + item.id} />} /> */}
 
               <View style={{flexDirection: "row" }}>
 
                 <InfoCard icon={constants.info[0].icon}
                           info={constants.info[0].info}
                           category={constants.info[0].category}
-                          key={constants.info[0].id} />
+                          key={"service_" + constants.info[0].id} />
 
                 <View style={{width: 10}} />
 
                 <InfoCard icon={constants.info[1].icon}
                           info={constants.info[1].info}
                           category={constants.info[1].category}
-                          key={constants.info[1].id} />
+                          key={"service_" + constants.info[1].id} />
 
               </View>
 
@@ -74,14 +74,14 @@ export default function Services() {
                 <InfoCard icon={constants.info[2].icon}
                           info={constants.info[2].info}
                           category={constants.info[2].category}
-                          key={constants.info[2].id} />
+                          key={"service_" + constants.info[2].id} />
 
               <View style={{width: 10}} />
 
                 <InfoCard icon={constants.info[3].icon}
                           info={constants.info[3].info}
                           category={constants.info[3].category}
-                          key={constants.info[3].id} />
+                          key={"service_" + constants.info[3].id} />
 
               </View>
 
@@ -103,14 +103,14 @@ export default function Services() {
                                                                  details={item.details}
                                                                  icon={item.icon}
                                                                  iconSize={item.size}
-                                                                 key={item.id} />} /> */}
+                                                                 key={"service_" + item.id} />} /> */}
 
                 { constants.details.map((item, index) => <DetailsCard category={item.category}
                                                              details={item.details}
                                                              icon={item.icon}
                                                              iconSize={item.size}
                                                              gap={(index < constants.details.length - 1) ? 10 : 0}
-                                                             key={item.id} />) }
+                                                             key={"service_" + item.id} />) }
 
             </View>
 
@@ -124,7 +124,8 @@ export default function Services() {
 
                 <DetailsCard category={"Trade stocks"}
                              details={"Trade stocks and grow your portfolio all from your pocket."}
-                             icon={require("../../assets/icons/trading.png")} />
+                             icon={require("../../assets/icons/trading.png")}
+                             key={"service_stocks_details_card"} />
 
             </View>
 

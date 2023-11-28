@@ -30,11 +30,11 @@ export default function TransactionBox() {
 
             </View>
 
-            { (constants.data.length === 0) ? <EmptyTransactions /> :
+            { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
                                               <View style={styles.transactions}>
 
-                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
 
                                                                                             <TransactionRow amount={item.amount}
                                                                                                             status={item.status}
@@ -42,11 +42,12 @@ export default function TransactionBox() {
                                                                                                             name={item.name}
                                                                                                             category={item.category}
                                                                                                             date={item.date}
-                                                                                                            key={item.id} />
+                                                                                                            screen={"home"}
+                                                                                                            key={"transactions_box_" + item.id} />
 
                                                                                         </View>,
 
-                                                                                        (index < 3) && <HorizontalDivider />]) }
+                                                                                        (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
 
                                               </View> }
 

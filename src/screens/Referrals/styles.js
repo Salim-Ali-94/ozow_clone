@@ -19,8 +19,14 @@ export const styles = StyleSheet.create({
 
         fontFamily: "poppins_bold",
         color: constants.primary,
-        fontSize: 32,
+        width: "78%",
+        fontSize: 28,
         marginLeft: "5%"
+    },
+
+    horizontalSection: {
+
+        marginTop: 20
     }
 
 });

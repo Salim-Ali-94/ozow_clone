@@ -5,7 +5,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function TransactionRow({ amount, status, direction, name, date, category }) {
+export default function TransactionRow({ amount, status, direction, name, date, category, screen }) {
 
     return (
 
@@ -14,7 +14,7 @@ export default function TransactionRow({ amount, status, direction, name, date, 
 
             <View style={styles.left}>
 
-                <IconBox icon={constants.transactionIcons[category]} />
+                <IconBox icon={constants.transactionIcons[category]} key={"transaction_row_icon_box_" + category + screen} />
 
                 <View style={styles.info}>
 
@@ -28,7 +28,7 @@ export default function TransactionRow({ amount, status, direction, name, date, 
 
             <View style={styles.right}>
 
-                <StatusIndicator status={status} />
+                <StatusIndicator status={status} key={"transaction_row_status_indicator_" + category + screen} />
                 <Text style={styles.priceText}>{(direction.toLowerCase() === "into") ? "+" : "-"}R{amount.toFixed(2)}</Text>
 
             </View>

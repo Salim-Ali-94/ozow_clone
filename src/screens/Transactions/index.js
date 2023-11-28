@@ -22,7 +22,8 @@ export default function Transactions() {
 
                     <SearchInput placeholder={"Search EFT transactions"}
                                  onChangeText={() => {}}
-                                 value={""} />
+                                 value={""}
+                                 key={"transactions_search"} />
 
                 </View>
 
@@ -33,7 +34,8 @@ export default function Transactions() {
                               data={["All time", "All transactions", "All services", "All statuses"]}
                               showsHorizontalScrollIndicator={false}
                               renderItem={({ item, index }) => (<FilterBox text={item}
-                                                                           key={index}
+                                                                           key={"transactions_" + index.toString()}
+                                                                           arrow={true}
                                                                            left_gap={(index === 0) ? 20 : 10}
                                                                            right_gap={(index === 4 - 1) ? 20 : 0} />)} />
 
@@ -47,11 +49,11 @@ export default function Transactions() {
 
                     <View style={{width: "90%"}}>
 
-                        { (constants.data.length === 0) ? <EmptyTransactions /> :
+                        { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
-                                                          <View style={styles.transactions}>
+                                                          <View style={styles.transactions} key={"transactions_box_holder"}>
 
-                                                              { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                              { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
 
                                                                                                           <TransactionRow amount={item.amount}
                                                                                                                           status={item.status}
@@ -59,11 +61,12 @@ export default function Transactions() {
                                                                                                                           name={item.name}
                                                                                                                           category={item.category}
                                                                                                                           date={item.date}
-                                                                                                                          key={item.id} />
+                                                                                                                          screen={"transactions"}
+                                                                                                                          key={"transactions_" + item.id} />
 
                                                                                                       </View>,
 
-                                                                                                      (index < constants.data.length - 1) && <HorizontalDivider />]) }
+                                                                                                      (index < constants.data.length - 1) && <HorizontalDivider key={"trasnactions_" + index.toString()} />]) }
 
                                                           </View> }
 

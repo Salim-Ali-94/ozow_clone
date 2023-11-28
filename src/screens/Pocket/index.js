@@ -24,7 +24,8 @@ export default function Pocket() {
 
               <PocketBalanceCard amount={1234567890.09876}
                                  shadow={false}
-                                 arrow={false} />
+                                 arrow={false}
+                                 key={"pocket_pocket_balance_card"} />
 
             </View>
 
@@ -42,7 +43,7 @@ export default function Pocket() {
                           contentContainerStyle={{ gap: 20 }}
                           renderItem={({ item }) => <IconButton icon={item.icon} 
                                                                 category={item.category}
-                                                                key={item.id} />} />
+                                                                key={"pocket_" + item.id} />} />
 
             </View>
 
@@ -56,11 +57,11 @@ export default function Pocket() {
 
               <View style={{width: "90%"}}>
 
-                { (constants.data.length === 0) ? <EmptyTransactions /> :
+                { (constants.data.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
 
                                                   <View style={styles.transactions}>
 
-                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"pocket_row_container_" + item.id}>
 
                                                                                                 <TransactionRow amount={item.amount}
                                                                                                                 status={item.status}
@@ -68,11 +69,12 @@ export default function Pocket() {
                                                                                                                 name={item.name}
                                                                                                                 category={item.category}
                                                                                                                 date={item.date}
-                                                                                                                key={item.id} />
+                                                                                                                screen={"pocket"}
+                                                                                                                key={"pocket_" + item.id} />
 
                                                                                             </View>,
 
-                                                                                            (index < constants.data.length - 1) && <HorizontalDivider />]) }
+                                                                                            (index < constants.data.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
 
                                                   </View> }
 
