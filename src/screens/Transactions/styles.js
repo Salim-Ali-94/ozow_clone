@@ -1,7 +1,25 @@
 import { StyleSheet } from "react-native";
+import * as constants from "../../utility/constants";
 
 
 export const styles = StyleSheet.create({
+
+    container: {
+        
+        backgroundColor: constants.background,
+        flex: 1
+    },
+
+    search: {
+        
+        marginTop: 30,
+        alignItems: "center"
+    },
+
+    transactionList: {
+        
+        width: "90%"
+    },
 
     centerAlign: {
 

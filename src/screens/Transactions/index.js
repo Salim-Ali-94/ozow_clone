@@ -17,13 +17,13 @@ export default function Transactions() {
 
     return (
 
-        <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+        <SafeAreaView style={styles.container}>
 
             <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
             <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-                <View style={{ marginTop: 30, alignItems: "center" }}>
+                <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
                                  onChangeText={(value) => utility.searchFilter(constants.data, value, setFilteredData, setSearchQuery)}
@@ -52,7 +52,7 @@ export default function Transactions() {
 
                     <View style={styles.centerAlign}>
 
-                    <View style={{width: "90%"}}>
+                    <View style={styles.transactionList}>
 
                         { (filteredData.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
