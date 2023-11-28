@@ -10,38 +10,14 @@ import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
 import { screenContext } from "./src/providers/screenContext";
-// import { useContext } from "react";
-// const { screen, setScreen } = useContext(screenContext)
 import * as constants from "./src/utility/constants";
 
 
 export default function App() {
 
-  // const navigation = useNavigation();
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
-
-  // const renderBackButton = () => {
-
-  // const navigation = useNavigation();
-
-  //   if (screen === 'Buy') {
-  //     return (
-  //       <Pressable
-  //         // onPress={() => useNavigation().navigate(previous)} // Change this to the appropriate screen
-  //         onPress={() => navigation.navigate("Home")} // Change this to the appropriate screen
-  //         style={{ paddingLeft: 30 }}
-  //       >
-  //         <Image
-  //           source={require("./src/assets/icons/left.png")}
-  //           style={{ tintColor: "#fff", width: 20, height: 20 }}
-  //         />
-  //       </Pressable>
-  //     );
-  //   }
-  //   return null;
-  // };
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -99,21 +75,12 @@ export default function App() {
 
   const renderTabBar = ({ routeName, selectedTab, navigate }) => {
 
-    // console.log("routeName")
-    // console.log(routeName)
-    // console.log("selectedTab")
-    // console.log(selectedTab)
-    // console.log("previous")
-    // console.log(previous)
-    // console.log("screen")
-    // console.log(screen)
-
     return (
 
       <Pressable onPress={() => { ozow && setOzow(false);
                                   setPrevious(screen);
-                                  setScreen(selectedTab);
-                                  // setScreen(routeName);
+                                  // setScreen(selectedTab);
+                                  setScreen(routeName);
                                   navigate(routeName); } }
                  style={styles.tabItem}>
 
@@ -141,48 +108,23 @@ export default function App() {
                                   initialRouteName="Home"
                                   tabBar={renderTabBar}
                                   screenOptions={{ headerTitle: "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
-                                                    // headerLeft: () => <Pressable onPress={() => {const navigation = useNavigation(); navigation.navigate(previous)}} style={{ paddingLeft: 30 }}><Image source={require("./src/assets/icons/left.png")} style={{ tintColor: "#fff", width: 20, height: 20 }} /></Pressable>,
-                                                    
-                                                    
-                                                    // headerLeft: () => {
-                                                    //   const navigation = useNavigation();
-                                                    //   return (
-                                                    //     <Pressable
-                                                    //       onPress={() => {constants.tabBarRef?.current?.setVisible(true);
-                                                    //                       navigation.navigate(previous);}}
-                                                    //       style={{ paddingLeft: 30 }}
-                                                    //     >
-                                                    //       <Image
-                                                    //         source={require("./src/assets/icons/left.png")}
-                                                    //         style={{ tintColor: "#fff", width: 20, height: 20 }}
-                                                    //       />
-                                                    //     </Pressable>
-                                                    //   );
-                                                    // },
-
 
                                                     headerLeft: () => {
+                                                      
                                                       const navigation = useNavigation();
-                                                      if (screen == "Buy") {
-                                                        return (
-                                                          <Pressable
-                                                            onPress={() => {constants.tabBarRef?.current?.setVisible(true);
-                                                                            setScreen(previous);
-                                                                            setPrevious(screen);
-                                                                            navigation.navigate(previous);}}
-                                                            style={{ paddingLeft: 30 }}
-                                                          >
-                                                            <Image
-                                                              source={require("./src/assets/icons/left.png")}
-                                                              style={{ tintColor: "#fff", width: 20, height: 20 }}
-                                                            />
-                                                          </Pressable>
-                                                        );
-                                                      }
 
-                                                      return null;
+                                                      return (screen == "Buy") && <Pressable style={{ paddingLeft: 30 }}
+                                                                                             onPress={() => { constants.tabBarRef?.current?.setVisible(true);
+                                                                                                              setPrevious(screen);
+                                                                                                              setScreen(previous);
+                                                                                                              navigation.navigate(previous); }}>
+
+                                                                                      <Image source={require("./src/assets/icons/left.png")}
+                                                                                             style={{ tintColor: "#fff", width: 20, height: 20 }} />
+
+                                                                                  </Pressable>
+
                                                     },
-
 
                                                     // headerLeft: renderBackButton,
                                                     headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
@@ -196,10 +138,9 @@ export default function App() {
                                                     <Animated.View>
 
                                                       <Pressable style={styles.button}
-                                                                onPress={() => { constants.tabBarRef?.current?.setVisible(false);
-                                                                                  !ozow && setPrevious(selectedTab);
-                                                                                  !ozow ? navigate("Services") : navigate(previous);
-                                                                                  setOzow(!ozow); } }>
+                                                                onPress={() => { !ozow && setPrevious(selectedTab);
+                                                                                 !ozow ? navigate("Services") : navigate(previous);
+                                                                                 setOzow(!ozow); } }>
 
                                                         { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                   style={styles.circleButton}
