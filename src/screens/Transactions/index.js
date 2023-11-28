@@ -1,14 +1,19 @@
 import { SafeAreaView, ScrollView, StatusBar, View, Text, FlatList } from "react-native";
+import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import EmptyTransactions from "../../components/EmptyTransactions";
 import TransactionRow from "../../components/TransactionRow";
 import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
 import * as constants from "../../utility/constants";
+import * as utility from "../../utility/utility";
 import { styles } from "./styles";
 
 
 export default function Transactions() {
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredData, setFilteredData] = useState(constants.data);
 
     return (
 
@@ -21,8 +26,8 @@ export default function Transactions() {
                 <View style={{ marginTop: 30, alignItems: "center" }}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={() => {}}
-                                 value={""}
+                                 onChangeText={(value) => utility.searchFilter(constants.data, value, setFilteredData, setSearchQuery)}
+                                 value={searchQuery}
                                  key={"transactions_search"} />
 
                 </View>
@@ -37,7 +42,7 @@ export default function Transactions() {
                                                                            key={"transactions_" + index.toString()}
                                                                            arrow={true}
                                                                            left_gap={(index === 0) ? 20 : 10}
-                                                                           right_gap={(index === 4 - 1) ? 20 : 0} />)} />
+                                                                           right_gap={(index === 3) ? 20 : 0} />)} />
 
                 </View>
 
@@ -49,11 +54,11 @@ export default function Transactions() {
 
                     <View style={{width: "90%"}}>
 
-                        { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
+                        { (filteredData.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
                                                           <View style={styles.transactions} key={"transactions_box_holder"}>
 
-                                                              { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
+                                                              { filteredData.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
 
                                                                                                           <TransactionRow amount={item.amount}
                                                                                                                           status={item.status}
@@ -66,7 +71,7 @@ export default function Transactions() {
 
                                                                                                       </View>,
 
-                                                                                                      (index < constants.data.length - 1) && <HorizontalDivider key={"trasnactions_" + index.toString()} />]) }
+                                                                                                      (index < filteredData.length - 1) && <HorizontalDivider key={"trasnactions_" + index.toString()} />]) }
 
                                                           </View> }
 
