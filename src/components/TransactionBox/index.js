@@ -1,4 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import EmptyTransactions from "../EmptyTransactions";
 import TransactionRow from "../TransactionRow";
 import HorizontalDivider from "../HorizontalDivider";
@@ -6,7 +7,9 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function TransactionBox({ pressAction }) {
+export default function TransactionBox() {
+
+    const navigation = useNavigation();
 
     return (
 
@@ -16,7 +19,7 @@ export default function TransactionBox({ pressAction }) {
 
                 <Text style={styles.headingText}>LATEST</Text>
 
-                <Pressable onPress={pressAction}
+                <Pressable onPress={() => navigation.navigate("History")}
                             style={styles.expand}>
 
                     <Text style={[styles.headingText, { fontFamily: "poppins_semi_bold" }]}>See all</Text>

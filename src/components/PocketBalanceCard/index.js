@@ -1,13 +1,16 @@
 import { View, Text, Image, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 
-export default function PocketBalanceCard({ amount, shadow, arrow }) {
+export default function PocketBalanceCard({ amount, shadow, arrow, pressAction }) {
+
+    const navigation = useNavigation();
 
     return (
 
         <Pressable style={[styles.card, shadow && styles.boxShadow]}
-                    onPress={() => alert("pocket balance card")}>
+                    onPress={() => navigation.navigate("Pocket")}>
 
             <Text style={styles.headingText}>POCKET BALANCE</Text>
             
