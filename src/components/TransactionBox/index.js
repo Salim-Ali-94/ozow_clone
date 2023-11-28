@@ -46,7 +46,7 @@ export default function TransactionBox() {
 
                                                                                         </View>,
 
-                                                                                        (index < 3) && <HorizontalDivider />]) }
+                                                                                        (index < 3) && <HorizontalDivider key={index} />]) }
 
                                               </View> }
 

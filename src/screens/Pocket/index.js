@@ -72,7 +72,7 @@ export default function Pocket() {
 
                                                                                             </View>,
 
-                                                                                            (index < constants.data.length - 1) && <HorizontalDivider />]) }
+                                                                                            (index < constants.data.length - 1) && <HorizontalDivider key={index} />]) }
 
                                                   </View> }
 
