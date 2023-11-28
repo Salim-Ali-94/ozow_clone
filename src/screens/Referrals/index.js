@@ -1,4 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
+import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
@@ -8,6 +9,17 @@ import { styles } from "./styles";
 
 
 export default function Referrals() {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState(constants.contacts);
+
+  const handleSearch = (text) => {
+
+    setSearchQuery(text);
+    const filteredItems = constants.contacts.filter((item) => item.name.toLowerCase().includes(text.toLowerCase()));
+    setFilteredData(filteredItems);
+
+  };
 
   return (
 
@@ -24,8 +36,8 @@ export default function Referrals() {
             <View style={styles.centerAlign}>
 
               <SearchInput placeholder={"Search your contacts"}
-                           onChangeText={() => {}}
-                           value={""}
+                           onChangeText={handleSearch}
+                           value={searchQuery}
                            key={"refer_search"} />
 
             </View>
@@ -55,13 +67,13 @@ export default function Referrals() {
 
             <View style={{ width: "90%", backgroundColor: "#ffffff", borderRadius: 20, padding: 20, height: 300 }}>
 
-                <FlatList data={constants.contacts}
+                <FlatList data={filteredData}
                           showsVerticalScrollIndicator={false}
                           renderItem={({ item, index }) => [<Contact name={item.name}
                                                               phone={item.phone}
                                                               key={"refer_" + item.name} />,
                                                               
-                                                            (index < constants.contacts.length - 1) && <HorizontalDivider key={"refer_" + item.phone} />]} />
+                                                            (index < filteredData.length - 1) && <HorizontalDivider key={"refer_" + item.phone} />]} />
 
             </View>
 
