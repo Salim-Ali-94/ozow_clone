@@ -11,7 +11,7 @@ export default function Buy() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+    <SafeAreaView style={styles.container}>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
@@ -19,7 +19,7 @@ export default function Buy() {
 
         <GradientHeader heading={"What would you like to buy?"} />
 
-        <View style={{ marginTop: -50, marginBottom: 80 }}>
+        <View style={styles.listSection}>
 
             <View style={styles.centerAlign}>
 

@@ -4,23 +4,21 @@ import * as constants from "../../utility/constants";
 
 export const styles = StyleSheet.create({
 
-    section: {
+    container: {
+        
+        backgroundColor: constants.background,
+        flex: 1
+    },
 
-        marginTop: 30,
-        paddingBottom: 30
+    listSection: {
+        
+        marginTop: -50,
+        marginBottom: 80
     },
 
     centerAlign: {
 
         alignItems: "center"
-    },
-
-    sectionText: {
-
-        fontFamily: "poppins_bold",
-        color: constants.primary,
-        fontSize: 32,
-        marginLeft: "5%"
     }
 
 });
