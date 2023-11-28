@@ -1,5 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
-// import LinearGradient from "react-native-linear-gradient";
+import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
@@ -22,17 +21,6 @@ export default function Services() {
         <View style={{ marginTop: -115 }}>
 
             <View style={styles.centerAlign}>
-
-                {/* <FlatList data={constants.info}
-                          scrollEnabled={false}
-                          numColumns={2}
-                          showsVerticalScrollIndicator={false}
-                          columnWrapperStyle={{ gap: 10, paddingTop: 5, paddingBottom: 5 }}
-                          contentContainerStyle={{ gap: 10, paddingLeft: 5, paddingRight: 5 }}
-                          renderItem={({ item }) => <InfoCard icon={item.icon}
-                                                              info={item.info}
-                                                              category={item.category}
-                                                              key={"service_" + item.id} />} /> */}
 
               <View style={{flexDirection: "row" }}>
 
@@ -77,16 +65,6 @@ export default function Services() {
             <Text style={[styles.sectionText, { marginBottom: 10 }]}>Buy</Text>
 
             <View style={styles.centerAlign}>
-
-                {/* <FlatList data={constants.details}
-                          scrollEnabled={false}
-                          showsVerticalScrollIndicator={false}
-                          contentContainerStyle={{ gap: 10, paddingLeft: 5, paddingRight: 5, paddingBottom: 5, paddingTop: 5 }}
-                          renderItem={({ item }) => <DetailsCard category={item.category}
-                                                                 details={item.details}
-                                                                 icon={item.icon}
-                                                                 iconSize={item.size}
-                                                                 key={"service_" + item.id} />} /> */}
 
                 { constants.details.map((item, index) => <DetailsCard category={item.category}
                                                              details={item.details}

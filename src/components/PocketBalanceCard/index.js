@@ -10,7 +10,7 @@ export default function PocketBalanceCard({ amount, shadow }) {
     return (
 
         <Pressable style={[styles.card, shadow && styles.boxShadow]}
-                    onPress={() => navigation.navigate("Pocket")}>
+                    onPress={() => shadow && navigation.navigate("Pocket")}>
 
             <Text style={styles.headingText}>POCKET BALANCE</Text>
             

@@ -56,7 +56,6 @@ export default function Home() {
                       renderItem={({ item, index }) => (<ActionCard category={item.category}
                                                                     icon={item.icon}
                                                                     pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                          //  setPrevious("Home");
                                                                                                            setPrevious(screen);
                                                                                                            setScreen(item.route);
                                                                                                            navigation.navigate(item.route); } }}

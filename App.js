@@ -79,7 +79,6 @@ export default function App() {
 
       <Pressable onPress={() => { ozow && setOzow(false);
                                   setPrevious(screen);
-                                  // setScreen(selectedTab);
                                   setScreen(routeName);
                                   navigate(routeName); } }
                  style={styles.tabItem}>
@@ -107,7 +106,7 @@ export default function App() {
                                   bgColor="white"
                                   initialRouteName="Home"
                                   tabBar={renderTabBar}
-                                  screenOptions={{ headerTitle: "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
+                                  screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" : "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
                                                       
@@ -126,7 +125,6 @@ export default function App() {
 
                                                     },
 
-                                                    // headerLeft: renderBackButton,
                                                     headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
                                                     headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                             style={{ flex: 1 }}
