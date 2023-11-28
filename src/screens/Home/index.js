@@ -7,10 +7,22 @@ import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
+import { screenContext } from "../../providers/screenContext";
+import { useEffect, useContext } from "react";
+
 
 export default function Home() {
 
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
   const navigation = useNavigation();
+
+  // useEffect(() => {
+
+  //   setPrevious(screen);
+  //   setScreen("Buy");
+
+  // }, []);
+
 
   return (
 
@@ -54,6 +66,9 @@ export default function Home() {
                                                                     // pressAction={() => { item.route && constants.tabBarRef?.current?.setVisible(false);
                                                                     //                                    navigation.navigate(item.route); }}
                                                                     pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
+                                                                      setScreen("Buy");
+                                                                      setPrevious(screen);
+                                                                  
                                                                                                            navigation.navigate(item.route); } }}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}
