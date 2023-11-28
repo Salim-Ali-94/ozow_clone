@@ -6,7 +6,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function TransactionBox() {
+export default function TransactionBox({ pressAction }) {
 
     return (
 
@@ -16,7 +16,7 @@ export default function TransactionBox() {
 
                 <Text style={styles.headingText}>LATEST</Text>
 
-                <Pressable onPress={() => console.log("see all")}
+                <Pressable onPress={pressAction}
                             style={styles.expand}>
 
                     <Text style={[styles.headingText, { fontFamily: "poppins_semi_bold" }]}>See all</Text>

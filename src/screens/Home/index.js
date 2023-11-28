@@ -4,10 +4,13 @@ import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
+import { useNavigation } from "@react-navigation/native";
 import { styles } from "./styles";
 
 
 export default function Home() {
+
+  const navigation = useNavigation();
 
   return (
 
@@ -61,7 +64,8 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <TransactionBox key={"home_transaction_box"} />
+              <TransactionBox key={"home_transaction_box"}
+                              pressAction={() => navigation.navigate("History")} />
 
             </View>
 
