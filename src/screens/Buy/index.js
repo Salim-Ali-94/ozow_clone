@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
+import SecurityBadge from "../../components/SecurityBadge";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -34,11 +35,13 @@ export default function Buy() {
                          key={"buy_stocks_details_card"} />
 
 
-            <View style={{ marginTop: 16 }}>
+            <View style={{ marginTop: 16, marginBottom: 5 }}>
 
-                <Text style={{ fontFamily: "poppins_regular" }}>Ozow is safe and secure</Text>
+                <Text style={{ fontFamily: "poppins_regular" }}>Ozow is safe and <Text style={{ color: constants.primary, textDecorationLine: "underline" }}>secure</Text></Text>
 
             </View>
+
+            <SecurityBadge key={"security_tls_buy"} />
 
         </View>
 
