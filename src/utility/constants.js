@@ -1,5 +1,7 @@
+import { createRef } from "react";
 
 
+export const tabBarRef = createRef();
 export const primary = "#00e588";
 // export const primary = "#00D980";
 export const secondary = "#96a7ff";

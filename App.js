@@ -91,6 +91,7 @@ export default function App() {
     <NavigationContainer>
 
       <CurvedBottomBar.Navigator type="DOWN"
+                                 ref={constants.tabBarRef}
                                  style={styles.bottomBar}
                                  shadowStyle={styles.shadow}
                                  height={50}
