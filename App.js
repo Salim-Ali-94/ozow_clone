@@ -8,6 +8,7 @@ import Pocket from "./src/screens/Pocket";
 import Transactions from "./src/screens/Transactions";
 import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
+import Buy from "./src/screens/Buy";
 import * as constants from "./src/utility/constants";
 
 
@@ -111,7 +112,7 @@ export default function App() {
                                                   <Animated.View>
 
                                                     <Pressable style={styles.button}
-                                                               onPress={() => { constants.tabBarRef?.current?.setVisible(false);;
+                                                               onPress={() => { constants.tabBarRef?.current?.setVisible(false);
                                                                                 !ozow && setPrevious(selectedTab);
                                                                                 !ozow ? navigate("Services") : navigate(previous);
                                                                                 setOzow(!ozow); } }>
@@ -158,6 +159,9 @@ export default function App() {
           <CurvedBottomBar.Screen name="Services"
                                   component={() => <Services key={"services_screen"} />}
                                   position="CIRCLE"/>
+
+          <CurvedBottomBar.Screen name="Buy"
+                                  component={() => <Buy key={"buy_screen"} />} />
 
       </CurvedBottomBar.Navigator>
 

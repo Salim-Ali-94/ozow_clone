@@ -8,6 +8,7 @@ export default function GradientHeader({ heading }) {
     return (
 
         <LinearGradient colors={[constants.primary, constants.secondary]}
+                        // style={{ height: 260, alignItems: "center", paddingTop: 30 }}
                         style={{ height: 260, alignItems: "center", paddingTop: 50 }}
                         start={{x: 0, y: 0.5}}
                         end={{x: 1, y: 0.5}} >

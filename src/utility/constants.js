@@ -26,7 +26,8 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
                       
                         { icon: require("../assets/icons/buy.png"),
                           category: "Buy",
-                          id: "buy_g6h7" },
+                          id: "buy_g6h7",
+                          route: "Buy" },
                       
                         { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
