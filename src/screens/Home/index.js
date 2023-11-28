@@ -1,13 +1,20 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
+
 export default function Home() {
+
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const navigation = useNavigation();
 
   return (
 
@@ -48,6 +55,11 @@ export default function Home() {
                       showsHorizontalScrollIndicator={false}
                       renderItem={({ item, index }) => (<ActionCard category={item.category}
                                                                     icon={item.icon}
+                                                                    pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
+                                                                                                          //  setPrevious("Home");
+                                                                                                           setPrevious(screen);
+                                                                                                           setScreen(item.route);
+                                                                                                           navigation.navigate(item.route); } }}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}
                                                                     key={"home_" + item.id} />)} />

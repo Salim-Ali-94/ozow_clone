@@ -1,4 +1,4 @@
-import { View, Pressable, Text } from "react-native";
+import { View, Text } from "react-native";
 import StatusIndicator from "../StatusIndicator";
 import IconBox from "../IconBox";
 import * as constants from "../../utility/constants";
@@ -9,8 +9,7 @@ export default function TransactionRow({ amount, status, direction, name, date, 
 
     return (
 
-        <Pressable style={styles.row}
-                   onPress={() => console.log("clicked")}>
+        <View style={styles.row}>
 
             <View style={styles.left}>
 
@@ -33,7 +32,7 @@ export default function TransactionRow({ amount, status, direction, name, date, 
 
             </View>
 
-        </Pressable>
+        </View>
 
     );
 

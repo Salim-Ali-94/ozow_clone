@@ -1,5 +1,5 @@
 import { StyleSheet, Image, Animated, Pressable, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import { useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
@@ -8,6 +8,8 @@ import Pocket from "./src/screens/Pocket";
 import Transactions from "./src/screens/Transactions";
 import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
+import Buy from "./src/screens/Buy";
+import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 
 
@@ -15,6 +17,7 @@ export default function App() {
 
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
+  const [screen, setScreen] = useState("Home");
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -75,6 +78,9 @@ export default function App() {
     return (
 
       <Pressable onPress={() => { ozow && setOzow(false);
+                                  setPrevious(screen);
+                                  // setScreen(selectedTab);
+                                  setScreen(routeName);
                                   navigate(routeName); } }
                  style={styles.tabItem}>
 
@@ -88,80 +94,105 @@ export default function App() {
 
   return (
 
-    <NavigationContainer>
+    <screenContext.Provider value={{screen, setScreen, setPrevious}}>
 
-      <CurvedBottomBar.Navigator type="DOWN"
-                                 ref={constants.tabBarRef}
-                                 style={styles.bottomBar}
-                                 shadowStyle={styles.shadow}
-                                 height={50}
-                                 circleWidth={50}
-                                 bgColor="white"
-                                 initialRouteName="Home"
-                                 tabBar={renderTabBar}
-                                 screenOptions={{ headerTitle: "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
-                                                  headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
-                                                  headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                          style={{ flex: 1 }}
-                                                                                          start={{x: 0, y: 0.5}}
-                                                                                          end={{x: 1, y: 0.5}} /> }}
+      <NavigationContainer>
 
-                                 renderCircle={({ selectedTab, navigate }) => (
+        <CurvedBottomBar.Navigator type="DOWN"
+                                  ref={constants.tabBarRef}
+                                  style={styles.bottomBar}
+                                  shadowStyle={styles.shadow}
+                                  height={50}
+                                  circleWidth={50}
+                                  bgColor="white"
+                                  initialRouteName="Home"
+                                  tabBar={renderTabBar}
+                                  screenOptions={{ headerTitle: "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
-                                                  <Animated.View>
+                                                    headerLeft: () => {
+                                                      
+                                                      const navigation = useNavigation();
 
-                                                    <Pressable style={styles.button}
-                                                               onPress={() => { constants.tabBarRef?.current?.setVisible(false);;
-                                                                                !ozow && setPrevious(selectedTab);
-                                                                                !ozow ? navigate("Services") : navigate(previous);
-                                                                                setOzow(!ozow); } }>
+                                                      return (screen == "Buy") && <Pressable style={{ paddingLeft: 30 }}
+                                                                                             onPress={() => { constants.tabBarRef?.current?.setVisible(true);
+                                                                                                              setPrevious(screen);
+                                                                                                              setScreen(previous);
+                                                                                                              navigation.navigate(previous); }}>
 
-                                                      { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                style={styles.circleButton}
-                                                                                // locations={[0, 0.6]}
-                                                                                start={{x: 0, y: 0.5}}
-                                                                                end={{x: 1, y: 0.5}}>
+                                                                                      <Image source={require("./src/assets/icons/left.png")}
+                                                                                             style={{ tintColor: "#fff", width: 20, height: 20 }} />
 
-                                                                  <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                                         style={{width: 35, height: 35}}
-                                                                         tintColor={"white"} />
+                                                                                  </Pressable>
 
-                                                                </LinearGradient> : 
+                                                    },
 
-                                                                <View style={styles.circleButton}>
+                                                    // headerLeft: renderBackButton,
+                                                    headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
+                                                    headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                            style={{ flex: 1 }}
+                                                                                            start={{x: 0, y: 0.5}}
+                                                                                            end={{x: 1, y: 0.5}} /> }}
 
-                                                                  <Image source={require("./src/assets/icons/x.png")}
-                                                                         style={{width: 20, height: 20}} /> 
-                                                                       
-                                                                </View> }
+                                  renderCircle={({ selectedTab, navigate }) => (
 
-                                                    </Pressable>
+                                                    <Animated.View>
 
-                                                  </Animated.View>)}>
+                                                      <Pressable style={styles.button}
+                                                                onPress={() => { !ozow && setPrevious(selectedTab);
+                                                                                 !ozow ? navigate("Services") : navigate(previous);
+                                                                                 setOzow(!ozow); } }>
 
-          <CurvedBottomBar.Screen name="Home"
-                                  position="LEFT"
-                                  component={() => <Home key={"home_screen"} />}/>
+                                                        { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                  style={styles.circleButton}
+                                                                                  // locations={[0, 0.6]}
+                                                                                  start={{x: 0, y: 0.5}}
+                                                                                  end={{x: 1, y: 0.5}}>
 
-          <CurvedBottomBar.Screen name="History"
-                                  component={() => <Transactions key={"transactions_screen"} />}
-                                  position="RIGHT"/>
+                                                                    <Image source={require("./src/assets/icons/ozow_white.png")}
+                                                                          style={{width: 35, height: 35}}
+                                                                          tintColor={"white"} />
 
-          <CurvedBottomBar.Screen name="Pocket"
-                                  position="LEFT"
-                                  component={() => <Pocket key={"pocket_screen"} />}/>
+                                                                  </LinearGradient> : 
 
-          <CurvedBottomBar.Screen name="Referrals"
-                                  component={() => <Referrals key={"referral_screen"} />}
-                                  position="RIGHT"/>
+                                                                  <View style={styles.circleButton}>
 
-          <CurvedBottomBar.Screen name="Services"
-                                  component={() => <Services key={"services_screen"} />}
-                                  position="CIRCLE"/>
+                                                                    <Image source={require("./src/assets/icons/x.png")}
+                                                                          style={{width: 20, height: 20}} /> 
+                                                                        
+                                                                  </View> }
 
-      </CurvedBottomBar.Navigator>
+                                                      </Pressable>
 
-    </NavigationContainer>
+                                                    </Animated.View>)}>
+
+            <CurvedBottomBar.Screen name="Home"
+                                    position="LEFT"
+                                    component={() => <Home key={"home_screen"} />}/>
+
+            <CurvedBottomBar.Screen name="History"
+                                    component={() => <Transactions key={"transactions_screen"} />}
+                                    position="RIGHT"/>
+
+            <CurvedBottomBar.Screen name="Pocket"
+                                    position="LEFT"
+                                    component={() => <Pocket key={"pocket_screen"} />}/>
+
+            <CurvedBottomBar.Screen name="Referrals"
+                                    component={() => <Referrals key={"referral_screen"} />}
+                                    position="RIGHT"/>
+
+            <CurvedBottomBar.Screen name="Services"
+                                    component={() => <Services key={"services_screen"} />}
+                                    position="CIRCLE"/>
+
+            <CurvedBottomBar.Screen name="Buy"
+                                    component={() => <Buy key={"buy_screen"} />} />
+
+        </CurvedBottomBar.Navigator>
+
+      </NavigationContainer>
+
+    </screenContext.Provider>
 
   );
 

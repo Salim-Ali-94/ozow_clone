@@ -4,11 +4,11 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function ActionCard({ category, icon, left_gap, right_gap }) {
+export default function ActionCard({ category, icon, left_gap, right_gap, pressAction }) {
 
     return (
 
-        <Pressable onPress={() => alert(category + " card")}>
+        <Pressable onPress={pressAction}>
 
             <LinearGradient colors={[constants.primary_blend1, constants.primary_blend2]} 
                             style={[styles.card, { marginLeft: left_gap, marginRight: right_gap, flex: 1 }]}
