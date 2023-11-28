@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 
-export default function PocketBalanceCard({ amount, shadow, arrow, pressAction }) {
+export default function PocketBalanceCard({ amount, shadow }) {
 
     const navigation = useNavigation();
 
@@ -22,7 +22,7 @@ export default function PocketBalanceCard({ amount, shadow, arrow, pressAction }
 
                 <View style={styles.space} />
 
-                { arrow && <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} /> }
+                { shadow && <Image source={require("../../assets/icons/arrow.png")} style={styles.rightArrow} /> }
 
             </View>
 

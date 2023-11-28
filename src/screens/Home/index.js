@@ -32,7 +32,6 @@ export default function Home() {
 
               <PocketBalanceCard amount={1234567890.09876}
                                  shadow={true}
-                                 arrow={true}
                                  key={"home_pocket_balance_card"} />
 
             </View>

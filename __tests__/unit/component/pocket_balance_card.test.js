@@ -8,7 +8,7 @@ describe("Testing functionality of the pocket balance card component separately 
     test("Input value must reflect on the card", () => {
 
         let value = 123.45;
-        render(<PocketBalanceCard amount={value} />);
+        render(<PocketBalanceCard shadow={true} amount={value} />);
         let result = screen.getByTestId("pocket-balance-amount");
         expect(result.props.children.join("")).toBe("R" + value.toString());
 
@@ -17,7 +17,7 @@ describe("Testing functionality of the pocket balance card component separately 
     test("Input value must be rounded off to 2 decimal places", () => {
 
         let value = 12345.6789;
-        render(<PocketBalanceCard amount={value} />);
+        render(<PocketBalanceCard shadow={false} amount={value} />);
         let result = screen.getByTestId("pocket-balance-amount");
         expect(result.props.children[1]).toEqual(value.toFixed(2).toString());
 
@@ -26,7 +26,7 @@ describe("Testing functionality of the pocket balance card component separately 
     // test("Input value must be truncated if length exceeds 1 text line", () => {
 
     //     let value = 1234567890987654.3210;
-    //     render(<PocketBalanceCard amount={value} />);
+    //     render(<PocketBalanceCard shadow={true} amount={value} />);
     //     let result = screen.getByTestId("pocket-balance-amount");
     //     expect(result).toHaveStyle({ overflow: "hidden" });
 

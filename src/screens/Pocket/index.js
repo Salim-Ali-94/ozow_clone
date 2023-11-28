@@ -24,7 +24,6 @@ export default function Pocket() {
 
               <PocketBalanceCard amount={1234567890.09876}
                                  shadow={false}
-                                 arrow={false}
                                  key={"pocket_pocket_balance_card"} />
 
             </View>
