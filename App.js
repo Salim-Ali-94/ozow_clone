@@ -139,22 +139,22 @@ export default function App() {
 
           <CurvedBottomBar.Screen name="Home"
                                   position="LEFT"
-                                  component={() => <Home />}/>
+                                  component={() => <Home key={"home_screen"} />}/>
 
           <CurvedBottomBar.Screen name="History"
-                                  component={() => <Transactions />}
+                                  component={() => <Transactions key={"transactions_screen"} />}
                                   position="RIGHT"/>
 
           <CurvedBottomBar.Screen name="Pocket"
                                   position="LEFT"
-                                  component={() => <Pocket />}/>
+                                  component={() => <Pocket key={"pocket_screen"} />}/>
 
           <CurvedBottomBar.Screen name="Referrals"
-                                  component={() => <Referrals />}
+                                  component={() => <Referrals key={"referral_screen"} />}
                                   position="RIGHT"/>
 
           <CurvedBottomBar.Screen name="Services"
-                                  component={() => <Services />}
+                                  component={() => <Services key={"services_screen"} />}
                                   position="CIRCLE"/>
 
       </CurvedBottomBar.Navigator>

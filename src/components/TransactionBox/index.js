@@ -34,7 +34,7 @@ export default function TransactionBox() {
 
                                               <View style={styles.transactions}>
 
-                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
 
                                                                                             <TransactionRow amount={item.amount}
                                                                                                             status={item.status}

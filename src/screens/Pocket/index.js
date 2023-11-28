@@ -61,7 +61,7 @@ export default function Pocket() {
 
                                                   <View style={styles.transactions}>
 
-                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"pocket_row_container_" + item.id}>
 
                                                                                                 <TransactionRow amount={item.amount}
                                                                                                                 status={item.status}

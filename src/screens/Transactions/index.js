@@ -51,9 +51,9 @@ export default function Transactions() {
 
                         { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
-                                                          <View style={styles.transactions}>
+                                                          <View style={styles.transactions} key={"transactions_box_holder"}>
 
-                                                              { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }}>
+                                                              { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
 
                                                                                                           <TransactionRow amount={item.amount}
                                                                                                                           status={item.status}
