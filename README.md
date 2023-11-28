@@ -36,3 +36,4 @@ full-stack project cloning the ozow.me app using react native (cli)
 - performance optimization
 - automated testing
 - responsive design principles
+- search filter

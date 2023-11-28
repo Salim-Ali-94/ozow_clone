@@ -155,21 +155,29 @@ export const data = [{ name: "Logan",
                        amount: 150,
                        id: "sushi_a0b1" },
 
-                       { name: "Tony",
-                         category: "coffee",
-                         status: "Paid",
-                         direction: "into",
-                         date: "28 April 2021, 13:06",
-                         amount: 53.6,
-                         id: "coffee_a0b1" },
+                     { name: "Steve",
+                       category: "burger",
+                       status: "Failed",
+                       direction: "from",
+                       date: "13 October 2024, 18:43",
+                       amount: 107.9,
+                       id: "burger_a0b1" },
 
-                         { name: "Steve",
-                           category: "burger",
-                           status: "Failed",
-                           direction: "from",
-                           date: "13 October 2024, 18:43",
-                           amount: 107.9,
-                           id: "burger_a0b1" },];
+                     { name: "Mubeen",
+                       category: "donut",
+                       status: "failed",
+                       direction: "into",
+                       date: "9 August 2020, 22:16",
+                       amount: 39.86,
+                       id: "donut_a0b1" },
+
+                    { name: "Tony",
+                      category: "coffee",
+                      status: "Paid",
+                      direction: "into",
+                      date: "28 April 2021, 13:06",
+                      amount: 53.6,
+                      id: "coffee_a0b1" }];
 // export const data = [];
 
 
