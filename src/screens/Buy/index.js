@@ -1,6 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
-// import LinearGradient from "react-native-linear-gradient";
-// import InfoCard from "../../components/InfoCard";
+import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import * as constants from "../../utility/constants";
@@ -21,111 +19,30 @@ export default function Buy() {
 
         <View style={{ marginTop: -50, marginBottom: 80 }}>
 
-            {/* <View style={styles.centerAlign}>
+        <View style={styles.centerAlign}>
 
-              <View style={{flexDirection: "row" }}>
+            { constants.details.map((item, index) => <DetailsCard category={item.category}
+                                                                  details={item.details}
+                                                                  icon={item.icon}
+                                                                  iconSize={item.size}
+                                                                  gap={10}
+                                                                  key={"buy_" + item.id} />) }
 
-                <InfoCard icon={constants.info[0].icon}
-                          info={constants.info[0].info}
-                          category={constants.info[0].category}
-                          key={"service_" + constants.info[0].id} />
-
-                <View style={{width: 10}} />
-
-                <InfoCard icon={constants.info[1].icon}
-                          info={constants.info[1].info}
-                          category={constants.info[1].category}
-                          key={"service_" + constants.info[1].id} />
-
-              </View>
-
-              <View style={{height: 20}} />
-
-              <View style={{flexDirection: "row"}}>
-  
-                <InfoCard icon={constants.info[2].icon}
-                          info={constants.info[2].info}
-                          category={constants.info[2].category}
-                          key={"service_" + constants.info[2].id} />
-
-              <View style={{width: 10}} />
-
-                <InfoCard icon={constants.info[3].icon}
-                          info={constants.info[3].info}
-                          category={constants.info[3].category}
-                          key={"service_" + constants.info[3].id} />
-
-              </View>
-
-            </View> */}
+            <DetailsCard category={"Trade stocks"}
+                         details={"Trade stocks and grow your portfolio all from your pocket."}
+                         icon={require("../../assets/icons/trading.png")}
+                         key={"buy_stocks_details_card"} />
 
 
-<View style={styles.centerAlign}>
+            <View style={{ marginTop: 16 }}>
 
-{ constants.details.map((item, index) => <DetailsCard category={item.category}
-                                             details={item.details}
-                                             icon={item.icon}
-                                             iconSize={item.size}
-                                            //  gap={(index < constants.details.length - 1) ? 10 : 10}
-                                             gap={10}
-                                             key={"buy_" + item.id} />) }
+                <Text style={{ fontFamily: "poppins_regular" }}>Ozow is safe and secure</Text>
 
-{/* <View style={{ marginTop: 10 }}> */}
-
-<DetailsCard category={"Trade stocks"}
-             details={"Trade stocks and grow your portfolio all from your pocket."}
-             icon={require("../../assets/icons/trading.png")}
-             key={"buy_stocks_details_card"} />
-
-{/* </View> */}
-
-</View>
-
-
-{/* <View style={[styles.centerAlign, { marginTop: 10 }]}>
-
-<DetailsCard category={"Trade stocks"}
-             details={"Trade stocks and grow your portfolio all from your pocket."}
-             icon={require("../../assets/icons/trading.png")}
-             key={"service_stocks_details_card"} />
-
-</View> */}
-
-
+            </View>
 
         </View>
 
-        {/* <View style={styles.section}>
-
-            <Text style={[styles.sectionText, { marginBottom: 10 }]}>Buy</Text>
-
-            <View style={styles.centerAlign}>
-
-                { constants.details.map((item, index) => <DetailsCard category={item.category}
-                                                             details={item.details}
-                                                             icon={item.icon}
-                                                             iconSize={item.size}
-                                                             gap={(index < constants.details.length - 1) ? 10 : 0}
-                                                             key={"service_" + item.id} />) }
-
-            </View>
-
-        </View> */}
-
-        {/* <View style={{ marginBottom: 120 }}>
-
-            <Text style={[styles.sectionText, { marginBottom: 10 }]}>Trade</Text>
-
-            <View style={styles.centerAlign}>
-
-                <DetailsCard category={"Trade stocks"}
-                             details={"Trade stocks and grow your portfolio all from your pocket."}
-                             icon={require("../../assets/icons/trading.png")}
-                             key={"service_stocks_details_card"} />
-
-            </View>
-
-        </View> */}
+        </View>
 
       </ScrollView>
 
