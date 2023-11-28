@@ -33,7 +33,8 @@ export default function Transactions() {
                               data={["All time", "All transactions", "All services", "All statuses"]}
                               showsHorizontalScrollIndicator={false}
                               renderItem={({ item, index }) => (<FilterBox text={item}
-                                                                           key={index}
+                                                                           key={"transactions_" + index.toString()}
+                                                                           arrow={true}
                                                                            left_gap={(index === 0) ? 20 : 10}
                                                                            right_gap={(index === 4 - 1) ? 20 : 0} />)} />
 

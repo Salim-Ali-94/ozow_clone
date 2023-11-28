@@ -22,6 +22,11 @@ export const styles = StyleSheet.create({
         width: "78%",
         fontSize: 28,
         marginLeft: "5%"
+    },
+
+    horizontalSection: {
+
+        marginTop: 20
     }
 
 });

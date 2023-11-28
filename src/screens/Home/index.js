@@ -50,7 +50,7 @@ export default function Home() {
                                                                     icon={item.icon}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}
-                                                                    key={item.id} />)} />
+                                                                    key={"home_" + item.id} />)} />
 
           </View>
 

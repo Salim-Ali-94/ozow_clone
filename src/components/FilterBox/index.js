@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image } from "react-native";
 import { styles } from "./styles";
 
 
-export default function FilterBox({ text, left_gap, right_gap }) {
+export default function FilterBox({ text, left_gap, right_gap, arrow }) {
 
     return (
 
@@ -11,10 +11,10 @@ export default function FilterBox({ text, left_gap, right_gap }) {
 
             <Text style={styles.text}>{text}</Text>
 
-            <View style={styles.space} />
+            { arrow && [<View style={styles.space} />,
 
-            <Image source={require("../../assets/icons/down.png")}
-                   style={styles.downIcon} />
+                        <Image source={require("../../assets/icons/down.png")}
+                            style={styles.downIcon} />] }
 
         </Pressable>
 

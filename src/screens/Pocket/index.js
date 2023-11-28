@@ -42,7 +42,7 @@ export default function Pocket() {
                           contentContainerStyle={{ gap: 20 }}
                           renderItem={({ item }) => <IconButton icon={item.icon} 
                                                                 category={item.category}
-                                                                key={item.id} />} />
+                                                                key={"pocket_" + item.id} />} />
 
             </View>
 

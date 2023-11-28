@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
 import SearchInput from "../../components/SearchInput";
 import HorizontalDivider from "../../components/HorizontalDivider";
+import FilterBox from "../../components/FilterBox";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
@@ -29,6 +30,24 @@ export default function Referrals() {
 
         </View>
 
+
+        <View style={styles.horizontalSection}>
+
+          <FlatList horizontal={true}
+                    overScrollMode="never"
+                    data={["Non-Ozow.ME users", "Invite pending", "Accepted my invite", "Ozow.ME users"]}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({ item, index }) => (<FilterBox text={item}
+                                                                 key={"refer_" + index.toString()}
+                                                                 left_gap={(index === 0) ? 20 : 10}
+                                                                 right_gap={(index === 4 - 1) ? 20 : 0} />)} />
+
+        </View>
+
+        <View style={{marginLeft: "5%", marginTop: 20}}>
+          <Text style={{color: "#000", fontFamily: "poppins_semi_bold", fontSize: 16}}>Invite contacts</Text>
+        </View>
+
         <View style={[styles.section, { alignItems: "center" }]}>
 
             {/* <View style={styles.centerAlign}> */}
@@ -39,7 +58,22 @@ export default function Referrals() {
                           // scrollEnabled={false}
                           showsVerticalScrollIndicator={false}
                           // contentContainerStyle={{ gap: 10, paddingLeft: 5, paddingRight: 5, paddingBottom: 5, paddingTop: 5 }}
-                          renderItem={({ item }) => [<View style={{ paddingVertical: 10, flexDirection: "row", alignItems: "center" }}><View style={{width: 50, height: 50, borderRadius: 50, backgroundColor: constants.cement, marginRight: 10, justifyContent: "center", alignItems: "center" }}><Image source={require("../../assets/icons/user.png")} style={{ width: 30, height: 30 }} /></View><View><Text style={{ fontFamily: "poppins_medium", color: "#000", fontSize: 18, lineHeight: 19 }}>{item.name}</Text><Text style={{ fontFamily: "poppins_medium", color: "grey", fontSize: 16 }}>{item.phone}</Text></View></View>, (item.name !== "Zaheer") && <HorizontalDivider key={item.phone} />]} />
+                          renderItem={({ item }) => [<View style={{ paddingVertical: 10, flexDirection: "row", alignItems: "center" }}>
+                                                      
+                                                        <View style={{width: 50, height: 50, borderRadius: 50, backgroundColor: constants.cement, marginRight: 10, justifyContent: "center", alignItems: "center" }}>
+                                                      
+                                                            <Image source={require("../../assets/icons/user.png")} style={{ width: 30, height: 30 }} />
+                                                      
+                                                        </View>
+                                                      
+                                                        <View>
+                                                      
+                                                          <Text style={{ fontFamily: "poppins_medium", color: "#000", fontSize: 18, lineHeight: 19 }}>{item.name}</Text>
+                                                          <Text style={{ fontFamily: "poppins_medium", color: "grey", fontSize: 16 }}>{item.phone}</Text>
+                                                      
+                                                        </View>
+                                                      
+                                                      </View>, (item.name !== "Zaheer") && <HorizontalDivider key={"refer_" + item.phone} />]} />
 
                 {/* { constants.details.map((item, index) => <DetailsCard category={item.category}
                                                              details={item.details}
