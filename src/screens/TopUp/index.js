@@ -1,4 +1,4 @@
-import { View, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import SecurityBadge from "../../components/SecurityBadge";
@@ -7,7 +7,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function Buy() {
+export default function TopUp() {
 
   return (
 

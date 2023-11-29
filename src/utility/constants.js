@@ -57,7 +57,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
 
                       { icon: require("../assets/icons/plus.png"),
                         category: "Top up",
-                        id: "top_i8j9" },
+                        id: "top_i8j9",
+                       route: "TopUp" },
 
                       { icon: require("../assets/icons/trading.png"),
                         category: "Buy stocks",

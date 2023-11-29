@@ -1,14 +1,20 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
+import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import IconButton from "../../components/IconButton";
 import EmptyTransactions from "../../components/EmptyTransactions";
 import TransactionRow from "../../components/TransactionRow";
 import HorizontalDivider from "../../components/HorizontalDivider";
 import * as constants from "../../utility/constants";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function Pocket() {
+
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const navigation = useNavigation();
 
   return (
 
@@ -42,7 +48,13 @@ export default function Pocket() {
                           contentContainerStyle={{ gap: 20 }}
                           renderItem={({ item }) => <IconButton icon={item.icon} 
                                                                 category={item.category}
-                                                                key={"pocket_" + item.id} />} />
+                                                                key={"pocket_" + item.id} 
+                                                                pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
+                                                                                                       setPrevious(screen);
+                                                                                                       setScreen(item.route);
+                                                                                                       navigation.navigate(item.route);
+                                                                                                    
+                                                                                     } else { Alert.alert(item.category, item.category + " feature coming soon") } }} />}  />
 
             </View>
 

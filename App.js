@@ -9,6 +9,7 @@ import Transactions from "./src/screens/Transactions";
 import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
+import TopUp from "./src/screens/TopUp";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 
@@ -106,13 +107,15 @@ export default function App() {
                                   bgColor="white"
                                   initialRouteName="Home"
                                   tabBar={renderTabBar}
-                                  screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" : "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
+                                  screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
+                                                                (screen === "TopUp") ? "Top Up" :
+                                                                "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
                                                       
                                                       const navigation = useNavigation();
 
-                                                      return (screen == "Buy") && <Pressable style={{ paddingLeft: 30 }}
+                                                      return ((screen === "Buy") || (screen === "TopUp")) && <Pressable style={{ paddingLeft: 30 }}
                                                                                              onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                               setPrevious(screen);
                                                                                                               setScreen(previous);
@@ -185,6 +188,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="Buy"
                                     component={() => <Buy key={"buy_screen"} />} />
+
+            <CurvedBottomBar.Screen name="TopUp"
+                                    component={() => <TopUp key={"top_up_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
