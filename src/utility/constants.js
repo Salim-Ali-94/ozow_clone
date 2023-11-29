@@ -25,6 +25,16 @@ export const transactionFilters = ["All time",
 export const routes = ["Buy",
                        "TopUp"];
 
+export const banks = [{ label: "FNB", value: "1" },
+                      { label: "NedBank", value: "2" },
+                      { label: "Standard Bank", value: "3" },
+                      { label: "ABSA", value: "4" },
+                      { label: "Capitec", value: "5" },
+                      { label: "Investec", value: "6" },
+                      { label: "Old Mutual", value: "7" },
+                      { label: "Tyme Bank", value: "9" },
+                      { label: "African Bank", value: "8" }];
+
 export const pocket = 1234567890.09876;
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),

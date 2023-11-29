@@ -14,6 +14,7 @@ export default function InputText({ label, text, setText, focused, setFocused })
       <TextInput style={[styles.input, { borderColor: focused ? constants.primary : constants.secondary }]}
                  value={text}
                  onChangeText={(value) => setText(value)}
+                 keyboardType="numeric"
                  onFocus={() => setFocused(true)}
                  onBlur={() => setFocused(false)} />
 
