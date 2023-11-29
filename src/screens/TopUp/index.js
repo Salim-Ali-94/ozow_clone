@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
+import ContinueButton from "../../components/ContinueButton";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
@@ -47,6 +48,12 @@ export default function TopUp() {
                               setFocused={setBankFocused}
                               value={bank}
                               setValue={setBank} />
+                </View>
+
+                <View style={styles.bottom}>
+
+                    <ContinueButton />
+
                 </View>
 
             {/* </ScrollView> */}
