@@ -1,17 +1,16 @@
 import { Pressable, Image, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { styles } from "./styles";
-import * as constants from "../../utility/constants";
 
 
-export default function ContinueButton() {
+export default function ContinueButton({ active }) {
 
     return (
 
-        <Pressable style={styles.container} onPress={() => console.log("continue")}>
+        <Pressable style={styles.container} onPress={() => active && console.log("continue")}>
 
             <LinearGradient style={styles.button}
-                            colors={[constants.primary_blend1, constants.primary_blend2]}
+                            colors={[`rgba(1, 225, 137, ${active ? 1 : '0.6'})`, `rgba(0, 187, 170, ${active ? 1 : '0.6'})`]}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}>
 

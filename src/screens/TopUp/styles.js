@@ -16,6 +16,21 @@ export const styles = StyleSheet.create({
         alignItems: "center"
     },
 
+    bankSection: {
+
+        marginTop: 30,
+        marginLeft: "5%"
+    },
+
+    bankHeading: {
+        
+        fontFamily: "poppins_bold",
+        color: constants.primary,
+        fontSize: 24,
+        lineHeight: 25,
+        marginBottom: 0
+    },
+
     bottom: {
 
         flex: 1,

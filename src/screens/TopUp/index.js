@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
@@ -21,42 +21,38 @@ export default function TopUp() {
 
         <SafeAreaView style={styles.container}>
 
-            {/* <ScrollView showsVerticalScrollIndicator={false} bounces={true}> */}
+            <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-                <StatusBar translucent={true} backgroundColor={"transparent"} />
+            <View style={styles.inputHolder}>
 
-                <View style={styles.inputHolder}>
+                <InputText label={"Top up amount"}
+                           text={amount}
+                           setText={setAmount}
+                           focused={amountFocused}
+                           setFocused={setAmountFocused} />
 
-                    <InputText label={"Top up amount"}
-                               text={amount}
-                               setText={setAmount}
-                               focused={amountFocused}
-                               setFocused={setAmountFocused} />
+            </View>
 
-                </View>
+            <View style={styles.bankSection}>
 
-                <View style={{marginTop: 30, marginLeft: "5%"}}>
+                <Text style={styles.bankHeading}>Select your bank</Text>
 
-                    <Text style={{ fontFamily: "poppins_bold", color: constants.primary, fontSize: 24, lineHeight: 25, marginBottom: 0 }}>Select your bank</Text>
+            </View>
 
-                </View>
+            <View style={[styles.inputHolder, {marginTop: 10}]}>
+                
+                <DropDown data={constants.banks}
+                          focused={bankFocused}
+                          setFocused={setBankFocused}
+                          value={bank}
+                          setValue={setBank} />
+            </View>
 
-                <View style={[styles.inputHolder, {marginTop: 10}]}>
-                    
-                    <DropDown data={constants.banks}
-                              focused={bankFocused}
-                              setFocused={setBankFocused}
-                              value={bank}
-                              setValue={setBank} />
-                </View>
+            <View style={styles.bottom}>
 
-                <View style={styles.bottom}>
+                <ContinueButton active={amount && bank ? true : false} />
 
-                    <ContinueButton />
-
-                </View>
-
-            {/* </ScrollView> */}
+            </View>
 
         </SafeAreaView>
 
