@@ -10,7 +10,7 @@ export default function Services() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+    <SafeAreaView style={styles.container}>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
@@ -18,41 +18,56 @@ export default function Services() {
 
         <GradientHeader heading={"What would you like to do?"} />
 
-        <View style={{ marginTop: -115 }}>
+        <View style={styles.gridContainer}>
 
             <View style={styles.centerAlign}>
 
-              <View style={{flexDirection: "row" }}>
+              <View style={styles.row}>
 
-                <InfoCard icon={constants.info[0].icon}
+                {/* <InfoCard icon={constants.info[0].icon}
                           info={constants.info[0].info}
                           category={constants.info[0].category}
                           key={"service_" + constants.info[0].id} />
 
-                <View style={{width: 10}} />
+                <View style={styles.horizontalGap} />
 
                 <InfoCard icon={constants.info[1].icon}
                           info={constants.info[1].info}
                           category={constants.info[1].category}
-                          key={"service_" + constants.info[1].id} />
+                          key={"service_" + constants.info[1].id} /> */}
+
+                { constants.info.slice(0, 2).map((item, index) => [<InfoCard icon={item.icon}
+                                                                             info={item.info}
+                                                                             category={item.category}
+                                                                             key={"service_" + item.id} />,
+
+                                                                   (index < 1) && <View style={styles.horizontalGap} key={"service_gap_" + item.id} />]) }
 
               </View>
 
-              <View style={{height: 20}} />
+              <View style={styles.verticalGap} />
 
-              <View style={{flexDirection: "row"}}>
+              <View style={styles.row}>
   
-                <InfoCard icon={constants.info[2].icon}
+                {/* <InfoCard icon={constants.info[2].icon}
                           info={constants.info[2].info}
                           category={constants.info[2].category}
                           key={"service_" + constants.info[2].id} />
 
-              <View style={{width: 10}} />
+                <View style={styles.horizontalGap} />
 
                 <InfoCard icon={constants.info[3].icon}
                           info={constants.info[3].info}
                           category={constants.info[3].category}
-                          key={"service_" + constants.info[3].id} />
+                          key={"service_" + constants.info[3].id} /> */}
+
+                { constants.info.slice(2, 4).map((item, index) => [<InfoCard icon={item.icon}
+                                                                             info={item.info}
+                                                                             category={item.category}
+                                                                             key={"service_" + item.id} />,
+
+                                                                   (index < 1) && <View style={styles.horizontalGap} key={"service_gap_" + item.id} />]) }
+
 
               </View>
 
@@ -77,7 +92,7 @@ export default function Services() {
 
         </View>
 
-        <View style={{ marginBottom: 120 }}>
+        <View style={styles.tradeSection}>
 
             <Text style={[styles.sectionText, { marginBottom: 10 }]}>Trade</Text>
 

@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
         width: "90%"
     },
 
+    row: {
+        
+        paddingVertical: 20
+    },
+
     centerAlign: {
 
         alignItems: "center"

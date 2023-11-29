@@ -12,6 +12,11 @@ export const cement = "#e6e5eb";
 export const nartjie = "#ffd700";
 export const cherry = "#ff2fa0";
 
+export const referralFilters = ["Non-Ozow.ME users",
+                                "Invite pending",
+                                "Accepted my invite",
+                                "Ozow.ME users"];
+
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
                           id: "action_get_paid_a0b1" },

@@ -56,9 +56,10 @@ export default function Transactions() {
 
                         { (filteredData.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
-                                                          <View style={styles.transactions} key={"transactions_box_holder"}>
+                                                        //   <View style={styles.transactions} key={"transactions_box_holder"}>
+                                                          <View key={"transactions_box_holder"}>
 
-                                                              { filteredData.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
+                                                              { filteredData.map((item, index) => [<View style={styles.row} key={"transactions_box_container_" + item.id}>
 
                                                                                                           <TransactionRow amount={item.amount}
                                                                                                                           status={item.status}

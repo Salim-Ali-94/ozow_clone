@@ -24,13 +24,13 @@ export default function Referrals() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+    <SafeAreaView style={styles.container}>
 
       {/* <ScrollView showsVerticalScrollIndicator={false} bounces={true}> */}
 
         <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-        <View style={{ marginTop: 30 }}>
+        <View style={styles.header}>
 
             <Text style={[styles.sectionText, { marginBottom: 10 }]}>Share the love, invite a frined.</Text>
 
@@ -50,7 +50,7 @@ export default function Referrals() {
 
           <FlatList horizontal={true}
                     overScrollMode="never"
-                    data={["Non-Ozow.ME users", "Invite pending", "Accepted my invite", "Ozow.ME users"]}
+                    data={constants.referralFilters}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({ item, index }) => (<FilterBox text={item}
                                                                  key={"refer_" + index.toString()}
@@ -59,15 +59,15 @@ export default function Referrals() {
 
         </View>
 
-        <View style={{marginLeft: "5%", marginTop: 20}}>
+        <View style={styles.invite}>
 
-          <Text style={{color: "#000", fontFamily: "poppins_semi_bold", fontSize: 16}}>Invite contacts</Text>
+          <Text style={styles.sectionHeading}>Invite contacts</Text>
 
         </View>
 
         <View style={[styles.section, { alignItems: "center" }]}>
 
-            <View style={{ width: "90%", backgroundColor: "#ffffff", borderRadius: 20, padding: 20, height: 300 }}>
+            <View style={styles.contactsTable}>
 
                 <FlatList data={filteredData}
                           showsVerticalScrollIndicator={false}

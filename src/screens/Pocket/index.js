@@ -12,7 +12,7 @@ export default function Pocket() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+    <SafeAreaView style={styles.container}>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
