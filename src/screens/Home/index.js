@@ -10,10 +10,9 @@ import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
-
 export default function Home() {
 
-  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, balance } = useContext(screenContext)
   const navigation = useNavigation();
 
   return (
@@ -37,7 +36,7 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={1234567890.09876}
+              <PocketBalanceCard amount={balance}
                                  shadow={true}
                                  key={"home_pocket_balance_card"} />
 

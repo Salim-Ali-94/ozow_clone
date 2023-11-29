@@ -1,52 +1,40 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
-import DetailsCard from "../../components/DetailsCard";
-import GradientHeader from "../../components/GradientHeader";
-import SecurityBadge from "../../components/SecurityBadge";
-import SafetyTag from "../../components/SafetyTag";
+import { useState } from "react";
+import { useContext } from "react";
+import InputText from "../../components/InputText";
 import * as constants from "../../utility/constants";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function TopUp() {
 
-  return (
+    const { setBalance } = useContext(screenContext);
+    const [text, setText] = useState("");
+    const [focused, setFocused] = useState(false);
 
-    <SafeAreaView style={styles.container}>
+    return (
 
-      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+        <SafeAreaView style={styles.container}>
 
-        <StatusBar translucent={true} backgroundColor={"transparent"} />
+            <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
-        <GradientHeader heading={"What would you like to buy?"} />
+                <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-        <View style={styles.listSection}>
+                <View style={styles.inputHolder}>
 
-            <View style={styles.centerAlign}>
+                    <InputText label={"Top up amount"}
+                               text={text}
+                               setText={setText}
+                               focused={focused}
+                               setFocused={setFocused} />
 
-                { constants.details.map((item, index) => <DetailsCard category={item.category}
-                                                                      details={item.details}
-                                                                      icon={item.icon}
-                                                                      iconSize={item.size}
-                                                                      gap={10}
-                                                                      key={"buy_" + item.id} />) }
+                </View>
 
-                <DetailsCard category={"Trade stocks"}
-                             details={"Trade stocks and grow your portfolio all from your pocket."}
-                             icon={require("../../assets/icons/trading.png")}
-                             key={"buy_stocks_details_card"} />
+            </ScrollView>
 
-                <SafetyTag />
+        </SafeAreaView>
 
-                <SecurityBadge key={"security_tls_buy"} />
-
-            </View>
-
-        </View>
-
-      </ScrollView>
-
-    </SafeAreaView>
-
-  );
+    );
 
 }

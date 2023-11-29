@@ -22,6 +22,11 @@ export const transactionFilters = ["All time",
                                    "All services",
                                    "All statuses"];
 
+export const routes = ["Buy",
+                       "TopUp"];
+
+export const pocket = 1234567890.09876;
+
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
                           id: "action_get_paid_a0b1" },

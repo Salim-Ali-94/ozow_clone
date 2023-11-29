@@ -10,14 +10,11 @@ export const styles = StyleSheet.create({
         flex: 1
     },
 
-    listSection: {
-        
-        marginTop: -50,
-        marginBottom: 80
-    },
+    inputHolder: {
 
-    centerAlign: {
-
+        // marginLeft: "5%",
+        marginTop: 30,
+        // justifyContent: "center"
         alignItems: "center"
     }
 

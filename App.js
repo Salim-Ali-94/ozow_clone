@@ -19,6 +19,7 @@ export default function App() {
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
+  const [balance, setBalance] = useState(constants.pocket);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -94,22 +95,22 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{screen, setScreen, setPrevious}}>
+    <screenContext.Provider value={{ screen, setScreen, setPrevious, balance, setBalance }}>
 
       <NavigationContainer>
 
         <CurvedBottomBar.Navigator type="DOWN"
-                                  ref={constants.tabBarRef}
-                                  style={styles.bottomBar}
-                                  shadowStyle={styles.shadow}
-                                  height={50}
-                                  circleWidth={50}
-                                  bgColor="white"
-                                  initialRouteName="Home"
-                                  tabBar={renderTabBar}
-                                  screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
-                                                                (screen === "TopUp") ? "Top Up" :
-                                                                "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
+                                   ref={constants.tabBarRef}
+                                   style={styles.bottomBar}
+                                   shadowStyle={styles.shadow}
+                                   height={50}
+                                   circleWidth={50}
+                                   bgColor="white"
+                                   initialRouteName="Home"
+                                   tabBar={renderTabBar}
+                                   screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
+                                                                 (screen === "TopUp") ? "Top Up" :
+                                                                 "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
                                                       

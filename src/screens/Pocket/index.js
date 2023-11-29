@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 export default function Pocket() {
 
-  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, balance } = useContext(screenContext)
   const navigation = useNavigation();
 
   return (
@@ -28,7 +28,7 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={1234567890.09876}
+              <PocketBalanceCard amount={balance}
                                  shadow={false}
                                  key={"pocket_pocket_balance_card"} />
 
