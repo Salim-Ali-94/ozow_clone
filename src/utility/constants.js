@@ -17,6 +17,11 @@ export const referralFilters = ["Non-Ozow.ME users",
                                 "Accepted my invite",
                                 "Ozow.ME users"];
 
+export const transactionFilters = ["All time",
+                                   "All transactions",
+                                   "All services",
+                                   "All statuses"];
+
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
                           id: "action_get_paid_a0b1" },
