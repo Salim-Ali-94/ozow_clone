@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "190182547263",
+    "project_id": "ozow-clone",
+    "storage_bucket": "ozow-clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190182547263:android:fb49977028e38444847d8a",
+        "android_client_info": {
+          "package_name": "com.ozow_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpWs3XPuX_VuEFIwlVZsqJG4sgzGDt4bE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
