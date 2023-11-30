@@ -29,7 +29,7 @@ export default function BuyAirtime() {
 
             <View style={styles.inputHolder}>
 
-                <InputText label={"Airtime amount"}
+                <InputText label={"How much airtime?"}
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}

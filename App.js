@@ -57,11 +57,11 @@ export default function App() {
                                  style={styles.largerIcon}
                                  tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
 
-      (icon === "list") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/list.png")}
+      (icon === "list") ? <View style={styles.spacingLeft}><Image source={require("./src/assets/icons/list.png")}
                                                               style={styles.standardIcon}
                                                               tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
-      (icon === "pocket") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/pocket.png")}
+      (icon === "pocket") ? <View style={styles.spacingRight}><Image source={require("./src/assets/icons/pocket.png")}
                                                                 style={styles.standardIcon}
                                                                 tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
@@ -274,9 +274,14 @@ export const styles = StyleSheet.create({
     height: 25
   },
 
-  spacing: {
+  spacingLeft: {
   
     paddingLeft: 20
+  },
+
+  spacingRight: {
+  
+    paddingRight: 20
   },
 
   standardIcon: {
