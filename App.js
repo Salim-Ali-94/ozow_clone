@@ -11,6 +11,7 @@ import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
 import TopUp from "./src/screens/TopUp";
 import BuyAirtime from "./src/screens/BuyAirtime";
+import BuyData from "./src/screens/BuyData";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -57,11 +58,11 @@ export default function App() {
                                  style={styles.largerIcon}
                                  tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
 
-      (icon === "list") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/list.png")}
+      (icon === "list") ? <View style={styles.spacingLeft}><Image source={require("./src/assets/icons/list.png")}
                                                               style={styles.standardIcon}
                                                               tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
-      (icon === "pocket") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/pocket.png")}
+      (icon === "pocket") ? <View style={styles.spacingRight}><Image source={require("./src/assets/icons/pocket.png")}
                                                                 style={styles.standardIcon}
                                                                 tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
@@ -113,16 +114,19 @@ export default function App() {
                                    screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
                                                                  (screen === "TopUp") ? "Top Up" :
                                                                  (screen === "BuyAirtime") ? "Buy Airtime" :
+                                                                 (screen === "BuyData") ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
+                                                                 ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
-                                                      
+
                                                       const navigation = useNavigation();
 
                                                       return ((screen === "Buy") ||
                                                               (screen === "TopUp") ||
+                                                              (screen === "BuyData") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
@@ -201,10 +205,13 @@ export default function App() {
                                     component={() => <TopUp key={"top_up_screen"} />} />
 
             <CurvedBottomBar.Screen name="Confirmation"
-                                    component={() => <Confirmation key={"consfirm_screen"} />} />
+                                    component={() => <Confirmation key={"confirm_screen"} />} />
 
             <CurvedBottomBar.Screen name="BuyAirtime"
                                     component={() => <BuyAirtime key={"airtime_screen"} />} />
+
+            <CurvedBottomBar.Screen name="BuyData"
+                                    component={() => <BuyData key={"data_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
@@ -274,9 +281,14 @@ export const styles = StyleSheet.create({
     height: 25
   },
 
-  spacing: {
+  spacingLeft: {
   
     paddingLeft: 20
+  },
+
+  spacingRight: {
+  
+    paddingRight: 20
   },
 
   standardIcon: {
