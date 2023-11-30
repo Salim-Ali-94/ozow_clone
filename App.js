@@ -112,6 +112,7 @@ export default function App() {
                                    tabBar={renderTabBar}
                                    screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
                                                                  (screen === "TopUp") ? "Top Up" :
+                                                                 (screen === "BuyAirtime") ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
@@ -120,7 +121,7 @@ export default function App() {
                                                       
                                                       const navigation = useNavigation();
 
-                                                      return ((screen === "Buy") || (screen === "TopUp")) && <Pressable style={{ paddingLeft: 30 }}
+                                                      return ((screen === "Buy") || (screen === "TopUp") || (screen === "BuyAirtime")) && <Pressable style={{ paddingLeft: 30 }}
                                                                                              onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                               setPrevious(screen);
                                                                                                               setScreen(previous);

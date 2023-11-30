@@ -2,12 +2,12 @@ import { Pressable, Image, View, Text } from "react-native";
 import styles from "./styles";
 
 
-export default function DetailsCard({ category, icon, details, iconSize, gap }) {
+export default function DetailsCard({ category, icon, details, iconSize, gap, pressAction }) {
 
     return (
 
         <Pressable style={[styles.card, styles.boxShadow, { marginBottom: gap ? gap : 0 }]}
-                   onPress={() => console.log(category)}>
+                   onPress={pressAction}>
 
             <View style={styles.imageContainer}>
 

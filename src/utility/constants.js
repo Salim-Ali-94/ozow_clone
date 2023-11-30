@@ -157,6 +157,7 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
                           category: "Airtime",
                           details: "Buy/send airtime from your pocket fast!",
                           size: 50,
+                          route: "BuyAirtime",
                           id: "airtime_a0b1" },
   
                         { icon: require("../assets/icons/wifi.png"),
