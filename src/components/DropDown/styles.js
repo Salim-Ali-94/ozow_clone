@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
     placeholderStyle: {
 
         fontSize: 16,
-        fontFamily: "poppins_regular",
-        color: "lightgray"
+        fontFamily: "poppins_semi_bold",
+        color: "#000"
     },
 
     selectedTextStyle: {

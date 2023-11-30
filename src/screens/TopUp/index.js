@@ -1,4 +1,5 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
@@ -11,7 +12,8 @@ import { styles } from "./styles";
   
 export default function TopUp() {
 
-    const { setBalance } = useContext(screenContext);
+    const navigation = useNavigation();
+    const { balance, setBalance, setPrevious, setScreen, previous, screen } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -50,7 +52,13 @@ export default function TopUp() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && bank ? true : false} />
+                <ContinueButton active={amount && (parseInt(amount) > 0) && bank ? true : false}
+                                pressAction={() => { setBalance(balance + parseInt(amount)); 
+                                                    //  constants.tabBarRef?.current?.setVisible(true);
+                                                     setPrevious(screen);
+                                                     setScreen("Confirmation");
+                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
+                                                                                           header: "Authenticating your request..." }); }} />
 
             </View>
 

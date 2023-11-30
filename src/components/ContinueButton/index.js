@@ -3,11 +3,11 @@ import LinearGradient from "react-native-linear-gradient";
 import { styles } from "./styles";
 
 
-export default function ContinueButton({ active }) {
+export default function ContinueButton({ active, pressAction }) {
 
     return (
 
-        <Pressable style={styles.container} onPress={() => active && console.log("continue")}>
+        <Pressable style={styles.container} onPress={() => active && pressAction()}>
 
             <LinearGradient style={styles.button}
                             colors={[`rgba(1, 225, 137, ${active ? 1 : '0.6'})`, `rgba(0, 187, 170, ${active ? 1 : '0.6'})`]}

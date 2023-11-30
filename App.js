@@ -10,6 +10,7 @@ import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
 import TopUp from "./src/screens/TopUp";
+import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 
@@ -110,6 +111,7 @@ export default function App() {
                                    tabBar={renderTabBar}
                                    screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
                                                                  (screen === "TopUp") ? "Top Up" :
+                                                                 ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -192,6 +194,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="TopUp"
                                     component={() => <TopUp key={"top_up_screen"} />} />
+
+            <CurvedBottomBar.Screen name="Confirmation"
+                                    component={() => <Confirmation key={"consfirm_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 

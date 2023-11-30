@@ -26,7 +26,8 @@ export default function DropDown({ data, focused, setFocused, value, setValue })
                       // placeholder={!focused ? "Select item" : "..."}
                       searchPlaceholder="Search"
                       // placeholderStyle={{fontFamily: "poppins_medium"}}
-                      placeholder=""
+                      placeholder="FNB"
+                      //   placeholder=""
                       value={value}
                       onFocus={() => setFocused(true)}
                       onBlur={() => setFocused(false)}
