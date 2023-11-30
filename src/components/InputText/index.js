@@ -3,7 +3,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function InputText({ label, text, setText, focused, setFocused }) {
+export default function InputText({ label, text, setText, focused, setFocused, numbers }) {
 
   return (
 
@@ -14,7 +14,7 @@ export default function InputText({ label, text, setText, focused, setFocused })
       <TextInput style={[styles.input, { borderColor: focused ? constants.primary : constants.secondary }]}
                  value={text}
                  onChangeText={(value) => setText(value)}
-                 keyboardType="numeric"
+                 keyboardType={ numbers ? "numeric" : "default" }
                  onFocus={() => setFocused(true)}
                  onBlur={() => setFocused(false)} />
 

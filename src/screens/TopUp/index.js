@@ -20,7 +20,6 @@ export default function TopUp() {
     const [bank, setBank] = useState(constants.banks[0].value);
     const [amountFocused, setAmountFocused] = useState(false);
     const [bankFocused, setBankFocused] = useState(false);
-    // const [nameFocused, setNameFocused] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
 
     return (
@@ -35,6 +34,7 @@ export default function TopUp() {
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}
+                           numbers={true}
                            setFocused={setAmountFocused} />
 
             </View>
@@ -53,16 +53,6 @@ export default function TopUp() {
                           value={bank}
                           setValue={setBank} />
             </View>
-
-            {/* <View style={styles.inputHolder}>
-
-                <InputText label={"Full name"}
-                           text={name}
-                           setText={setName}
-                           focused={nameFocused}
-                           setFocused={setNameFocused} />
-
-            </View> */}
 
             <View style={styles.inputHolder}>
 
