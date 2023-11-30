@@ -36,7 +36,7 @@ export default function Transactions() {
 
                     <FlatList horizontal={true}
                               overScrollMode="never"
-                              data={["All time", "All transactions", "All services", "All statuses"]}
+                              data={constants.transactionFilters}
                               showsHorizontalScrollIndicator={false}
                               renderItem={({ item, index }) => (<FilterBox text={item}
                                                                            key={"transactions_" + index.toString()}

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { View, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import SecurityBadge from "../../components/SecurityBadge";

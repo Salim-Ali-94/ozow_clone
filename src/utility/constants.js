@@ -17,6 +17,27 @@ export const referralFilters = ["Non-Ozow.ME users",
                                 "Accepted my invite",
                                 "Ozow.ME users"];
 
+export const transactionFilters = ["All time",
+                                   "All transactions",
+                                   "All services",
+                                   "All statuses"];
+
+export const routes = ["Buy",
+                       "TopUp"];
+
+export const banks = [{ label: "FNB", value: "1" },
+                      { label: "NedBank", value: "2" },
+                      { label: "Standard Bank", value: "3" },
+                      { label: "ABSA", value: "4" },
+                      { label: "Capitec", value: "5" },
+                      { label: "Investec", value: "6" },
+                      { label: "Old Mutual", value: "7" },
+                      { label: "Tyme Bank", value: "9" },
+                      { label: "Bidvest", value: "10" },
+                      { label: "African Bank", value: "8" }];
+
+export const pocket = 1234567890.09876;
+
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
                           id: "action_get_paid_a0b1" },
@@ -52,7 +73,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
 
                       { icon: require("../assets/icons/plus.png"),
                         category: "Top up",
-                        id: "top_i8j9" },
+                        id: "top_i8j9",
+                       route: "TopUp" },
 
                       { icon: require("../assets/icons/trading.png"),
                         category: "Buy stocks",
@@ -106,6 +128,7 @@ export const transactionIcons = { burger: require("../assets/icons/burger.png"),
 export const info = [{ icon: require("../assets/icons/plus.png"),
                        category: "Top up",
                        info: "your pocket safely and securely.",
+                       route: "TopUp",
                        id: "top_up_a0b1" },
 
                       { icon: require("../assets/icons/plane.png"),
