@@ -1,13 +1,19 @@
 import { View, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import SecurityBadge from "../../components/SecurityBadge";
 import SafetyTag from "../../components/SafetyTag";
+import { screenContext } from "../../providers/screenContext";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
 export default function Buy() {
+
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const navigation = useNavigation();
 
   return (
 
@@ -28,6 +34,10 @@ export default function Buy() {
                                                                       icon={item.icon}
                                                                       iconSize={item.size}
                                                                       gap={10}
+                                                                      pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
+                                                                                                             setPrevious(screen);
+                                                                                                             setScreen(item.route);
+                                                                                                             navigation.navigate(item.route); } }}
                                                                       key={"buy_" + item.id} />) }
 
                 <DetailsCard category={"Trade stocks"}
