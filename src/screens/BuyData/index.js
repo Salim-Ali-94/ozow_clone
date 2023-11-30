@@ -68,8 +68,8 @@ export default function BuyData() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseInt(amount) > 0) && number && (number.length === 10) && network ? true : false}
-                                pressAction={() => { setBalance(balance - parseInt(amount)); 
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
+                                pressAction={() => { setBalance(balance - parseFloat(amount)); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),

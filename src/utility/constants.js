@@ -94,7 +94,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
                       
                       { icon: require("../assets/icons/withdraw.png"),
                         category: "Withdraw",
-                        id: "withdraw_m12n13" },
+                        id: "withdraw_m12n13",
+                        route: "Withdraw" },
                       
                       { icon: require("../assets/icons/zap.png"),
                         category: "Electricity",

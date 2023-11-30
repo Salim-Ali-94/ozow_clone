@@ -67,8 +67,8 @@ export default function TopUp() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseInt(amount) > 0) && password && bank ? true : false}
-                                pressAction={() => { setBalance(balance + parseInt(amount)); 
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
+                                pressAction={() => { setBalance(balance + parseFloat(amount)); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

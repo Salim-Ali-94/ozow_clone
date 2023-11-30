@@ -13,6 +13,7 @@ import TopUp from "./src/screens/TopUp";
 import BuyAirtime from "./src/screens/BuyAirtime";
 import BuyData from "./src/screens/BuyData";
 import BuyElectricity from "./src/screens/BuyElectricity";
+import Withdraw from "./src/screens/Withdraw";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -117,10 +118,12 @@ export default function App() {
                                                                  (screen === "BuyAirtime") ? "Buy Airtime" :
                                                                  (screen === "BuyData") ? "Buy Data" :
                                                                  (screen === "BuyElectricity") ? "Buy Electricity" :
+                                                                 (screen === "Withdraw") ? "Withdraw Cash" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
+                                                                 ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -131,6 +134,7 @@ export default function App() {
                                                               (screen === "TopUp") ||
                                                               (screen === "BuyData") ||
                                                               (screen === "BuyElectricity") ||
+                                                              (screen === "Withdraw") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
@@ -166,8 +170,8 @@ export default function App() {
                                                                                   end={{x: 1, y: 0.5}}>
 
                                                                     <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                                          style={styles.ozowLogo}
-                                                                          tintColor={"white"} />
+                                                                           style={styles.ozowLogo}
+                                                                           tintColor={"white"} />
 
                                                                   </LinearGradient> : 
 
@@ -219,6 +223,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="BuyElectricity"
                                     component={() => <BuyElectricity key={"electric_screen"} />} />
+
+            <CurvedBottomBar.Screen name="Withdraw"
+                                    component={() => <Withdraw key={"withdraw_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
