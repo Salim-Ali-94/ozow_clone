@@ -24,7 +24,7 @@ export default function App() {
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
-  const [balance, setBalance] = useState(constants.pocket);
+  const [balance, setBalance] = useState(constants.user.balance);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -124,7 +124,7 @@ export default function App() {
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
-                                                                 "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
+                                                                 `👋 Hi, ${constants.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
 

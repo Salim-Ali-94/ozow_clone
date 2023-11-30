@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";

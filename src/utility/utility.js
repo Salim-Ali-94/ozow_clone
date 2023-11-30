@@ -34,5 +34,22 @@ const searchFilter = (data, text, setFilteredData, setSearchQuery) => {
 
 };
 
+const uuid = (length) => {
 
-export { dropShadow, searchFilter };
+    let uuid = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+
+    while (uuid.length < length) {
+
+        const index = Math.floor(Math.random()*characters.length);
+        uuid += characters[index];
+
+    }
+
+    return uuid;
+
+};
+  
+
+
+export { dropShadow, searchFilter, uuid };

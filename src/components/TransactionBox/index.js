@@ -13,7 +13,7 @@ export default function TransactionBox() {
 
     return (
 
-        <View style={[styles.container, { height: (constants.data.length > 0) && 450, paddingBottom: (constants.data.length === 0) && 20 }]}>
+        <View style={[styles.container, { height: (constants.user.transactions.length > 0) && 450, paddingBottom: (constants.user.transactions.length === 0) && 20 }]}>
 
             <View style={styles.header}>
 
@@ -31,11 +31,11 @@ export default function TransactionBox() {
 
             </View>
 
-            { (constants.data.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
+            { (constants.user.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
                                               <View style={styles.transactions}>
 
-                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={styles.row}
+                                                  { constants.user.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
                                                                                                            key={"transactions_box_container_" + item.id}>
 
                                                                                                         <TransactionRow amount={item.amount}
