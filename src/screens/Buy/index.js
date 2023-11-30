@@ -12,7 +12,7 @@ import { styles } from "./styles";
 
 export default function Buy() {
 
-  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const { screen, setScreen, setPrevious } = useContext(screenContext);
   const navigation = useNavigation();
 
   return (

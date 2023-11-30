@@ -11,7 +11,7 @@ import { styles } from "./styles";
 
 export default function Services() {
 
-  const { screen, setScreen, setPrevious, ozow, setOzow } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, ozow, setOzow } = useContext(screenContext);
   const navigation = useNavigation();
 
   return (
