@@ -15,6 +15,7 @@ export default function InputText({ label, text, setText, focused, setFocused, n
       <TextInput style={[styles.input, { borderColor: focused ? constants.primary : constants.secondary }]}
                  value={text}
                  onChangeText={(value) => setText(value)}
+                 secureTextEntry={ label && label.includes("password") ? true : false}
                  keyboardType={ numbers ? "numeric" : "default" }
                  onFocus={() => setFocused(true)}
                  onBlur={() => setFocused(false)} />
