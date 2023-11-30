@@ -10,6 +10,36 @@ export const styles = StyleSheet.create({
         flex: 1
     },
 
+    cardHolder: {
+        
+        marginTop: 30
+    },
+
+    horizontalScroll: {
+        
+        marginTop: 50
+    },
+
+    column: {
+        
+        gap: 10
+    },
+
+    row: {
+        
+        gap: 20
+    },
+
+    transactionsHolder: {
+
+        width: "90%"
+    },
+
+    entry: {
+        
+        paddingVertical: 20
+    },
+
     centerAlign: {
 
         alignItems: "center"
@@ -28,6 +58,5 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: "5%"
     }
-
 
 });

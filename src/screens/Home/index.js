@@ -17,12 +17,12 @@ export default function Home() {
 
   return (
 
-    <SafeAreaView style={{ backgroundColor: constants.background, flex: 1 }}>
+    <SafeAreaView style={styles.container}>
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
           <LinearGradient colors={[constants.primary, constants.secondary]} 
-                          style={{ flex: 1 }}
+                          style={styles.gradient}
                           start={{ x: 0, y: 0.5 }}
                           end={{ x: 1, y: 0.5 }}>
 

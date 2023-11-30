@@ -22,6 +22,12 @@ export const styles = StyleSheet.create({
         alignItems: "center"
     },
 
+    image: {
+
+        width: 30,
+        height: 30
+    },
+
     nameText: {
         
         fontFamily: "poppins_medium",

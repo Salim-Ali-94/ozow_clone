@@ -24,10 +24,8 @@ export default function TransactionBox() {
 
                     <Text style={[styles.headingText, { fontFamily: "poppins_semi_bold" }]}>See all</Text>
 
-                    <View style={{ width: 5 }} />
-
                     <Image source={require("../../assets/icons/arrow.png")}
-                           style={{ width: 12, height: 12, marginBottom: 2 }} />
+                           style={styles.rightArrow} />
 
                 </Pressable>
 
@@ -37,20 +35,21 @@ export default function TransactionBox() {
 
                                               <View style={styles.transactions}>
 
-                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={{ paddingVertical: 20 }} key={"transactions_box_container_" + item.id}>
+                                                  { constants.data.slice(0, 4).map((item, index) => [<View style={styles.row}
+                                                                                                           key={"transactions_box_container_" + item.id}>
 
-                                                                                            <TransactionRow amount={item.amount}
-                                                                                                            status={item.status}
-                                                                                                            direction={item.direction}
-                                                                                                            name={item.name}
-                                                                                                            category={item.category}
-                                                                                                            date={item.date}
-                                                                                                            screen={"home"}
-                                                                                                            key={"transactions_box_" + item.id} />
+                                                                                                        <TransactionRow amount={item.amount}
+                                                                                                                        status={item.status}
+                                                                                                                        direction={item.direction}
+                                                                                                                        name={item.name}
+                                                                                                                        category={item.category}
+                                                                                                                        date={item.date}
+                                                                                                                        screen={"home"}
+                                                                                                                        key={"transactions_box_" + item.id} />
 
-                                                                                        </View>,
+                                                                                                    </View>,
 
-                                                                                        (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
+                                                                                                    (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
 
                                               </View> }
 

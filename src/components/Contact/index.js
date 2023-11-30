@@ -10,7 +10,8 @@ export default function Contact({ name, phone }) {
 
             <View style={styles.imageHolder}>
 
-                <Image source={require("../../assets/icons/user.png")} style={{ width: 30, height: 30 }} />
+                <Image source={require("../../assets/icons/user.png")}
+                       style={styles.image} />
 
             </View>
 

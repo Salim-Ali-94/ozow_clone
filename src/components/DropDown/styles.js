@@ -19,6 +19,24 @@ export const styles = StyleSheet.create({
         width: "100%"
     },
 
+    itemTextStyle: {
+        
+        fontFamily: "poppins_medium",
+        color: "grey"
+    },
+
+    itemContainerStyle: {
+        
+        borderRadius: 5,
+        width: "98%",
+        alignSelf: "center"
+    },
+
+    containerStyle: {
+        
+        borderRadius: 10
+    },
+
     label: {
 
         position: "absolute",

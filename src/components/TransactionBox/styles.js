@@ -13,6 +13,19 @@ export const styles = StyleSheet.create({
         // marginBottom: 120
     },
 
+    rightArrow: {
+        
+        width: 12,
+        height: 12,
+        marginBottom: 2,
+        marginLeft: 5
+    },
+
+    row: {
+        
+        paddingVertical: 20
+    },
+
     header: {
 
         flexDirection: "row",

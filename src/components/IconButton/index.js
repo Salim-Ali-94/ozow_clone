@@ -1,5 +1,4 @@
 import { View, Pressable, Image, Text } from "react-native";
-import * as constants from "../../utility/constants";
 import styles from "./styles" ;
 
 
@@ -13,7 +12,7 @@ export default function IconButton({ icon, category, pressAction }) {
                        onPress={pressAction}>
 
                 <Image source={icon}
-                       style={{ width: 30, height: 30, tintColor: constants.primary }}/>
+                       style={styles.icon}/>
 
             </Pressable>
 

@@ -24,7 +24,7 @@ export default function Pocket() {
 
           <StatusBar translucent={true} backgroundColor={"transparent"} />
 
-          <View style={{ marginTop: 30 }}>
+          <View style={styles.cardHolder}>
 
             <View style={styles.centerAlign}>
 
@@ -36,7 +36,7 @@ export default function Pocket() {
 
           </View>
 
-          <View style={{ marginTop: 50 }}>
+          <View style={styles.horizontalScroll}>
 
             <View style={styles.centerAlign}>
 
@@ -44,8 +44,8 @@ export default function Pocket() {
                           scrollEnabled={false}
                           numColumns={3}
                           showsVerticalScrollIndicator={false}
-                          columnWrapperStyle={{ gap: 10 }}
-                          contentContainerStyle={{ gap: 20 }}
+                          columnWrapperStyle={styles.column}
+                          contentContainerStyle={styles.row}
                           renderItem={({ item }) => <IconButton icon={item.icon} 
                                                                 category={item.category}
                                                                 key={"pocket_" + item.id} 
@@ -66,13 +66,13 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-              <View style={{width: "90%"}}>
+              <View style={styles.transactionsHolder}>
 
                 { (constants.data.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
 
                                                   <View style={styles.transactions}>
 
-                                                      { constants.data.map((item, index) => [<View style={{ paddingVertical: 20 }} key={"pocket_row_container_" + item.id}>
+                                                      { constants.data.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
 
                                                                                                 <TransactionRow amount={item.amount}
                                                                                                                 status={item.status}

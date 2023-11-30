@@ -1,7 +1,19 @@
 import { StyleSheet } from "react-native";
+import * as constants from "../../utility/constants";
 
 
 export const styles = StyleSheet.create({
+
+    container: {
+        
+        backgroundColor: constants.background,
+        flex: 1
+    },
+
+    gradient: {
+        
+        flex: 1
+    },
 
     section: {
 

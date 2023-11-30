@@ -1,16 +1,17 @@
 import { View, Text, Image } from "react-native";
+import { styles } from "./styles";
 
 
 export default function EmptyTransactions() {
 
     return (
 
-        <View style={{ alignItems: "center" }}>
-                    
-            <Image source={require("../../assets/icons/box.png")}
-                   style={{ width: 200, height: 200 }} />
+        <View style={styles.container}>
 
-            <Text style={{ fontFamily: "poppins_bold", color: "grey", fontSize: 18 }}>No transactions</Text>
+            <Image source={require("../../assets/icons/box.png")}
+                   style={styles.image} />
+
+            <Text style={styles.text}>No transactions</Text>
 
         </View>
 

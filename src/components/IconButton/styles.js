@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import * as utility from "../../utility/utility";
+import * as constants from "../../utility/constants";
 
 
 let styles = StyleSheet.create({
@@ -20,6 +21,13 @@ let styles = StyleSheet.create({
         borderRadius: 50,
         justifyContent: "center",
         alignItems: "center"
+    },
+
+    icon: {
+        
+        width: 30,
+        height: 30,
+        tintColor: constants.primary
     },
 
     text: {
