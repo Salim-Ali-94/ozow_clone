@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StatusBar } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useContext } from "react";

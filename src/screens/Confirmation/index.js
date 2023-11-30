@@ -38,7 +38,8 @@ export default function Confirmation() {
     
         return unsubscribe;
 
-    }, [navigation, screen]);
+    // }, [navigation, screen]);
+}, []);
 
     return (
     
