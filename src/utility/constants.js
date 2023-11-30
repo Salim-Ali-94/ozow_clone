@@ -164,6 +164,7 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
                         { icon: require("../assets/icons/wifi.png"),
                           category: "Data",
                           details: "Buy/send data bundles from your pocket fast!",
+                          route: "BuyData",
                           size: 40,
                           id: "data_a0b1" },
   
