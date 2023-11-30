@@ -10,6 +10,7 @@ import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
 import TopUp from "./src/screens/TopUp";
+import BuyAirtime from "./src/screens/BuyAirtime";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -53,23 +54,23 @@ export default function App() {
     return (
 
       (icon === "home") ? <Image source={require("./src/assets/icons/home.png")}
-                                 style={{ width: 25, height: 25 }}
+                                 style={styles.largerIcon}
                                  tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
 
-      (icon === "list") ? <View style={{ paddingLeft: 20 }}><Image source={require("./src/assets/icons/list.png")}
-                                                                   style={{ width: 20, height: 20 }}
-                                                                   tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
+      (icon === "list") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/list.png")}
+                                                              style={styles.standardIcon}
+                                                              tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
-      (icon === "pocket") ? <View style={{ paddingRight: 20 }}><Image source={require("./src/assets/icons/pocket.png")}
-                                                                      style={{ width: 20, height: 20 }}
-                                                                      tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
+      (icon === "pocket") ? <View style={styles.spacing}><Image source={require("./src/assets/icons/pocket.png")}
+                                                                style={styles.standardIcon}
+                                                                tintColor={(routeName === selectedTab) ? "black" : "grey"} /></View> :
 
       (icon === "referrals") ? <Image source={require("./src/assets/icons/group.png")}
-                                      style={{ width: 25, height: 25 }}
+                                      style={styles.largerIcon}
                                       tintColor={(routeName === selectedTab) ? "black" : "grey"} /> :
 
                           <Image source={require("./src/assets/icons/group.png")}
-                                 style={{ width: 25, height: 25 }}
+                                 style={styles.largerIcon}
                                  tintColor={(routeName === selectedTab) ? "black" : "grey"} />
 
     );
@@ -111,29 +112,33 @@ export default function App() {
                                    tabBar={renderTabBar}
                                    screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
                                                                  (screen === "TopUp") ? "Top Up" :
+                                                                 (screen === "BuyAirtime") ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
+                                                                 ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
                                                       
                                                       const navigation = useNavigation();
 
-                                                      return ((screen === "Buy") || (screen === "TopUp")) && <Pressable style={{ paddingLeft: 30 }}
-                                                                                             onPress={() => { constants.tabBarRef?.current?.setVisible(true);
-                                                                                                              setPrevious(screen);
-                                                                                                              setScreen(previous);
-                                                                                                              navigation.navigate(previous); }}>
+                                                      return ((screen === "Buy") ||
+                                                              (screen === "TopUp") ||
+                                                              (screen === "BuyAirtime")) && <Pressable style={styles.backIcon}
+                                                                                                       onPress={() => { constants.tabBarRef?.current?.setVisible(true);
+                                                                                                                        setPrevious(screen);
+                                                                                                                        setScreen(previous);
+                                                                                                                        navigation.navigate(previous); }}>
 
-                                                                                      <Image source={require("./src/assets/icons/left.png")}
-                                                                                             style={{ tintColor: "#fff", width: 20, height: 20 }} />
+                                                                                                <Image source={require("./src/assets/icons/left.png")}
+                                                                                                      style={styles.backIcon} />
 
-                                                                                  </Pressable>
+                                                                                            </Pressable>
 
                                                     },
 
                                                     headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
                                                     headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                            style={{ flex: 1 }}
+                                                                                            style={styles.gradient}
                                                                                             start={{x: 0, y: 0.5}}
                                                                                             end={{x: 1, y: 0.5}} /> }}
 
@@ -142,9 +147,9 @@ export default function App() {
                                                     <Animated.View>
 
                                                       <Pressable style={styles.button}
-                                                                onPress={() => { !ozow && setPrevious(selectedTab);
-                                                                                 !ozow ? navigate("Services") : navigate(previous);
-                                                                                 setOzow(!ozow); } }>
+                                                                 onPress={() => { !ozow && setPrevious(selectedTab);
+                                                                                  !ozow ? navigate("Services") : navigate(previous);
+                                                                                  setOzow(!ozow); } }>
 
                                                         { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                   style={styles.circleButton}
@@ -153,7 +158,7 @@ export default function App() {
                                                                                   end={{x: 1, y: 0.5}}>
 
                                                                     <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                                          style={{width: 35, height: 35}}
+                                                                          style={styles.ozowLogo}
                                                                           tintColor={"white"} />
 
                                                                   </LinearGradient> : 
@@ -161,7 +166,7 @@ export default function App() {
                                                                   <View style={styles.circleButton}>
 
                                                                     <Image source={require("./src/assets/icons/x.png")}
-                                                                          style={{width: 20, height: 20}} /> 
+                                                                           style={styles.xIcon} /> 
                                                                         
                                                                   </View> }
 
@@ -197,6 +202,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="Confirmation"
                                     component={() => <Confirmation key={"consfirm_screen"} />} />
+
+            <CurvedBottomBar.Screen name="BuyAirtime"
+                                    component={() => <BuyAirtime key={"airtime_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
@@ -258,6 +266,52 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
+  },
+
+  largerIcon: {
+    
+    width: 25,
+    height: 25
+  },
+
+  spacing: {
+  
+    paddingLeft: 20
+  },
+
+  standardIcon: {
+    
+    width: 20,
+    height: 20
+  },
+
+  backIcon: {
+    
+    tintColor: "#fff",
+    width: 20,
+    height: 20
+  },
+
+  gradient: {
+
+    flex: 1
+  },
+
+  ozowLogo: {
+
+    width: 35,
+    height: 35
+  },
+
+  xIcon: {
+
+    width: 20,
+    height: 20
+  },
+
+  backIcon: {
+    
+    paddingLeft: 30
   }
 
 });

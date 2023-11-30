@@ -30,9 +30,9 @@ export default function Confirmation() {
                     setScreen("Home");
                     navigation.navigate("Home");
 
-                }, 1000);
+                }, 1);
 
-            }, 2000);
+            }, 5000);
 
         });
     

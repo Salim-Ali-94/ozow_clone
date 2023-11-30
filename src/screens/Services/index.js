@@ -11,7 +11,7 @@ import { styles } from "./styles";
 
 export default function Services() {
 
-  const { screen, setScreen, setPrevious, ozow, setOzow } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, ozow, setOzow } = useContext(screenContext);
   const navigation = useNavigation();
 
   return (
@@ -54,6 +54,7 @@ export default function Services() {
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                                     setPrevious(screen);
                                                                                                                     setScreen(item.route);
+                                                                                                                    setOzow(!ozow);
                                                                                                                     navigation.navigate(item.route); } }}
                                                                              key={"service_" + item.id} />,
 
@@ -76,6 +77,11 @@ export default function Services() {
                                                                       details={item.details}
                                                                       icon={item.icon}
                                                                       iconSize={item.size}
+                                                                      pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
+                                                                                                             setPrevious(screen);
+                                                                                                             setScreen(item.route);
+                                                                                                             setOzow(!ozow);
+                                                                                                             navigation.navigate(item.route); } }}
                                                                       gap={(index < constants.details.length - 1) ? 10 : 0}
                                                                       key={"service_" + item.id} />) }
 

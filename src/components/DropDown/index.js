@@ -4,7 +4,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function DropDown({ data, focused, setFocused, value, setValue }) {
+export default function DropDown({ data, focused, setFocused, value, setValue, placeHolder }) {
 
     return (
 
@@ -24,7 +24,7 @@ export default function DropDown({ data, focused, setFocused, value, setValue })
                       labelField="label"
                       valueField="value"
                       searchPlaceholder="Search"
-                      placeholder="FNB"
+                      placeholder={placeHolder}
                       value={value}
                       onFocus={() => setFocused(true)}
                       onBlur={() => setFocused(false)}
