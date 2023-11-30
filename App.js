@@ -10,6 +10,7 @@ import Referrals from "./src/screens/Referrals";
 import Services from "./src/screens/Services";
 import Buy from "./src/screens/Buy";
 import TopUp from "./src/screens/TopUp";
+import BuyAirtime from "./src/screens/BuyAirtime";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -112,6 +113,7 @@ export default function App() {
                                    screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
                                                                  (screen === "TopUp") ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
+                                                                 ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -197,6 +199,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="Confirmation"
                                     component={() => <Confirmation key={"consfirm_screen"} />} />
+
+            <CurvedBottomBar.Screen name="BuyAirtime"
+                                    component={() => <BuyAirtime key={"airtime_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 

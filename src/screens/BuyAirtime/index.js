@@ -10,16 +10,16 @@ import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
   
-export default function TopUp() {
+export default function BuyAirtime() {
 
     const navigation = useNavigation();
     const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
     const [amount, setAmount] = useState("");
-    const [password, setPassword] = useState("");
-    const [bank, setBank] = useState(constants.banks[0].value);
+    const [number, setNumber] = useState("");
+    const [provider, setProvider] = useState(constants.serviceProviders[0].value);
     const [amountFocused, setAmountFocused] = useState(false);
-    const [bankFocused, setBankFocused] = useState(false);
-    const [passwordFocused, setPasswordFocused] = useState(false);
+    const [providerFocused, setProviderFocused] = useState(false);
+    const [numberFocused, setNumberFocused] = useState(false);
 
     return (
 
@@ -29,7 +29,7 @@ export default function TopUp() {
 
             <View style={styles.inputHolder}>
 
-                <InputText label={"Top up amount"}
+                <InputText label={"Airtime amount"}
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}
@@ -38,40 +38,41 @@ export default function TopUp() {
 
             </View>
 
-            <View style={styles.bankSection}>
+            <View style={styles.providerSection}>
 
-                <Text style={styles.bankHeading}>Select your bank</Text>
+                <Text style={styles.providerHeading}>Select service provider</Text>
 
             </View>
 
             <View style={[styles.inputHolder, {marginTop: 10}]}>
                 
-                <DropDown data={constants.banks}
-                          focused={bankFocused}
-                          setFocused={setBankFocused}
-                          value={bank}
-                          placeHolder={"FNB"}
-                          setValue={setBank} />
+                <DropDown data={constants.serviceProviders}
+                          focused={providerFocused}
+                          setFocused={setProviderFocused}
+                          value={provider}
+                          placeHolder={"Vodacom"}
+                          setValue={setProvider} />
             </View>
 
             <View style={styles.inputHolder}>
 
-                <InputText label={"Account password"}
-                           text={password}
-                           setText={setPassword}
-                           focused={passwordFocused}
-                           setFocused={setPasswordFocused} />
+                <InputText label={"Phone number"}
+                           text={number}
+                           numbers={true}
+                           setText={setNumber}
+                           focused={numberFocused}
+                           setFocused={setNumberFocused} />
 
             </View>
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseInt(amount) > 0) && password && bank ? true : false}
-                                pressAction={() => { setBalance(balance + parseInt(amount)); 
+                <ContinueButton active={amount && (parseInt(amount) > 0) && number && (number.length === 10) && provider ? true : false}
+                                pressAction={() => { setBalance(balance - parseInt(amount)); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
-                                                                                           header: "Authenticating your request..." }); }} />
+                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/phone.json"),
+                                                                                           header: "Fetching your airtime..." }); }} />
 
             </View>
 

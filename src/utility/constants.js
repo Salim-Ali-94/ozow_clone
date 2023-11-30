@@ -36,6 +36,12 @@ export const banks = [{ label: "FNB", value: "1" },
                       { label: "Bidvest", value: "10" },
                       { label: "African Bank", value: "8" }];
 
+export const serviceProviders = [{ label: "Vodacom", value: "1" },
+                                 { label: "MTN", value: "2" },
+                                 { label: "Cell C", value: "3" },
+                                 { label: "Telkom", value: "4" },
+                                 { label: "8ta", value: "5" }];
+
 export const pocket = 1234567890.09876;
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),
@@ -65,7 +71,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
 
                       { icon: require("../assets/icons/phone.png"),
                         category: "Airtime",
-                        id: "airtime_e4f5" },
+                        id: "airtime_e4f5",
+                        route: "BuyAirtime" },
 
                       { icon: require("../assets/icons/plane.png"),
                         category: "Send money",
