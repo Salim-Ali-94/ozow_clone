@@ -13,11 +13,15 @@ import { styles } from "./styles";
 export default function TopUp() {
 
     const navigation = useNavigation();
-    const { balance, setBalance, setPrevious, setScreen, previous, screen } = useContext(screenContext);
+    const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
     const [amount, setAmount] = useState("");
-    const [amountFocused, setAmountFocused] = useState(false);
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
+    const [amountFocused, setAmountFocused] = useState(false);
     const [bankFocused, setBankFocused] = useState(false);
+    // const [nameFocused, setNameFocused] = useState(false);
+    const [passwordFocused, setPasswordFocused] = useState(false);
 
     return (
 
@@ -48,6 +52,26 @@ export default function TopUp() {
                           setFocused={setBankFocused}
                           value={bank}
                           setValue={setBank} />
+            </View>
+
+            {/* <View style={styles.inputHolder}>
+
+                <InputText label={"Full name"}
+                           text={name}
+                           setText={setName}
+                           focused={nameFocused}
+                           setFocused={setNameFocused} />
+
+            </View> */}
+
+            <View style={styles.inputHolder}>
+
+                <InputText label={"Account password"}
+                           text={password}
+                           setText={setPassword}
+                           focused={passwordFocused}
+                           setFocused={setPasswordFocused} />
+
             </View>
 
             <View style={styles.bottom}>

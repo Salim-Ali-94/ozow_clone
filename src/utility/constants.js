@@ -33,6 +33,7 @@ export const banks = [{ label: "FNB", value: "1" },
                       { label: "Investec", value: "6" },
                       { label: "Old Mutual", value: "7" },
                       { label: "Tyme Bank", value: "9" },
+                      { label: "Bidvest", value: "10" },
                       { label: "African Bank", value: "8" }];
 
 export const pocket = 1234567890.09876;
@@ -127,6 +128,7 @@ export const transactionIcons = { burger: require("../assets/icons/burger.png"),
 export const info = [{ icon: require("../assets/icons/plus.png"),
                        category: "Top up",
                        info: "your pocket safely and securely.",
+                       route: "TopUp",
                        id: "top_up_a0b1" },
 
                       { icon: require("../assets/icons/plane.png"),

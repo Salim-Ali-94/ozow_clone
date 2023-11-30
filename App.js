@@ -96,7 +96,7 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{ screen, setScreen, setPrevious, balance, setBalance }}>
+    <screenContext.Provider value={{ screen, setScreen, setPrevious, balance, setBalance, ozow, setOzow }}>
 
       <NavigationContainer>
 
