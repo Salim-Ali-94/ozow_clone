@@ -10,7 +10,7 @@ import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
   
-export default function BuyAirtime() {
+export default function BuyData() {
 
     const navigation = useNavigation();
     const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
@@ -29,7 +29,7 @@ export default function BuyAirtime() {
 
             <View style={styles.inputHolder}>
 
-                <InputText label={"How much airtime?"}
+                <InputText label={"How much data?"}
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}
@@ -71,8 +71,8 @@ export default function BuyAirtime() {
                                 pressAction={() => { setBalance(balance - parseInt(amount)); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/phone.json"),
-                                                                                           header: "Fetching your airtime..." }); }} />
+                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),
+                                                                                           header: "Fetching your data bundles..." }); }} />
 
             </View>
 

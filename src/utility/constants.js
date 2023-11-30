@@ -36,11 +36,11 @@ export const banks = [{ label: "FNB", value: "1" },
                       { label: "Bidvest", value: "10" },
                       { label: "African Bank", value: "8" }];
 
-export const serviceProviders = [{ label: "Vodacom", value: "1" },
-                                 { label: "MTN", value: "2" },
-                                 { label: "Cell C", value: "3" },
-                                 { label: "Telkom", value: "4" },
-                                 { label: "8ta", value: "5" }];
+export const networks = [{ label: "Vodacom", value: "1" },
+                         { label: "MTN", value: "2" },
+                         { label: "Cell C", value: "3" },
+                         { label: "Telkom", value: "4" },
+                         { label: "8ta", value: "5" }];
 
 export const pocket = 1234567890.09876;
 
@@ -89,7 +89,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
                       
                       { icon: require("../assets/icons/wifi.png"),
                         category: "Data",
-                        id: "data_k10l11" },
+                        id: "data_k10l11",
+                        route: "BuyData" },
                       
                       { icon: require("../assets/icons/withdraw.png"),
                         category: "Withdraw",
