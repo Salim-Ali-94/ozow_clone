@@ -52,6 +52,7 @@ export default function TopUp() {
                           value={bank}
                           placeHolder={"FNB"}
                           setValue={setBank} />
+
             </View>
 
             <View style={styles.inputHolder}>

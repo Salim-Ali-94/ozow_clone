@@ -3,22 +3,18 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
-import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
-import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
   
-export default function BuyData() {
+export default function BuyElectricity() {
 
     const navigation = useNavigation();
     const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
-    const [network, setNetwork] = useState(constants.networks[0].value);
     const [amountFocused, setAmountFocused] = useState(false);
-    const [networkFocused, setNetworkFocused] = useState(false);
     const [numberFocused, setNumberFocused] = useState(false);
 
     return (
@@ -29,7 +25,7 @@ export default function BuyData() {
 
             <View style={styles.inputHolder}>
 
-                <InputText label={"How much data?"}
+                <InputText label={"How many units?"}
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}
@@ -38,26 +34,9 @@ export default function BuyData() {
 
             </View>
 
-            <View style={styles.networkSection}>
-
-                <Text style={styles.networkHeading}>Select your network</Text>
-
-            </View>
-
-            <View style={[styles.inputHolder, {marginTop: 10}]}>
-                
-                <DropDown data={constants.networks}
-                          focused={networkFocused}
-                          setFocused={setNetworkFocused}
-                          value={network}
-                          placeHolder={"Vodacom"}
-                          setValue={setNetwork} />
-
-            </View>
-
             <View style={styles.inputHolder}>
 
-                <InputText label={"Phone number"}
+                <InputText label={"Meter number"}
                            text={number}
                            numbers={true}
                            setText={setNumber}
@@ -68,12 +47,12 @@ export default function BuyData() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseInt(amount) > 0) && number && (number.length === 10) && network ? true : false}
-                                pressAction={() => { setBalance(balance - parseInt(amount)); 
+                <ContinueButton active={amount && (parseInt(amount) > 0) && number && (number.length === 9) ? true : false}
+                                pressAction={() => { setBalance(balance - parseInt(amount) / 10); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),
-                                                                                           header: "Fetching your data bundles..." }); }} />
+                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),
+                                                                                           header: "Fetching units for your meter..." }); }} />
 
             </View>
 

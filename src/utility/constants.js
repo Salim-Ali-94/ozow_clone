@@ -47,20 +47,20 @@ export const pocket = 1234567890.09876;
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
                           id: "action_get_paid_a0b1" },
-                      
+
                         { icon: require("../assets/icons/qr.png"),
                           category: "Scan to Pay",
                           id: "scan_to_pay_c2d3" },
-                      
+
                         { icon: require("../assets/icons/plane.png"),
                           category: "Send Money",
                           id: "send_money_e4f5" },
-                      
+
                         { icon: require("../assets/icons/buy.png"),
                           category: "Buy",
                           id: "buy_g6h7",
                           route: "Buy" },
-                      
+
                         { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
                           id: "trade_stocks_i8j9" }];
@@ -98,6 +98,7 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
                       
                       { icon: require("../assets/icons/zap.png"),
                         category: "Electricity",
+                        route: "BuyElectricity",
                         id: "electricity_o14p15" }];
 
 export const socials = [{ icon: require("../assets/icons/chat.png"),
@@ -170,6 +171,7 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
   
                         { icon: require("../assets/icons/zap.png"),
                           category: "Electricity",
+                          route: "BuyElectricity",
                           details: "Buy/send electricity from your pocket fast!",
                           size: 50,
                           id: "electricity_c2d3" },

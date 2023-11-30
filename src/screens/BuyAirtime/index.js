@@ -52,6 +52,7 @@ export default function BuyAirtime() {
                           value={network}
                           placeHolder={"Vodacom"}
                           setValue={setNetwork} />
+
             </View>
 
             <View style={styles.inputHolder}>

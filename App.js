@@ -12,6 +12,7 @@ import Buy from "./src/screens/Buy";
 import TopUp from "./src/screens/TopUp";
 import BuyAirtime from "./src/screens/BuyAirtime";
 import BuyData from "./src/screens/BuyData";
+import BuyElectricity from "./src/screens/BuyElectricity";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -115,9 +116,11 @@ export default function App() {
                                                                  (screen === "TopUp") ? "Top Up" :
                                                                  (screen === "BuyAirtime") ? "Buy Airtime" :
                                                                  (screen === "BuyData") ? "Buy Data" :
+                                                                 (screen === "BuyElectricity") ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
+                                                                 ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  "👋 Hi, Salim", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -127,6 +130,7 @@ export default function App() {
                                                       return ((screen === "Buy") ||
                                                               (screen === "TopUp") ||
                                                               (screen === "BuyData") ||
+                                                              (screen === "BuyElectricity") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
@@ -212,6 +216,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="BuyData"
                                     component={() => <BuyData key={"data_screen"} />} />
+
+            <CurvedBottomBar.Screen name="BuyElectricity"
+                                    component={() => <BuyElectricity key={"electric_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
