@@ -123,7 +123,7 @@ export default function App() {
 
                                                       return ((screen === "Buy") ||
                                                               (screen === "TopUp") ||
-                                                              (screen === "BuyAirtime")) && <Pressable style={styles.backIcon}
+                                                              (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
                                                                                                                         setScreen(previous);
@@ -309,7 +309,7 @@ export const styles = StyleSheet.create({
     height: 20
   },
 
-  backIcon: {
+  back: {
     
     paddingLeft: 30
   }

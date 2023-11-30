@@ -22,4 +22,4 @@ export default function InputText({ label, text, setText, focused, setFocused, n
 
   );
 
-};
+}
