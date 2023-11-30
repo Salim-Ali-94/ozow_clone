@@ -47,8 +47,8 @@ export default function BuyElectricity() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseInt(amount) > 0) && number && (number.length === 9) ? true : false}
-                                pressAction={() => { setBalance(balance - parseInt(amount) / 10); 
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
+                                pressAction={() => { setBalance(balance - parseFloat(amount) / 10); 
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),
