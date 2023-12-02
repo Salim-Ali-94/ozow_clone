@@ -59,7 +59,17 @@ export default function Home() {
     // const response = await axios.get(constants.endpoint);
     console.log(DB_ENDPOINT);
     const response = await axios.get(DB_ENDPOINT);
-    console.log(response.data);
+
+    try {
+
+      console.log(response.data);
+
+    } catch(error) {
+
+      console.log("error:", error);
+
+    }
+
 
   }
 

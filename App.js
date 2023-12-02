@@ -37,15 +37,15 @@ export default function App() {
 
     // else create a new empty user on firestore + store in cache
 
-    // await 
-    user.transactions = user.transactions.reversed();
+    // await
+    user.transactions.reverse();
 
   }
 
   useEffect(() => {
 
     fetchUser();
-    // user.transactions = user.transactions.reversed();
+    // user.transactions = user.transactions.reverse();
 
   }, []);
 
