@@ -13,7 +13,7 @@ import { styles } from "./styles";
 export default function Transactions() {
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState(constants.data);
+    const [filteredData, setFilteredData] = useState(constants.user.transactions);
 
     return (
 
@@ -26,7 +26,7 @@ export default function Transactions() {
                 <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={(value) => utility.searchFilter(constants.data, value, setFilteredData, setSearchQuery)}
+                                 onChangeText={(value) => utility.searchFilter(constants.user.transactions, value, setFilteredData, setSearchQuery)}
                                  value={searchQuery}
                                  key={"transactions_search"} />
 

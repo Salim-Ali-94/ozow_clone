@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 export default function Pocket() {
 
-  const { screen, setScreen, setPrevious, balance } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, user } = useContext(screenContext)
   const navigation = useNavigation();
 
   return (
@@ -28,7 +28,7 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={balance}
+              <PocketBalanceCard amount={user.balance}
                                  shadow={false}
                                  key={"pocket_pocket_balance_card"} />
 
@@ -68,11 +68,11 @@ export default function Pocket() {
 
               <View style={styles.transactionsHolder}>
 
-                { (constants.data.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
+                { (constants.user.transactions.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
 
                                                   <View style={styles.transactions}>
 
-                                                      { constants.data.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
+                                                      { constants.user.transactions.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
 
                                                                                                 <TransactionRow amount={item.amount}
                                                                                                                 status={item.status}
@@ -85,7 +85,7 @@ export default function Pocket() {
 
                                                                                             </View>,
 
-                                                                                            (index < constants.data.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
+                                                                                            (index < constants.user.transactions.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
 
                                                   </View> }
 

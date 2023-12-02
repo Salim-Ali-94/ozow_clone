@@ -1,4 +1,5 @@
 import { createRef } from "react";
+import * as utility from "../utility/utility";
 
 
 export const tabBarRef = createRef();
@@ -11,6 +12,79 @@ export const primary_blend2 = "#00bbaa";
 export const cement = "#e6e5eb";
 export const nartjie = "#ffd700";
 export const cherry = "#ff2fa0";
+
+// export const endpoint = "http://192.168.0.120:1234/";
+
+export const contacts = [{ name: "Aadil",
+                           phone: "0123456789" },
+
+                         { name: "Bilal",
+                           phone: "9876543210" },
+
+                         { name: "Cooper",
+                           phone: "2468101214" },
+
+                         { name: "Dawood",
+                           phone: "3691215181" },
+
+                         { name: "Elias",
+                           phone: "1098726540" },
+
+                         { name: "Fatima",
+                           phone: "0987152673" },
+
+                         { name: "George",
+                           phone: "9807561229" },
+
+                         { name: "Zaheer",
+                           phone: "0981028364" }];
+
+export const data = [{ name: "Logan",
+                       category: "fast_food",
+                       status: "Received",
+                       direction: "into",
+                       date: "29 March 2022, 9:00",
+                       amount: 350,
+                       id: "fast_food_a0b1" },
+
+                     { name: "Scott",
+                       category: "sushi",
+                       status: "Pending",
+                       direction: "from",
+                       date: "30 February 2023, 8:23",
+                       amount: 150,
+                       id: "sushi_a0b1" },
+
+                    { name: "Steve",
+                      category: "burger",
+                      status: "Failed",
+                      direction: "from",
+                      date: "13 October 2024, 18:43",
+                      amount: 107.9,
+                      id: "burger_a0b1" },
+
+                    { name: "Mubeen",
+                      category: "donut",
+                      status: "failed",
+                      direction: "into",
+                      date: "9 August 2020, 22:16",
+                      amount: 39.86,
+                      id: "donut_a0b1" },
+
+                  { name: "Tony",
+                    category: "coffee",
+                    status: "Paid",
+                    direction: "into",
+                    date: "28 April 2021, 13:06",
+                    amount: 53.6,
+                    id: "coffee_a0b1" }];
+
+export const user = { name: "Salim",
+                      id: "fnA3ik1q8PHN8daPjqQw",
+                      // id: utility.uuid(20),
+                      balance: 123456789.87,
+                      transactions: data,
+                      contacts: contacts };
 
 export const referralFilters = ["Non-Ozow.ME users",
                                 "Invite pending",
@@ -41,8 +115,6 @@ export const networks = [{ label: "Vodacom", value: "1" },
                          { label: "Cell C", value: "3" },
                          { label: "Telkom", value: "4" },
                          { label: "8ta", value: "5" }];
-
-export const pocket = 1234567890.09876;
 
 export const actions = [{ icon: require("../assets/icons/cash.png"),
                           category: "Get Paid",
@@ -182,70 +254,5 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
                           details: "Buy/send vouchers from your pocket fast!",
                           size: 40,
                           id: "coupon_e4f5" }];
-  
-export const data = [{ name: "Logan",
-                       category: "fast_food",
-                       status: "Received",
-                       direction: "into",
-                       date: "29 March 2022, 9:00",
-                       amount: 350,
-                       id: "fast_food_a0b1" },
 
-                     { name: "Scott",
-                       category: "sushi",
-                       status: "Pending",
-                       direction: "from",
-                       date: "30 February 2023, 8:23",
-                       amount: 150,
-                       id: "sushi_a0b1" },
-
-                     { name: "Steve",
-                       category: "burger",
-                       status: "Failed",
-                       direction: "from",
-                       date: "13 October 2024, 18:43",
-                       amount: 107.9,
-                       id: "burger_a0b1" },
-
-                     { name: "Mubeen",
-                       category: "donut",
-                       status: "failed",
-                       direction: "into",
-                       date: "9 August 2020, 22:16",
-                       amount: 39.86,
-                       id: "donut_a0b1" },
-
-                    { name: "Tony",
-                      category: "coffee",
-                      status: "Paid",
-                      direction: "into",
-                      date: "28 April 2021, 13:06",
-                      amount: 53.6,
-                      id: "coffee_a0b1" }];
 // export const data = [];
-
-
-
-export const contacts = [{ name: "Aadil",
-                           phone: "0123456789" },
-
-                         { name: "Bilal",
-                           phone: "9876543210" },
-
-                         { name: "Cooper",
-                           phone: "2468101214" },
-
-                         { name: "Dawood",
-                           phone: "3691215181" },
-
-                         { name: "Elias",
-                           phone: "1098726540" },
-
-                         { name: "Fatima",
-                           phone: "0987152673" },
-
-                         { name: "George",
-                           phone: "9807561229" },
-
-                         { name: "Zaheer",
-                           phone: "0981028364" }];
