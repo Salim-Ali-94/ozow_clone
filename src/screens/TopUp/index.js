@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
@@ -8,12 +9,13 @@ import ContinueButton from "../../components/ContinueButton";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { DB_ENDPOINT } from "@env";
 
   
 export default function TopUp() {
 
     const navigation = useNavigation();
-    const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -68,7 +70,10 @@ export default function TopUp() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
-                                pressAction={() => { setBalance(balance + parseFloat(amount)); 
+                                pressAction={() => { 
+                                                     //  setBalance(balance + parseFloat(amount));
+                                                     setUser({...user, balance: user.balance + parseFloat(amount)});
+                                                     axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)});
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

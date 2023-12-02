@@ -10,11 +10,12 @@ import * as utility from "../../utility/utility";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { DB_ENDPOINT } from "@env";
 
 
 export default function Home() {
 
-  const { screen, setScreen, setPrevious, balance } = useContext(screenContext)
+  const { screen, setScreen, setPrevious, user } = useContext(screenContext)
   const navigation = useNavigation();
 
   
@@ -55,7 +56,9 @@ export default function Home() {
       //     .then(response => console.log(response))
       //     .catch(error => console.log("error:", error));
       
-    const response = await axios.get(constants.endpoint);
+    // const response = await axios.get(constants.endpoint);
+    console.log(DB_ENDPOINT);
+    const response = await axios.get(DB_ENDPOINT);
     console.log(response.data);
 
   }
@@ -87,7 +90,7 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={balance}
+              <PocketBalanceCard amount={user.balance}
                                  shadow={true}
                                  key={"home_pocket_balance_card"} />
 

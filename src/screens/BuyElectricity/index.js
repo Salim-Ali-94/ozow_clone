@@ -1,17 +1,19 @@
 import { View, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
 import InputText from "../../components/InputText";
 import ContinueButton from "../../components/ContinueButton";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { DB_ENDPOINT } from "@env";
 
   
 export default function BuyElectricity() {
 
     const navigation = useNavigation();
-    const { balance, setBalance, setPrevious, setScreen, screen } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
@@ -48,7 +50,10 @@ export default function BuyElectricity() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
-                                pressAction={() => { setBalance(balance - parseFloat(amount) / 10); 
+                                pressAction={() => { 
+                                                    //  setBalance(balance - parseFloat(amount) / 10);
+                                                     setUser({...user, balance: user.balance - parseFloat(amount) / 10});
+                                                     axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),

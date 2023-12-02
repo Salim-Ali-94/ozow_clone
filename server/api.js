@@ -47,3 +47,16 @@ app.patch("/registerTransaction", async (request, response) => {
 });
 
 app.listen(port, () => console.log(`Server running on port: ${port}`))
+
+
+
+// let myObject = {
+//     key1: [1, 2, 3, 4, 5],
+//     key2: ['a', 'b', 'c'],
+//   };
+  
+//   // Assuming you want to reverse the array inside key1
+//   myObject.key1 = myObject.key1.reverse();
+  
+//   console.log(myObject);
+  

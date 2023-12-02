@@ -13,7 +13,7 @@ export const cement = "#e6e5eb";
 export const nartjie = "#ffd700";
 export const cherry = "#ff2fa0";
 
-export const endpoint = "http://localhost:1234/";
+// export const endpoint = "http://192.168.0.120:1234/";
 
 export const contacts = [{ name: "Aadil",
                            phone: "0123456789" },
@@ -80,7 +80,8 @@ export const data = [{ name: "Logan",
                     id: "coffee_a0b1" }];
 
 export const user = { name: "Salim",
-                      id: utility.uuid(20),
+                      id: "fnA3ik1q8PHN8daPjqQw",
+                      // id: utility.uuid(20),
                       balance: 123456789.87,
                       transactions: data,
                       contacts: contacts };

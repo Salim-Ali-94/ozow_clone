@@ -1,7 +1,7 @@
 import { StyleSheet, Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
@@ -24,7 +24,30 @@ export default function App() {
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
-  const [balance, setBalance] = useState(constants.user.balance);
+  // const [balance, setBalance] = useState(constants.user.balance);
+  const [user, setUser] = useState(constants.user);
+  // const [user, setUser] = useState({});
+
+  const fetchUser = async () => {
+
+    // if user exists in cache fetch cached data
+
+    // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
+    // else ask user for name --> if user exists on backend fetch backend data + store in cache
+
+    // else create a new empty user on firestore + store in cache
+
+    // await 
+    user.transactions = user.transactions.reversed();
+
+  }
+
+  useEffect(() => {
+
+    fetchUser();
+    // user.transactions = user.transactions.reversed();
+
+  }, []);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -100,7 +123,7 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{ screen, setScreen, setPrevious, balance, setBalance, ozow, setOzow }}>
+    <screenContext.Provider value={{ screen, setScreen, setPrevious, ozow, setOzow, user, setUser }}>
 
       <NavigationContainer>
 
@@ -124,7 +147,7 @@ export default function App() {
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
-                                                                 `👋 Hi, ${constants.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
+                                                                 `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
 
