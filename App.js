@@ -17,6 +17,8 @@ import Withdraw from "./src/screens/Withdraw";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
+// const { restClient } = require("@polygon.io/client-js");
+// import { restClient } from "@polygon.io/client-js";
 
 
 export default function App() {
@@ -39,6 +41,14 @@ export default function App() {
 
     // await
     user.transactions.reverse();
+
+    // const rest = restClient("t_tMM_xfb8FIykLfdMDpAmKGn8xCThNB");
+
+    // rest.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
+    //   console.log(data);
+    // }).catch(e => {
+    //   console.error("An error happened:", e);
+    // });
 
   }
 
