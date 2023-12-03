@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
-import EquityCard from "../../components/EquityCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
 import * as utility from "../../utility/utility";
@@ -106,15 +105,6 @@ export default function Home() {
 
             </View>
 
-          </View>
-
-          <View style={{alignItems: "center"}}>
-            <EquityCard data={[{value: 15}, {value: 30}, {value: 26}, {value: 40},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 85},{value: 10},{value: 8},{value: 58},{value: 56},{value: 78},{value: 74},{value: -20},{value: 98}]}
-                        company={"tEslA"}
-                        ticker={"tsla"}
-                        price={103.45}
-                        high={105.63}
-                        low={98.42} />
           </View>
           
           <View style={styles.section}>

@@ -98,6 +98,11 @@ export default function Services() {
                 <DetailsCard category={"Trade stocks"}
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
+                             pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
+                                                  setPrevious(screen);
+                                                  setScreen("StockMarket");
+                                                  navigation.navigate("StockMarket"); }}
+
                              key={"service_stocks_details_card"} />
 
             </View>

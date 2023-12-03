@@ -135,7 +135,8 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
 
                         { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
-                          id: "trade_stocks_i8j9" }];
+                          id: "trade_stocks_i8j9",
+                          route: "StockMarket" }];
 
 export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
@@ -156,7 +157,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
                        route: "TopUp" },
 
                       { icon: require("../assets/icons/trading.png"),
-                        category: "Buy stocks",
+                        category: "Trade stocks",
+                        route: "StockMarket",
                         id: "stock_q16r17" },
                       
                       { icon: require("../assets/icons/wifi.png"),
