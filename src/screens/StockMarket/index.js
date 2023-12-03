@@ -1,21 +1,94 @@
-import { View, Text, SafeAreaView, StatusBar, FlatList, Image, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, StatusBar, Pressable, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useContext, useState } from "react";
+import { restClient } from "@polygon.io/client-js";
+import axios from "axios";
+import * as simple_icons from "simple-icons";
 import EquityCard from "../../components/EquityCard";
 import SearchInput from "../../components/SearchInput";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { POLYGON_KEY, NINJA_API_KEY, NINJA_API_ENDPOINT } from "@env";
 
 
 export default function StockMarket() {
 
+    const polygon = restClient(POLYGON_KEY);
     const { user } = useContext(screenContext)
     const [searchQuery, setSearchQuery] = useState("");
     // const [filteredData, setFilteredData] = useState([{company: "tEslA", ticker: "TSLA",
     //                                                    data: [{value: 15}, {value: 30}, {value: 26}, {value: 40},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 104},{value: 85},{value: 10},{value: 18},{value: 58},{value: 56},{value: 78},{value: 74},{value: 13},{value: 98}]}]);
     const [filteredData, setFilteredData] = useState([]);
+
+    const queryStock = async () => {
+
+        console.log("searching...");
+        console.log(searchQuery);
+
+        for (const icon in simple_icons) {
+
+            console.log("checking -->", icon);
+
+            if (simple_icons[icon].title.toLowerCase().includes(searchQuery.toLowerCase())) {
+
+                console.log(icon);
+                const logo = simple_icons[icon];
+                console.log(`Icon Name: ${logo.title}, SVG: ${logo.svg}`);
+                // break;
+
+
+
+
+
+                const response = await axios.get(NINJA_API_ENDPOINT + encodeURIComponent(logo.title),
+                                                 { headers: { "X-Api-Key": NINJA_API_KEY } })
+                                            
+                                            // .then(result => {
+                                                
+                                            //     if (result.status === 200) {
+                                                
+                                            //         console.log(result.data);
+                                                
+                                            //     } else {
+                                            
+                                            //         console.log(`Error: ${result.status}`, result.data);
+                                                
+                                            //     }})
+
+                                            // .catch(error => {
+
+                                            //     console.error("Error:", error.message);
+
+                                            // });
+
+
+                console.log("data");
+                console.log(response.data);
+                // console.log(response.data.ticker);
+
+                
+
+                // polygon.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
+                polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
+                    console.log(data);
+                }).catch(e => {
+                    console.error("An error happened:", e);
+                });
+
+                
+
+
+                break;
+
+
+
+            }
+
+        }
+
+    }
   
     return (
 
@@ -45,7 +118,7 @@ export default function StockMarket() {
                 
                 </View>
 
-                <View style={styles.centerAlign}>
+                <View style={[styles.centerAlign, { flexDirection: "row", justifyContent: "center" }]}>
 
                     <SearchInput placeholder={"Search for stocks"}
                                 //  onChangeText={searchAction}
@@ -53,6 +126,16 @@ export default function StockMarket() {
                                 border
                                 value={searchQuery}
                                 key={"refer_search"} />
+
+                    <Pressable style={{ borderRadius: 10, backgroundColor: constants.secondary, marginLeft: 5, width: "20%", height: 53.5, justifyContent: "center", alignItems: "center" }}
+                                // onPress={() => console.log("search")}>
+                                onPress={() => queryStock()}>
+
+                        {/* <Text>Submit</Text> */}
+                        <Image source={require("../../assets/icons/search.png")}
+                                    style={{ width: 20, height: 20, tintColor: "#fff" }} />
+
+                    </Pressable>
 
                 </View>
 

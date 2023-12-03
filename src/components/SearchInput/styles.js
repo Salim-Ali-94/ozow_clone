@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         // borderColor: "grey",
         // borderColor: "deeppink",
         borderRadius: 10,
-        width: "90%"
+        // width: "90%"
     },
 
     input: {
