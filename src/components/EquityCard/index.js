@@ -7,7 +7,7 @@ import { SvgUri } from "react-native-svg";
 import styles from "./styles";
 
 
-export default function EquityCard({ data, company, ticker, price, high, low, gap }) {
+export default function EquityCard({ data, logo, ticker, price, high, low, gap }) {
 
     return (
 
@@ -27,7 +27,7 @@ export default function EquityCard({ data, company, ticker, price, high, low, ga
                             <SvgUri width={40}
                                     height={40}
                                     fill={"deeppink"}
-                                    uri={`https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/${company.toLowerCase()}.svg`} />
+                                    uri={logo} />
 
                         </View>
 

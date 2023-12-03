@@ -10,7 +10,7 @@ import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
-import { POLYGON_KEY, NINJA_API_KEY, NINJA_API_ENDPOINT } from "@env";
+import { POLYGON_KEY, NINJA_API_KEY, NINJA_API_ENDPOINT, LOGO_URL } from "@env";
 
 
 export default function StockMarket() {
@@ -33,6 +33,7 @@ export default function StockMarket() {
 
             if (simple_icons[icon].title.toLowerCase().includes(searchQuery.toLowerCase())) {
 
+                // var array = [];
                 console.log(icon);
                 const logo = simple_icons[icon];
                 console.log(`Icon Name: ${logo.title}, SVG: ${logo.svg}`);
@@ -73,9 +74,52 @@ export default function StockMarket() {
                 // polygon.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
                 polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
                     console.log(data);
+
+                    // for (price in data.results) {
+
+
+
+                    // }
+
+
+                    console.log(data.results[0])
+                    console.log(data.results[0].c)
+                    var array = data.results.map(element => ({ value: element.c }));
+                    console.log("array");
+                    console.log(array);
+                    const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
+                    console.log("svg");
+                    console.log(svg);
+    
+    
+    
+    
+    
+    
+                    setFilteredData([{ logo: svg,
+                                       ticker: response.data[0].ticker,
+                                       data: array }]);
+    
                 }).catch(e => {
                     console.error("An error happened:", e);
                 });
+
+
+                // for price in 
+
+
+                // const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
+                // console.log("svg");
+                // console.log(svg);
+
+
+
+
+
+
+                // setFilteredData([{ logo: svg,
+                //                    ticker: response.data[0].ticker,
+                //                    data: [] }]);
 
                 
 
@@ -155,13 +199,17 @@ export default function StockMarket() {
                                 low={Math.min(...filteredData[0].data.map(price => price.value))} /> */}
 
                     { (filteredData.length > 0) ? filteredData.map(item => <EquityCard data={item.data}
-                                                           company={item.company}
+                                                           logo={item.logo}
+                                                           //    company={item.company}
                                                            ticker={item.ticker}
-                                                           key={item.company}
+                                                           key={item.ticker}
                                                            price={item.data[item.data.length - 1].value}
+                                                        //    price={item.data[item.data.length - 1]}
                                                         //    gap={true}
                                                            high={Math.max(...item.data.map(price => price.value))}
                                                            low={Math.min(...item.data.map(price => price.value))} />) :
+                                                        // high={Math.max(...item.data.map(price => price))}
+                                                        // low={Math.min(...item.data.map(price => price))} />) :
 
                                                 <View style={{justifyContent: "center", alignItems: "center"}}>
 
