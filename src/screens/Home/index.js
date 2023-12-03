@@ -82,7 +82,7 @@ export default function Home() {
 
     <SafeAreaView style={styles.container}>
 
-      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
 
           <LinearGradient colors={[constants.primary, constants.secondary]} 
                           style={styles.gradient}

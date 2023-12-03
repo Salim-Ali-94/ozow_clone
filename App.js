@@ -173,10 +173,11 @@ export default function App() {
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
                                                                                                                         setScreen(previous);
+                                                                                                                        ozow && setOzow(false);
                                                                                                                         navigation.navigate(previous); }}>
 
                                                                                                 <Image source={require("./src/assets/icons/left.png")}
-                                                                                                      style={styles.backIcon} />
+                                                                                                       style={styles.backIcon} />
 
                                                                                             </Pressable>
 

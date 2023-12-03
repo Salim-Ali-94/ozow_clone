@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, StatusBar, Pressable, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useContext, useState } from "react";
+import LottieView from "lottie-react-native";
+import { useEffect, useContext, useState } from "react";
 import { restClient } from "@polygon.io/client-js";
 import axios from "axios";
 import * as simple_icons from "simple-icons";
@@ -18,115 +19,48 @@ export default function StockMarket() {
     const polygon = restClient(POLYGON_KEY);
     const { user } = useContext(screenContext)
     const [searchQuery, setSearchQuery] = useState("");
-    // const [filteredData, setFilteredData] = useState([{company: "tEslA", ticker: "TSLA",
-    //                                                    data: [{value: 15}, {value: 30}, {value: 26}, {value: 40},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 104},{value: 85},{value: 10},{value: 18},{value: 58},{value: 56},{value: 78},{value: 74},{value: 13},{value: 98}]}]);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredData, setFilteredData] = useState(user.portfolio);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+
+        if (loading) {
+
+            setLoading(false);
+
+        }
+
+    }, [filteredData]);
 
     const queryStock = async () => {
 
-        console.log("searching...");
-        console.log(searchQuery);
-
         for (const icon in simple_icons) {
-
-            console.log("checking -->", icon);
 
             if (simple_icons[icon].title.toLowerCase().includes(searchQuery.toLowerCase())) {
 
-                // var array = [];
-                console.log(icon);
                 const logo = simple_icons[icon];
-                console.log(`Icon Name: ${logo.title}, SVG: ${logo.svg}`);
-                // break;
-
-
-
-
-
                 const response = await axios.get(NINJA_API_ENDPOINT + encodeURIComponent(logo.title),
-                                                 { headers: { "X-Api-Key": NINJA_API_KEY } })
-                                            
-                                            // .then(result => {
-                                                
-                                            //     if (result.status === 200) {
-                                                
-                                            //         console.log(result.data);
-                                                
-                                            //     } else {
-                                            
-                                            //         console.log(`Error: ${result.status}`, result.data);
-                                                
-                                            //     }})
+                                                 { headers: { "X-Api-Key": NINJA_API_KEY } });
 
-                                            // .catch(error => {
+                const today = new Date();
+                const previousWorkingDay = utility.previousWorkingDay(today);
 
-                                            //     console.error("Error:", error.message);
+                polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", previousWorkingDay, previousWorkingDay).then((data) => {
 
-                                            // });
-
-
-                console.log("data");
-                console.log(response.data);
-                // console.log(response.data.ticker);
-
-                
-
-                // polygon.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
-                polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
-                    console.log(data);
-
-                    // for (price in data.results) {
-
-
-
-                    // }
-
-
-                    console.log(data.results[0])
-                    console.log(data.results[0].c)
                     var array = data.results.map(element => ({ value: element.c }));
-                    console.log("array");
-                    console.log(array);
                     const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
-                    console.log("svg");
-                    console.log(svg);
-    
-    
-    
-    
-    
-    
+
                     setFilteredData([{ logo: svg,
                                        ticker: response.data[0].ticker,
                                        data: array }]);
-    
-                }).catch(e => {
-                    console.error("An error happened:", e);
+
+                }).catch(error => {
+
+                    console.error("An error occured:", error);
+
                 });
 
-
-                // for price in 
-
-
-                // const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
-                // console.log("svg");
-                // console.log(svg);
-
-
-
-
-
-
-                // setFilteredData([{ logo: svg,
-                //                    ticker: response.data[0].ticker,
-                //                    data: [] }]);
-
-                
-
-
                 break;
-
-
 
             }
 
@@ -138,10 +72,8 @@ export default function StockMarket() {
 
         <SafeAreaView style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+            <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
   
-            {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
-
             <LinearGradient colors={[constants.primary, constants.secondary]} 
                             style={styles.gradient}
                             start={{ x: 0, y: 0.5 }}
@@ -151,33 +83,28 @@ export default function StockMarket() {
 
             </LinearGradient>
 
-            <View style={{ marginTop: 30, marginBottom: 10 }}>
+            <View style={styles.headingSection}>
 
-                <View style={{flexDirection: "row"}}>
+                <View style={styles.heading}>
 
-                    <Text style={[styles.sectionText, {paddingBottom: 20}]}>Own shares in top companies<Image source={require("../../assets/icons/hot.png")} style={{width: 40, height: 40}} /></Text>
+                    <Text style={[styles.sectionText, { paddingBottom: 20 }]}>Own shares in top companies<Image source={require("../../assets/icons/hot.png")}
+                                                                                                                style={styles.fireIcon} /></Text>
 
-                    {/* <Image source={require("../../assets/icons/hot.png")}
-                           style={{ width: 50, height: 50}} /> */}
-                
                 </View>
 
                 <View style={[styles.centerAlign, { flexDirection: "row", justifyContent: "center" }]}>
 
                     <SearchInput placeholder={"Search for stocks"}
-                                //  onChangeText={searchAction}
-                                onChangeText={(value) => utility.searchFilter([], value, setFilteredData, setSearchQuery)}
-                                border
-                                value={searchQuery}
-                                key={"refer_search"} />
+                                 onChangeText={(value) => utility.searchFilter(user.portfolio, value, setFilteredData, setSearchQuery)}
+                                 border
+                                 value={searchQuery}
+                                 key={"refer_search"} />
 
-                    <Pressable style={{ borderRadius: 10, backgroundColor: constants.secondary, marginLeft: 5, width: "20%", height: 53.5, justifyContent: "center", alignItems: "center" }}
-                                // onPress={() => console.log("search")}>
-                                onPress={() => queryStock()}>
+                    <Pressable style={styles.searchBox}
+                               onPress={async () => { setLoading(true); await queryStock(); }}>
 
-                        {/* <Text>Submit</Text> */}
                         <Image source={require("../../assets/icons/search.png")}
-                                    style={{ width: 20, height: 20, tintColor: "#fff" }} />
+                               style={styles.searchIcon} />
 
                     </Pressable>
 
@@ -189,35 +116,31 @@ export default function StockMarket() {
 
                 { (filteredData.length > 0) && <Text style={styles.sectionText}>Results</Text> }
 
-                <View style={{alignItems: "center"}}>
+                <View style={styles.resultsSection}>
 
-                    {/* <EquityCard data={filteredData[0].data}
-                                company={filteredData[0].company}
-                                ticker={filteredData[0].ticker}
-                                price={filteredData[0].data[filteredData[0].data.length - 1].value}
-                                high={Math.max(...filteredData[0].data.map(price => price.value))}
-                                low={Math.min(...filteredData[0].data.map(price => price.value))} /> */}
+                    { loading ? <View style={{ alignItems: "center", justifyContent: "center" }}>
 
-                    { (filteredData.length > 0) ? filteredData.map(item => <EquityCard data={item.data}
-                                                           logo={item.logo}
-                                                           //    company={item.company}
-                                                           ticker={item.ticker}
-                                                           key={item.ticker}
-                                                           price={item.data[item.data.length - 1].value}
-                                                        //    price={item.data[item.data.length - 1]}
-                                                        //    gap={true}
-                                                           high={Math.max(...item.data.map(price => price.value))}
-                                                           low={Math.min(...item.data.map(price => price.value))} />) :
-                                                        // high={Math.max(...item.data.map(price => price))}
-                                                        // low={Math.min(...item.data.map(price => price))} />) :
+                                    <LottieView source={require("../../assets/animations/liquid.json")}
+                                                style={styles.loader} autoPlay loop />
 
-                                                <View style={{justifyContent: "center", alignItems: "center"}}>
+                                </View> :
 
-                                                <Image source={require("../../assets/icons/empty.png")}
-                                                       style={{ width: 160, height: 160 }} />
+                                (filteredData.length > 0) ? filteredData.map(item => <EquityCard data={item.data}
+                                                                    logo={item.logo}
+                                                                    ticker={item.ticker}
+                                                                    key={item.ticker}
+                                                                    price={item.data[item.data.length - 1].value}
+                                                                    high={Math.max(...item.data.map(price => price.value))}
+                                                                    low={Math.min(...item.data.map(price => price.value))} />) :
 
-                                                       <Text style={{fontFamily: "poppins_bold", color: "grey", fontSize: 18}}>No stocks match your query</Text>
-                                                </View> }
+                                <View style={styles.emptySection}>
+
+                                    <Image source={require("../../assets/icons/empty.png")}
+                                           style={styles.emptyIcon} />
+
+                                    <Text style={styles.emptyText}>No stocks match your query</Text>
+
+                                </View> }
 
 
                 </View>

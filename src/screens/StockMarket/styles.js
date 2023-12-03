@@ -10,15 +10,67 @@ export const styles = StyleSheet.create({
         flex: 1
     },
 
+    headingSection: {
+        
+        marginTop: 30,
+        marginBottom: 10
+    },
+
+    heading: {
+        
+        flexDirection: "row"
+    },
+
     header: {
 
         marginTop: 30
     },
 
-    invite: {
+    fireIcon: {
+        
+        width: 40,
+        height: 40
+    },
 
-        marginLeft: "5%",
-        marginTop: 20
+    searchBox: {
+        
+        borderRadius: 10,
+        backgroundColor: constants.secondary,
+        marginLeft: 5,
+        width: "20%",
+        height: 53.5,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
+    searchIcon: {
+        
+        width: 20,
+        height: 20,
+        tintColor: "#fff"
+    },
+
+    resultsSection: {
+        
+        alignItems: "center"
+    },
+
+    loader: {
+        
+        width: 240,
+        height: 240
+    },
+
+    emptySection: {
+        
+        justifyContent: "center",
+        alignItems: "center"
+    },
+
+    emptyIcon: {
+        
+        width: 160,
+        height: 160
     },
 
     sectionHeading: {
@@ -26,15 +78,6 @@ export const styles = StyleSheet.create({
         color: "#000",
         fontFamily: "poppins_semi_bold",
         fontSize: 16
-    },
-
-    contactsTable: {
-
-        width: "90%",
-        backgroundColor: "#ffffff",
-        borderRadius: 20,
-        padding: 20,
-        height: 300
     },
 
     section: {
@@ -57,9 +100,11 @@ export const styles = StyleSheet.create({
         marginLeft: "5%"
     },
 
-    horizontalSection: {
-
-        marginTop: 20
+    emptyText: {
+        
+        fontFamily: "poppins_bold",
+        color: "grey",
+        fontSize: 18
     }
 
 });

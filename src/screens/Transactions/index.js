@@ -20,7 +20,7 @@ export default function Transactions() {
 
         <SafeAreaView style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+            <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
 
                 {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
 

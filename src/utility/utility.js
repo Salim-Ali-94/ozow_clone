@@ -49,7 +49,32 @@ const uuid = (length) => {
     return uuid;
 
 };
-  
+
+const formatDate = (date) => {
+
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+
+}
+
+const previousWorkingDay = (date) => {
+
+    const target = new Date(date);
+    const day = target.getDay();
+    const weeknd_flag = (day === 0 || day === 1);
+
+    if (weeknd_flag) {
+
+        target.setDate(target.getDate() - 1);
+
+    }
+
+    target.setDate(target.getDate() - 1);
+    return formatDate(target);
+
+}
 
 
-export { dropShadow, searchFilter, uuid };
+export { dropShadow, searchFilter, uuid, previousWorkingDay };
