@@ -1,5 +1,6 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList, Image } from "react-native";
+import { View, Text, SafeAreaView, StatusBar, FlatList } from "react-native";
 import { useState } from "react";
+import LinearGradient from "react-native-linear-gradient";
 import SearchInput from "../../components/SearchInput";
 import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
@@ -28,7 +29,16 @@ export default function Referrals() {
 
       {/* <ScrollView showsVerticalScrollIndicator={false} bounces={true}> */}
 
-        <StatusBar translucent={true} backgroundColor={"transparent"} />
+        {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+        <LinearGradient colors={[constants.primary, constants.secondary]} 
+                        style={styles.gradient}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}>
+
+          <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+        </LinearGradient >
 
         <View style={styles.header}>
 

@@ -1,4 +1,5 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
@@ -22,7 +23,16 @@ export default function Pocket() {
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
-          <StatusBar translucent={true} backgroundColor={"transparent"} />
+          {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+          <LinearGradient colors={[constants.primary, constants.secondary]} 
+                          style={styles.gradient}
+                          start={{ x: 0, y: 0.5 }}
+                          end={{ x: 1, y: 0.5 }}>
+
+            <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+          </LinearGradient >
 
           <View style={styles.cardHolder}>
 

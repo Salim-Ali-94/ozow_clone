@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
@@ -27,7 +28,16 @@ export default function TopUp() {
 
         <SafeAreaView style={styles.container}>
 
-            <StatusBar translucent={true} backgroundColor={"transparent"} />
+            {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+            <LinearGradient colors={[constants.primary, constants.secondary]} 
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}>
+
+                <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+            </LinearGradient >
 
             <View style={styles.inputHolder}>
 

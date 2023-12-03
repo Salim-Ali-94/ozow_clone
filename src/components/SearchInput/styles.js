@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         borderWidth: 1,
-        borderColor: "grey",
+        // borderColor: "grey",
+        // borderColor: "deeppink",
         borderRadius: 10,
         width: "90%"
     },

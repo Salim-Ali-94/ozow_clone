@@ -3,15 +3,16 @@ import { LineChart } from "react-native-gifted-charts";
 import * as constants from "../../utility/constants";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgUri } from "react-native-svg";
-import { styles } from "./styles";
+// import { styles } from "./styles";
+import styles from "./styles";
 
 
-export default function EquityCard({ data, company, ticker, price, high, low }) {
+export default function EquityCard({ data, company, ticker, price, high, low, gap }) {
 
     return (
 
         <LinearGradient colors={[constants.secondary, constants.primary]} 
-                        style={styles.card}
+                        style={[styles.card, styles.boxShadow, gap && { marginBottom: 10 }]}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}>
 
@@ -58,9 +59,11 @@ export default function EquityCard({ data, company, ticker, price, high, low }) 
                        height={80}
                        thickness1={1.5}
                        color={"deeppink"}
-                       startFillColor={constants.secondary}
+                    //    startFillColor={constants.secondary}
+                       startFillColor={"deeppink"}
                        startOpacity={0.5}
-                       endFillColor={constants.primary}
+                    //    endFillColor={constants.primary}
+                       endFillColor={constants.secondary}
                        endOpacity={0} />
 
         </LinearGradient>

@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
@@ -20,7 +21,16 @@ export default function Services() {
 
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
 
-        <StatusBar translucent={true} backgroundColor={"transparent"} />
+        {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+        <LinearGradient colors={[constants.primary, constants.secondary]} 
+                        style={styles.gradient}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}>
+
+          <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+        </LinearGradient >
 
         <GradientHeader heading={"What would you like to do?"} />
 

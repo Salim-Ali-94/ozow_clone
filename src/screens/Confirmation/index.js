@@ -1,4 +1,5 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView, StatusBar } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { useEffect, useContext, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
@@ -42,15 +43,28 @@ export default function Confirmation() {
     }, []);
 
     return (
-    
-        <View style={styles.container}>
 
-            <Text style={styles.heading}>{text}</Text>
- 
-            <LottieView source={animation} style={styles.loader} autoPlay loop />
+        <SafeAreaView>
 
-        </View>
+            <LinearGradient colors={[constants.primary, constants.secondary]} 
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}>
+
+                <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+            </LinearGradient >
+
+            <View style={styles.container}>
+
+                <Text style={styles.heading}>{text}</Text>
     
+                <LottieView source={animation} style={styles.loader} autoPlay loop />
+
+            </View>
+
+        </SafeAreaView>   
+
     );
 
 }
