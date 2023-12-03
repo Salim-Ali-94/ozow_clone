@@ -1,17 +1,21 @@
 import { View, Text, SafeAreaView, StatusBar, FlatList, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import EquityCard from "../../components/EquityCard";
 import SearchInput from "../../components/SearchInput";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function StockMarket() {
 
+    const { user } = useContext(screenContext)
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState([{company: "tEslA", ticker: "TSLA", data: [{value: 15}, {value: 30}, {value: 26}, {value: 40},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 104},{value: 85},{value: 10},{value: 18},{value: 58},{value: 56},{value: 78},{value: 74},{value: 13},{value: 98}]}]);
+    // const [filteredData, setFilteredData] = useState([{company: "tEslA", ticker: "TSLA",
+    //                                                    data: [{value: 15}, {value: 30}, {value: 26}, {value: 40},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 104},{value: 85},{value: 10},{value: 18},{value: 58},{value: 56},{value: 78},{value: 74},{value: 13},{value: 98}]}]);
+    const [filteredData, setFilteredData] = useState([]);
   
     return (
 
@@ -56,7 +60,7 @@ export default function StockMarket() {
 
             <View>
 
-                <Text style={styles.sectionText}>Results</Text>
+                { (filteredData.length > 0) && <Text style={styles.sectionText}>Results</Text> }
 
                 <View style={{alignItems: "center"}}>
 
@@ -67,20 +71,29 @@ export default function StockMarket() {
                                 high={Math.max(...filteredData[0].data.map(price => price.value))}
                                 low={Math.min(...filteredData[0].data.map(price => price.value))} /> */}
 
-                    { filteredData.map(item => <EquityCard data={item.data}
-                                company={item.company}
-                                ticker={item.ticker}
-                                key={item.company}
-                                price={item.data[item.data.length - 1].value}
-                                high={Math.max(...item.data.map(price => price.value))}
-                                low={Math.min(...item.data.map(price => price.value))} />) }
+                    { (filteredData.length > 0) ? filteredData.map(item => <EquityCard data={item.data}
+                                                           company={item.company}
+                                                           ticker={item.ticker}
+                                                           key={item.company}
+                                                           price={item.data[item.data.length - 1].value}
+                                                        //    gap={true}
+                                                           high={Math.max(...item.data.map(price => price.value))}
+                                                           low={Math.min(...item.data.map(price => price.value))} />) :
+
+                                                <View style={{justifyContent: "center", alignItems: "center"}}>
+
+                                                <Image source={require("../../assets/icons/empty.png")}
+                                                       style={{ width: 160, height: 160 }} />
+
+                                                       <Text style={{fontFamily: "poppins_bold", color: "grey", fontSize: 18}}>No stocks match your query</Text>
+                                                </View> }
 
 
                 </View>
 
             </View>
 
-            <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text>
+            { (user.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
 
             </ScrollView>
 

@@ -84,6 +84,7 @@ export const user = { name: "Salim",
                       // id: utility.uuid(20),
                       balance: 123456789.87,
                       transactions: data,
+                      portfolio: [],
                       contacts: contacts };
 
 export const referralFilters = ["Non-Ozow.ME users",

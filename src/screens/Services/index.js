@@ -45,7 +45,8 @@ export default function Services() {
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                                     setPrevious(screen);
                                                                                                                     setScreen(item.route);
-                                                                                                                    setOzow(!ozow)
+                                                                                                                    setOzow(!ozow);
+                                                                                                                    // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } }}
                                                                              category={item.category}
                                                                              key={"service_" + item.id} />,
@@ -65,6 +66,7 @@ export default function Services() {
                                                                                                                     setPrevious(screen);
                                                                                                                     setScreen(item.route);
                                                                                                                     setOzow(!ozow);
+                                                                                                                    // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } }}
                                                                              key={"service_" + item.id} />,
 
@@ -90,7 +92,8 @@ export default function Services() {
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                              setPrevious(screen);
                                                                                                              setScreen(item.route);
-                                                                                                             setOzow(!ozow);
+                                                                                                              setOzow(!ozow);
+                                                                                                            //  setOzow(false);
                                                                                                              navigation.navigate(item.route); } }}
                                                                       gap={(index < constants.details.length - 1) ? 10 : 0}
                                                                       key={"service_" + item.id} />) }
