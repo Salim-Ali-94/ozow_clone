@@ -15,6 +15,8 @@ import BuyData from "./src/screens/BuyData";
 import BuyElectricity from "./src/screens/BuyElectricity";
 import Withdraw from "./src/screens/Withdraw";
 import StockMarket from "./src/screens/StockMarket";
+import SendMoney from "./src/screens/SendMoney";
+import ReceiveMoney from "./src/screens/ReceiveMoney";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
@@ -120,6 +122,7 @@ export default function App() {
                                   setPrevious(screen);
                                   setScreen(routeName);
                                   navigate(routeName); } }
+
                  style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
@@ -152,12 +155,16 @@ export default function App() {
                                                                  (screen === "BuyElectricity") ? "Buy Electricity" :
                                                                  (screen === "Withdraw") ? "Withdraw Cash" :
                                                                  (screen === "StockMarket") ? "Stock Market" :
+                                                                 (screen === "SendMoney") ? "Send Money" :
+                                                                 (screen === "ReceiveMoney") ? "Receive Money" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
                                                                  ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
+                                                                 ((screen === "Confirmation") && (previous === "SendMoney")) ? "Send Money" :
+                                                                 ((screen === "Confirmation") && (previous === "ReceiveMoney")) ? "Receive Money" :
                                                                  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -170,6 +177,8 @@ export default function App() {
                                                               (screen === "BuyElectricity") ||
                                                               (screen === "Withdraw") ||
                                                               (screen === "StockMarket") ||
+                                                              (screen === "SendMoney") ||
+                                                              (screen === "ReceiveMoney") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
@@ -265,6 +274,12 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="StockMarket"
                                     component={() => <StockMarket key={"stock_market_screen"} />} />
+
+            <CurvedBottomBar.Screen name="SendMoney"
+                                    component={() => <SendMoney key={"send_money_screen"} />} />
+
+            <CurvedBottomBar.Screen name="ReceiveMoney"
+                                    component={() => <ReceiveMoney key={"accept_money_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 

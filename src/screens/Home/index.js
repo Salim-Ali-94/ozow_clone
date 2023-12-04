@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
+import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -6,7 +6,7 @@ import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
-import * as utility from "../../utility/utility";
+// import * as utility from "../../utility/utility";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
@@ -120,7 +120,7 @@ export default function Home() {
                                                                     pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                            setPrevious(screen);
                                                                                                            setScreen(item.route);
-                                                                                                           navigation.navigate(item.route); } }}
+                                                                                                           navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}
                                                                     key={"home_" + item.id} />)} />
