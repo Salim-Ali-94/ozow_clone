@@ -1,4 +1,5 @@
 import { SafeAreaView, ScrollView, StatusBar, View, Text, FlatList } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import EmptyTransactions from "../../components/EmptyTransactions";
@@ -19,9 +20,18 @@ export default function Transactions() {
 
         <SafeAreaView style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+            <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
 
-            <StatusBar translucent={true} backgroundColor={"transparent"} />
+                {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+                <LinearGradient colors={[constants.primary, constants.secondary]} 
+                                style={styles.gradient}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}>
+
+                    <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+                </LinearGradient >
 
                 <View style={styles.search}>
 

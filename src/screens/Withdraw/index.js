@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
@@ -15,7 +16,7 @@ import { DB_ENDPOINT } from "@env";
 export default function Withdraw() {
 
     const navigation = useNavigation();
-    const { user, setUser, setPrevious, setScreen, screen } = useContext(screenContext);
+    const { user, setUser, setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -27,7 +28,16 @@ export default function Withdraw() {
 
         <SafeAreaView style={styles.container}>
 
-            <StatusBar translucent={true} backgroundColor={"transparent"} />
+            {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+            <LinearGradient colors={[constants.primary, constants.secondary]} 
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}>
+
+                <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+            </LinearGradient >
 
             <View style={[styles.bankSection, { marginTop: 30 }]}>
 
@@ -78,6 +88,7 @@ export default function Withdraw() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && password && bank ? true : false}
                                 pressAction={() => { 
                                                      //  setBalance(balance - parseFloat(amount)); 
+                                                     setOzow(false);
                                                      setUser({...user, balance: user.balance - parseFloat(amount)});
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
                                                      setPrevious(screen);

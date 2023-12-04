@@ -1,5 +1,6 @@
 import { View, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
@@ -19,9 +20,18 @@ export default function Buy() {
 
     <SafeAreaView style={styles.container}>
 
-      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
 
-        <StatusBar translucent={true} backgroundColor={"transparent"} />
+        {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+        <LinearGradient colors={[constants.primary, constants.secondary]} 
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}>
+
+          <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+        </LinearGradient >
 
         <GradientHeader heading={"What would you like to buy?"} />
 
@@ -43,6 +53,10 @@ export default function Buy() {
                 <DetailsCard category={"Trade stocks"}
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
+                             pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
+                                                  setPrevious(screen);
+                                                  setScreen("StockMarket");
+                                                  navigation.navigate("StockMarket"); }}
                              key={"buy_stocks_details_card"} />
 
                 <SafetyTag />

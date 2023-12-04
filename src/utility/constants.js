@@ -84,7 +84,20 @@ export const user = { name: "Salim",
                       // id: utility.uuid(20),
                       balance: 123456789.87,
                       transactions: data,
+                      portfolio: [],
                       contacts: contacts };
+
+export const whiteList = { 
+                          //  twitter: [{ ticker: "TWTR" }],
+                           twitter: {data: [{ ticker: "X", company: "twitter" }]},
+                          //  x: [{ ticker: "TWTR" }],
+                           x: {data: [{ ticker: "X", company: "twitter" }]},
+                           alphabet: {data: [{ ticker: "GOOG", company: "google" }]},
+                           qualcom: {data: [{ ticker: "QCOM", company: "qualcom" }]},
+                           lenovo: {data: [{ ticker: "LNVGY", company: "lenovo" }]},
+                           starbucks: {data: [{ ticker: "SBUX", company: "starbucks" }]},
+                           facebook: {data: [{ ticker: "META", company: "facebook" }]},
+                           meta: {data: [{ ticker: "META", company: "facebook" }]},  };
 
 export const referralFilters = ["Non-Ozow.ME users",
                                 "Invite pending",
@@ -135,7 +148,8 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
 
                         { icon: require("../assets/icons/trading.png"),
                           category: "Trade Stocks",
-                          id: "trade_stocks_i8j9" }];
+                          id: "trade_stocks_i8j9",
+                          route: "StockMarket" }];
 
 export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
@@ -156,7 +170,8 @@ export const icons = [{ icon: require("../assets/icons/voucher.png"),
                        route: "TopUp" },
 
                       { icon: require("../assets/icons/trading.png"),
-                        category: "Buy stocks",
+                        category: "Trade stocks",
+                        route: "StockMarket",
                         id: "stock_q16r17" },
                       
                       { icon: require("../assets/icons/wifi.png"),

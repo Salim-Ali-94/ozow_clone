@@ -1,5 +1,6 @@
 import { View, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
@@ -13,7 +14,7 @@ import { DB_ENDPOINT } from "@env";
 export default function BuyElectricity() {
 
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
@@ -23,7 +24,16 @@ export default function BuyElectricity() {
 
         <SafeAreaView style={styles.container}>
 
-            <StatusBar translucent={true} backgroundColor={"transparent"} />
+            {/* <StatusBar translucent={true} backgroundColor={"transparent"} /> */}
+
+            <LinearGradient colors={[constants.primary, constants.secondary]} 
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}>
+
+                <StatusBar translucent={true} backgroundColor={"transparent"} />
+
+            </LinearGradient >
 
             <View style={styles.inputHolder}>
 
@@ -52,7 +62,8 @@ export default function BuyElectricity() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
                                 pressAction={() => { 
                                                     //  setBalance(balance - parseFloat(amount) / 10);
-                                                     setUser({...user, balance: user.balance - parseFloat(amount) / 10});
+                                                    setOzow(false);
+                                                    setUser({...user, balance: user.balance - parseFloat(amount) / 10});
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");

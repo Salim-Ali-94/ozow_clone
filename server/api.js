@@ -46,4 +46,12 @@ app.patch("/registerTransaction", async (request, response) => {
 
 });
 
+app.patch("/registerStock", async (request, response) => {
+
+    const { id, stock } = request.body;
+    const doc = db.collection("users").doc(id);
+    await doc.update({ portfolio: FieldValue.arrayUnion(stock) });
+
+});
+
 app.listen(port, () => console.log(`Server running on port: ${port}`))

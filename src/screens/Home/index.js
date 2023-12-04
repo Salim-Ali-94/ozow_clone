@@ -17,7 +17,6 @@ export default function Home() {
 
   const { screen, setScreen, setPrevious, user } = useContext(screenContext)
   const navigation = useNavigation();
-
   
   const getData = async () => {
 
@@ -83,7 +82,7 @@ export default function Home() {
 
     <SafeAreaView style={styles.container}>
 
-      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
 
           <LinearGradient colors={[constants.primary, constants.secondary]} 
                           style={styles.gradient}
@@ -107,7 +106,7 @@ export default function Home() {
             </View>
 
           </View>
-
+          
           <View style={styles.section}>
 
             <Text style={[styles.sectionText, { marginBottom: 20 }]}>Quick actions</Text>

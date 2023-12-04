@@ -12,12 +12,13 @@ export const styles = StyleSheet.create({
 
     heading: {
         
+        // width: "90%",
         fontFamily: "poppins_bold",
         color: constants.secondary,
         fontSize: 32,
         // marginBottom: 30,
         marginTop: 50,
-        height: 100
+        height: 120
     },
 
     loader: {

@@ -14,9 +14,12 @@ import BuyAirtime from "./src/screens/BuyAirtime";
 import BuyData from "./src/screens/BuyData";
 import BuyElectricity from "./src/screens/BuyElectricity";
 import Withdraw from "./src/screens/Withdraw";
+import StockMarket from "./src/screens/StockMarket";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
+// const { restClient } = require("@polygon.io/client-js");
+// import { restClient } from "@polygon.io/client-js";
 
 
 export default function App() {
@@ -24,7 +27,6 @@ export default function App() {
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
-  // const [balance, setBalance] = useState(constants.user.balance);
   const [user, setUser] = useState(constants.user);
   // const [user, setUser] = useState({});
 
@@ -40,12 +42,19 @@ export default function App() {
     // await
     user.transactions.reverse();
 
+    // const rest = restClient("t_tMM_xfb8FIykLfdMDpAmKGn8xCThNB");
+
+    // rest.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
+    //   console.log(data);
+    // }).catch(e => {
+    //   console.error("An error happened:", e);
+    // });
+
   }
 
   useEffect(() => {
 
     fetchUser();
-    // user.transactions = user.transactions.reverse();
 
   }, []);
 
@@ -142,11 +151,13 @@ export default function App() {
                                                                  (screen === "BuyData") ? "Buy Data" :
                                                                  (screen === "BuyElectricity") ? "Buy Electricity" :
                                                                  (screen === "Withdraw") ? "Withdraw Cash" :
+                                                                 (screen === "StockMarket") ? "Stock Market" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
+                                                                 ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
                                                                  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -158,14 +169,16 @@ export default function App() {
                                                               (screen === "BuyData") ||
                                                               (screen === "BuyElectricity") ||
                                                               (screen === "Withdraw") ||
+                                                              (screen === "StockMarket") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { constants.tabBarRef?.current?.setVisible(true);
                                                                                                                         setPrevious(screen);
                                                                                                                         setScreen(previous);
+                                                                                                                        ozow && setOzow(false);
                                                                                                                         navigation.navigate(previous); }}>
 
                                                                                                 <Image source={require("./src/assets/icons/left.png")}
-                                                                                                      style={styles.backIcon} />
+                                                                                                       style={styles.backIcon} />
 
                                                                                             </Pressable>
 
@@ -249,6 +262,9 @@ export default function App() {
 
             <CurvedBottomBar.Screen name="Withdraw"
                                     component={() => <Withdraw key={"withdraw_screen"} />} />
+
+            <CurvedBottomBar.Screen name="StockMarket"
+                                    component={() => <StockMarket key={"stock_market_screen"} />} />
 
         </CurvedBottomBar.Navigator>
 
