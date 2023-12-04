@@ -14,7 +14,7 @@ import { DB_ENDPOINT } from "@env";
 export default function BuyElectricity() {
 
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
@@ -62,7 +62,8 @@ export default function BuyElectricity() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
                                 pressAction={() => { 
                                                     //  setBalance(balance - parseFloat(amount) / 10);
-                                                     setUser({...user, balance: user.balance - parseFloat(amount) / 10});
+                                                    setOzow(false);
+                                                    setUser({...user, balance: user.balance - parseFloat(amount) / 10});
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");

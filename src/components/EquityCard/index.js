@@ -1,22 +1,28 @@
-import { View, Pressable, Image, Text } from "react-native";
+import { View, Pressable, Text } from "react-native";
+import { useContext, useState } from "react";
 import { LineChart } from "react-native-gifted-charts";
 import * as constants from "../../utility/constants";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgUri } from "react-native-svg";
-// import { styles } from "./styles";
+import { screenContext } from "../../providers/screenContext";
+import PopUp from "../PopUp";
 import styles from "./styles";
 
 
 export default function EquityCard({ data, logo, ticker, price, high, low, gap }) {
 
+    const { user } = useContext(screenContext);
+    const [open, setOpen] = useState(false);
+    const [shares, setShares] = useState("");
+
     return (
 
         <LinearGradient colors={[constants.secondary, constants.primary]} 
-                        style={[styles.card, styles.boxShadow, gap && { marginBottom: 10 }]}
+                        style={[styles.card, styles.boxShadow, gap && { marginBottom: gap }]}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 1 }}>
 
-            <Pressable onPress={() => console.log("click")}>
+            <Pressable onPress={() => setOpen(true) }>
 
                 <View style={styles.detailsSection}>
 
@@ -51,20 +57,27 @@ export default function EquityCard({ data, logo, ticker, price, high, low, gap }
                        areaChart
                        showYAxisIndices={false}
                        hideYAxisText
-                    //    yAxisThickness={0}
-                    //    xAxisThickness={0}
                        hideDataPoints
                        hideAxesAndRules
                        data={data}
                        height={80}
                        thickness1={1.5}
                        color={"deeppink"}
-                    //    startFillColor={constants.secondary}
                        startFillColor={"deeppink"}
                        startOpacity={0.5}
-                    //    endFillColor={constants.primary}
                        endFillColor={constants.secondary}
                        endOpacity={0} />
+
+            <PopUp open={open}
+                   setOpen={setOpen}
+                   ticker={ticker}
+                   balance={user.balance}
+                   price={price}
+                   low={low}
+                   high={high}
+                   shares={shares}
+                   logo={logo}
+                   setShares={setShares} />
 
         </LinearGradient>
 

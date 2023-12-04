@@ -16,7 +16,7 @@ import { DB_ENDPOINT } from "@env";
 export default function TopUp() {
 
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -82,6 +82,7 @@ export default function TopUp() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
                                 pressAction={() => { 
                                                      //  setBalance(balance + parseFloat(amount));
+                                                     setOzow(false);
                                                      setUser({...user, balance: user.balance + parseFloat(amount)});
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)});
                                                      setPrevious(screen);

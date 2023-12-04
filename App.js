@@ -157,6 +157,7 @@ export default function App() {
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
+                                                                 ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
                                                                  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {

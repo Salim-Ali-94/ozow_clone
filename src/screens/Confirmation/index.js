@@ -39,7 +39,6 @@ export default function Confirmation() {
     
         return unsubscribe;
 
-    // }, [navigation, screen]);
     }, []);
 
     return (

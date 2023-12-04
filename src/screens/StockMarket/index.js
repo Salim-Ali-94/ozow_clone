@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StatusBar, Pressable, Image, ScrollView } from "react-native";
+import { FlatList, View, Text, SafeAreaView, StatusBar, Pressable, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import LottieView from "lottie-react-native";
 import { useEffect, useContext, useState } from "react";
@@ -7,6 +7,7 @@ import axios from "axios";
 import * as simple_icons from "simple-icons";
 import EquityCard from "../../components/EquityCard";
 import SearchInput from "../../components/SearchInput";
+import CompanyBox from "../../components/CompanyBox";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
@@ -17,10 +18,11 @@ import { POLYGON_KEY, NINJA_API_KEY, NINJA_API_ENDPOINT, LOGO_URL } from "@env";
 export default function StockMarket() {
 
     const polygon = restClient(POLYGON_KEY);
-    const { user } = useContext(screenContext)
+    const { user } = useContext(screenContext);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState(user.portfolio);
+    const [filteredData, setFilteredData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [exit, setExit] = useState(false);
 
     useEffect(() => {
 
@@ -30,41 +32,77 @@ export default function StockMarket() {
 
         }
 
-    }, [filteredData]);
+    }, [filteredData, exit]);
 
     const queryStock = async () => {
 
         for (const icon in simple_icons) {
 
-            if (simple_icons[icon].title.toLowerCase().includes(searchQuery.toLowerCase())) {
+            if (simple_icons[icon].hasOwnProperty("title")) {
 
-                const logo = simple_icons[icon];
-                const response = await axios.get(NINJA_API_ENDPOINT + encodeURIComponent(logo.title),
-                                                 { headers: { "X-Api-Key": NINJA_API_KEY } });
+                if (searchQuery.toLowerCase() === simple_icons[icon].title.toLowerCase()) {
 
-                const today = new Date();
-                const previousWorkingDay = utility.previousWorkingDay(today);
+                    const logo = simple_icons[icon];
 
-                polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", previousWorkingDay, previousWorkingDay).then((data) => {
+                    if (!constants.whiteList.hasOwnProperty(logo.title.toLowerCase())) {
 
-                    var array = data.results.map(element => ({ value: element.c }));
-                    const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
+                        var response = await axios.get(NINJA_API_ENDPOINT + encodeURIComponent(logo.title),
+                                                       { headers: { "X-Api-Key": NINJA_API_KEY } }).catch(error => console.log("error:", error));
 
-                    setFilteredData([{ logo: svg,
-                                       ticker: response.data[0].ticker,
-                                       data: array }]);
+                    } else {
 
-                }).catch(error => {
+                        var response = {data: []};
 
-                    console.error("An error occured:", error);
+                    }
 
-                });
+                    if ((response.data.length === 0) || (constants.whiteList.hasOwnProperty(logo.title.toLowerCase()))) {
 
-                break;
+                        if (constants.whiteList.hasOwnProperty(logo.title.toLowerCase())) {
+
+                            response = constants.whiteList[logo.title.toLowerCase()];
+    
+                        } else {
+
+                            setLoading(false);
+                            return;
+
+                        }
+
+                    }
+
+                    const today = new Date();
+                    const previousWorkingDay = utility.previousWorkingDay(today);
+    
+                    polygon.stocks.aggregates(response.data[0].ticker, 30, "minute", previousWorkingDay, previousWorkingDay).then((data) => {
+    
+                        var array = data.results.map(element => ({ value: element.c }));
+                        const svg = LOGO_URL + logo.title.toLowerCase() + ".svg";
+
+                        setFilteredData([{ logo: svg,
+                                           ticker: response.data[0].ticker,
+                                           data: array }]);
+
+                        return;
+
+                    }).catch(error => {
+
+                        console.error("An error occured:", error);
+
+                    });
+
+                    return;
+
+                }
 
             }
 
         }
+
+        setTimeout(() => {
+            
+            setExit(!exit);
+
+        }, 500);
 
     }
   
@@ -72,7 +110,9 @@ export default function StockMarket() {
 
         <SafeAreaView style={styles.container}>
 
-            <ScrollView showsVerticalScrollIndicator={false} bounces={true} keyboardShouldPersistTaps="handle">
+            <ScrollView showsVerticalScrollIndicator={false}
+                        bounces={true}
+                        keyboardShouldPersistTaps="handle">
   
             <LinearGradient colors={[constants.primary, constants.secondary]} 
                             style={styles.gradient}
@@ -95,7 +135,7 @@ export default function StockMarket() {
                 <View style={[styles.centerAlign, { flexDirection: "row", justifyContent: "center" }]}>
 
                     <SearchInput placeholder={"Search for stocks"}
-                                 onChangeText={(value) => utility.searchFilter(user.portfolio, value, setFilteredData, setSearchQuery)}
+                                 onChangeText={value => utility.searchFilter([], value, setFilteredData, setSearchQuery)}
                                  border
                                  value={searchQuery}
                                  key={"refer_search"} />
@@ -120,18 +160,18 @@ export default function StockMarket() {
 
                     { loading ? <View style={{ alignItems: "center", justifyContent: "center" }}>
 
-                                    <LottieView source={require("../../assets/animations/liquid.json")}
+                                    <LottieView source={require("../../assets/animations/waiting.json")}
                                                 style={styles.loader} autoPlay loop />
 
                                 </View> :
 
-                                (filteredData.length > 0) ? filteredData.map(item => <EquityCard data={item.data}
-                                                                    logo={item.logo}
-                                                                    ticker={item.ticker}
-                                                                    key={item.ticker}
-                                                                    price={item.data[item.data.length - 1].value}
-                                                                    high={Math.max(...item.data.map(price => price.value))}
-                                                                    low={Math.min(...item.data.map(price => price.value))} />) :
+                                ((filteredData.length > 0) && (filteredData[0].data.length > 0)) ? filteredData.map(item => <EquityCard data={item.data}
+                                                                                                                                        logo={item.logo}
+                                                                                                                                        ticker={(item.ticker === "X") ? "TWTR" : item.ticker}
+                                                                                                                                        key={item.ticker}
+                                                                                                                                        price={item.data[item.data.length - 1].value}
+                                                                                                                                        high={Math.max(...item.data.map(price => price.value))}
+                                                                                                                                        low={Math.min(...item.data.map(price => price.value))} />) :
 
                                 <View style={styles.emptySection}>
 
@@ -142,12 +182,24 @@ export default function StockMarket() {
 
                                 </View> }
 
-
                 </View>
 
             </View>
 
             { (user.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
+
+            { (user.portfolio.length > 0) && <FlatList horizontal={true}
+                                                       data={user.portfolio}
+                                                       showsHorizontalScrollIndicator={false}
+                                                       renderItem={({ item, index }) => (<CompanyBox ticker={item.ticker}
+                                                                                                     price={item.price}
+                                                                                                     high={item.high}
+                                                                                                     low={item.low}
+                                                                                                     stocks={item.shares}
+                                                                                                     logo={item.logo}
+                                                                                                     gap_right={(index === user.portfolio.length - 1) ? 20 : 10}
+                                                                                                     gap_left={(index === 0) && 20}
+                                                                                                     key={item.ticker} />)} /> }
 
             </ScrollView>
 

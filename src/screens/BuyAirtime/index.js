@@ -16,7 +16,7 @@ import { DB_ENDPOINT } from "@env";
 export default function BuyAirtime() {
 
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [network, setNetwork] = useState(constants.networks[0].value);
@@ -83,7 +83,8 @@ export default function BuyAirtime() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
                                 pressAction={() => { 
                                                     //  setBalance(balance - parseFloat(amount));
-                                                     setUser({...user, balance: user.balance - parseFloat(amount)});
+                                                    setOzow(false);
+                                                    setUser({...user, balance: user.balance - parseFloat(amount)});
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");

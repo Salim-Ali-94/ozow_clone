@@ -87,6 +87,18 @@ export const user = { name: "Salim",
                       portfolio: [],
                       contacts: contacts };
 
+export const whiteList = { 
+                          //  twitter: [{ ticker: "TWTR" }],
+                           twitter: {data: [{ ticker: "X", company: "twitter" }]},
+                          //  x: [{ ticker: "TWTR" }],
+                           x: {data: [{ ticker: "X", company: "twitter" }]},
+                           alphabet: {data: [{ ticker: "GOOG", company: "google" }]},
+                           qualcom: {data: [{ ticker: "QCOM", company: "qualcom" }]},
+                           lenovo: {data: [{ ticker: "LNVGY", company: "lenovo" }]},
+                           starbucks: {data: [{ ticker: "SBUX", company: "starbucks" }]},
+                           facebook: {data: [{ ticker: "META", company: "facebook" }]},
+                           meta: {data: [{ ticker: "META", company: "facebook" }]},  };
+
 export const referralFilters = ["Non-Ozow.ME users",
                                 "Invite pending",
                                 "Accepted my invite",
