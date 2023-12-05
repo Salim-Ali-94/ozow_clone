@@ -49,11 +49,11 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                 if (user.portfolio.filter(item => item.ticker === ticker).length === 0) {
 
                                                                     setUser({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: [{ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }, ...user.portfolio] });
-                                                                    axios.patch(DB_ENDPOINT + "registerStock", { id: "fnA3ik1q8PHN8daPjqQw", stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
+                                                                    axios.patch(DB_ENDPOINT + "registerStock", { id: user.id, stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
 
                                                                 } else {
 
-                                                                    setUser({...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: user.portfolio.map(item => { if (item.ticker === ticker) {
+                                                                    setUser({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: user.portfolio.map(item => { if (item.ticker === ticker) {
 
                                                                                                 return {
 
@@ -63,6 +63,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                                             }
 
                                                                                             return item; })});
+
+                                                                    axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
 
                                                                 }
 
@@ -83,6 +85,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                 setUser({ ...user,
                                                                           balance: user.balance + parseFloat(shares)*parseFloat(user.portfolio.filter(element => element.ticker === ticker)[0].price), 
                                                                           portfolio: user.portfolio.filter(item => item.ticker !== ticker) });
+
+                                                                axios.patch(DB_ENDPOINT + "removeStock", { id: user.id, ticker: ticker });
                         
                                                             } else {
                         
@@ -91,8 +95,10 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                           portfolio: user.portfolio.map(item => { if (item.ticker === ticker) { return { ...item,
                                                                                                                                                          shares: item.shares - parseFloat(shares) }; }
 
-                                                                                                                  return item; })});
+                                                                                                                  return item; }) });
                         
+                                                                axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
+
                                                             }
                         
                                                             setOpen(false);

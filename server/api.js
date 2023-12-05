@@ -38,6 +38,30 @@ app.patch("/updateBalance", async (request, response) => {
 
 });
 
+app.patch("/updateShares", async (request, response) => {
+
+    const { id, ticker, shares } = request.body;
+    const doc = db.collection("users").doc(id);
+    const user = await doc.get();
+
+    const stocks = user.data().portfolio.map(stock => {
+
+        if (stock.ticker === ticker) {
+
+            return { ...stock, shares: shares };
+
+        } else {
+
+            return stock;
+
+        }
+
+    });
+
+    await doc.update({ portfolio: stocks });
+
+});
+
 app.patch("/registerTransaction", async (request, response) => {
 
     const { id, transaction } = request.body;
@@ -51,6 +75,23 @@ app.patch("/registerStock", async (request, response) => {
     const { id, stock } = request.body;
     const doc = db.collection("users").doc(id);
     await doc.update({ portfolio: FieldValue.arrayUnion(stock) });
+
+});
+
+// app.patch("/removeStock", async (request, response) => {
+
+//     const { id, ticker } = request.body;
+//     const doc = db.collection("users").doc(id);
+//     await doc.update({ portfolio: FieldValue.arrayRemove({ ticker: ticker }) });
+
+// });
+app.patch("/removeStock", async (request, response) => {
+
+    const { id, ticker } = request.body;
+    const doc = db.collection("users").doc(id);
+    const user = await doc.get();
+    const stocks = user.data().portfolio.filter(stock => stock.ticker !== ticker);
+    await doc.update({ portfolio: stocks });
 
 });
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Animated, Pressable, View } from "react-native";
+import { Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import { useState, useEffect } from "react";
@@ -15,11 +15,12 @@ import BuyData from "./src/screens/BuyData";
 import BuyElectricity from "./src/screens/BuyElectricity";
 import Withdraw from "./src/screens/Withdraw";
 import StockMarket from "./src/screens/StockMarket";
+import SendMoney from "./src/screens/SendMoney";
+import ReceiveMoney from "./src/screens/ReceiveMoney";
 import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
-// const { restClient } = require("@polygon.io/client-js");
-// import { restClient } from "@polygon.io/client-js";
+import { styles } from "./styles";
 
 
 export default function App() {
@@ -120,6 +121,7 @@ export default function App() {
                                   setPrevious(screen);
                                   setScreen(routeName);
                                   navigate(routeName); } }
+
                  style={styles.tabItem}>
 
         {_renderIcon(routeName, selectedTab)}
@@ -152,12 +154,16 @@ export default function App() {
                                                                  (screen === "BuyElectricity") ? "Buy Electricity" :
                                                                  (screen === "Withdraw") ? "Withdraw Cash" :
                                                                  (screen === "StockMarket") ? "Stock Market" :
+                                                                 (screen === "SendMoney") ? "Send Money" :
+                                                                 (screen === "ReceiveMoney") ? "Receive Money" :
                                                                  ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
                                                                  ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                  ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
                                                                  ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
                                                                  ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
                                                                  ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
+                                                                 ((screen === "Confirmation") && (previous === "SendMoney")) ? "Send Money" :
+                                                                 ((screen === "Confirmation") && (previous === "ReceiveMoney")) ? "Receive Money" :
                                                                  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -170,12 +176,20 @@ export default function App() {
                                                               (screen === "BuyElectricity") ||
                                                               (screen === "Withdraw") ||
                                                               (screen === "StockMarket") ||
+                                                              (screen === "SendMoney") ||
+                                                              (screen === "ReceiveMoney") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
-                                                                                                       onPress={() => { constants.tabBarRef?.current?.setVisible(true);
+                                                                                                       onPress={() => { 
+                                                                                                                        // constants.tabBarRef?.current?.setVisible(true);
+                                                                                                                        // constants.tabBarRef?.current?.setVisible(constants.routes.includes(previous) ? true : false);
+                                                                                                                        constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(previous) ? true : false);
                                                                                                                         setPrevious(screen);
-                                                                                                                        setScreen(previous);
-                                                                                                                        ozow && setOzow(false);
-                                                                                                                        navigation.navigate(previous); }}>
+                                                                                                                        // setScreen(previous);
+                                                                                                                        setScreen((screen === "Buy") ? "Home" : previous);
+                                                                                                                        // ozow && setOzow(false);
+                                                                                                                        setOzow(false);
+                                                                                                                        // navigation.navigate(previous); }}>
+                                                                                                                        navigation.navigate((screen === "Buy") ? "Home" : previous); }}>
 
                                                                                                 <Image source={require("./src/assets/icons/left.png")}
                                                                                                        style={styles.backIcon} />
@@ -266,6 +280,12 @@ export default function App() {
             <CurvedBottomBar.Screen name="StockMarket"
                                     component={() => <StockMarket key={"stock_market_screen"} />} />
 
+            <CurvedBottomBar.Screen name="SendMoney"
+                                    component={() => <SendMoney key={"send_money_screen"} />} />
+
+            <CurvedBottomBar.Screen name="ReceiveMoney"
+                                    component={() => <ReceiveMoney key={"accept_money_screen"} />} />
+
         </CurvedBottomBar.Navigator>
 
       </NavigationContainer>
@@ -275,108 +295,3 @@ export default function App() {
   );
 
 }
-
-
-export const styles = StyleSheet.create({
-
-  shadow: {
-
-    shadowColor: "#dddddd",
-
-    shadowOffset: {
-
-      width: 0,
-      height: 0,
-    },
-
-    shadowOpacity: 1,
-    shadowRadius: 5
-  },
-
-  button: {
-
-    flex: 1,
-    justifyContent: "center"
-  },
-
-  circleButton: {
-
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000000",
-    bottom: 30,
-    shadowColor: "#000000",
-
-    shadowOffset: {
-
-      width: 0,
-      height: 1
-    },
-
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 1
-  },
-
-  tabItem: {
-
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-
-  largerIcon: {
-    
-    width: 25,
-    height: 25
-  },
-
-  spacingLeft: {
-  
-    paddingLeft: 20
-  },
-
-  spacingRight: {
-  
-    paddingRight: 20
-  },
-
-  standardIcon: {
-    
-    width: 20,
-    height: 20
-  },
-
-  backIcon: {
-    
-    tintColor: "#fff",
-    width: 20,
-    height: 20
-  },
-
-  gradient: {
-
-    flex: 1
-  },
-
-  ozowLogo: {
-
-    width: 35,
-    height: 35
-  },
-
-  xIcon: {
-
-    width: 20,
-    height: 20
-  },
-
-  back: {
-    
-    paddingLeft: 30
-  }
-
-});

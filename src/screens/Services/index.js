@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
@@ -47,7 +47,7 @@ export default function Services() {
                                                                                                                     setScreen(item.route);
                                                                                                                     setOzow(!ozow);
                                                                                                                     // setOzow(false);
-                                                                                                                    navigation.navigate(item.route); } }}
+                                                                                                                    navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              category={item.category}
                                                                              key={"service_" + item.id} />,
 
@@ -67,7 +67,7 @@ export default function Services() {
                                                                                                                     setScreen(item.route);
                                                                                                                     setOzow(!ozow);
                                                                                                                     // setOzow(false);
-                                                                                                                    navigation.navigate(item.route); } }}
+                                                                                                                    navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              key={"service_" + item.id} />,
 
                                                                    (index < 1) && <View style={styles.horizontalGap} key={"service_gap_" + item.id} />]) }
@@ -94,7 +94,7 @@ export default function Services() {
                                                                                                              setScreen(item.route);
                                                                                                               setOzow(!ozow);
                                                                                                             //  setOzow(false);
-                                                                                                             navigation.navigate(item.route); } }}
+                                                                                                             navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       gap={(index < constants.details.length - 1) ? 10 : 0}
                                                                       key={"service_" + item.id} />) }
 

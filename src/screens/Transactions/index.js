@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, StatusBar, View, Text, FlatList } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import SearchInput from "../../components/SearchInput";
 import EmptyTransactions from "../../components/EmptyTransactions";
 import TransactionRow from "../../components/TransactionRow";
@@ -8,13 +8,15 @@ import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function Transactions() {
 
+    const { user } = useContext(screenContext);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState(constants.user.transactions);
+    const [filteredData, setFilteredData] = useState(user.transactions);
 
     return (
 
@@ -36,7 +38,7 @@ export default function Transactions() {
                 <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={(value) => utility.searchFilter(constants.user.transactions, value, setFilteredData, setSearchQuery)}
+                                 onChangeText={(value) => utility.searchFilter(user.transactions, value, setFilteredData, setSearchQuery, "reference")}
                                  value={searchQuery}
                                  key={"transactions_search"} />
 
@@ -74,7 +76,7 @@ export default function Transactions() {
                                                                                                           <TransactionRow amount={item.amount}
                                                                                                                           status={item.status}
                                                                                                                           direction={item.direction}
-                                                                                                                          name={item.name}
+                                                                                                                          reference={item.reference}
                                                                                                                           category={item.category}
                                                                                                                           date={item.date}
                                                                                                                           screen={"transactions"}

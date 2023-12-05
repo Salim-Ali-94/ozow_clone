@@ -12,7 +12,7 @@ export default function Confirmation() {
 
     const route = useRoute();
     const navigation = useNavigation();
-    const { animation, header } = route.params;
+    const { animation, header, size } = route.params;
     const { setPrevious, setScreen, screen } = useContext(screenContext);
     const [text, setText] = useState(header);
 
@@ -58,7 +58,7 @@ export default function Confirmation() {
 
                 <Text style={styles.heading}>{text}</Text>
     
-                <LottieView source={animation} style={styles.loader} autoPlay loop />
+                <LottieView source={animation} style={[styles.loader, size && { width: size, height: size }]} autoPlay loop />
 
             </View>
 

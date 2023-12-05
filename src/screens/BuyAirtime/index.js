@@ -81,10 +81,12 @@ export default function BuyAirtime() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
-                                pressAction={() => { 
+                                pressAction={async () => { 
                                                     //  setBalance(balance - parseFloat(amount));
                                                     setOzow(false);
                                                     setUser({...user, balance: user.balance - parseFloat(amount)});
+                                                    //  axios.get(DB_ENDPOINT + "user/" + user.id).then(response => console.log("sucess")).catch(error => console.log("error:", error));
+                                                    //  await axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) }).then(response => console.log("sucess")).catch(error => console.log("error:", error));
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");

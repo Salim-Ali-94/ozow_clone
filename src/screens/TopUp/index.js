@@ -87,7 +87,7 @@ export default function TopUp() {
                                                      axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)});
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
+                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authentication.json"),
                                                                                            header: "Authenticating your request..." }); }} />
 
             </View>

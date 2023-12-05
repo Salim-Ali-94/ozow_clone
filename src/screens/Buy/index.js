@@ -1,4 +1,4 @@
-import { View, SafeAreaView, ScrollView, StatusBar } from "react-native";
+import { Alert, View, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
@@ -47,7 +47,7 @@ export default function Buy() {
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                              setPrevious(screen);
                                                                                                              setScreen(item.route);
-                                                                                                             navigation.navigate(item.route); } }}
+                                                                                                             navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       key={"buy_" + item.id} />) }
 
                 <DetailsCard category={"Trade stocks"}

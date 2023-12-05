@@ -5,7 +5,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
 
-export default function TransactionRow({ amount, status, direction, name, date, category, screen }) {
+export default function TransactionRow({ amount, status, direction, reference, date, category, screen }) {
 
     return (
 
@@ -18,7 +18,7 @@ export default function TransactionRow({ amount, status, direction, name, date, 
                 <View style={styles.info}>
 
                     <Text style={styles.dateText}>{date}</Text>
-                    <Text style={[styles.priceText, { lineHeight: 19 }]}>{name}</Text>
+                    <Text style={[styles.priceText, { lineHeight: 19 }]}>{reference}</Text>
                     <Text style={styles.dateText}>{direction[0].toUpperCase() + direction.slice(1)} pocket</Text>
 
                 </View>

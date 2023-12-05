@@ -1,19 +1,22 @@
 import { View, Text, Pressable, Image } from "react-native";
+import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import EmptyTransactions from "../EmptyTransactions";
 import TransactionRow from "../TransactionRow";
 import HorizontalDivider from "../HorizontalDivider";
-import * as constants from "../../utility/constants";
+// import * as constants from "../../utility/constants";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function TransactionBox() {
 
     const navigation = useNavigation();
+    const { user } = useContext(screenContext);
 
     return (
 
-        <View style={[styles.container, { height: (constants.user.transactions.length > 0) && 450, paddingBottom: (constants.user.transactions.length === 0) && 20 }]}>
+        <View style={[styles.container, { height: (user.transactions.length > 0) && 450, paddingBottom: (user.transactions.length === 0) && 20 }]}>
 
             <View style={styles.header}>
 
@@ -31,17 +34,17 @@ export default function TransactionBox() {
 
             </View>
 
-            { (constants.user.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
+            { (user.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
                                               <View style={styles.transactions}>
 
-                                                  { constants.user.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
+                                                  { user.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
                                                                                                            key={"transactions_box_container_" + item.id}>
 
                                                                                                         <TransactionRow amount={item.amount}
                                                                                                                         status={item.status}
                                                                                                                         direction={item.direction}
-                                                                                                                        name={item.name}
+                                                                                                                        reference={item.reference}
                                                                                                                         category={item.category}
                                                                                                                         date={item.date}
                                                                                                                         screen={"home"}
