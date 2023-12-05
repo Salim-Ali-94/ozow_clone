@@ -21,6 +21,7 @@ import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function App() {
@@ -34,6 +35,28 @@ export default function App() {
   const fetchUser = async () => {
 
     // if user exists in cache fetch cached data
+
+    try {
+
+      const person = await AsyncStorage.getItem("user");
+      // let person = await AsyncStorage.getItem("user");
+  
+      if (person !== null) {
+
+        setUser(JSON.parse(person));
+
+      } else {
+
+        await AsyncStorage.setItem("user", JSON.stringify(user));
+
+      }
+
+
+    } catch(error) {
+
+      console.log("error:", error)
+
+    }
 
     // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
     // else ask user for name --> if user exists on backend fetch backend data + store in cache

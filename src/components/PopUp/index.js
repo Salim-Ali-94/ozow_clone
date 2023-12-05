@@ -5,6 +5,7 @@ import axios from "axios";
 import { styles } from "./styles";
 import { screenContext } from "../../providers/screenContext";
 import { DB_ENDPOINT } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function PopUp({ open, setOpen, ticker, price, low, high, shares, setShares, logo, balance, stocks }) {
@@ -42,7 +43,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                onChangeText={value => setShares(value)}
                                keyboardType={"numeric"} />
 
-                    <Pressable onPress={balance ? () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= user.balance)) {
+{/* <Pressable onPress={balance ? () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= user.balance)) { */}
+                    <Pressable onPress={balance ? async () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= user.balance)) {
 
                                                                 setOzow(false);
 
@@ -50,6 +52,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                                                                     setUser({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: [{ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }, ...user.portfolio] });
                                                                     axios.patch(DB_ENDPOINT + "registerStock", { id: user.id, stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
+
+                                                                    await AsyncStorage.setItem("user", JSON.stringify({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: [{ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }, ...user.portfolio] }));
 
                                                                 } else {
 
@@ -66,6 +70,17 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                                                                     axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
 
+                                                                    await AsyncStorage.setItem("user", JSON.stringify({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: user.portfolio.map(item => { if (item.ticker === ticker) {
+
+                                                                        return {
+
+                                                                            ...item,
+                                                                            shares: item.shares + parseFloat(shares)
+                                                                        };
+                                                                    }
+
+                                                                    return item; })}));
+
                                                                 }
 
                                                                 axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(shares)*parseFloat(price) });
@@ -75,7 +90,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                 navigation.navigate("Confirmation", { animation: require("../../assets/animations/ping.json"),
                                                                 header: "Processing your company stock trade..." }); } else { Alert.alert("You don't have enough funds to make this purchase"); } } : 
 
-                                                () => {
+                                                // () => {
+                                                async () => {
 
                                                         if ((parseFloat(shares) > 0) && (parseFloat(shares) <= user.portfolio.filter(element => element.ticker === ticker)[0].shares)) {
                     
@@ -88,6 +104,11 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                                                                 axios.patch(DB_ENDPOINT + "removeStock", { id: user.id, ticker: ticker });
                         
+                                                                await AsyncStorage.setItem("user", JSON.stringify({ ...user,
+                                                                    balance: user.balance + parseFloat(shares)*parseFloat(user.portfolio.filter(element => element.ticker === ticker)[0].price), 
+                                                                    portfolio: user.portfolio.filter(item => item.ticker !== ticker) }));
+
+
                                                             } else {
                         
                                                                 setUser({ ...user,
@@ -98,6 +119,15 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                                                                   return item; }) });
                         
                                                                 axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
+
+
+                                                                await AsyncStorage.setItem("user", JSON.stringify({ ...user,
+                                                                    balance: user.balance + parseFloat(shares)*parseFloat(user.portfolio.filter(element => element.ticker === ticker)[0].price),
+                                                                    portfolio: user.portfolio.map(item => { if (item.ticker === ticker) { return { ...item,
+                                                                                                                                                   shares: item.shares - parseFloat(shares) }; }
+
+                                                                                                            return item; }) }));
+
 
                                                             }
                         

@@ -14,6 +14,7 @@ import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
   
 export default function ReceiveMoney() {
@@ -110,7 +111,7 @@ export default function ReceiveMoney() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && reference ? true : false}
-                                pressAction={() => { 
+                                pressAction={async () => { 
                                                      setOzow(false);
                                                      const uuid = utility.uuid(10);
                                                      const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
@@ -131,6 +132,12 @@ export default function ReceiveMoney() {
                                                                                 status: status, id: uuid }, ...user.transactions] });
 
                                                      axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                     
+                                                     await AsyncStorage.setItem("user", JSON.stringify({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
+                                                        transactions: [{ direction: "into", reference: reference,
+                                                                         category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
+                                                                         amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                         status: status, id: uuid }, ...user.transactions] }));
                                                      
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
