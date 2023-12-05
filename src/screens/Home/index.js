@@ -6,7 +6,6 @@ import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
-// import * as utility from "../../utility/utility";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";

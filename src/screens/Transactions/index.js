@@ -38,7 +38,7 @@ export default function Transactions() {
                 <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={(value) => utility.searchFilter(user.transactions, value, setFilteredData, setSearchQuery)}
+                                 onChangeText={(value) => utility.searchFilter(user.transactions, value, setFilteredData, setSearchQuery, "reference")}
                                  value={searchQuery}
                                  key={"transactions_search"} />
 

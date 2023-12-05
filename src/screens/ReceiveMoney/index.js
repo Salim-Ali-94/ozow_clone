@@ -67,7 +67,6 @@ export default function ReceiveMoney() {
                            text={reference}
                            setText={setReference}
                            focused={referenceFocused}
-                        //    numbers={true}
                            setFocused={setReferenceFocused} />
 
             </View>
@@ -112,28 +111,27 @@ export default function ReceiveMoney() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && reference ? true : false}
                                 pressAction={() => { 
-                                                    //  setBalance(balance - parseFloat(amount));
-                                                    setOzow(false);
-                                                    const uuid = utility.uuid(10);
+                                                     setOzow(false);
+                                                     const uuid = utility.uuid(10);
                                                      const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
                                                      const currentDate = new Date();
+                                                     const options = { day: "numeric",
+                                                                       month: "long",
+                                                                       year: "numeric",
+                                                                       hour: "numeric",
+                                                                       minute: "numeric",
+                                                                       hour12: false };
+                                                     
+                                                     const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);                                                     
+                                                     
+                                                     setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
+                                                               transactions: [{ direction: "into", reference: reference,
+                                                                                category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
+                                                                                amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                status: status, id: uuid }, ...user.transactions] });
 
-                                                     const options = {
-                                                       day: "numeric",
-                                                       month: "long",
-                                                       year: "numeric",
-                                                       hour: "numeric",
-                                                       minute: "numeric",
-                                                       hour12: false,
-                                                     };
-                                                     
-                                                     const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
-                                                     
-                                                    //  console.log(formattedDateTime);
-                                                                                                          // setUser({...user, balance: user.balance + parseFloat(amount)});
-                                                     setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2), transactions: [{ direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }, ...user.transactions] });
-                                                    //  axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount) });
                                                      axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                     
                                                      setPrevious(screen);
                                                      setScreen("Confirmation");
                                                      navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),

@@ -135,7 +135,8 @@ export default function StockMarket() {
                 <View style={[styles.centerAlign, { flexDirection: "row", justifyContent: "center" }]}>
 
                     <SearchInput placeholder={"Search for stocks"}
-                                 onChangeText={value => utility.searchFilter([], value, setFilteredData, setSearchQuery)}
+                                //  onChangeText={value => utility.searchFilter([], value, setFilteredData, setSearchQuery)}
+                                 onChangeText={value => utility.searchFilter([], value, setFilteredData, setSearchQuery, "ticker")}
                                  border
                                  value={searchQuery}
                                  key={"refer_search"} />

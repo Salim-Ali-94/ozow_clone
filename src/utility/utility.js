@@ -26,11 +26,12 @@ const dropShadow = (styles, xOffset, yOffset, shadowColourIOS, shadowOpacity, sh
 
 };
 
-const searchFilter = (data, text, setFilteredData, setSearchQuery) => {
+const searchFilter = (data, text, setFilteredData, setSearchQuery, key) => {
 
     setSearchQuery(text);
     // const filteredItems = data.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
-    const filteredItems = data.filter(item => item.ticker.toLowerCase().includes(text.toLowerCase()));
+    // const filteredItems = data.filter(item => item.ticker.toLowerCase().includes(text.toLowerCase()));
+    const filteredItems = data.filter(item => item[key].toLowerCase().includes(text.toLowerCase()));
     setFilteredData(filteredItems);
 
 };
@@ -64,16 +65,22 @@ const previousWorkingDay = (date) => {
 
     const target = new Date(date);
 
-    while (target.getDay() === 0 || target.getDay() === 1) {
+    do {
 
         target.setDate(target.getDate() - 1);
 
-    }
+    } while ((target.getDay() === 0) || (target.getDay() === 1));
 
-    target.setDate(target.getDate() - 1);
+    do {
+
+        target.setDate(target.getDate() - 1);
+
+    } while ((target.getDay() === 0) || (target.getDay() === 1));
+
     return formatDate(target);
 
 };
+
 
 
 export { dropShadow, searchFilter, uuid, previousWorkingDay };

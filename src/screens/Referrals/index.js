@@ -48,7 +48,8 @@ export default function Referrals() {
 
               <SearchInput placeholder={"Search your contacts"}
                           //  onChangeText={searchAction}
-                           onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery)}
+                          //  onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery)}
+                           onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery, "name")}
                            value={searchQuery}
                            key={"refer_search"} />
 
