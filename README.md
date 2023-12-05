@@ -38,9 +38,9 @@ I don't have a macbook, so I could only develop the app for Android devices
 9. opne the .env file and replace _**"192.168.0.120"**_ for the _**DB_ENDPOINT**_ variable with the value above 
 10. open a separate terminal and navigate to the _**server**_ folder inside the project directory
 11. **node api.js**
-12. inisde the project root folder in a separate terminal
+12. navigate to the project root folder in a separate terminal
 13. **npm start**
-14. after the metro spins up, press **a** in the terminal to run the app on Android
+14. after metro spins up, press **a** in the terminal to run the app on Android
 15. open the app from the phone emulator
 16. explore the app
 
