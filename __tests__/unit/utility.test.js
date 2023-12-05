@@ -19,6 +19,7 @@ describe("Testing functionality of the utility functiosn used throughout the app
         const date = utility.formatDate(target);
         expect(date.length).toBe(10);
         expect(date.split("-").length).toBe(3);
+        expect((date.match(/-/g) || []).length).toBe(2);
         expect(date.split("-")[0].length).toBe(4);
         expect(date.split("-")[1].length).toBe(2);
         expect(date.split("-")[2].length).toBe(2);
