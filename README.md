@@ -4,19 +4,21 @@ full-stack project cloning the ozow.me app using react native (cli)
 # progress images
 
 # home 1
-![Screenshot_1701055305](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/8e478c39-a989-46da-8fd8-4c2720c5fb1f)
+![Screenshot_1701756663](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/e479ba6c-69c0-435e-9a4f-6f19c6fcf335)
 # home 2
-![Screenshot_1701066217](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/b37bf068-9ced-45a5-9b7b-4dc5527459bc)
+![Screenshot_1701756681](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/a8cb0e92-2fba-4080-88f3-5e2ede2bcdf1)
 # pocket 1
-![Screenshot_1701055311](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/dfbd5a63-638d-48b3-9933-c587e7d8e4ea)
+![Screenshot_1701756688](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/3e0bbca8-e491-488a-b588-5b39ed464781)
 # pocket 2
-![Screenshot_1701055314](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/641c2ddc-f3f9-442b-958b-7f34c9a8c522)
+![Screenshot_1701756695](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/a6fded43-6e89-4e2d-9986-a651c4101463)
 # transactions
-![Screenshot_1701079345](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/0cec36e4-80b8-4f47-addf-99f7a376f0d5)
+![Screenshot_1701756702](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/7f187a8b-63a6-4ccd-89e8-f341026008c1)
+# referrals
+![Screenshot_1701756722](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/7de43406-5aa7-4674-b975-e835e59cf034)
 # services 1
-![Screenshot_1701123408](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/7eca27c1-0a2e-439f-a0aa-efdb0831f9c7)
+![Screenshot_1701756731](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/34f46c48-0127-49c0-b02b-9150a54878a9)
 # services 2
-![Screenshot_1701123423](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/f153b5d2-d6d9-443a-9077-e292d21a7243)
+![Screenshot_1701756740](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/94886459-2b10-4204-90bc-5c1e0516e349)
 
 # key concepts
 
