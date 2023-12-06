@@ -11,7 +11,6 @@ import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
   
 export default function Withdraw() {
@@ -87,18 +86,15 @@ export default function Withdraw() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && password && bank ? true : false}
-                                // pressAction={async () => { 
-                                    pressAction={() => { 
-                                                     //  setBalance(balance - parseFloat(amount)); 
-                                                     setOzow(false);
-                                                     setUser({...user, balance: user.balance - parseFloat(amount)});
-                                                     axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
-                                                    //  await AsyncStorage.setItem("user", JSON.stringify({...user, balance: user.balance - parseFloat(amount)}));
-                                                     
-                                                     setPrevious(screen);
-                                                     setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authentication.json"),
-                                                                                           header: "Authenticating your request..." }); }} />
+                                    pressAction={() => {
+
+                                                            setOzow(false);
+                                                            setUser({...user, balance: user.balance - parseFloat(amount)});
+                                                            axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
+                                                            setPrevious(screen);
+                                                            setScreen("Confirmation");
+                                                            navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
+                                                                                                  header: "Authenticating your request..." }); }} />
 
             </View>
 

@@ -11,7 +11,6 @@ import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
   
 export default function BuyAirtime() {
@@ -82,20 +81,14 @@ export default function BuyAirtime() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
-                                pressAction={async () => { 
-                                                    //  setBalance(balance - parseFloat(amount));
-                                                    setOzow(false);
-                                                    setUser({...user, balance: user.balance - parseFloat(amount)});
-                                                    //  axios.get(DB_ENDPOINT + "user/" + user.id).then(response => console.log("sucess")).catch(error => console.log("error:", error));
-                                                    //  await axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) }).then(response => console.log("sucess")).catch(error => console.log("error:", error));
-                                                     axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
-                                                     
-                                                     await AsyncStorage.setItem("user", JSON.stringify({...user, balance: user.balance - parseFloat(amount)}));
-                                                     
-                                                     setPrevious(screen);
-                                                     setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/phone.json"),
-                                                                                           header: "Fetching your airtime..." }); }} />
+                                pressAction={() => { 
+                                                        setOzow(false);
+                                                        setUser({...user, balance: user.balance - parseFloat(amount)});
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
+                                                        setPrevious(screen);
+                                                        setScreen("Confirmation");
+                                                        navigation.navigate("Confirmation", { animation: require("../../assets/animations/phone.json"),
+                                                                                              header: "Fetching your airtime..." }); }} />
 
             </View>
 

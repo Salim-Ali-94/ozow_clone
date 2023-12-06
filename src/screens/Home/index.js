@@ -1,7 +1,5 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
-// import { useContext, useEffect } from "react";
 import { useContext } from "react";
-// import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
@@ -10,7 +8,6 @@ import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
-// import { DB_ENDPOINT } from "@env";
 
 
 export default function Home() {

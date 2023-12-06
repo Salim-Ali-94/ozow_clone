@@ -14,7 +14,6 @@ import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
   
 export default function SendMoney() {
@@ -111,39 +110,32 @@ export default function SendMoney() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && reference ? true : false}
-                                pressAction={async () => { 
-                                                     setOzow(false);
-                                                     const uuid = utility.uuid(10);
-                                                     const status = ["Paid", "Failed", "Pending"][Math.floor(Math.random()*3)];
-                                                     const currentDate = new Date();
-                                                     const options = { day: "numeric",
-                                                                       month: "long",
-                                                                       year: "numeric",
-                                                                       hour: "numeric",
-                                                                       minute: "numeric",
-                                                                       hour12: false };
+                                pressAction={() => {
 
-                                                     const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+                                                        setOzow(false);
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Paid", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                        month: "long",
+                                                                        year: "numeric",
+                                                                        hour: "numeric",
+                                                                        minute: "numeric",
+                                                                        hour12: false };
 
-                                                     setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
-                                                               transactions: [{ direction: "from", reference: reference,
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+
+                                                        setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
+                                                                transactions: [{ direction: "from", reference: reference,
                                                                                 category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
                                                                                 amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                 status: status, id: uuid }, ...user.transactions] });
 
-                                                     axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
-
-                                                     await AsyncStorage.setItem("user", JSON.stringify({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
-                                                        transactions: [{ direction: "from", reference: reference,
-                                                                         category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
-                                                                         amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
-                                                                         status: status, id: uuid }, ...user.transactions] }));
-                                                     
-                                                     setPrevious(screen);
-                                                     setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/transfer.json"),
-                                                                                           header: "Sending your cash..."}); }} />
-                                                                                           {/* size: 500 }); }} /> */}
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        setPrevious(screen);
+                                                        setScreen("Confirmation");
+                                                        navigation.navigate("Confirmation", { animation: require("../../assets/animations/transfer.json"),
+                                                                                              header: "Sending your cash..."}); }} />
 
             </View>
 

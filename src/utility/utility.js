@@ -29,8 +29,6 @@ const dropShadow = (styles, xOffset, yOffset, shadowColourIOS, shadowOpacity, sh
 const searchFilter = (data, text, setFilteredData, setSearchQuery, key) => {
 
     setSearchQuery(text);
-    // const filteredItems = data.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
-    // const filteredItems = data.filter(item => item.ticker.toLowerCase().includes(text.toLowerCase()));
     const filteredItems = data.filter(item => item[key].toLowerCase().includes(text.toLowerCase()));
     setFilteredData(filteredItems);
 
@@ -83,4 +81,4 @@ const previousWorkingDay = (date) => {
 
 
 
-export { dropShadow, searchFilter, uuid, previousWorkingDay, formatDate };
+export { dropShadow, searchFilter, uuid, previousWorkingDay };

@@ -40,9 +40,10 @@ export default function App() {
 
       const person = await AsyncStorage.getItem("user");
       // let person = await AsyncStorage.getItem("user");
-  
+      
       if (person !== null) {
-
+        
+        console.log("person =", JSON.parse(person));
         setUser(JSON.parse(person));
 
       } else {
@@ -59,9 +60,10 @@ export default function App() {
     }
 
     // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
-    // else ask user for name --> if user exists on backend fetch backend data + store in cache
 
-    // else create a new empty user on firestore + store in cache
+    // else ask user for name --> if user exists on backend fetch backend data (based on password) + store in cache
+
+    // else create a new empty user on firestore + store in cache + set state
 
     // await
     user.transactions.reverse();

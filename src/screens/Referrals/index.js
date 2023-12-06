@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, StatusBar, FlatList } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import SearchInput from "../../components/SearchInput";
 import HorizontalDivider from "../../components/HorizontalDivider";
@@ -7,21 +7,15 @@ import FilterBox from "../../components/FilterBox";
 import Contact from "../../components/Contact";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
+import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function Referrals() {
 
+  const { user } = useContext(screenContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(constants.contacts);
-
-  // const searchAction = (text) => {
-
-  //   setSearchQuery(text);
-  //   const filteredItems = constants.contacts.filter((item) => item.name.toLowerCase().includes(text.toLowerCase()));
-  //   setFilteredData(filteredItems);
-
-  // };
 
   return (
 
@@ -47,9 +41,7 @@ export default function Referrals() {
             <View style={styles.centerAlign}>
 
               <SearchInput placeholder={"Search your contacts"}
-                          //  onChangeText={searchAction}
-                          //  onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery)}
-                           onChangeText={(value) => utility.searchFilter(constants.contacts, value, setFilteredData, setSearchQuery, "name")}
+                           onChangeText={(value) => utility.searchFilter(user.contacts, value, setFilteredData, setSearchQuery, "name")}
                            value={searchQuery}
                            key={"refer_search"} />
 
