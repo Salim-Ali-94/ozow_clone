@@ -86,15 +86,15 @@ export default function Withdraw() {
             <View style={styles.bottom}>
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && password && bank ? true : false}
-                                pressAction={() => { 
-                                                     //  setBalance(balance - parseFloat(amount)); 
-                                                     setOzow(false);
-                                                     setUser({...user, balance: user.balance - parseFloat(amount)});
-                                                     axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
-                                                     setPrevious(screen);
-                                                     setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/authentication.json"),
-                                                                                           header: "Authenticating your request..." }); }} />
+                                    pressAction={() => {
+
+                                                            setOzow(false);
+                                                            setUser({...user, balance: user.balance - parseFloat(amount)});
+                                                            axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
+                                                            setPrevious(screen);
+                                                            setScreen("Confirmation");
+                                                            navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
+                                                                                                  header: "Authenticating your request..." }); }} />
 
             </View>
 

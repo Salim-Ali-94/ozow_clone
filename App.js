@@ -2,6 +2,7 @@ import { Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
@@ -21,6 +22,8 @@ import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DB_ENDPOINT } from "@env";
 
 
 export default function App() {
@@ -35,21 +38,38 @@ export default function App() {
 
     // if user exists in cache fetch cached data
 
-    // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
-    // else ask user for name --> if user exists on backend fetch backend data + store in cache
+    try {
 
-    // else create a new empty user on firestore + store in cache
+      const person = await AsyncStorage.getItem("user");
+      // let person = await AsyncStorage.getItem("user");
+      
+      if (person !== null) {
+        
+        // console.log("person =", JSON.parse(person));
+        setUser(JSON.parse(person));
+
+      } else {
+
+        await AsyncStorage.setItem("user", JSON.stringify(user));
+        axios.post(DB_ENDPOINT + "storeUser", user);
+
+      }
+
+
+    } catch(error) {
+
+      console.log("error:", error)
+
+    }
+
+    // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
+
+    // else ask user for name --> if user exists on backend fetch backend data (based on password) + store in cache
+
+    // else create a new empty user on firestore + store in cache + set state
 
     // await
     user.transactions.reverse();
-
-    // const rest = restClient("t_tMM_xfb8FIykLfdMDpAmKGn8xCThNB");
-
-    // rest.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
-    //   console.log(data);
-    // }).catch(e => {
-    //   console.error("An error happened:", e);
-    // });
 
   }
 

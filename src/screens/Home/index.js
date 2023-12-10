@@ -1,7 +1,5 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
-// import { useContext, useEffect } from "react";
 import { useContext } from "react";
-// import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
@@ -10,79 +8,12 @@ import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
-import { DB_ENDPOINT } from "@env";
 
 
 export default function Home() {
 
   const { screen, setScreen, setPrevious, user } = useContext(screenContext)
   const navigation = useNavigation();
-  
-  // const getData = async () => {
-
-  //   // add user doc
-  //   // axios.post(constants.endpoint + "storeUser", constants.user)
-  //   //      .then(response => console.log(response))
-  //   //      .catch(error => console.log("error:", error));
-
-
-  //   // update balance
-
-  //   // axios.patch(constants.endpoint + "updateBalance", { id: constants.user.id, balance: 987654321 })
-  //   //      .then(response => console.log(response))
-  //   //      .catch(error => console.log("error:", error));
-  
-
-  //   // get user
-  //   // const salim = await axios.get(`${constants.endpoint}user/${"fnA3ik1q8PHN8daPjqQw"}`)
-  //   //                          .then(response => console.log(response.data))
-  //   //                          .catch(error => console.log("error:", error));
-    
-  //   // console.log(salim);
-
-
-
-  //   // // add transaction
-  //     //   axios.patch(constants.endpoint + "registerTransaction", {id: "fnA3ik1q8PHN8daPjqQw", transaction: {
-  //     //     name: "Wayne",
-  //     //     category: "transport",
-  //     //     status: "Paid",
-  //     //     direction: "from",
-  //     //     date: "31 November 2025, 5:12",
-  //     //     amount: 103.56,
-  //     //     id: utility.uuid(10)
-  //     // }})
-  //     //     .then(response => console.log(response))
-  //     //     .catch(error => console.log("error:", error));
-      
-  //   // const response = await axios.get(constants.endpoint);
-
-
-
-
-
-
-  //   console.log(DB_ENDPOINT);
-  //   const response = await axios.get(DB_ENDPOINT);
-
-  //   try {
-
-  //     console.log(response.data);
-
-  //   } catch(error) {
-
-  //     console.log("error:", error);
-
-  //   }
-
-
-  // }
-
-  // useEffect(() => {
-
-  //   getData();
-
-  // }, []);
 
   return (
 

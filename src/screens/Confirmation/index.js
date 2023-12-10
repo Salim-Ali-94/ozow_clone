@@ -6,6 +6,7 @@ import LottieView from "lottie-react-native";
 import { screenContext } from "../../providers/screenContext";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Confirmation() {
@@ -13,12 +14,20 @@ export default function Confirmation() {
     const route = useRoute();
     const navigation = useNavigation();
     const { animation, header, size } = route.params;
-    const { setPrevious, setScreen, screen } = useContext(screenContext);
+    const { user, setPrevious, setScreen, screen } = useContext(screenContext);
     const [text, setText] = useState(header);
+
+    const updateStorage = async () => {
+        
+        await AsyncStorage.setItem("user", JSON.stringify(user));
+
+    }
 
     useEffect(() => {
 
         const unsubscribe = navigation.addListener("focus", () => {
+
+            updateStorage();
 
             setTimeout(() => {
 

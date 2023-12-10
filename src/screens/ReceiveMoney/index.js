@@ -111,31 +111,30 @@ export default function ReceiveMoney() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && reference ? true : false}
                                 pressAction={() => { 
-                                                     setOzow(false);
-                                                     const uuid = utility.uuid(10);
-                                                     const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
-                                                     const currentDate = new Date();
-                                                     const options = { day: "numeric",
-                                                                       month: "long",
-                                                                       year: "numeric",
-                                                                       hour: "numeric",
-                                                                       minute: "numeric",
-                                                                       hour12: false };
-                                                     
-                                                     const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);                                                     
-                                                     
-                                                     setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
-                                                               transactions: [{ direction: "into", reference: reference,
+                                                        setOzow(false);
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                        month: "long",
+                                                                        year: "numeric",
+                                                                        hour: "numeric",
+                                                                        minute: "numeric",
+                                                                        hour12: false };
+
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);                                                     
+
+                                                        setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
+                                                                transactions: [{ direction: "into", reference: reference,
                                                                                 category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
                                                                                 amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                 status: status, id: uuid }, ...user.transactions] });
 
-                                                     axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
-                                                     
-                                                     setPrevious(screen);
-                                                     setScreen("Confirmation");
-                                                     navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),
-                                                                                           header: "Receiving your cash..." }); }} />
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        setPrevious(screen);
+                                                        setScreen("Confirmation");
+                                                        navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),
+                                                                                              header: "Receiving your cash..." }); }} />
 
             </View>
 

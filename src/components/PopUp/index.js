@@ -73,7 +73,7 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                 setScreen("Confirmation");
                                                                 setOpen(false);
                                                                 navigation.navigate("Confirmation", { animation: require("../../assets/animations/ping.json"),
-                                                                header: "Processing your company stock trade..." }); } else { Alert.alert("You don't have enough funds to make this purchase"); } } : 
+                                                                                                      header: "Processing your company stock trade..." }); } else { Alert.alert("You don't have enough funds to make this purchase"); } } : 
 
                                                 () => {
 
@@ -87,7 +87,7 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                           portfolio: user.portfolio.filter(item => item.ticker !== ticker) });
 
                                                                 axios.patch(DB_ENDPOINT + "removeStock", { id: user.id, ticker: ticker });
-                        
+
                                                             } else {
                         
                                                                 setUser({ ...user,
