@@ -2,6 +2,7 @@ import { Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
@@ -22,6 +23,7 @@ import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DB_ENDPOINT } from "@env";
 
 
 export default function App() {
@@ -43,12 +45,13 @@ export default function App() {
       
       if (person !== null) {
         
-        console.log("person =", JSON.parse(person));
+        // console.log("person =", JSON.parse(person));
         setUser(JSON.parse(person));
 
       } else {
 
         await AsyncStorage.setItem("user", JSON.stringify(user));
+        axios.post(DB_ENDPOINT + "storeUser", user);
 
       }
 
@@ -67,14 +70,6 @@ export default function App() {
 
     // await
     user.transactions.reverse();
-
-    // const rest = restClient("t_tMM_xfb8FIykLfdMDpAmKGn8xCThNB");
-
-    // rest.stocks.aggregates("AAPL", 30, "minute", "2023-01-12", "2023-01-12").then((data) => {
-    //   console.log(data);
-    // }).catch(e => {
-    //   console.error("An error happened:", e);
-    // });
 
   }
 

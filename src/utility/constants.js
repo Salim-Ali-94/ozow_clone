@@ -80,8 +80,8 @@ export const data = [{ reference: "Logan",
                     id: "coffee_a0b1" }];
 
 export const user = { name: "Salim",
-                      id: "fnA3ik1q8PHN8daPjqQw",
-                      // id: utility.uuid(20),
+                      // id: "fnA3ik1q8PHN8daPjqQw",
+                      id: utility.uuid(20),
                       // balance: 123456789.87,
                       balance: 0,
                       transactions: data,

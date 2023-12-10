@@ -35,7 +35,7 @@ I don't have a macbook, so I could only develop the app for Android devices
 6. hit _**Run**_ and let the app open on the emulator
 7. close Android Studio
 8. get your wifi's _**IPv4 address**_ (windows; right click wifi icon inside bottom right quick settings box --> go to settings --> click on _**<wifi_name> properties**_ --> copy the value under the _**IPv4 address**_)
-9. opne the .env file and replace _**"192.168.0.120"**_ for the _**DB_ENDPOINT**_ variable with the value above 
+9. open the .env file and replace _**"192.168.0.120"**_ for the _**DB_ENDPOINT**_ variable with the value above 
 10. open a separate terminal and navigate to the _**server**_ folder inside the project directory
 11. **node api.js**
 12. navigate to the project root folder in a separate terminal
