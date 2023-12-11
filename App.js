@@ -25,59 +25,84 @@ import { styles } from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DB_ENDPOINT } from "@env";
 
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUser } from "./src/providers/reducers/userReducer";
+
 
 export default function App() {
+
+  // const customer = useSelector(state => state.reducer_user.user);
+  const customer = useSelector(state => state.reducer_user);
+  const dispatch = useDispatch();
 
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
   const [user, setUser] = useState(constants.user);
   // const [user, setUser] = useState({});
+  
+  useEffect(() => {
 
-  const fetchUser = async () => {
+    if (customer.status === "idle") {
 
-    // if user exists in cache fetch cached data
-
-    try {
-
-      const person = await AsyncStorage.getItem("user");
-      // let person = await AsyncStorage.getItem("user");
-      
-      if (person !== null) {
-        
-        // console.log("person =", JSON.parse(person));
-        setUser(JSON.parse(person));
-
-      } else {
-
-        await AsyncStorage.setItem("user", JSON.stringify(user));
-        axios.post(DB_ENDPOINT + "storeUser", user);
-
-      }
-
-
-    } catch(error) {
-
-      console.log("error:", error)
+      dispatch(fetchUser());
 
     }
 
-    // xx elif user exists on backend (that's why we need authentication) fetch backend data + store in cache
+  }, [dispatch, customer]);
 
-    // else ask user for name --> if user exists on backend fetch backend data (based on password) + store in cache
+  // const fetchUsers = async () => {
 
-    // else create a new empty user on firestore + store in cache + set state
+  //   console.log("user");
+  //   console.log(customer);
+  //   // console.log(customer.name);
+  //   // console.log(customer.balance);
+  //   console.log(customer.user);
+  //   console.log(customer.user.name);
+  //   console.log(customer.user.balance);
 
-    // await
-    user.transactions.reverse();
+  //   // if user exists in cache fetch cached data
 
-  }
+  //   try {
 
-  useEffect(() => {
+  //     const person = await AsyncStorage.getItem("user");
+  //     // let person = await AsyncStorage.getItem("user");
+      
+  //     if (person !== null) {
+        
+  //       // console.log("person =", JSON.parse(person));
+  //       setUser(JSON.parse(person));
 
-    fetchUser();
+  //     } else {
 
-  }, []);
+  //       await AsyncStorage.setItem("user", JSON.stringify(user));
+  //       axios.post(DB_ENDPOINT + "storeUser", user);
+
+  //     }
+
+
+  //   } catch(error) {
+
+  //     console.log("error:", error)
+
+  //   }
+
+  //   // xx elif user exists on backend (that"s why we need authentication) fetch backend data + store in cache
+
+  //   // else ask user for name --> if user exists on backend fetch backend data (based on password) + store in cache
+
+  //   // else create a new empty user on firestore + store in cache + set state
+
+  //   // await
+  //   user.transactions.reverse();
+
+  // }
+
+  // useEffect(() => {
+
+  //   fetchUsers();
+
+  // }, []);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -184,7 +209,8 @@ export default function App() {
                                                                  ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
                                                                  ((screen === "Confirmation") && (previous === "SendMoney")) ? "Send Money" :
                                                                  ((screen === "Confirmation") && (previous === "ReceiveMoney")) ? "Receive Money" :
-                                                                 `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
+                                                                //  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
+                                                                 `👋 Hi, ${customer.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
 
