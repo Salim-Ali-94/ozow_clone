@@ -1,6 +1,7 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
@@ -12,7 +13,8 @@ import { styles } from "./styles";
 
 export default function Home() {
 
-  const { screen, setScreen, setPrevious, user } = useContext(screenContext)
+  const customer = useSelector(state => state.reducer_user.user);
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
   const navigation = useNavigation();
 
   return (
@@ -36,7 +38,7 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={user.balance}
+              <PocketBalanceCard amount={customer.balance}
                                  shadow={true}
                                  key={"home_pocket_balance_card"} />
 

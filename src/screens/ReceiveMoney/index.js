@@ -2,8 +2,9 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
-import { useState } from "react";
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
+import { useState, useContext } from "react";
 import DropDown from "../../components/DropDown";
 import InputText from "../../components/InputText";
 import SecurityBadge from "../../components/SecurityBadge";
@@ -18,8 +19,10 @@ import { DB_ENDPOINT } from "@env";
   
 export default function ReceiveMoney() {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [category, setCategory] = useState(constants.transactionCategories[0].value);
@@ -116,21 +119,20 @@ export default function ReceiveMoney() {
                                                         const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
                                                         const currentDate = new Date();
                                                         const options = { day: "numeric",
-                                                                        month: "long",
-                                                                        year: "numeric",
-                                                                        hour: "numeric",
-                                                                        minute: "numeric",
-                                                                        hour12: false };
+                                                                          month: "long",
+                                                                          year: "numeric",
+                                                                          hour: "numeric",
+                                                                          minute: "numeric",
+                                                                          hour12: false };
 
-                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);                                                     
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+                                                        dispatch(updateBalance(customer.balance - parseFloat(amount).toFixed(2)));
+                                                        dispatch(storeTransaction({ direction: "into", reference: reference,
+                                                                                    category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
+                                                                                    amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                    status: status, id: uuid }));
 
-                                                        setUser({ ...user, balance: user.balance - parseFloat(amount).toFixed(2),
-                                                                transactions: [{ direction: "into", reference: reference,
-                                                                                category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
-                                                                                amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
-                                                                                status: status, id: uuid }, ...user.transactions] });
-
-                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: customer.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
                                                         setPrevious(screen);
                                                         setScreen("Confirmation");
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),

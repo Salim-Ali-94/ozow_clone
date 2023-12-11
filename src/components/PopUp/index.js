@@ -1,6 +1,8 @@
 import { Alert, TextInput, View, Pressable, Image, Text, Modal } from "react-native";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBalance, addStock, updateShares, removeStock } from "../../providers/reducers/userReducer";
 import axios from "axios";
 import { styles } from "./styles";
 import { screenContext } from "../../providers/screenContext";
@@ -9,8 +11,10 @@ import { DB_ENDPOINT } from "@env";
 
 export default function PopUp({ open, setOpen, ticker, price, low, high, shares, setShares, logo, balance, stocks }) {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
-    const { user, setUser, screen, setPrevious, setScreen, setOzow } = useContext(screenContext);
+    const { screen, setPrevious, setScreen, setOzow } = useContext(screenContext);
 
     return (
 
@@ -42,33 +46,26 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                onChangeText={value => setShares(value)}
                                keyboardType={"numeric"} />
 
-                    <Pressable onPress={balance ? () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= user.balance)) {
+                    <Pressable onPress={balance ? () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= customer.balance)) {
 
                                                                 setOzow(false);
 
-                                                                if (user.portfolio.filter(item => item.ticker === ticker).length === 0) {
+                                                                    if (customer.portfolio.filter(item => item.ticker === ticker).length === 0) {
 
-                                                                    setUser({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: [{ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }, ...user.portfolio] });
-                                                                    axios.patch(DB_ENDPOINT + "registerStock", { id: user.id, stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
+                                                                    dispatch(updateBalance(customer.balance - parseFloat(shares)*parseFloat(price)));
+                                                                    dispatch(addStock({ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }));
+
+                                                                    axios.patch(DB_ENDPOINT + "registerStock", { id: customer.id, stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
 
                                                                 } else {
 
-                                                                    setUser({ ...user, balance: user.balance - parseFloat(shares)*parseFloat(price), portfolio: user.portfolio.map(item => { if (item.ticker === ticker) {
-
-                                                                                                return {
-
-                                                                                                    ...item,
-                                                                                                    shares: item.shares + parseFloat(shares)
-                                                                                                };
-                                                                                            }
-
-                                                                                            return item; })});
-
-                                                                    axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
+                                                                    dispatch(updateBalance(customer.balance - parseFloat(shares)*parseFloat(price)));
+                                                                    dispatch(updateShares({ ticker: ticker, shares: customer.find(item => item.ticker === ticker).shares + parseFloat(shares) }));
+                                                                    axios.patch(DB_ENDPOINT + "updateShares", { id: customer.id, ticker: ticker, shares: customer.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
 
                                                                 }
 
-                                                                axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(shares)*parseFloat(price) });
+                                                                axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(shares)*parseFloat(price) });
                                                                 setPrevious(screen);
                                                                 setScreen("Confirmation");
                                                                 setOpen(false);
@@ -77,33 +74,25 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                                                 () => {
 
-                                                        if ((parseFloat(shares) > 0) && (parseFloat(shares) <= user.portfolio.filter(element => element.ticker === ticker)[0].shares)) {
-                    
-                    
-                                                            if (user.portfolio.filter(item => item.ticker === ticker)[0].shares === parseFloat(shares)) {
-                        
-                                                                setUser({ ...user,
-                                                                          balance: user.balance + parseFloat(shares)*parseFloat(user.portfolio.filter(element => element.ticker === ticker)[0].price), 
-                                                                          portfolio: user.portfolio.filter(item => item.ticker !== ticker) });
+                                                        if ((parseFloat(shares) > 0) && (parseFloat(shares) <= customer.portfolio.filter(element => element.ticker === ticker)[0].shares)) {
 
-                                                                axios.patch(DB_ENDPOINT + "removeStock", { id: user.id, ticker: ticker });
+                                                            if (customer.portfolio.filter(item => item.ticker === ticker)[0].shares === parseFloat(shares)) {
+
+                                                                dispatch(updateBalance(customer.balance + parseFloat(shares)*parseFloat(customer.portfolio.find(element => element.ticker === ticker).price)));
+                                                                dispatch(removeStock(ticker));
+                                                                axios.patch(DB_ENDPOINT + "removeStock", { id: customer.id, ticker: ticker });
 
                                                             } else {
-                        
-                                                                setUser({ ...user,
-                                                                          balance: user.balance + parseFloat(shares)*parseFloat(user.portfolio.filter(element => element.ticker === ticker)[0].price),
-                                                                          portfolio: user.portfolio.map(item => { if (item.ticker === ticker) { return { ...item,
-                                                                                                                                                         shares: item.shares - parseFloat(shares) }; }
 
-                                                                                                                  return item; }) });
-                        
-                                                                axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
+                                                                dispatch(updateBalance(customer.balance + parseFloat(shares)*parseFloat(customer.portfolio.find(element => element.ticker === ticker).price)));
+                                                                dispatch(updateShares({ ticker: ticker, shares: customer.portfolio.find(item => item.ticker === ticker).shares - parseFloat(shares) }));
+                                                                axios.patch(DB_ENDPOINT + "updateShares", { id: customer.id, ticker: ticker, shares: customer.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
 
                                                             }
                         
                                                             setOpen(false);
                         
-                                                        } else { Alert.alert("Insufficient shares", `You want to sell ${shares} shares, but you only own ${user.portfolio.filter(element => element.ticker === ticker)[0].shares} ${ticker} stocks`) }
+                                                        } else { Alert.alert("Insufficient shares", `You want to sell ${shares} shares, but you only own ${customer.portfolio.filter(element => element.ticker === ticker)[0].shares} ${ticker} stocks`) }
 
                                                     }
 

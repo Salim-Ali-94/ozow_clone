@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, StatusBar, View, Text, FlatList } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import EmptyTransactions from "../../components/EmptyTransactions";
 import TransactionRow from "../../components/TransactionRow";
@@ -8,15 +8,15 @@ import HorizontalDivider from "../../components/HorizontalDivider";
 import FilterBox from "../../components/FilterBox";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { useSelector } from "react-redux";
 
 
 export default function Transactions() {
 
-    const { user } = useContext(screenContext);
+    const customer = useSelector(state => state.reducer_user.user);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState(user.transactions);
+    const [filteredData, setFilteredData] = useState(customer.transactions);
 
     return (
 
@@ -38,7 +38,7 @@ export default function Transactions() {
                 <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={(value) => utility.searchFilter(user.transactions, value, setFilteredData, setSearchQuery, "reference")}
+                                 onChangeText={(value) => utility.searchFilter(customer.transactions, value, setFilteredData, setSearchQuery, "reference")}
                                  value={searchQuery}
                                  key={"transactions_search"} />
 
@@ -68,7 +68,6 @@ export default function Transactions() {
 
                         { (filteredData.length === 0) ? <EmptyTransactions key={"transactions_empty"} /> :
 
-                                                        //   <View style={styles.transactions} key={"transactions_box_holder"}>
                                                           <View key={"transactions_box_holder"}>
 
                                                               { filteredData.map((item, index) => [<View style={styles.row} key={"transactions_box_container_" + item.id}>

@@ -2,7 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import * as constants from "../../utility/constants";
+import { DB_ENDPOINT } from "@env";
 
+
+const initialState = {
+
+    user: constants.user,
+    status: "idle", // "idle" | "loading" | "succeeded" | "failed"
+    error: null,
+
+};
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
@@ -16,28 +25,21 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 
         } else {
 
-            await AsyncStorage.setItem("user", JSON.stringify(constants.user));
-            axios.post(constants.DB_ENDPOINT + "storeUser", constants.user);
-            return constants.user;
+            const human = constants.user;
+            await AsyncStorage.setItem("user", JSON.stringify(human));
+            axios.post(DB_ENDPOINT + "storeUser", human).then(response => console.log("ADDED USER")).catch(err => console.log("Error:", err));
+            return human;
 
         }
 
     } catch (error) {
 
-        console.log("error:", error);
+        console.log("Error:", error);
         throw error;
 
     }
 
 });
-
-const initialState = {
-
-    user: constants.user,
-    status: "idle", // "idle" | "loading" | "succeeded" | "failed"
-    error: null,
-
-};
 
 const userSlice = createSlice({
 
@@ -47,9 +49,38 @@ const userSlice = createSlice({
     reducers: {
     
         updateBalance: (state, action) => {
+
             state.user.balance = action.payload;
 
         },
+
+        storeTransaction: (state, action) => {
+
+            state.user.transactions.unshift(action.payload);
+
+        },
+
+        addStock: (state, action) => {
+
+            state.user.portfolio.unshift(action.payload);
+
+        },
+
+        removeStock: (state, action) => {
+
+            state.user.portfolio = state.user.portfolio.filter(stock => stock.ticker !== action.payload);
+
+        },
+
+        updateShares: (state, action) => {
+
+            // const { ticker, shares } = action.payload;
+            // let company = state.user.portfolio.find(company => company.ticker === ticker);
+            let company = state.user.portfolio.find(company => company.ticker === action.payload.ticker);
+            // company.shares = shares;
+            company.shares = action.payload.shares;
+
+        }
 
     },
 
@@ -75,83 +106,5 @@ const userSlice = createSlice({
 
 });
 
-export const { updateBalance } = userSlice.actions;
+export const { updateBalance, storeTransaction, addStock, removeStock, updateShares } = userSlice.actions;
 export default userSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { createSlice } from "@reduxjs/toolkit";
-// import * as constants from "../../utility/constants";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { DB_ENDPOINT } from "@env";
-
-
-// const fetchUser = async () => {
-
-//     try {
-
-//         const person = await AsyncStorage.getItem("user");
-        
-//         if (person !== null) {
-        
-//             return JSON.parse(person);
-
-//         } else {
-
-//             await AsyncStorage.setItem("user", JSON.stringify(constants.user));
-//             axios.post(DB_ENDPOINT + "storeUser", constants.user);
-//             return constants.user;
-
-//         }
-
-
-//     } catch(error) {
-
-//         console.log("error:", error)
-
-//     }
-
-//     // return constants.user.transactions.reverse();
-//     return constants.user;
-
-// }
-
-// const initial = { user: fetchUser() };
-
-// export const userSlice = createSlice({
-
-//     name: "person",
-//     // initialState: { user: fetchUser() },
-//     // initialState: { user: await fetchUser() },
-
-//     // initialState: { user: constants.user },
-//     initialState: initial,
-
-//     reducers: {
-
-//         updateBalance: (state, action) => {
-
-//             state.user.balance = action.payload;
-
-//         }
-
-//     }
-
-// });
-
-// export const { updateBalance } = userSlice.actions;
-// export default userSlice.reducer;

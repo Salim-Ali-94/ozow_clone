@@ -1,7 +1,7 @@
 import { FlatList, View, Text, SafeAreaView, StatusBar, Pressable, Image, ScrollView } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import LottieView from "lottie-react-native";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { restClient } from "@polygon.io/client-js";
 import axios from "axios";
 import * as simple_icons from "simple-icons";
@@ -10,15 +10,15 @@ import SearchInput from "../../components/SearchInput";
 import CompanyBox from "../../components/CompanyBox";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { POLYGON_KEY, NINJA_API_KEY, NINJA_API_ENDPOINT, LOGO_URL } from "@env";
+import { useSelector } from "react-redux";
 
 
 export default function StockMarket() {
 
+    const customer = useSelector(state => state.reducer_user.user);
     const polygon = restClient(POLYGON_KEY);
-    const { user } = useContext(screenContext);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredData, setFilteredData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -186,20 +186,20 @@ export default function StockMarket() {
 
             </View>
 
-            { (user.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
+            { (customer.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
 
-            { (user.portfolio.length > 0) && <FlatList horizontal={true}
-                                                       data={user.portfolio}
-                                                       showsHorizontalScrollIndicator={false}
-                                                       renderItem={({ item, index }) => (<CompanyBox ticker={item.ticker}
-                                                                                                     price={item.price}
-                                                                                                     high={item.high}
-                                                                                                     low={item.low}
-                                                                                                     stocks={item.shares}
-                                                                                                     logo={item.logo}
-                                                                                                     gap_right={(index === user.portfolio.length - 1) ? 20 : 10}
-                                                                                                     gap_left={(index === 0) && 20}
-                                                                                                     key={item.ticker} />)} /> }
+            { (customer.portfolio.length > 0) && <FlatList horizontal={true}
+                                                           data={customer.portfolio}
+                                                           showsHorizontalScrollIndicator={false}
+                                                           renderItem={({ item, index }) => (<CompanyBox ticker={item.ticker}
+                                                                                                         price={item.price}
+                                                                                                         high={item.high}
+                                                                                                         low={item.low}
+                                                                                                         stocks={item.shares}
+                                                                                                         logo={item.logo}
+                                                                                                         gap_right={(index === customer.portfolio.length - 1) ? 20 : 10}
+                                                                                                         gap_left={(index === 0) && 20}
+                                                                                                         key={item.ticker} />)} /> }
 
             </ScrollView>
 

@@ -2,8 +2,9 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
-import { useState } from "react";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBalance } from "../../providers/reducers/userReducer";
+import { useState, useContext } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
@@ -15,8 +16,10 @@ import { DB_ENDPOINT } from "@env";
   
 export default function Withdraw() {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
-    const { user, setUser, setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -47,7 +50,7 @@ export default function Withdraw() {
 
             <View style={styles.inputHolder}>
 
-                <InputText balance={user.balance}
+                <InputText balance={customer.balance}
                            text={amount}
                            setText={setAmount}
                            focused={amountFocused}
@@ -85,12 +88,12 @@ export default function Withdraw() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && password && bank ? true : false}
-                                    pressAction={() => {
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= customer.balance) && password && bank ? true : false}
+                                pressAction={() => {
 
                                                             setOzow(false);
-                                                            setUser({...user, balance: user.balance - parseFloat(amount)});
-                                                            axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
+                                                            dispatch(updateBalance(customer.balance - parseFloat(amount)));
+                                                            axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) });                                                            
                                                             setPrevious(screen);
                                                             setScreen("Confirmation");
                                                             navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

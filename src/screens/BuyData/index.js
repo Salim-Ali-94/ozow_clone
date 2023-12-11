@@ -2,8 +2,9 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
-import { useState } from "react";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBalance } from "../../providers/reducers/userReducer";
+import { useState, useContext } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
@@ -15,8 +16,10 @@ import { DB_ENDPOINT } from "@env";
   
 export default function BuyData() {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
+    const { setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [network, setNetwork] = useState(constants.networks[0].value);
@@ -83,8 +86,8 @@ export default function BuyData() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
                                 pressAction={() => { 
                                                         setOzow(false);
-                                                        setUser({...user, balance: user.balance - parseFloat(amount)});
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance });
+                                                        dispatch(updateBalance(customer.balance - parseFloat(amount)));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) });                                                        
                                                         setPrevious(screen);
                                                         setScreen("Confirmation");
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),

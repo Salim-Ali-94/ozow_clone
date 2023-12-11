@@ -2,6 +2,7 @@ import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from
 import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import IconButton from "../../components/IconButton";
 import EmptyTransactions from "../../components/EmptyTransactions";
@@ -14,7 +15,8 @@ import { styles } from "./styles";
 
 export default function Pocket() {
 
-  const { screen, setScreen, setPrevious, user } = useContext(screenContext)
+  const customer = useSelector(state => state.reducer_user.user);
+  const { screen, setScreen, setPrevious } = useContext(screenContext)
   const navigation = useNavigation();
 
   return (
@@ -38,7 +40,8 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={user.balance}
+              {/* <PocketBalanceCard amount={user.balance} */}
+              <PocketBalanceCard amount={customer.balance}
                                  shadow={false}
                                  key={"pocket_pocket_balance_card"} />
 
@@ -78,26 +81,26 @@ export default function Pocket() {
 
               <View style={styles.transactionsHolder}>
 
-                { (user.transactions.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
+                { (customer.transactions.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
 
-                                                  <View style={styles.transactions}>
+                                                          <View style={styles.transactions}>
 
-                                                      { user.transactions.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
+                                                              { customer.transactions.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
 
-                                                                                                <TransactionRow amount={item.amount}
-                                                                                                                status={item.status}
-                                                                                                                direction={item.direction}
-                                                                                                                reference={item.reference}
-                                                                                                                category={item.category}
-                                                                                                                date={item.date}
-                                                                                                                screen={"pocket"}
-                                                                                                                key={"pocket_" + item.id} />
+                                                                                                                <TransactionRow amount={item.amount}
+                                                                                                                                status={item.status}
+                                                                                                                                direction={item.direction}
+                                                                                                                                reference={item.reference}
+                                                                                                                                category={item.category}
+                                                                                                                                date={item.date}
+                                                                                                                                screen={"pocket"}
+                                                                                                                                key={"pocket_" + item.id} />
 
-                                                                                            </View>,
+                                                                                                            </View>,
 
-                                                                                            (index < user.transactions.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
+                                                                                                            (index < customer.transactions.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
 
-                                                  </View> }
+                                                          </View> }
 
               </View>
 

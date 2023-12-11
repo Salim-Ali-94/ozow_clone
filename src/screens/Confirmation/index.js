@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useEffect, useContext, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
 import { screenContext } from "../../providers/screenContext";
 import * as constants from "../../utility/constants";
@@ -11,15 +12,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Confirmation() {
 
+    const customer = useSelector(state => state.reducer_user.user);
     const route = useRoute();
     const navigation = useNavigation();
     const { animation, header, size } = route.params;
-    const { user, setPrevious, setScreen, screen } = useContext(screenContext);
+    const { setPrevious, setScreen, screen } = useContext(screenContext);
     const [text, setText] = useState(header);
 
     const updateStorage = async () => {
         
-        await AsyncStorage.setItem("user", JSON.stringify(user));
+        await AsyncStorage.setItem("user", JSON.stringify(customer));
 
     }
 

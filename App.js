@@ -22,25 +22,19 @@ import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DB_ENDPOINT } from "@env";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "./src/providers/reducers/userReducer";
 
 
 export default function App() {
 
-  // const customer = useSelector(state => state.reducer_user.user);
   const customer = useSelector(state => state.reducer_user);
   const dispatch = useDispatch();
-
   const [ozow, setOzow] = useState(false);
   const [previous, setPrevious] = useState("Home");
   const [screen, setScreen] = useState("Home");
-  const [user, setUser] = useState(constants.user);
-  // const [user, setUser] = useState({});
-  
+
   useEffect(() => {
 
     if (customer.status === "idle") {
@@ -50,59 +44,6 @@ export default function App() {
     }
 
   }, [dispatch, customer]);
-
-  // const fetchUsers = async () => {
-
-  //   console.log("user");
-  //   console.log(customer);
-  //   // console.log(customer.name);
-  //   // console.log(customer.balance);
-  //   console.log(customer.user);
-  //   console.log(customer.user.name);
-  //   console.log(customer.user.balance);
-
-  //   // if user exists in cache fetch cached data
-
-  //   try {
-
-  //     const person = await AsyncStorage.getItem("user");
-  //     // let person = await AsyncStorage.getItem("user");
-      
-  //     if (person !== null) {
-        
-  //       // console.log("person =", JSON.parse(person));
-  //       setUser(JSON.parse(person));
-
-  //     } else {
-
-  //       await AsyncStorage.setItem("user", JSON.stringify(user));
-  //       axios.post(DB_ENDPOINT + "storeUser", user);
-
-  //     }
-
-
-  //   } catch(error) {
-
-  //     console.log("error:", error)
-
-  //   }
-
-  //   // xx elif user exists on backend (that"s why we need authentication) fetch backend data + store in cache
-
-  //   // else ask user for name --> if user exists on backend fetch backend data (based on password) + store in cache
-
-  //   // else create a new empty user on firestore + store in cache + set state
-
-  //   // await
-  //   user.transactions.reverse();
-
-  // }
-
-  // useEffect(() => {
-
-  //   fetchUsers();
-
-  // }, []);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -179,7 +120,7 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{ screen, setScreen, setPrevious, ozow, setOzow, user, setUser }}>
+    <screenContext.Provider value={{ screen, setScreen, setPrevious, ozow, setOzow }}>
 
       <NavigationContainer>
 
@@ -209,7 +150,6 @@ export default function App() {
                                                                  ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
                                                                  ((screen === "Confirmation") && (previous === "SendMoney")) ? "Send Money" :
                                                                  ((screen === "Confirmation") && (previous === "ReceiveMoney")) ? "Receive Money" :
-                                                                //  `👋 Hi, ${user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
                                                                  `👋 Hi, ${customer.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
@@ -226,15 +166,10 @@ export default function App() {
                                                               (screen === "ReceiveMoney") ||
                                                               (screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { 
-                                                                                                                        // constants.tabBarRef?.current?.setVisible(true);
-                                                                                                                        // constants.tabBarRef?.current?.setVisible(constants.routes.includes(previous) ? true : false);
                                                                                                                         constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(previous) ? true : false);
                                                                                                                         setPrevious(screen);
-                                                                                                                        // setScreen(previous);
                                                                                                                         setScreen((screen === "Buy") ? "Home" : previous);
-                                                                                                                        // ozow && setOzow(false);
                                                                                                                         setOzow(false);
-                                                                                                                        // navigation.navigate(previous); }}>
                                                                                                                         navigation.navigate((screen === "Buy") ? "Home" : previous); }}>
 
                                                                                                 <Image source={require("./src/assets/icons/left.png")}
