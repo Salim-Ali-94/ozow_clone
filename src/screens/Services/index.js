@@ -1,22 +1,21 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
-import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import * as constants from "../../utility/constants";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
 
 export default function Services() {
 
   const dispatch = useDispatch();
   const page = useSelector(state => state.reducer_screen);
-  const { ozow, setOzow } = useContext(screenContext);
+  const state = useSelector(state => state.reducer_ozow.ozow);
   const navigation = useNavigation();
 
   return (
@@ -49,7 +48,7 @@ export default function Services() {
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                                     dispatch(previousScreen(page.screen));
                                                                                                                     dispatch(currentScreen(item.route));
-                                                                                                                    setOzow(!ozow);
+                                                                                                                    dispatch(toggleState(!state));
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              category={item.category}
@@ -69,7 +68,7 @@ export default function Services() {
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
                                                                                                                     dispatch(previousScreen(page.screen));
                                                                                                                     dispatch(currentScreen(item.route));
-                                                                                                                    setOzow(!ozow);
+                                                                                                                    dispatch(toggleState(!state));
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              key={"service_" + item.id} />,
@@ -94,9 +93,9 @@ export default function Services() {
                                                                       icon={item.icon}
                                                                       iconSize={item.size}
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                            dispatch(previousScreen(page.screen));
-                                                                                                            dispatch(currentScreen(item.route));
-                                                                                                              setOzow(!ozow);
+                                                                                                             dispatch(previousScreen(page.screen));
+                                                                                                             dispatch(currentScreen(item.route));
+                                                                                                             dispatch(toggleState(!state));
                                                                                                             //  setOzow(false);
                                                                                                              navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       gap={(index < constants.details.length - 1) ? 10 : 0}

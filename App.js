@@ -24,14 +24,15 @@ import { styles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "./src/providers/reducers/userReducer";
 import { currentScreen, previousScreen } from "./src/providers/reducers/screenReducer";
+import { toggleState } from "./src/providers/reducers/ozowReducer";
 
 
 export default function App() {
 
   const customer = useSelector(state => state.reducer_user);
   const page = useSelector(state => state.reducer_screen);
+  const state = useSelector(state => state.reducer_ozow.ozow);
   const dispatch = useDispatch();
-  const [ozow, setOzow] = useState(false);
 
   useEffect(() => {
 
@@ -101,7 +102,7 @@ export default function App() {
 
     return (
 
-      <Pressable onPress={() => { ozow && setOzow(false);
+      <Pressable onPress={() => { state && dispatch(toggleState(false));
                                   dispatch(previousScreen(page.screen));
                                   dispatch(currentScreen(routeName));
                                   navigate(routeName); } }
@@ -118,158 +119,154 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{ ozow, setOzow }}>
+    <NavigationContainer>
 
-      <NavigationContainer>
+      <CurvedBottomBar.Navigator type="DOWN"
+                                  ref={constants.tabBarRef}
+                                  style={styles.bottomBar}
+                                  shadowStyle={styles.shadow}
+                                  height={50}
+                                  circleWidth={50}
+                                  bgColor="white"
+                                  initialRouteName="Home"
+                                  tabBar={renderTabBar}
+                                  screenOptions={{ headerTitle: (page.screen === "Buy") ? "Buy" :
+                                                                (page.screen === "TopUp") ? "Top Up" :
+                                                                (page.screen === "BuyAirtime") ? "Buy Airtime" :
+                                                                (page.screen === "BuyData") ? "Buy Data" :
+                                                                (page.screen === "BuyElectricity") ? "Buy Electricity" :
+                                                                (page.screen === "Withdraw") ? "Withdraw Cash" :
+                                                                (page.screen === "StockMarket") ? "Stock Market" :
+                                                                (page.screen === "SendMoney") ? "Send Money" :
+                                                                (page.screen === "ReceiveMoney") ? "Receive Money" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "TopUp")) ? "Top Up" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "BuyAirtime")) ? "Buy Airtime" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "BuyData")) ? "Buy Data" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "BuyElectricity")) ? "Buy Electricity" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "Withdraw")) ? "Withdraw Cash" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "StockMarket")) ? "Stock Market" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "SendMoney")) ? "Send Money" :
+                                                                ((page.screen === "Confirmation") && (page.previous === "ReceiveMoney")) ? "Receive Money" :
+                                                                `👋 Hi, ${customer.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
-        <CurvedBottomBar.Navigator type="DOWN"
-                                   ref={constants.tabBarRef}
-                                   style={styles.bottomBar}
-                                   shadowStyle={styles.shadow}
-                                   height={50}
-                                   circleWidth={50}
-                                   bgColor="white"
-                                   initialRouteName="Home"
-                                   tabBar={renderTabBar}
-                                   screenOptions={{ headerTitle: (page.screen === "Buy") ? "Buy" :
-                                                                 (page.screen === "TopUp") ? "Top Up" :
-                                                                 (page.screen === "BuyAirtime") ? "Buy Airtime" :
-                                                                 (page.screen === "BuyData") ? "Buy Data" :
-                                                                 (page.screen === "BuyElectricity") ? "Buy Electricity" :
-                                                                 (page.screen === "Withdraw") ? "Withdraw Cash" :
-                                                                 (page.screen === "StockMarket") ? "Stock Market" :
-                                                                 (page.screen === "SendMoney") ? "Send Money" :
-                                                                 (page.screen === "ReceiveMoney") ? "Receive Money" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "TopUp")) ? "Top Up" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyAirtime")) ? "Buy Airtime" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyData")) ? "Buy Data" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyElectricity")) ? "Buy Electricity" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "Withdraw")) ? "Withdraw Cash" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "StockMarket")) ? "Stock Market" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "SendMoney")) ? "Send Money" :
-                                                                 ((page.screen === "Confirmation") && (page.previous === "ReceiveMoney")) ? "Receive Money" :
-                                                                 `👋 Hi, ${customer.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
+                                                  headerLeft: () => {
 
-                                                    headerLeft: () => {
+                                                    const navigation = useNavigation();
 
-                                                      const navigation = useNavigation();
+                                                    return ((page.screen === "Buy") ||
+                                                            (page.screen === "TopUp") ||
+                                                            (page.screen === "BuyData") ||
+                                                            (page.screen === "BuyElectricity") ||
+                                                            (page.screen === "Withdraw") ||
+                                                            (page.screen === "StockMarket") ||
+                                                            (page.screen === "SendMoney") ||
+                                                            (page.screen === "ReceiveMoney") ||
+                                                            (page.screen === "BuyAirtime")) && <Pressable style={styles.back}
+                                                                                                      onPress={() => { 
+                                                                                                                      constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(page.previous) ? true : false);
+                                                                                                                      dispatch(previousScreen(page.screen));
+                                                                                                                      dispatch(currentScreen((page.screen === "Buy") ? "Home" : page.previous));
+                                                                                                                      dispatch(toggleState(false));
+                                                                                                                      navigation.navigate((page.screen === "Buy") ? "Home" : page.previous); }}>
 
-                                                      return ((page.screen === "Buy") ||
-                                                              (page.screen === "TopUp") ||
-                                                              (page.screen === "BuyData") ||
-                                                              (page.screen === "BuyElectricity") ||
-                                                              (page.screen === "Withdraw") ||
-                                                              (page.screen === "StockMarket") ||
-                                                              (page.screen === "SendMoney") ||
-                                                              (page.screen === "ReceiveMoney") ||
-                                                              (page.screen === "BuyAirtime")) && <Pressable style={styles.back}
-                                                                                                       onPress={() => { 
-                                                                                                                        constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(page.previous) ? true : false);
-                                                                                                                        dispatch(previousScreen(page.screen));
-                                                                                                                        dispatch(currentScreen((page.screen === "Buy") ? "Home" : page.previous));
-                                                                                                                        setOzow(false);
-                                                                                                                        navigation.navigate((page.screen === "Buy") ? "Home" : page.previous); }}>
+                                                                                              <Image source={require("./src/assets/icons/left.png")}
+                                                                                                      style={styles.backIcon} />
 
-                                                                                                <Image source={require("./src/assets/icons/left.png")}
-                                                                                                       style={styles.backIcon} />
+                                                                                          </Pressable>
 
-                                                                                            </Pressable>
+                                                  },
 
-                                                    },
+                                                  headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
+                                                  headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                          style={styles.gradient}
+                                                                                          start={{x: 0, y: 0.5}}
+                                                                                          end={{x: 1, y: 0.5}} /> }}
 
-                                                    headerTintColor: "#ffffff", headerTitleStyle: { fontFamily: "poppins_bold", fontSize: 18 },
-                                                    headerBackground: () => <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                            style={styles.gradient}
-                                                                                            start={{x: 0, y: 0.5}}
-                                                                                            end={{x: 1, y: 0.5}} /> }}
+                                renderCircle={({ selectedTab, navigate }) => (
 
-                                  renderCircle={({ selectedTab, navigate }) => (
+                                                  <Animated.View>
 
-                                                    <Animated.View>
+                                                    <Pressable style={styles.button}
+                                                                onPress={() => { !state && dispatch(previousScreen(selectedTab));
+                                                                                 !state ? navigate("Services") : navigate(page.previous);
+                                                                                 dispatch(toggleState(!state)); } }>
 
-                                                      <Pressable style={styles.button}
-                                                                  onPress={() => { !ozow && dispatch(previousScreen(selectedTab));
-                                                                                   !ozow ? navigate("Services") : navigate(page.previous);
-                                                                                   setOzow(!ozow); } }>
+                                                      { !state ? <LinearGradient colors={[constants.primary, constants.secondary]}
+                                                                                style={styles.circleButton}
+                                                                                // locations={[0, 0.6]}
+                                                                                start={{x: 0, y: 0.5}}
+                                                                                end={{x: 1, y: 0.5}}>
 
-                                                        { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
-                                                                                  style={styles.circleButton}
-                                                                                  // locations={[0, 0.6]}
-                                                                                  start={{x: 0, y: 0.5}}
-                                                                                  end={{x: 1, y: 0.5}}>
+                                                                  <Image source={require("./src/assets/icons/ozow_white.png")}
+                                                                          style={styles.ozowLogo}
+                                                                          tintColor={"white"} />
 
-                                                                    <Image source={require("./src/assets/icons/ozow_white.png")}
-                                                                           style={styles.ozowLogo}
-                                                                           tintColor={"white"} />
+                                                                </LinearGradient> : 
 
-                                                                  </LinearGradient> : 
+                                                                <View style={styles.circleButton}>
 
-                                                                  <View style={styles.circleButton}>
+                                                                  <Image source={require("./src/assets/icons/x.png")}
+                                                                          style={styles.xIcon} /> 
+                                                                      
+                                                                </View> }
 
-                                                                    <Image source={require("./src/assets/icons/x.png")}
-                                                                           style={styles.xIcon} /> 
-                                                                        
-                                                                  </View> }
+                                                    </Pressable>
 
-                                                      </Pressable>
+                                                  </Animated.View>)}>
 
-                                                    </Animated.View>)}>
+          <CurvedBottomBar.Screen name="Home"
+                                  position="LEFT"
+                                  component={() => <Home key={"home_screen"} />}/>
 
-            <CurvedBottomBar.Screen name="Home"
-                                    position="LEFT"
-                                    component={() => <Home key={"home_screen"} />}/>
+          <CurvedBottomBar.Screen name="History"
+                                  component={() => <Transactions key={"transactions_screen"} />}
+                                  position="RIGHT"/>
 
-            <CurvedBottomBar.Screen name="History"
-                                    component={() => <Transactions key={"transactions_screen"} />}
-                                    position="RIGHT"/>
+          <CurvedBottomBar.Screen name="Pocket"
+                                  position="LEFT"
+                                  component={() => <Pocket key={"pocket_screen"} />}/>
 
-            <CurvedBottomBar.Screen name="Pocket"
-                                    position="LEFT"
-                                    component={() => <Pocket key={"pocket_screen"} />}/>
+          <CurvedBottomBar.Screen name="Referrals"
+                                  component={() => <Referrals key={"referral_screen"} />}
+                                  position="RIGHT"/>
 
-            <CurvedBottomBar.Screen name="Referrals"
-                                    component={() => <Referrals key={"referral_screen"} />}
-                                    position="RIGHT"/>
+          <CurvedBottomBar.Screen name="Services"
+                                  component={() => <Services key={"services_screen"} />}
+                                  position="CIRCLE"/>
 
-            <CurvedBottomBar.Screen name="Services"
-                                    component={() => <Services key={"services_screen"} />}
-                                    position="CIRCLE"/>
+          <CurvedBottomBar.Screen name="Buy"
+                                  component={() => <Buy key={"buy_screen"} />} />
 
-            <CurvedBottomBar.Screen name="Buy"
-                                    component={() => <Buy key={"buy_screen"} />} />
+          <CurvedBottomBar.Screen name="TopUp"
+                                  component={() => <TopUp key={"top_up_screen"} />} />
 
-            <CurvedBottomBar.Screen name="TopUp"
-                                    component={() => <TopUp key={"top_up_screen"} />} />
+          <CurvedBottomBar.Screen name="Confirmation"
+                                  component={() => <Confirmation key={"confirm_screen"} />} />
 
-            <CurvedBottomBar.Screen name="Confirmation"
-                                    component={() => <Confirmation key={"confirm_screen"} />} />
+          <CurvedBottomBar.Screen name="BuyAirtime"
+                                  component={() => <BuyAirtime key={"airtime_screen"} />} />
 
-            <CurvedBottomBar.Screen name="BuyAirtime"
-                                    component={() => <BuyAirtime key={"airtime_screen"} />} />
+          <CurvedBottomBar.Screen name="BuyData"
+                                  component={() => <BuyData key={"data_screen"} />} />
 
-            <CurvedBottomBar.Screen name="BuyData"
-                                    component={() => <BuyData key={"data_screen"} />} />
+          <CurvedBottomBar.Screen name="BuyElectricity"
+                                  component={() => <BuyElectricity key={"electric_screen"} />} />
 
-            <CurvedBottomBar.Screen name="BuyElectricity"
-                                    component={() => <BuyElectricity key={"electric_screen"} />} />
+          <CurvedBottomBar.Screen name="Withdraw"
+                                  component={() => <Withdraw key={"withdraw_screen"} />} />
 
-            <CurvedBottomBar.Screen name="Withdraw"
-                                    component={() => <Withdraw key={"withdraw_screen"} />} />
+          <CurvedBottomBar.Screen name="StockMarket"
+                                  component={() => <StockMarket key={"stock_market_screen"} />} />
 
-            <CurvedBottomBar.Screen name="StockMarket"
-                                    component={() => <StockMarket key={"stock_market_screen"} />} />
+          <CurvedBottomBar.Screen name="SendMoney"
+                                  component={() => <SendMoney key={"send_money_screen"} />} />
 
-            <CurvedBottomBar.Screen name="SendMoney"
-                                    component={() => <SendMoney key={"send_money_screen"} />} />
+          <CurvedBottomBar.Screen name="ReceiveMoney"
+                                  component={() => <ReceiveMoney key={"accept_money_screen"} />} />
 
-            <CurvedBottomBar.Screen name="ReceiveMoney"
-                                    component={() => <ReceiveMoney key={"accept_money_screen"} />} />
+      </CurvedBottomBar.Navigator>
 
-        </CurvedBottomBar.Navigator>
-
-      </NavigationContainer>
-
-    </screenContext.Provider>
+    </NavigationContainer>
 
   );
 

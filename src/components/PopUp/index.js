@@ -1,13 +1,12 @@
 import { Alert, TextInput, View, Pressable, Image, Text, Modal } from "react-native";
-import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBalance, addStock, updateShares, removeStock } from "../../providers/reducers/userReducer";
 import axios from "axios";
 import { styles } from "./styles";
-import { screenContext } from "../../providers/screenContext";
 import { DB_ENDPOINT } from "@env";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
 
 export default function PopUp({ open, setOpen, ticker, price, low, high, shares, setShares, logo, balance, stocks }) {
@@ -16,7 +15,6 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
     const customer = useSelector(state => state.reducer_user.user);
     const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setOzow } = useContext(screenContext);
 
     return (
 
@@ -50,7 +48,7 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                     <Pressable onPress={balance ? () => { if ((parseFloat(shares) > 0) && (parseFloat(shares)*parseFloat(price) <= customer.balance)) {
 
-                                                                setOzow(false);
+                                                                dispatch(toggleState(false));
 
                                                                     if (customer.portfolio.filter(item => item.ticker === ticker).length === 0) {
 

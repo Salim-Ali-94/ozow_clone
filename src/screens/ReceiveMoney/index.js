@@ -4,7 +4,7 @@ import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import DropDown from "../../components/DropDown";
 import InputText from "../../components/InputText";
 import SecurityBadge from "../../components/SecurityBadge";
@@ -12,10 +12,10 @@ import SafetyTag from "../../components/SafetyTag";
 import ContinueButton from "../../components/ContinueButton";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
   
 export default function ReceiveMoney() {
@@ -24,7 +24,6 @@ export default function ReceiveMoney() {
     const customer = useSelector(state => state.reducer_user.user);
     const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [category, setCategory] = useState(constants.transactionCategories[0].value);
@@ -116,7 +115,7 @@ export default function ReceiveMoney() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && reference ? true : false}
                                 pressAction={() => { 
-                                                        setOzow(false);
+                                                        dispatch(toggleState(false));
                                                         const uuid = utility.uuid(10);
                                                         const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
                                                         const currentDate = new Date();

@@ -4,15 +4,16 @@ import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBalance } from "../../providers/reducers/userReducer";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
 import * as constants from "../../utility/constants";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
+
   
 export default function Withdraw() {
 
@@ -20,7 +21,6 @@ export default function Withdraw() {
     const customer = useSelector(state => state.reducer_user.user);
     const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -92,13 +92,13 @@ export default function Withdraw() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= customer.balance) && password && bank ? true : false}
                                 pressAction={() => {
 
-                                                            setOzow(false);
-                                                            dispatch(updateBalance(customer.balance - parseFloat(amount)));
-                                                            axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) });                                                            
-                                                            dispatch(previousScreen(page.screen));
-                                                            dispatch(currentScreen("Confirmation"));
-                                                            navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
-                                                                                                  header: "Authenticating your request..." }); }} />
+                                                        dispatch(toggleState(false));
+                                                        dispatch(updateBalance(customer.balance - parseFloat(amount)));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) });                                                            
+                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(currentScreen("Confirmation"));
+                                                        navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
+                                                                                                header: "Authenticating your request..." }); }} />
 
             </View>
 

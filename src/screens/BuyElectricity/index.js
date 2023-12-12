@@ -4,14 +4,14 @@ import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBalance } from "../../providers/reducers/userReducer";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import InputText from "../../components/InputText";
 import ContinueButton from "../../components/ContinueButton";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import * as constants from "../../utility/constants";
 import { DB_ENDPOINT } from "@env";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
   
 export default function BuyElectricity() {
@@ -20,7 +20,6 @@ export default function BuyElectricity() {
     const customer = useSelector(state => state.reducer_user.user);
     const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
@@ -67,7 +66,7 @@ export default function BuyElectricity() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
                                 pressAction={ () => { 
-                                                        setOzow(false);
+                                                        dispatch(toggleState(false));
                                                         dispatch(updateBalance(customer.balance - parseFloat(amount) / 10));
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) / 10 });
                                                         dispatch(previousScreen(page.screen));
