@@ -1,19 +1,20 @@
 import { Alert, View, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import SecurityBadge from "../../components/SecurityBadge";
 import SafetyTag from "../../components/SafetyTag";
-import { screenContext } from "../../providers/screenContext";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
 
 export default function Buy() {
 
-  const { screen, setScreen, setPrevious } = useContext(screenContext);
+  const dispatch = useDispatch();
+  const page = useSelector(state => state.reducer_screen);
   const navigation = useNavigation();
 
   return (
@@ -45,8 +46,8 @@ export default function Buy() {
                                                                       iconSize={item.size}
                                                                       gap={10}
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                             setPrevious(screen);
-                                                                                                             setScreen(item.route);
+                                                                                                             dispatch(previousScreen(page.screen));
+                                                                                                             dispatch(currentScreen(item.route));                                                    
                                                                                                              navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       key={"buy_" + item.id} />) }
 
@@ -54,8 +55,8 @@ export default function Buy() {
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
                              pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
-                                                  setPrevious(screen);
-                                                  setScreen("StockMarket");
+                                                  dispatch(previousScreen(page.screen));
+                                                  dispatch(currentScreen("StockMarket"));
                                                   navigation.navigate("StockMarket"); }}
                              key={"buy_stocks_details_card"} />
 

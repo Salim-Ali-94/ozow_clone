@@ -7,14 +7,16 @@ import axios from "axios";
 import { styles } from "./styles";
 import { screenContext } from "../../providers/screenContext";
 import { DB_ENDPOINT } from "@env";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
 
 export default function PopUp({ open, setOpen, ticker, price, low, high, shares, setShares, logo, balance, stocks }) {
 
     const dispatch = useDispatch();
     const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { screen, setPrevious, setScreen, setOzow } = useContext(screenContext);
+    const { setOzow } = useContext(screenContext);
 
     return (
 
@@ -66,8 +68,8 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                 }
 
                                                                 axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(shares)*parseFloat(price) });
-                                                                setPrevious(screen);
-                                                                setScreen("Confirmation");
+                                                                dispatch(previousScreen(page.screen));
+                                                                dispatch(currentScreen("Confirmation"));
                                                                 setOpen(false);
                                                                 navigation.navigate("Confirmation", { animation: require("../../assets/animations/ping.json"),
                                                                                                       header: "Processing your company stock trade..." }); } else { Alert.alert("You don't have enough funds to make this purchase"); } } : 

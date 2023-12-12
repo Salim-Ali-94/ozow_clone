@@ -12,14 +12,16 @@ import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
   
 export default function BuyData() {
 
     const dispatch = useDispatch();
     const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
+    const { setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [network, setNetwork] = useState(constants.networks[0].value);
@@ -88,8 +90,8 @@ export default function BuyData() {
                                                         setOzow(false);
                                                         dispatch(updateBalance(customer.balance - parseFloat(amount)));
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) });                                                        
-                                                        setPrevious(screen);
-                                                        setScreen("Confirmation");
+                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),
                                                                                               header: "Fetching your data bundles..." }); }} />
 

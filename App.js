@@ -2,7 +2,6 @@ import { Image, Animated, Pressable, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
@@ -22,18 +21,17 @@ import Confirmation from "./src/screens/Confirmation";
 import { screenContext } from "./src/providers/screenContext";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
-import { DB_ENDPOINT } from "@env";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "./src/providers/reducers/userReducer";
+import { currentScreen, previousScreen } from "./src/providers/reducers/screenReducer";
 
 
 export default function App() {
 
   const customer = useSelector(state => state.reducer_user);
+  const page = useSelector(state => state.reducer_screen);
   const dispatch = useDispatch();
   const [ozow, setOzow] = useState(false);
-  const [previous, setPrevious] = useState("Home");
-  const [screen, setScreen] = useState("Home");
 
   useEffect(() => {
 
@@ -104,8 +102,8 @@ export default function App() {
     return (
 
       <Pressable onPress={() => { ozow && setOzow(false);
-                                  setPrevious(screen);
-                                  setScreen(routeName);
+                                  dispatch(previousScreen(page.screen));
+                                  dispatch(currentScreen(routeName));
                                   navigate(routeName); } }
 
                  style={styles.tabItem}>
@@ -120,7 +118,7 @@ export default function App() {
 
   return (
 
-    <screenContext.Provider value={{ screen, setScreen, setPrevious, ozow, setOzow }}>
+    <screenContext.Provider value={{ ozow, setOzow }}>
 
       <NavigationContainer>
 
@@ -133,44 +131,44 @@ export default function App() {
                                    bgColor="white"
                                    initialRouteName="Home"
                                    tabBar={renderTabBar}
-                                   screenOptions={{ headerTitle: (screen === "Buy") ? "Buy" :
-                                                                 (screen === "TopUp") ? "Top Up" :
-                                                                 (screen === "BuyAirtime") ? "Buy Airtime" :
-                                                                 (screen === "BuyData") ? "Buy Data" :
-                                                                 (screen === "BuyElectricity") ? "Buy Electricity" :
-                                                                 (screen === "Withdraw") ? "Withdraw Cash" :
-                                                                 (screen === "StockMarket") ? "Stock Market" :
-                                                                 (screen === "SendMoney") ? "Send Money" :
-                                                                 (screen === "ReceiveMoney") ? "Receive Money" :
-                                                                 ((screen === "Confirmation") && (previous === "TopUp")) ? "Top Up" :
-                                                                 ((screen === "Confirmation") && (previous === "BuyAirtime")) ? "Buy Airtime" :
-                                                                 ((screen === "Confirmation") && (previous === "BuyData")) ? "Buy Data" :
-                                                                 ((screen === "Confirmation") && (previous === "BuyElectricity")) ? "Buy Electricity" :
-                                                                 ((screen === "Confirmation") && (previous === "Withdraw")) ? "Withdraw Cash" :
-                                                                 ((screen === "Confirmation") && (previous === "StockMarket")) ? "Stock Market" :
-                                                                 ((screen === "Confirmation") && (previous === "SendMoney")) ? "Send Money" :
-                                                                 ((screen === "Confirmation") && (previous === "ReceiveMoney")) ? "Receive Money" :
+                                   screenOptions={{ headerTitle: (page.screen === "Buy") ? "Buy" :
+                                                                 (page.screen === "TopUp") ? "Top Up" :
+                                                                 (page.screen === "BuyAirtime") ? "Buy Airtime" :
+                                                                 (page.screen === "BuyData") ? "Buy Data" :
+                                                                 (page.screen === "BuyElectricity") ? "Buy Electricity" :
+                                                                 (page.screen === "Withdraw") ? "Withdraw Cash" :
+                                                                 (page.screen === "StockMarket") ? "Stock Market" :
+                                                                 (page.screen === "SendMoney") ? "Send Money" :
+                                                                 (page.screen === "ReceiveMoney") ? "Receive Money" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "TopUp")) ? "Top Up" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyAirtime")) ? "Buy Airtime" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyData")) ? "Buy Data" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "BuyElectricity")) ? "Buy Electricity" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "Withdraw")) ? "Withdraw Cash" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "StockMarket")) ? "Stock Market" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "SendMoney")) ? "Send Money" :
+                                                                 ((page.screen === "Confirmation") && (page.previous === "ReceiveMoney")) ? "Receive Money" :
                                                                  `👋 Hi, ${customer.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
 
                                                     headerLeft: () => {
 
                                                       const navigation = useNavigation();
 
-                                                      return ((screen === "Buy") ||
-                                                              (screen === "TopUp") ||
-                                                              (screen === "BuyData") ||
-                                                              (screen === "BuyElectricity") ||
-                                                              (screen === "Withdraw") ||
-                                                              (screen === "StockMarket") ||
-                                                              (screen === "SendMoney") ||
-                                                              (screen === "ReceiveMoney") ||
-                                                              (screen === "BuyAirtime")) && <Pressable style={styles.back}
+                                                      return ((page.screen === "Buy") ||
+                                                              (page.screen === "TopUp") ||
+                                                              (page.screen === "BuyData") ||
+                                                              (page.screen === "BuyElectricity") ||
+                                                              (page.screen === "Withdraw") ||
+                                                              (page.screen === "StockMarket") ||
+                                                              (page.screen === "SendMoney") ||
+                                                              (page.screen === "ReceiveMoney") ||
+                                                              (page.screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                        onPress={() => { 
-                                                                                                                        constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(previous) ? true : false);
-                                                                                                                        setPrevious(screen);
-                                                                                                                        setScreen((screen === "Buy") ? "Home" : previous);
+                                                                                                                        constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(page.previous) ? true : false);
+                                                                                                                        dispatch(previousScreen(page.screen));
+                                                                                                                        dispatch(currentScreen((page.screen === "Buy") ? "Home" : page.previous));
                                                                                                                         setOzow(false);
-                                                                                                                        navigation.navigate((screen === "Buy") ? "Home" : previous); }}>
+                                                                                                                        navigation.navigate((page.screen === "Buy") ? "Home" : page.previous); }}>
 
                                                                                                 <Image source={require("./src/assets/icons/left.png")}
                                                                                                        style={styles.backIcon} />
@@ -190,9 +188,9 @@ export default function App() {
                                                     <Animated.View>
 
                                                       <Pressable style={styles.button}
-                                                                 onPress={() => { !ozow && setPrevious(selectedTab);
-                                                                                  !ozow ? navigate("Services") : navigate(previous);
-                                                                                  setOzow(!ozow); } }>
+                                                                  onPress={() => { !ozow && dispatch(previousScreen(selectedTab));
+                                                                                   !ozow ? navigate("Services") : navigate(page.previous);
+                                                                                   setOzow(!ozow); } }>
 
                                                         { !ozow ? <LinearGradient colors={[constants.primary, constants.secondary]}
                                                                                   style={styles.circleButton}

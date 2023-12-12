@@ -1,22 +1,22 @@
 import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
-import { screenContext } from "../../providers/screenContext";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
 
 export default function Confirmation() {
 
     const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const route = useRoute();
     const navigation = useNavigation();
     const { animation, header, size } = route.params;
-    const { setPrevious, setScreen, screen } = useContext(screenContext);
     const [text, setText] = useState(header);
 
     const updateStorage = async () => {
@@ -38,8 +38,8 @@ export default function Confirmation() {
                 setTimeout(() => {
 
                     constants.tabBarRef?.current?.setVisible(true);
-                    setPrevious(screen);
-                    setScreen("Home");
+                    dispatch(previousScreen(page.screen));
+                    dispatch(currentScreen("Home"));
                     navigation.navigate("Home");
 
                 }, 1);

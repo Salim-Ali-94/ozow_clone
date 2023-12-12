@@ -1,20 +1,20 @@
 import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar, FlatList } from "react-native";
-import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import PocketBalanceCard from "../../components/PocketBalanceCard";
 import ActionCard from "../../components/ActionCard";
 import TransactionBox from "../../components/TransactionBox";
 import * as constants from "../../utility/constants";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
 
 export default function Home() {
 
+  const dispatch = useDispatch();
   const customer = useSelector(state => state.reducer_user.user);
-  const { screen, setScreen, setPrevious } = useContext(screenContext)
+  const page = useSelector(state => state.reducer_screen);
   const navigation = useNavigation();
 
   return (
@@ -57,8 +57,8 @@ export default function Home() {
                       renderItem={({ item, index }) => (<ActionCard category={item.category}
                                                                     icon={item.icon}
                                                                     pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                           setPrevious(screen);
-                                                                                                           setScreen(item.route);
+                                                                                                           dispatch(previousScreen(page.screen));
+                                                                                                           dispatch(currentScreen(item.route));    
                                                                                                            navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                     left_gap={(index === 0) ? 20 : 10}
                                                                     right_gap={(index === constants.actions.length - 1) ? 20 : 0}

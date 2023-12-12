@@ -15,14 +15,16 @@ import * as utility from "../../utility/utility";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
   
 export default function ReceiveMoney() {
 
     const dispatch = useDispatch();
     const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, setOzow } = useContext(screenContext);
+    const { setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [category, setCategory] = useState(constants.transactionCategories[0].value);
@@ -133,8 +135,8 @@ export default function ReceiveMoney() {
                                                                                     status: status, id: uuid }));
 
                                                         axios.patch(DB_ENDPOINT + "registerTransaction", { id: customer.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
-                                                        setPrevious(screen);
-                                                        setScreen("Confirmation");
+                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),
                                                                                               header: "Receiving your cash..." }); }} />
 

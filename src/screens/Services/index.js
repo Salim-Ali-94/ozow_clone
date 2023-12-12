@@ -2,17 +2,21 @@ import { Alert, View, Text, SafeAreaView, ScrollView, StatusBar } from "react-na
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import InfoCard from "../../components/InfoCard";
 import DetailsCard from "../../components/DetailsCard";
 import GradientHeader from "../../components/GradientHeader";
 import * as constants from "../../utility/constants";
 import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 
 
 export default function Services() {
 
-  const { screen, setScreen, setPrevious, ozow, setOzow } = useContext(screenContext);
+  const dispatch = useDispatch();
+  const page = useSelector(state => state.reducer_screen);
+  const { ozow, setOzow } = useContext(screenContext);
   const navigation = useNavigation();
 
   return (
@@ -43,8 +47,8 @@ export default function Services() {
                 { constants.info.slice(0, 2).map((item, index) => [<InfoCard icon={item.icon}
                                                                              info={item.info}
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                                    setPrevious(screen);
-                                                                                                                    setScreen(item.route);
+                                                                                                                    dispatch(previousScreen(page.screen));
+                                                                                                                    dispatch(currentScreen(item.route));
                                                                                                                     setOzow(!ozow);
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
@@ -63,8 +67,8 @@ export default function Services() {
                                                                              info={item.info}
                                                                              category={item.category}
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                                    setPrevious(screen);
-                                                                                                                    setScreen(item.route);
+                                                                                                                    dispatch(previousScreen(page.screen));
+                                                                                                                    dispatch(currentScreen(item.route));
                                                                                                                     setOzow(!ozow);
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
@@ -90,8 +94,8 @@ export default function Services() {
                                                                       icon={item.icon}
                                                                       iconSize={item.size}
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                             setPrevious(screen);
-                                                                                                             setScreen(item.route);
+                                                                                                            dispatch(previousScreen(page.screen));
+                                                                                                            dispatch(currentScreen(item.route));
                                                                                                               setOzow(!ozow);
                                                                                                             //  setOzow(false);
                                                                                                              navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
@@ -112,8 +116,8 @@ export default function Services() {
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
                              pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
-                                                  setPrevious(screen);
-                                                  setScreen("StockMarket");
+                                                  dispatch(previousScreen(page.screen));
+                                                  dispatch(currentScreen("StockMarket"));
                                                   navigation.navigate("StockMarket"); }}
 
                              key={"service_stocks_details_card"} />
