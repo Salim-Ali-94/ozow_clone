@@ -1,22 +1,20 @@
 import { View, Text, Pressable, Image } from "react-native";
-import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import EmptyTransactions from "../EmptyTransactions";
 import TransactionRow from "../TransactionRow";
 import HorizontalDivider from "../HorizontalDivider";
-// import * as constants from "../../utility/constants";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function TransactionBox() {
 
+    const customer = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
-    const { user } = useContext(screenContext);
 
     return (
 
-        <View style={[styles.container, { height: (user.transactions.length > 0) && 450, paddingBottom: (user.transactions.length === 0) && 20 }]}>
+        <View style={[styles.container, { height: (customer.transactions.length > 0) && 450, paddingBottom: (customer.transactions.length === 0) && 20 }]}>
 
             <View style={styles.header}>
 
@@ -34,27 +32,27 @@ export default function TransactionBox() {
 
             </View>
 
-            { (user.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
+            { (customer.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
-                                              <View style={styles.transactions}>
+                                                    <View style={styles.transactions}>
 
-                                                  { user.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
-                                                                                                           key={"transactions_box_container_" + item.id}>
+                                                        { customer.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
+                                                                                                                        key={"transactions_box_container_" + item.id}>
 
-                                                                                                        <TransactionRow amount={item.amount}
-                                                                                                                        status={item.status}
-                                                                                                                        direction={item.direction}
-                                                                                                                        reference={item.reference}
-                                                                                                                        category={item.category}
-                                                                                                                        date={item.date}
-                                                                                                                        screen={"home"}
-                                                                                                                        key={"transactions_box_" + item.id} />
+                                                                                                                        <TransactionRow amount={item.amount}
+                                                                                                                                        status={item.status}
+                                                                                                                                        direction={item.direction}
+                                                                                                                                        reference={item.reference}
+                                                                                                                                        category={item.category}
+                                                                                                                                        date={item.date}
+                                                                                                                                        screen={"home"}
+                                                                                                                                        key={"transactions_box_" + item.id} />
 
-                                                                                                    </View>,
+                                                                                                                    </View>,
 
-                                                                                                    (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
+                                                                                                                    (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
 
-                                              </View> }
+                                                    </View> }
 
         </View>
 

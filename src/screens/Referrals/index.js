@@ -1,5 +1,6 @@
 import { View, Text, SafeAreaView, StatusBar, FlatList } from "react-native";
-import { useState, useContext } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import SearchInput from "../../components/SearchInput";
 import HorizontalDivider from "../../components/HorizontalDivider";
@@ -7,13 +8,12 @@ import FilterBox from "../../components/FilterBox";
 import Contact from "../../components/Contact";
 import * as constants from "../../utility/constants";
 import * as utility from "../../utility/utility";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 
 
 export default function Referrals() {
 
-  const { user } = useContext(screenContext);
+  const customer = useSelector(state => state.reducer_user.user);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(constants.contacts);
 
@@ -41,7 +41,7 @@ export default function Referrals() {
             <View style={styles.centerAlign}>
 
               <SearchInput placeholder={"Search your contacts"}
-                           onChangeText={(value) => utility.searchFilter(user.contacts, value, setFilteredData, setSearchQuery, "name")}
+                           onChangeText={(value) => utility.searchFilter(customer.contacts, value, setFilteredData, setSearchQuery, "name")}
                            value={searchQuery}
                            key={"refer_search"} />
 

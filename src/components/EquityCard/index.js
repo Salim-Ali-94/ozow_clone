@@ -1,17 +1,17 @@
 import { View, Pressable, Text } from "react-native";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { LineChart } from "react-native-gifted-charts";
 import * as constants from "../../utility/constants";
 import LinearGradient from "react-native-linear-gradient";
 import { SvgUri } from "react-native-svg";
-import { screenContext } from "../../providers/screenContext";
 import PopUp from "../PopUp";
 import styles from "./styles";
 
 
 export default function EquityCard({ data, logo, ticker, price, high, low, gap }) {
 
-    const { user } = useContext(screenContext);
+    const customer = useSelector(state => state.reducer_user.user);
     const [open, setOpen] = useState(false);
     const [shares, setShares] = useState("");
 
@@ -71,7 +71,7 @@ export default function EquityCard({ data, logo, ticker, price, high, low, gap }
             <PopUp open={open}
                    setOpen={setOpen}
                    ticker={ticker}
-                   balance={user.balance}
+                   balance={customer.balance}
                    price={price}
                    low={low}
                    high={high}

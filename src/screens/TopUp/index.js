@@ -2,21 +2,25 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
-import { useContext } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
 import * as constants from "../../utility/constants";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
   
 export default function TopUp() {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
     const [bank, setBank] = useState(constants.banks[0].value);
@@ -81,11 +85,11 @@ export default function TopUp() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
                                 pressAction={() => { 
-                                                        setOzow(false);
-                                                        setUser({...user, balance: user.balance + parseFloat(amount)});
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)});
-                                                        setPrevious(screen);
-                                                        setScreen("Confirmation");
+                                                        dispatch(toggleState(false));
+                                                        dispatch(updateBalance(customer.balance + parseFloat(amount)));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
                                                                                               header: "Authenticating your request..." }); }} />
 

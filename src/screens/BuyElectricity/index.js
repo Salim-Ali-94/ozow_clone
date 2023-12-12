@@ -2,20 +2,24 @@ import { View, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
-import { useContext } from "react";
 import InputText from "../../components/InputText";
 import ContinueButton from "../../components/ContinueButton";
-import { screenContext } from "../../providers/screenContext";
 import { styles } from "./styles";
 import * as constants from "../../utility/constants";
 import { DB_ENDPOINT } from "@env";
+import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
+import { toggleState } from "../../providers/reducers/ozowReducer";
 
   
 export default function BuyElectricity() {
 
+    const dispatch = useDispatch();
+    const customer = useSelector(state => state.reducer_user.user);
+    const page = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
-    const { setPrevious, setScreen, screen, user, setUser, setOzow } = useContext(screenContext);
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
     const [amountFocused, setAmountFocused] = useState(false);
@@ -62,11 +66,11 @@ export default function BuyElectricity() {
 
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
                                 pressAction={ () => { 
-                                                        setOzow(false);
-                                                        setUser({...user, balance: user.balance - parseFloat(amount) / 10});
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
-                                                        setPrevious(screen);
-                                                        setScreen("Confirmation");
+                                                        dispatch(toggleState(false));
+                                                        dispatch(updateBalance(customer.balance - parseFloat(amount) / 10));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) / 10 });
+                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),
                                                                                               header: "Fetching units for your meter..." }); }} />
 
