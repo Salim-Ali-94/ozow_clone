@@ -12,8 +12,8 @@ import { previousScreen, currentScreen } from "../../providers/reducers/screenRe
 
 export default function Confirmation() {
 
-    const customer = useSelector(state => state.reducer_user.user);
-    const page = useSelector(state => state.reducer_screen);
+    const user = useSelector(state => state.reducer_user.user);
+    const screen = useSelector(state => state.reducer_screen);
     const route = useRoute();
     const navigation = useNavigation();
     const { animation, header, size } = route.params;
@@ -21,7 +21,7 @@ export default function Confirmation() {
 
     const updateStorage = async () => {
         
-        await AsyncStorage.setItem("user", JSON.stringify(customer));
+        await AsyncStorage.setItem("user", JSON.stringify(user));
 
     }
 
@@ -38,7 +38,7 @@ export default function Confirmation() {
                 setTimeout(() => {
 
                     constants.tabBarRef?.current?.setVisible(true);
-                    dispatch(previousScreen(page.screen));
+                    dispatch(previousScreen(screen.screen));
                     dispatch(currentScreen("Home"));
                     navigation.navigate("Home");
 

@@ -15,8 +15,8 @@ import { previousScreen, currentScreen } from "../../providers/reducers/screenRe
 export default function Pocket() {
 
   const dispatch = useDispatch();
-  const customer = useSelector(state => state.reducer_user.user);
-  const page = useSelector(state => state.reducer_screen);
+  const user = useSelector(state => state.reducer_user.user);
+  const screen = useSelector(state => state.reducer_screen);
   const navigation = useNavigation();
 
   return (
@@ -40,7 +40,7 @@ export default function Pocket() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={customer.balance}
+              <PocketBalanceCard amount={user.balance}
                                  shadow={false}
                                  key={"pocket_pocket_balance_card"} />
 
@@ -62,7 +62,7 @@ export default function Pocket() {
                                                                 category={item.category}
                                                                 key={"pocket_" + item.id} 
                                                                 pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                       dispatch(previousScreen(page.screen));
+                                                                                                       dispatch(previousScreen(screen.screen));
                                                                                                        dispatch(currentScreen(item.route));
                                                                                                        navigation.navigate(item.route);
                                                                                                     
@@ -80,11 +80,11 @@ export default function Pocket() {
 
               <View style={styles.transactionsHolder}>
 
-                { (customer.transactions.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
+                { (user.transactions.length === 0) ? <EmptyTransactions key={"pocket_empty"} /> :
 
                                                           <View style={styles.transactions}>
 
-                                                              { customer.transactions.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
+                                                              { user.transactions.map((item, index) => [<View style={styles.entry} key={"pocket_row_container_" + item.id}>
 
                                                                                                                 <TransactionRow amount={item.amount}
                                                                                                                                 status={item.status}
@@ -97,7 +97,7 @@ export default function Pocket() {
 
                                                                                                             </View>,
 
-                                                                                                            (index < customer.transactions.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
+                                                                                                            (index < user.transactions.length - 1) && <HorizontalDivider key={"pocket_" + index.toString()} />]) }
 
                                                           </View> }
 

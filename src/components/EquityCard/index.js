@@ -11,7 +11,7 @@ import styles from "./styles";
 
 export default function EquityCard({ data, logo, ticker, price, high, low, gap }) {
 
-    const customer = useSelector(state => state.reducer_user.user);
+    const user = useSelector(state => state.reducer_user.user);
     const [open, setOpen] = useState(false);
     const [shares, setShares] = useState("");
 
@@ -71,7 +71,7 @@ export default function EquityCard({ data, logo, ticker, price, high, low, gap }
             <PopUp open={open}
                    setOpen={setOpen}
                    ticker={ticker}
-                   balance={customer.balance}
+                   balance={user.balance}
                    price={price}
                    low={low}
                    high={high}

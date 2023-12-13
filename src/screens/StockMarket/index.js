@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 
 export default function StockMarket() {
 
-    const customer = useSelector(state => state.reducer_user.user);
+    const user = useSelector(state => state.reducer_user.user);
     const polygon = restClient(POLYGON_KEY);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredData, setFilteredData] = useState([]);
@@ -186,10 +186,10 @@ export default function StockMarket() {
 
             </View>
 
-            { (customer.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
+            { (user.portfolio.length > 0) && <Text style={[styles.sectionText, { marginTop: 30 }]}>Your portfolio</Text> }
 
-            { (customer.portfolio.length > 0) && <FlatList horizontal={true}
-                                                           data={customer.portfolio}
+            { (user.portfolio.length > 0) && <FlatList horizontal={true}
+                                                           data={user.portfolio}
                                                            showsHorizontalScrollIndicator={false}
                                                            renderItem={({ item, index }) => (<CompanyBox ticker={item.ticker}
                                                                                                          price={item.price}
@@ -197,7 +197,7 @@ export default function StockMarket() {
                                                                                                          low={item.low}
                                                                                                          stocks={item.shares}
                                                                                                          logo={item.logo}
-                                                                                                         gap_right={(index === customer.portfolio.length - 1) ? 20 : 10}
+                                                                                                         gap_right={(index === user.portfolio.length - 1) ? 20 : 10}
                                                                                                          gap_left={(index === 0) && 20}
                                                                                                          key={item.ticker} />)} /> }
 

@@ -14,9 +14,9 @@ import { useSelector } from "react-redux";
 
 export default function Transactions() {
 
-    const customer = useSelector(state => state.reducer_user.user);
+    const user = useSelector(state => state.reducer_user.user);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredData, setFilteredData] = useState(customer.transactions);
+    const [filteredData, setFilteredData] = useState(user.transactions);
 
     return (
 
@@ -38,7 +38,7 @@ export default function Transactions() {
                 <View style={styles.search}>
 
                     <SearchInput placeholder={"Search EFT transactions"}
-                                 onChangeText={(value) => utility.searchFilter(customer.transactions, value, setFilteredData, setSearchQuery, "reference")}
+                                 onChangeText={(value) => utility.searchFilter(user.transactions, value, setFilteredData, setSearchQuery, "reference")}
                                  value={searchQuery}
                                  key={"transactions_search"} />
 

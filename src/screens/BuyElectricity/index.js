@@ -17,8 +17,8 @@ import { toggleState } from "../../providers/reducers/ozowReducer";
 export default function BuyElectricity() {
 
     const dispatch = useDispatch();
-    const customer = useSelector(state => state.reducer_user.user);
-    const page = useSelector(state => state.reducer_screen);
+    const user = useSelector(state => state.reducer_user.user);
+    const screen = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
@@ -67,9 +67,9 @@ export default function BuyElectricity() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
                                 pressAction={ () => { 
                                                         dispatch(toggleState(false));
-                                                        dispatch(updateBalance(customer.balance - parseFloat(amount) / 10));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount) / 10 });
-                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(updateBalance(user.balance - parseFloat(amount) / 10));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
+                                                        dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),
                                                                                               header: "Fetching units for your meter..." }); }} />
