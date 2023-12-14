@@ -85,7 +85,7 @@ function encrypt(text, key) {
 
     for (let index = 0; index < text.length; index++) {
 
-        cipher += String.fromCharCode(text.charCodeAt(index) ^ key);
+        cipher += String.fromCharCode(text.charCodeAt(index) ^ parseInt(key));
 
     }
 
