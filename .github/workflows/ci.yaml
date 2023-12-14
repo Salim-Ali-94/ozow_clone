@@ -92,6 +92,17 @@ jobs:
 
   #         node-version: 18.15.0
 
+      # - name: Create a duplicate of the .env file
+      #   run: |
+      #     touch .env
+      #     echo DB_ENDPOINT=${{ secrets.DB_ENDPOINT }} >> .env
+      #     echo POLYGON_KEY=${{ secrets.POLYGON_KEY }} >> .env
+      #     echo NINJA_API_KEY=${{ secrets.NINJA_API_KEY }} >> .env
+      #     echo NINJA_API_ENDPOINT=${{ secrets.NINJA_API_ENDPOINT }} >> .env
+      #     echo LOGO_URL=${{ secrets.LOGO_URL }} >> .env
+      #     echo KEY=${{ secrets.KEY }} >> .env
+      #     cat .env
+
   #     - name: Install dependencies required for running the web app on Github host machine
   #       run: npm install --force
 
