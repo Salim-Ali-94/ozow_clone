@@ -79,14 +79,22 @@ export const data = [{ reference: "Logan",
                     amount: 53.6,
                     id: "coffee_a0b1" }];
 
-export const user = { name: "Salim",
-                      // id: "fnA3ik1q8PHN8daPjqQw",
-                      id: utility.uuid(20),
-                      // balance: 123456789.87,
-                      balance: 0,
-                      transactions: data,
-                      portfolio: [],
-                      contacts: contacts };
+// export const user = { name: "Salim",
+//                       // id: "fnA3ik1q8PHN8daPjqQw",
+//                       id: utility.uuid(20),
+//                       // balance: 123456789.87,
+//                       balance: 0,
+//                       transactions: data,
+//                       portfolio: [],
+//                       contacts: contacts };
+// export const user = { name: "",
+export var user = { name: "",
+                    id: utility.uuid(20),
+                    balance: 0,
+                    password: "",
+                    transactions: [],
+                    portfolio: [],
+                    contacts: contacts };
 
 export const whiteList = { 
                           //  twitter: [{ ticker: "TWTR" }],

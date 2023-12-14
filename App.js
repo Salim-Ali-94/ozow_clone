@@ -1,7 +1,8 @@
-import { Image, Animated, Pressable, View } from "react-native";
+import { Image, Animated, Pressable, View, Alert } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { CurvedBottomBar } from "react-native-curved-bottom-bar";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import LinearGradient from "react-native-linear-gradient";
 import Home from "./src/screens/Home";
 import Pocket from "./src/screens/Pocket";
@@ -18,30 +19,50 @@ import StockMarket from "./src/screens/StockMarket";
 import SendMoney from "./src/screens/SendMoney";
 import ReceiveMoney from "./src/screens/ReceiveMoney";
 import Confirmation from "./src/screens/Confirmation";
+import UserModal from "./src/components/UserModal";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUser } from "./src/providers/reducers/userReducer";
+import { assignUser } from "./src/providers/reducers/userReducer";
 import { currentScreen, previousScreen } from "./src/providers/reducers/screenReducer";
 import { toggleState } from "./src/providers/reducers/ozowReducer";
 
 
 export default function App() {
 
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const user = useSelector(state => state.reducer_user);
   const screen = useSelector(state => state.reducer_screen);
   const ozow = useSelector(state => state.reducer_ozow.ozow);
   const dispatch = useDispatch();
 
+  const fetchUser = async () => {
+
+    const person = await AsyncStorage.getItem("user");
+
+    if (person !== null) {
+
+      dispatch(assignUser(JSON.parse(person)));
+
+    } else {
+
+      setOpen(true);
+
+    }
+
+  }
+
   useEffect(() => {
 
     if (user.status === "idle") {
 
-      dispatch(fetchUser());
+      fetchUser();
 
     }
 
-  }, [dispatch, user]);
+  }, []);
 
   const _renderIcon = (routeName, selectedTab) => {
 
@@ -121,32 +142,32 @@ export default function App() {
     <NavigationContainer>
 
       <CurvedBottomBar.Navigator type="DOWN"
-                                  ref={constants.tabBarRef}
-                                  style={styles.bottomBar}
-                                  shadowStyle={styles.shadow}
-                                  height={50}
-                                  circleWidth={50}
-                                  bgColor="white"
-                                  initialRouteName="Home"
-                                  tabBar={renderTabBar}
-                                  screenOptions={{ headerTitle: (screen.screen === "Buy") ? "Buy" :
-                                                                (screen.screen === "TopUp") ? "Top Up" :
-                                                                (screen.screen === "BuyAirtime") ? "Buy Airtime" :
-                                                                (screen.screen === "BuyData") ? "Buy Data" :
-                                                                (screen.screen === "BuyElectricity") ? "Buy Electricity" :
-                                                                (screen.screen === "Withdraw") ? "Withdraw Cash" :
-                                                                (screen.screen === "StockMarket") ? "Stock Market" :
-                                                                (screen.screen === "SendMoney") ? "Send Money" :
-                                                                (screen.screen === "ReceiveMoney") ? "Receive Money" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "TopUp")) ? "Top Up" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "BuyAirtime")) ? "Buy Airtime" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "BuyData")) ? "Buy Data" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "BuyElectricity")) ? "Buy Electricity" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "Withdraw")) ? "Withdraw Cash" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "StockMarket")) ? "Stock Market" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "SendMoney")) ? "Send Money" :
-                                                                ((screen.screen === "Confirmation") && (screen.previous === "ReceiveMoney")) ? "Receive Money" :
-                                                                `👋 Hi, ${user.user.name}`, headerShadowVisible: false, headerTitleAlign: "center",
+                                 ref={constants.tabBarRef}
+                                 style={styles.bottomBar}
+                                 shadowStyle={styles.shadow}
+                                 height={50}
+                                 circleWidth={50}
+                                 bgColor="white"
+                                 initialRouteName="Home"
+                                 tabBar={renderTabBar}
+                                 screenOptions={{ headerTitle: (screen.screen === "Buy") ? "Buy" :
+                                                               (screen.screen === "TopUp") ? "Top Up" :
+                                                               (screen.screen === "BuyAirtime") ? "Buy Airtime" :
+                                                               (screen.screen === "BuyData") ? "Buy Data" :
+                                                               (screen.screen === "BuyElectricity") ? "Buy Electricity" :
+                                                               (screen.screen === "Withdraw") ? "Withdraw Cash" :
+                                                               (screen.screen === "StockMarket") ? "Stock Market" :
+                                                               (screen.screen === "SendMoney") ? "Send Money" :
+                                                               (screen.screen === "ReceiveMoney") ? "Receive Money" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "TopUp")) ? "Top Up" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "BuyAirtime")) ? "Buy Airtime" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "BuyData")) ? "Buy Data" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "BuyElectricity")) ? "Buy Electricity" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "Withdraw")) ? "Withdraw Cash" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "StockMarket")) ? "Stock Market" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "SendMoney")) ? "Send Money" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "ReceiveMoney")) ? "Receive Money" :
+                                                               (user.user.name !== "") ? `👋 Hi, ${user.user.name}` : "", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                   headerLeft: () => {
 
@@ -161,17 +182,17 @@ export default function App() {
                                                             (screen.screen === "SendMoney") ||
                                                             (screen.screen === "ReceiveMoney") ||
                                                             (screen.screen === "BuyAirtime")) && <Pressable style={styles.back}
-                                                                                                      onPress={() => { 
-                                                                                                                      constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
-                                                                                                                      dispatch(previousScreen(screen.screen));
-                                                                                                                      dispatch(currentScreen((screen.screen === "Buy") ? "Home" : screen.previous));
-                                                                                                                      dispatch(toggleState(false));
-                                                                                                                      navigation.navigate((screen.screen === "Buy") ? "Home" : screen.previous); }}>
+                                                                                                            onPress={() => {
+                                                                                                                              constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
+                                                                                                                              dispatch(previousScreen(screen.screen));
+                                                                                                                              dispatch(currentScreen((screen.screen === "Buy") ? "Home" : screen.previous));
+                                                                                                                              dispatch(toggleState(false));
+                                                                                                                              navigation.navigate((screen.screen === "Buy") ? "Home" : screen.previous); } }>
 
-                                                                                              <Image source={require("./src/assets/icons/left.png")}
-                                                                                                      style={styles.backIcon} />
+                                                                                                    <Image source={require("./src/assets/icons/left.png")}
+                                                                                                           style={styles.backIcon} />
 
-                                                                                          </Pressable>
+                                                                                                </Pressable>
 
                                                   },
 
@@ -264,6 +285,14 @@ export default function App() {
                                   component={() => <ReceiveMoney key={"accept_money_screen"} />} />
 
       </CurvedBottomBar.Navigator>
+
+
+      <UserModal open={open}
+                 setOpen={setOpen}
+                 password={password}
+                 setPassword={setPassword}
+                 name={name}
+                 setName={setName} />
 
     </NavigationContainer>
 

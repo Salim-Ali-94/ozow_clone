@@ -95,4 +95,34 @@ app.patch("/removeStock", async (request, response) => {
 
 });
 
+app.get("/findUser", async (request, response) => {
+
+    const { name, password } = request.query;
+
+    try {
+
+        const users = db.collection("users");
+        const user = await users.where("name", "==", name)
+                                .where("password", "==", password)
+                                .get();
+
+        if (user.empty) {
+
+            response.status(200).send({});
+
+        } else {
+
+            const data = user.docs[0].data();
+            response.status(200).send(data);
+
+        }
+
+    } catch (error) {
+
+        response.status(500).send({ error: "Internal Server Error" });
+
+    }
+
+});
+
 app.listen(port, () => console.log(`Server running on port: ${port}`))

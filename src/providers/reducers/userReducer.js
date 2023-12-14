@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
 import * as constants from "../../utility/constants";
-import { DB_ENDPOINT } from "@env";
 
 
 const initialState = {
@@ -12,34 +9,6 @@ const initialState = {
     error: null,
 
 };
-
-export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
-
-    try {
-
-        const person = await AsyncStorage.getItem("user");
-
-        if (person !== null) {
-
-            return JSON.parse(person);
-
-        } else {
-
-            const human = constants.user;
-            await AsyncStorage.setItem("user", JSON.stringify(human));
-            axios.post(DB_ENDPOINT + "storeUser", human).then(response => console.log("ADDED USER")).catch(err => console.log("Error:", err));
-            return human;
-
-        }
-
-    } catch (error) {
-
-        console.log("Error:", error);
-        throw error;
-
-    }
-
-});
 
 const userSlice = createSlice({
 
@@ -74,37 +43,23 @@ const userSlice = createSlice({
 
         updateShares: (state, action) => {
 
-            // const { ticker, shares } = action.payload;
-            // let company = state.user.portfolio.find(company => company.ticker === ticker);
-            let company = state.user.portfolio.find(company => company.ticker === action.payload.ticker);
-            // company.shares = shares;
-            company.shares = action.payload.shares;
+            // let company = state.user.portfolio.find(company => company.ticker === action.payload.ticker);
+            // company.shares = action.payload.shares;
+            const { ticker, shares } = action.payload;
+            let company = state.user.portfolio.find(company => company.ticker === ticker);
+            company.shares = shares;
+            
+        },
 
-        }
+        assignUser: (state, action) => {
 
-    },
-
-    extraReducers: (builder) => {
-
-        builder.addCase(fetchUser.pending, (state) => {
-
-            state.status = "loading";
-
-        }).addCase(fetchUser.fulfilled, (state, action) => {
-
-            state.status = "succeeded";
             state.user = action.payload;
 
-        }).addCase(fetchUser.rejected, (state, action) => {
-
-            state.status = "failed";
-            state.error = action.error.message;
-
-        });
+        }
 
     }
 
 });
 
-export const { updateBalance, storeTransaction, addStock, removeStock, updateShares } = userSlice.actions;
+export const { updateBalance, storeTransaction, addStock, removeStock, updateShares, assignUser } = userSlice.actions;
 export default userSlice.reducer;
