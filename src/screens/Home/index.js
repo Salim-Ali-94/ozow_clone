@@ -13,8 +13,8 @@ import { previousScreen, currentScreen } from "../../providers/reducers/screenRe
 export default function Home() {
 
   const dispatch = useDispatch();
-  const customer = useSelector(state => state.reducer_user.user);
-  const page = useSelector(state => state.reducer_screen);
+  const user = useSelector(state => state.reducer_user.user);
+  const screen = useSelector(state => state.reducer_screen);
   const navigation = useNavigation();
 
   return (
@@ -38,7 +38,7 @@ export default function Home() {
 
             <View style={styles.centerAlign}>
 
-              <PocketBalanceCard amount={customer.balance}
+              <PocketBalanceCard amount={user.balance}
                                  shadow={true}
                                  key={"home_pocket_balance_card"} />
 
@@ -57,7 +57,7 @@ export default function Home() {
                       renderItem={({ item, index }) => (<ActionCard category={item.category}
                                                                     icon={item.icon}
                                                                     pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                           dispatch(previousScreen(page.screen));
+                                                                                                           dispatch(previousScreen(screen.screen));
                                                                                                            dispatch(currentScreen(item.route));    
                                                                                                            navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                     left_gap={(index === 0) ? 20 : 10}

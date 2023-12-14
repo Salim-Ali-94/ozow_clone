@@ -18,8 +18,8 @@ import { toggleState } from "../../providers/reducers/ozowReducer";
 export default function TopUp() {
 
     const dispatch = useDispatch();
-    const customer = useSelector(state => state.reducer_user.user);
-    const page = useSelector(state => state.reducer_screen);
+    const user = useSelector(state => state.reducer_user.user);
+    const screen = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
     const [amount, setAmount] = useState("");
     const [password, setPassword] = useState("");
@@ -86,9 +86,9 @@ export default function TopUp() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
                                 pressAction={() => { 
                                                         dispatch(toggleState(false));
-                                                        dispatch(updateBalance(customer.balance + parseFloat(amount)));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
-                                                        dispatch(previousScreen(page.screen));
+                                                        dispatch(updateBalance(user.balance + parseFloat(amount)));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+                                                        dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),
                                                                                               header: "Authenticating your request..." }); }} />

@@ -13,7 +13,7 @@ import { styles } from "./styles";
 
 export default function Referrals() {
 
-  const customer = useSelector(state => state.reducer_user.user);
+  const user = useSelector(state => state.reducer_user.user);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState(constants.contacts);
 
@@ -41,7 +41,7 @@ export default function Referrals() {
             <View style={styles.centerAlign}>
 
               <SearchInput placeholder={"Search your contacts"}
-                           onChangeText={(value) => utility.searchFilter(customer.contacts, value, setFilteredData, setSearchQuery, "name")}
+                           onChangeText={(value) => utility.searchFilter(user.contacts, value, setFilteredData, setSearchQuery, "name")}
                            value={searchQuery}
                            key={"refer_search"} />
 

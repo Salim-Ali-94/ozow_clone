@@ -21,8 +21,8 @@ import { toggleState } from "../../providers/reducers/ozowReducer";
 export default function SendMoney() {
 
     const dispatch = useDispatch();
-    const customer = useSelector(state => state.reducer_user.user);
-    const page = useSelector(state => state.reducer_screen);
+    const user = useSelector(state => state.reducer_user.user);
+    const screen = useSelector(state => state.reducer_screen);
     const navigation = useNavigation();
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
@@ -128,15 +128,15 @@ export default function SendMoney() {
                                                                           hour12: false };
 
                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
-                                                        dispatch(updateBalance(customer.balance - parseFloat(amount).toFixed(2)));
+                                                        dispatch(updateBalance(user.balance - parseFloat(amount).toFixed(2)));
                                                         dispatch(storeTransaction({ direction: "from", reference: reference,
                                                                                     category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
 
-                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: customer.id, transaction: { direction: "from", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: customer.id, balance: customer.balance - parseFloat(amount).toFixed(2)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
-                                                        dispatch(previousScreen(page.screen));
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount).toFixed(2)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+                                                        dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/transfer.json"),
                                                                                               header: "Sending your cash..."}); }} />

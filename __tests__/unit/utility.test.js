@@ -24,4 +24,14 @@ describe("Testing functionality of the utility functions used throughout the app
 
     });
 
+    test("Ensure that the encryption function correctly hides the input text", () => {
+
+        const text = "Lift off!";
+        const cipher = utility.encrypt(text, "182");
+        expect(cipher).not.toEqual(text);
+        expect(utility.encrypt(text, "183")).not.toEqual(cipher);
+        expect(cipher.length).toBe(text.length);
+
+    });
+
 });

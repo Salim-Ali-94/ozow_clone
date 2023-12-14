@@ -14,8 +14,8 @@ import { toggleState } from "../../providers/reducers/ozowReducer";
 export default function Services() {
 
   const dispatch = useDispatch();
-  const page = useSelector(state => state.reducer_screen);
-  const state = useSelector(state => state.reducer_ozow.ozow);
+  const screen = useSelector(state => state.reducer_screen);
+  const ozow = useSelector(state => state.reducer_ozow.ozow);
   const navigation = useNavigation();
 
   return (
@@ -46,9 +46,9 @@ export default function Services() {
                 { constants.info.slice(0, 2).map((item, index) => [<InfoCard icon={item.icon}
                                                                              info={item.info}
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                                    dispatch(previousScreen(page.screen));
+                                                                                                                    dispatch(previousScreen(screen.screen));
                                                                                                                     dispatch(currentScreen(item.route));
-                                                                                                                    dispatch(toggleState(!state));
+                                                                                                                    dispatch(toggleState(!ozow));
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              category={item.category}
@@ -66,9 +66,9 @@ export default function Services() {
                                                                              info={item.info}
                                                                              category={item.category}
                                                                              pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                                    dispatch(previousScreen(page.screen));
+                                                                                                                    dispatch(previousScreen(screen.screen));
                                                                                                                     dispatch(currentScreen(item.route));
-                                                                                                                    dispatch(toggleState(!state));
+                                                                                                                    dispatch(toggleState(!ozow));
                                                                                                                     // setOzow(false);
                                                                                                                     navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                              key={"service_" + item.id} />,
@@ -93,9 +93,9 @@ export default function Services() {
                                                                       icon={item.icon}
                                                                       iconSize={item.size}
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                             dispatch(previousScreen(page.screen));
+                                                                                                             dispatch(previousScreen(screen.screen));
                                                                                                              dispatch(currentScreen(item.route));
-                                                                                                             dispatch(toggleState(!state));
+                                                                                                             dispatch(toggleState(!ozow));
                                                                                                             //  setOzow(false);
                                                                                                              navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       gap={(index < constants.details.length - 1) ? 10 : 0}
@@ -115,7 +115,7 @@ export default function Services() {
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
                              pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
-                                                  dispatch(previousScreen(page.screen));
+                                                  dispatch(previousScreen(screen.screen));
                                                   dispatch(currentScreen("StockMarket"));
                                                   navigation.navigate("StockMarket"); }}
 

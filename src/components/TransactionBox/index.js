@@ -9,12 +9,12 @@ import { styles } from "./styles";
 
 export default function TransactionBox() {
 
-    const customer = useSelector(state => state.reducer_user.user);
+    const user = useSelector(state => state.reducer_user.user);
     const navigation = useNavigation();
 
     return (
 
-        <View style={[styles.container, { height: (customer.transactions.length > 0) && 450, paddingBottom: (customer.transactions.length === 0) && 20 }]}>
+        <View style={[styles.container, { height: (user.transactions.length > 0) && 450, paddingBottom: (user.transactions.length === 0) && 20 }]}>
 
             <View style={styles.header}>
 
@@ -32,11 +32,11 @@ export default function TransactionBox() {
 
             </View>
 
-            { (customer.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
+            { (user.transactions.length === 0) ? <EmptyTransactions key={"transactions_box_empty"} /> :
 
                                                     <View style={styles.transactions}>
 
-                                                        { customer.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
+                                                        { user.transactions.slice(0, 4).map((item, index) => [<View style={styles.row}
                                                                                                                         key={"transactions_box_container_" + item.id}>
 
                                                                                                                         <TransactionRow amount={item.amount}

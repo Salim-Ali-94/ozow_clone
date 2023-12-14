@@ -14,7 +14,7 @@ import { previousScreen, currentScreen } from "../../providers/reducers/screenRe
 export default function Buy() {
 
   const dispatch = useDispatch();
-  const page = useSelector(state => state.reducer_screen);
+  const screen = useSelector(state => state.reducer_screen);
   const navigation = useNavigation();
 
   return (
@@ -46,7 +46,7 @@ export default function Buy() {
                                                                       iconSize={item.size}
                                                                       gap={10}
                                                                       pressAction={() => { if (item.route) { constants.tabBarRef?.current?.setVisible(false);
-                                                                                                             dispatch(previousScreen(page.screen));
+                                                                                                             dispatch(previousScreen(screen.screen));
                                                                                                              dispatch(currentScreen(item.route));                                                    
                                                                                                              navigation.navigate(item.route); } else { Alert.alert(item.category, item.category + " feature coming soon") } }}
                                                                       key={"buy_" + item.id} />) }
@@ -55,7 +55,7 @@ export default function Buy() {
                              details={"Trade stocks and grow your portfolio all from your pocket."}
                              icon={require("../../assets/icons/trading.png")}
                              pressAction={() => { constants.tabBarRef?.current?.setVisible(false);
-                                                  dispatch(previousScreen(page.screen));
+                                                  dispatch(previousScreen(screen.screen));
                                                   dispatch(currentScreen("StockMarket"));
                                                   navigation.navigate("StockMarket"); }}
                              key={"buy_stocks_details_card"} />
