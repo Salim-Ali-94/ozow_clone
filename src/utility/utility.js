@@ -79,6 +79,19 @@ const previousWorkingDay = (date) => {
 
 };
 
+function encrypt(text, key) {
+
+    let cipher = "";
+
+    for (let index = 0; index < text.length; index++) {
+
+        cipher += String.fromCharCode(text.charCodeAt(index) ^ key);
+
+    }
+
+    return cipher;
+
+}
 
 
-export { dropShadow, searchFilter, uuid, previousWorkingDay };
+export { dropShadow, searchFilter, uuid, previousWorkingDay, encrypt };
