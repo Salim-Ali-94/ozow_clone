@@ -36,7 +36,7 @@ export default function UserModal({ open, setOpen, name, setName, password, setP
 
                     <Pressable onPress={async () => { if ((name !== "") && (password !== "")) {
 
-                                                            let check = await axios.get(DB_ENDPOINT + "findUser", { params: { name: name, password: utility.encrypt(password, KEY) } });
+                                                            let check = axios.get(DB_ENDPOINT + "findUser", { params: { name: name, password: utility.encrypt(password, KEY) } });
 
                                                             if (check.status === 200) {
 

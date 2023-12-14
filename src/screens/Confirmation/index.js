@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, StatusBar } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LottieView from "lottie-react-native";
 import * as constants from "../../utility/constants";
 import { styles } from "./styles";
@@ -12,6 +12,7 @@ import { previousScreen, currentScreen } from "../../providers/reducers/screenRe
 
 export default function Confirmation() {
 
+    const dispatch = useDispatch();
     const user = useSelector(state => state.reducer_user.user);
     const screen = useSelector(state => state.reducer_screen);
     const route = useRoute();

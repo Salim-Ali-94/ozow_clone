@@ -33,7 +33,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const user = useSelector(state => state.reducer_user);
+  const user = useSelector(state => state.reducer_user.user);
   const screen = useSelector(state => state.reducer_screen);
   const ozow = useSelector(state => state.reducer_ozow.ozow);
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ export default function App() {
 
   useEffect(() => {
 
-    if (user.status === "idle") {
+    if (user.name === "") {
 
       fetchUser();
 
@@ -167,7 +167,7 @@ export default function App() {
                                                                ((screen.screen === "Confirmation") && (screen.previous === "StockMarket")) ? "Stock Market" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "SendMoney")) ? "Send Money" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "ReceiveMoney")) ? "Receive Money" :
-                                                               (user.user.name !== "") ? `👋 Hi, ${user.user.name}` : "", headerShadowVisible: false, headerTitleAlign: "center",
+                                                               (user.name !== "") ? `👋 Hi, ${user.name}` : "", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                   headerLeft: () => {
 
