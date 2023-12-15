@@ -1,14 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import * as constants from "../../utility/constants";
 
-
-// const initialState = {
-
-//     user: constants.user,
-//     status: "idle", // "idle" | "loading" | "succeeded" | "failed"
-//     error: null,
-
-// };
 
 const userSlice = createSlice({
 
