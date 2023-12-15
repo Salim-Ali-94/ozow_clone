@@ -24,6 +24,8 @@ export const styles = StyleSheet.create({
     row: {
         
         paddingVertical: 20
+        // paddingTop: 10,
+        // paddingBottom: 10
     },
 
     header: {

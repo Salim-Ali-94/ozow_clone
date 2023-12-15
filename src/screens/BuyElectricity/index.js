@@ -3,15 +3,16 @@ import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
 import InputText from "../../components/InputText";
 import ContinueButton from "../../components/ContinueButton";
-import { styles } from "./styles";
-import * as constants from "../../utility/constants";
 import { DB_ENDPOINT } from "@env";
+import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 import { toggleState } from "../../providers/reducers/ozowReducer";
+import * as utility from "../../utility/utility";
+import * as constants from "../../utility/constants";
+import { styles } from "./styles";
 
   
 export default function BuyElectricity() {
@@ -47,6 +48,7 @@ export default function BuyElectricity() {
                            setText={setAmount}
                            focused={amountFocused}
                            numbers={true}
+                           balance={user.balance}
                            setFocused={setAmountFocused} />
 
             </View>
@@ -64,10 +66,28 @@ export default function BuyElectricity() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 9) ? true : false}
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && number && (number.length === 9) ? true : false}
                                 pressAction={ () => { 
                                                         dispatch(toggleState(false));
+
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Paid", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                          month: "long",
+                                                                          year: "numeric",
+                                                                          hour: "numeric",
+                                                                          minute: "numeric",
+                                                                          hour12: false };
+
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+
+                                                        
                                                         dispatch(updateBalance(user.balance - parseFloat(amount) / 10));
+                                                        dispatch(storeTransaction({ direction: "from", reference: "Electricity",
+                                                                                    category: "electricity",
+                                                                                    amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                    status: status, id: uuid }));
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));

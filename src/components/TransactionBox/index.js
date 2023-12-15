@@ -50,7 +50,7 @@ export default function TransactionBox() {
 
                                                                                                                     </View>,
 
-                                                                                                                    (index < 3) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
+                                                                                                                    (index < user.transactions.length - 1) && <HorizontalDivider key={"transactions_box_" + index.toString()} />]) }
 
                                                     </View> }
 

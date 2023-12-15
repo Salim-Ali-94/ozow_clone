@@ -3,16 +3,17 @@ import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
-import * as constants from "../../utility/constants";
-import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 import { toggleState } from "../../providers/reducers/ozowReducer";
+import * as constants from "../../utility/constants";
+import * as utility from "../../utility/utility";
+import { styles } from "./styles";
 
   
 export default function Withdraw() {
@@ -93,7 +94,25 @@ export default function Withdraw() {
                                 pressAction={() => {
 
                                                         dispatch(toggleState(false));
+                                                        
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Paid", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                          month: "long",
+                                                                          year: "numeric",
+                                                                          hour: "numeric",
+                                                                          minute: "numeric",
+                                                                          hour12: false };
+
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+
+                                                        
                                                         dispatch(updateBalance(user.balance - parseFloat(amount)));
+                                                        dispatch(storeTransaction({ direction: "from", reference: "Withdraw",
+                                                                                    category: "withdraw",
+                                                                                    amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                    status: status, id: uuid }));
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });                                                            
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));

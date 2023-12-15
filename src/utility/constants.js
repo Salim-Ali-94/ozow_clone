@@ -251,6 +251,11 @@ export const transactionIcons = { burger: require("../assets/icons/burger.png"),
                                   donut: require("../assets/icons/donut.png"),
                                   sushi: require("../assets/icons/sushi.png"),
                                   default: require("../assets/icons/like.png"),
+                                  airtime: require("../assets/icons/smart_phone.png"),
+                                  top_up: require("../assets/icons/money.png"),
+                                  withdraw: require("../assets/icons/withdraw_.png"),
+                                  sell_shares: require("../assets/icons/stock_market.png"),
+                                  buy_shares: require("../assets/icons/stocks.png"),
                                   "fast_food": require("../assets/icons/hot_dog.png") };
 
 export const info = [{ icon: require("../assets/icons/plus.png"),
