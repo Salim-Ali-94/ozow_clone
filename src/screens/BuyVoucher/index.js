@@ -1,11 +1,10 @@
-import { View, Text, SafeAreaView, StatusBar } from "react-native";
+import { View, SafeAreaView, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import InputText from "../../components/InputText";
-import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
 import { DB_ENDPOINT } from "@env";
 import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
@@ -16,7 +15,7 @@ import * as constants from "../../utility/constants";
 import { styles } from "./styles";
 
   
-export default function BuyData() {
+export default function BuyVoucher() {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.reducer_user.user);
@@ -24,9 +23,7 @@ export default function BuyData() {
     const navigation = useNavigation();
     const [amount, setAmount] = useState("");
     const [number, setNumber] = useState("");
-    const [network, setNetwork] = useState(constants.networks[0].value);
     const [amountFocused, setAmountFocused] = useState(false);
-    const [networkFocused, setNetworkFocused] = useState(false);
     const [numberFocused, setNumberFocused] = useState(false);
 
     return (
@@ -55,23 +52,6 @@ export default function BuyData() {
                            setFocused={setAmountFocused} />
 
             </View>
-
-            {/* <View style={styles.networkSection}>
-
-                <Text style={styles.networkHeading}>Select your network</Text>
-
-            </View>
-
-            <View style={[styles.inputHolder, {marginTop: 10}]}>
-                
-                <DropDown data={constants.networks}
-                          focused={networkFocused}
-                          setFocused={setNetworkFocused}
-                          value={network}
-                          placeHolder={"Vodacom"}
-                          setValue={setNetwork} />
-
-            </View> */}
 
             <View style={styles.inputHolder}>
 
