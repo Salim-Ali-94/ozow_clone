@@ -46,7 +46,6 @@ export default function Confirmation() {
                 }, 1);
 
             }, 5000);
-            // }, 1);
 
         });
     

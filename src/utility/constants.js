@@ -181,6 +181,7 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
 
 export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
+                        route: "BuyVoucher",
                         id: "voucher_c2d3" },
 
                       { icon: require("../assets/icons/phone.png"),
@@ -304,6 +305,7 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
   
                         { icon: require("../assets/icons/voucher.png"),
                           category: "Vouchers",
+                          route: "BuyVoucher",
                           details: "Buy/send vouchers from your pocket fast!",
                           size: 40,
                           id: "coupon_e4f5" }];
