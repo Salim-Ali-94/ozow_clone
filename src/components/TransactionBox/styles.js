@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 20
         // paddingTop: 10,
         // paddingBottom: 10
+        // paddingBottom: 20
     },
 
     header: {
@@ -52,9 +53,9 @@ export const styles = StyleSheet.create({
     transactions: {
 
         marginTop: 20,
-        height: 240,
+        // height: 240,
         paddingHorizontal: 20,
-        justifyContent: "space-between"
+        // justifyContent: "space-between"
     }
 
 });

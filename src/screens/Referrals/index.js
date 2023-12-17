@@ -36,7 +36,7 @@ export default function Referrals() {
 
         <View style={styles.header}>
 
-            <Text style={[styles.sectionText, { marginBottom: 10 }]}>Share the love, invite a frined.</Text>
+            <Text style={[styles.sectionText, { marginBottom: 10 }]}>Share the love, invite a friend.</Text>
 
             <View style={styles.centerAlign}>
 

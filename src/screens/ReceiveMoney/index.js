@@ -117,7 +117,7 @@ export default function ReceiveMoney() {
                                 pressAction={() => { 
                                                         dispatch(toggleState(false));
                                                         const uuid = utility.uuid(10);
-                                                        const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const status = ["Received", "Failed", "Requested"][Math.floor(Math.random()*3)];
                                                         const currentDate = new Date();
                                                         const options = { day: "numeric",
                                                                           month: "long",
@@ -129,11 +129,13 @@ export default function ReceiveMoney() {
                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
                                                         dispatch(updateBalance(user.balance - parseFloat(amount).toFixed(2)));
                                                         dispatch(storeTransaction({ direction: "into", reference: reference,
-                                                                                    category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
+                                                                                    // category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"),
+                                                                                    category: constants.transactionCategories.find(element => element.value === category).label.toLowerCase().replace(" ", "_"),
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
 
-                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        // axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.filter(element => element.value === category)[0].label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: reference, category: constants.transactionCategories.find(element => element.value === category).label.toLowerCase().replace(" ", "_"), amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime, status: status, id: uuid }});
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/receive.json"),

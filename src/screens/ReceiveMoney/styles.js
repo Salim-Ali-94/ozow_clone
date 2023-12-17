@@ -28,7 +28,8 @@ export const styles = StyleSheet.create({
         fontFamily: "poppins_bold",
         color: constants.primary,
         fontSize: 24,
-        lineHeight: 26,
+        // lineHeight: 26,
+        lineHeight: 30,
         marginTop: 30,
         width: "70%"
         // marginBottom: 0

@@ -90,7 +90,7 @@ export default function TopUp() {
                                                         dispatch(toggleState(false));
                                                         
                                                         const uuid = utility.uuid(10);
-                                                        const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const status = ["Received", "Failed", "Requested"][Math.floor(Math.random()*3)];
                                                         const currentDate = new Date();
                                                         const options = { day: "numeric",
                                                                           month: "long",
@@ -107,7 +107,14 @@ export default function TopUp() {
                                                                                     category: "top_up",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: "Top up",
+                                                                                                                                       category: "top_up",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
+                                                        // axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)});
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

@@ -16,7 +16,7 @@ export const cherry = "#ff2fa0";
 // export const endpoint = "http://192.168.0.120:1234/";
 
 export const contacts = [{ name: "Aadil",
-                           phone: "0123456789" },
+                           phone: "0729437028" },
 
                          { name: "Bilal",
                            phone: "9876543210" },

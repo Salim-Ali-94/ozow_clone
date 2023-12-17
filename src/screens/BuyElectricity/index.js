@@ -88,6 +88,12 @@ export default function BuyElectricity() {
                                                                                     category: "electricity",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: "Electricity",
+                                                                                                                                       category: "electricity",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));

@@ -64,13 +64,18 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                                           hour12: false };
                 
                                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
-                
-                                                                        
+
                                                                         dispatch(updateBalance(user.balance - parseFloat(shares)*parseFloat(price)));
                                                                         dispatch(storeTransaction({ direction: "from", reference: ticker + " shares",
                                                                                                     category: "buy_shares",
                                                                                                     amount: parseFloat((parseFloat(shares)*parseFloat(price)).toFixed(2)), date: formattedDateTime,
                                                                                                     status: status, id: uuid }));
+
+                                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: ticker + " shares",
+                                                                                                                                                       category: "buy_shares",
+                                                                                                                                                       amount: parseFloat((parseFloat(shares)*parseFloat(price)).toFixed(2)), date: formattedDateTime,
+                                                                                                                                                       status: status, id: uuid }});
+
                                                                         dispatch(addStock({ ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }));
 
                                                                         axios.patch(DB_ENDPOINT + "registerStock", { id: user.id, stock: { ticker: ticker, logo: logo, price: price, low: low, high: high, shares: parseFloat(shares) }});
@@ -88,15 +93,22 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                                       hour12: false };
             
                                                                     const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
-            
-                                                                    
+
                                                                     dispatch(updateBalance(user.balance - parseFloat(shares)*parseFloat(price)));
                                                                     dispatch(storeTransaction({ direction: "from", reference: ticker + " shares",
                                                                                                 category: "buy_shares",
                                                                                                 amount: parseFloat((parseFloat(shares)*parseFloat(price)).toFixed(2)), date: formattedDateTime,
                                                                                                 status: status, id: uuid }));
+
                                                                     dispatch(updateShares({ ticker: ticker, shares: user.portfolio.find(item => item.ticker === ticker).shares + parseFloat(shares) }));
-                                                                    axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
+                                                                    
+                                                                    axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: ticker + " shares",
+                                                                                                                                                   category: "buy_shares",
+                                                                                                                                                   amount: parseFloat((parseFloat(shares)*parseFloat(price)).toFixed(2)), date: formattedDateTime,
+                                                                                                                                                   status: status, id: uuid }});
+
+                                                                    // axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares + parseFloat(shares) });
+                                                                    axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.find(item => item.ticker === ticker).shares + parseFloat(shares) });
 
                                                                 }
 
@@ -109,12 +121,14 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
 
                                                 () => {
 
-                                                        if ((parseFloat(shares) > 0) && (parseFloat(shares) <= user.portfolio.filter(element => element.ticker === ticker)[0].shares)) {
+                                                        // if ((parseFloat(shares) > 0) && (parseFloat(shares) <= user.portfolio.filter(element => element.ticker === ticker)[0].shares)) {
+                                                        if ((parseFloat(shares) > 0) && (parseFloat(shares) <= user.portfolio.find(element => element.ticker === ticker).shares)) {
 
-                                                            if (user.portfolio.filter(item => item.ticker === ticker)[0].shares === parseFloat(shares)) {
+                                                            // if (user.portfolio.filter(item => item.ticker === ticker)[0].shares === parseFloat(shares)) {
+                                                            if (user.portfolio.find(item => item.ticker === ticker).shares === parseFloat(shares)) {
 
                                                                 const uuid = utility.uuid(10);
-                                                                const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                                const status = ["Received", "Failed", "Requested"][Math.floor(Math.random()*3)];
                                                                 const currentDate = new Date();
                                                                 const options = { day: "numeric",
                                                                                   month: "long",
@@ -132,12 +146,18 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
                                                                                             status: status, id: uuid }));
                                                                 
                                                                 dispatch(removeStock(ticker));
+
+                                                                axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: ticker + " shares",
+                                                                                                                                               category: "sell_shares",
+                                                                                                                                               amount: parseFloat((parseFloat(shares)*parseFloat(user.portfolio.find(element => element.ticker === ticker).price)).toFixed(2)), date: formattedDateTime,
+                                                                                                                                               status: status, id: uuid }});
+
                                                                 axios.patch(DB_ENDPOINT + "removeStock", { id: user.id, ticker: ticker });
 
                                                             } else {
 
                                                                 const uuid = utility.uuid(10);
-                                                                const status = ["Received", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                                const status = ["Received", "Failed", "Requested"][Math.floor(Math.random()*3)];
                                                                 const currentDate = new Date();
                                                                 const options = { day: "numeric",
                                                                                   month: "long",
@@ -148,20 +168,29 @@ export default function PopUp({ open, setOpen, ticker, price, low, high, shares,
         
                                                                 const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
 
-                                                                
                                                                 dispatch(updateBalance(user.balance + parseFloat(shares)*parseFloat(user.portfolio.find(element => element.ticker === ticker).price)));
                                                                 dispatch(storeTransaction({ direction: "into", reference: ticker + " shares",
                                                                                             category: "sell_shares",
                                                                                             amount: parseFloat((parseFloat(shares)*parseFloat(user.portfolio.find(element => element.ticker === ticker).price)).toFixed(2)), date: formattedDateTime,
                                                                                             status: status, id: uuid }));
+
                                                                 dispatch(updateShares({ ticker: ticker, shares: user.portfolio.find(item => item.ticker === ticker).shares - parseFloat(shares) }));
-                                                                axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
+
+
+                                                                axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: ticker + " shares",
+                                                                                                                                               category: "sell_shares",
+                                                                                                                                               amount: parseFloat((parseFloat(shares)*parseFloat(user.portfolio.find(element => element.ticker === ticker).price)).toFixed(2)), date: formattedDateTime,
+                                                                                                                                               status: status, id: uuid }});
+
+                                                                // axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.filter(item => item.ticker === ticker)[0].shares - parseFloat(shares) });
+                                                                axios.patch(DB_ENDPOINT + "updateShares", { id: user.id, ticker: ticker, shares: user.portfolio.find(item => item.ticker === ticker).shares - parseFloat(shares) });
 
                                                             }
                         
                                                             setOpen(false);
                         
-                                                        } else { Alert.alert("Insufficient shares", `You want to sell ${shares} shares, but you only own ${user.portfolio.filter(element => element.ticker === ticker)[0].shares} ${ticker} stocks`) }
+                                                        // } else { Alert.alert("Insufficient shares", `You want to sell ${shares} shares, but you only own ${user.portfolio.filter(element => element.ticker === ticker)[0].shares} ${ticker} stocks`) }
+                                                        } else { Alert.alert("Insufficient shares", `You want to sell ${shares} shares, but you only own ${user.portfolio.find(element => element.ticker === ticker).shares} ${ticker} stocks`) }
 
                                                     }
 

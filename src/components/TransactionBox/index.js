@@ -15,6 +15,7 @@ export default function TransactionBox() {
     return (
 
         <View style={[styles.container, { height: (user.transactions.length > 0) && 450, paddingBottom: (user.transactions.length === 0) && 20 }]}>
+        {/* <View style={[styles.container, { height: (user.transactions.length > 0) && 450 }]}> */}
 
             <View style={styles.header}>
 

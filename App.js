@@ -187,7 +187,9 @@ export default function App() {
                                                             (screen.screen === "BuyVoucher") ||
                                                             (screen.screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                             onPress={() => {
-                                                                                                                              constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
+                                                                                                                              // constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
+                                                                                                                              constants.tabBarRef?.current?.setVisible((["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) || (screen.screen === "Buy")) ? true : false);
+                                                                                                                              // constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.screen) ? true : false);
                                                                                                                               dispatch(previousScreen(screen.screen));
                                                                                                                               dispatch(currentScreen((screen.screen === "Buy") ? "Home" : screen.previous));
                                                                                                                               dispatch(toggleState(false));

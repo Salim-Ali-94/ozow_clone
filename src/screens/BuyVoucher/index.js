@@ -87,6 +87,12 @@ export default function BuyVoucher() {
                                                                                     category: "transport",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: "Transport",
+                                                                                                                                       category: "transport",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
                                                         axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });                                                        
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
