@@ -69,4 +69,4 @@ yarn-error.log
 # firebase
 credentials.json
 
-.env
+# .env
