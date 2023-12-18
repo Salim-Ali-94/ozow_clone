@@ -52,6 +52,7 @@ export default function UserModal({ open, setOpen, name, setName, password, setP
                                                                 } else {
 
                                                                     let person = check.data;
+                                                                    person.transactions.reverse();
                                                                     dispatch(assignUser(person));
                                                                     // await AsyncStorage.setItem("user", JSON.stringify(person));
                                                                     AsyncStorage.setItem("user", JSON.stringify(person));
