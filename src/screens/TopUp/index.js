@@ -3,16 +3,17 @@ import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
-import * as constants from "../../utility/constants";
-import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 import { toggleState } from "../../providers/reducers/ozowReducer";
+import * as constants from "../../utility/constants";
+import * as utility from "../../utility/utility";
+import { styles } from "./styles";
 
   
 export default function TopUp() {
@@ -50,6 +51,7 @@ export default function TopUp() {
                            setText={setAmount}
                            focused={amountFocused}
                            numbers={true}
+                           balance={user.balance}
                            setFocused={setAmountFocused} />
 
             </View>
@@ -86,8 +88,33 @@ export default function TopUp() {
                 <ContinueButton active={amount && (parseFloat(amount) > 0) && password && bank ? true : false}
                                 pressAction={() => { 
                                                         dispatch(toggleState(false));
-                                                        dispatch(updateBalance(user.balance + parseFloat(amount)));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance + parseFloat(amount)}).then(response => console.log("SUCCESS")).catch(err => console.log("ERROR:", err));
+                                                        
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Received", "Failed", "Requested"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                          month: "long",
+                                                                          year: "numeric",
+                                                                          hour: "numeric",
+                                                                          minute: "numeric",
+                                                                          hour12: false };
+
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+
+                                                        
+                                                        dispatch(updateBalance(parseFloat(user.balance + parseFloat(amount))));
+                                                        dispatch(storeTransaction({ direction: "into", reference: "Top up",
+                                                                                    category: "top_up",
+                                                                                    amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                    status: status, id: uuid }));
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "into", reference: "Top up",
+                                                                                                                                       category: "top_up",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: parseFloat(user.balance + parseFloat(amount))});
+
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

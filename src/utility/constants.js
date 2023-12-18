@@ -16,7 +16,7 @@ export const cherry = "#ff2fa0";
 // export const endpoint = "http://192.168.0.120:1234/";
 
 export const contacts = [{ name: "Aadil",
-                           phone: "0123456789" },
+                           phone: "0729437028" },
 
                          { name: "Bilal",
                            phone: "9876543210" },
@@ -181,6 +181,7 @@ export const actions = [{ icon: require("../assets/icons/cash.png"),
 
 export const icons = [{ icon: require("../assets/icons/voucher.png"),
                         category: "Vouchers",
+                        route: "BuyVoucher",
                         id: "voucher_c2d3" },
 
                       { icon: require("../assets/icons/phone.png"),
@@ -251,6 +252,11 @@ export const transactionIcons = { burger: require("../assets/icons/burger.png"),
                                   donut: require("../assets/icons/donut.png"),
                                   sushi: require("../assets/icons/sushi.png"),
                                   default: require("../assets/icons/like.png"),
+                                  airtime: require("../assets/icons/smart_phone.png"),
+                                  top_up: require("../assets/icons/money.png"),
+                                  withdraw: require("../assets/icons/withdraw_.png"),
+                                  sell_shares: require("../assets/icons/stock_market.png"),
+                                  buy_shares: require("../assets/icons/stocks.png"),
                                   "fast_food": require("../assets/icons/hot_dog.png") };
 
 export const info = [{ icon: require("../assets/icons/plus.png"),
@@ -299,6 +305,7 @@ export const details = [{ icon: require("../assets/icons/phone.png"),
   
                         { icon: require("../assets/icons/voucher.png"),
                           category: "Vouchers",
+                          route: "BuyVoucher",
                           details: "Buy/send vouchers from your pocket fast!",
                           size: 40,
                           id: "coupon_e4f5" }];

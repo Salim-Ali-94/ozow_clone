@@ -18,6 +18,7 @@ app.post("/storeUser", async (request, response) => {
     const user = request.body;
     const users = db.collection("users");
     await users.doc(user.id).set(user);
+    response.status(200).send({ success: true, message: "User stored successfully" });
 
 });
 
@@ -35,6 +36,7 @@ app.patch("/updateBalance", async (request, response) => {
     const { id, balance } = request.body;
     const doc = db.collection("users").doc(id);
     await doc.update({ balance: balance });
+    response.status(200).send({ success: true, message: "Balance updated successfully" });
 
 });
 
@@ -59,6 +61,7 @@ app.patch("/updateShares", async (request, response) => {
     });
 
     await doc.update({ portfolio: stocks });
+    response.status(200).send({ success: true, message: "Shares updated successfully" });
 
 });
 
@@ -67,6 +70,7 @@ app.patch("/registerTransaction", async (request, response) => {
     const { id, transaction } = request.body;
     const doc = db.collection("users").doc(id);
     await doc.update({ transactions: FieldValue.arrayUnion(transaction) });
+    response.status(200).send({ success: true, message: "Transactions added successfully" });
 
 });
 
@@ -75,6 +79,7 @@ app.patch("/registerStock", async (request, response) => {
     const { id, stock } = request.body;
     const doc = db.collection("users").doc(id);
     await doc.update({ portfolio: FieldValue.arrayUnion(stock) });
+    response.status(200).send({ success: true, message: "Stock added successfully" });
 
 });
 
@@ -92,34 +97,26 @@ app.patch("/removeStock", async (request, response) => {
     const user = await doc.get();
     const stocks = user.data().portfolio.filter(stock => stock.ticker !== ticker);
     await doc.update({ portfolio: stocks });
+    response.status(200).send({ success: true, message: "Stock removed successfully" });
 
 });
 
 app.get("/findUser", async (request, response) => {
 
     const { name, password } = request.query;
+    const users = db.collection("users");
+    const user = await users.where("name", "==", name)
+                            .where("password", "==", password)
+                            .get();
 
-    try {
+    if (user.empty) {
 
-        const users = db.collection("users");
-        const user = await users.where("name", "==", name)
-                                .where("password", "==", password)
-                                .get();
+        response.status(200).send({ });
 
-        if (user.empty) {
+    } else {
 
-            response.status(200).send({});
-
-        } else {
-
-            const data = user.docs[0].data();
-            response.status(200).send(data);
-
-        }
-
-    } catch (error) {
-
-        response.status(500).send({ error: "Internal Server Error" });
+        const data = user.docs[0].data();
+        response.status(200).send(data);
 
     }
 

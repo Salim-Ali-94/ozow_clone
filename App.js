@@ -19,6 +19,7 @@ import StockMarket from "./src/screens/StockMarket";
 import SendMoney from "./src/screens/SendMoney";
 import ReceiveMoney from "./src/screens/ReceiveMoney";
 import Confirmation from "./src/screens/Confirmation";
+import BuyVoucher from "./src/screens/BuyVoucher";
 import UserModal from "./src/components/UserModal";
 import * as constants from "./src/utility/constants";
 import { styles } from "./styles";
@@ -159,6 +160,7 @@ export default function App() {
                                                                (screen.screen === "StockMarket") ? "Stock Market" :
                                                                (screen.screen === "SendMoney") ? "Send Money" :
                                                                (screen.screen === "ReceiveMoney") ? "Receive Money" :
+                                                               (screen.screen === "BuyVoucher") ? "Buy Voucher" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "TopUp")) ? "Top Up" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "BuyAirtime")) ? "Buy Airtime" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "BuyData")) ? "Buy Data" :
@@ -167,6 +169,7 @@ export default function App() {
                                                                ((screen.screen === "Confirmation") && (screen.previous === "StockMarket")) ? "Stock Market" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "SendMoney")) ? "Send Money" :
                                                                ((screen.screen === "Confirmation") && (screen.previous === "ReceiveMoney")) ? "Receive Money" :
+                                                               ((screen.screen === "Confirmation") && (screen.previous === "BuyVoucher")) ? "Buy Voucher" :
                                                                (user.name !== "") ? `👋 Hi, ${user.name}` : "", headerShadowVisible: false, headerTitleAlign: "center",
 
                                                   headerLeft: () => {
@@ -181,9 +184,12 @@ export default function App() {
                                                             (screen.screen === "StockMarket") ||
                                                             (screen.screen === "SendMoney") ||
                                                             (screen.screen === "ReceiveMoney") ||
+                                                            (screen.screen === "BuyVoucher") ||
                                                             (screen.screen === "BuyAirtime")) && <Pressable style={styles.back}
                                                                                                             onPress={() => {
-                                                                                                                              constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
+                                                                                                                              // constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) ? true : false);
+                                                                                                                              constants.tabBarRef?.current?.setVisible((["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.previous) || (screen.screen === "Buy")) ? true : false);
+                                                                                                                              // constants.tabBarRef?.current?.setVisible(["Home", "Services", "History", "Pocket", "Referrals"].includes(screen.screen) ? true : false);
                                                                                                                               dispatch(previousScreen(screen.screen));
                                                                                                                               dispatch(currentScreen((screen.screen === "Buy") ? "Home" : screen.previous));
                                                                                                                               dispatch(toggleState(false));
@@ -283,6 +289,9 @@ export default function App() {
 
           <CurvedBottomBar.Screen name="ReceiveMoney"
                                   component={() => <ReceiveMoney key={"accept_money_screen"} />} />
+
+          <CurvedBottomBar.Screen name="BuyVoucher"
+                                  component={() => <BuyVoucher key={"buy_voucher_screen"} />} />
 
       </CurvedBottomBar.Navigator>
 

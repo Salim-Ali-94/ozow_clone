@@ -12,27 +12,23 @@ export const styles = StyleSheet.create({
 
     inputHolder: {
 
-        // marginTop: 30,
-        marginTop: 20,
+        marginTop: 30,
         alignItems: "center"
     },
 
-    headerSection: {
+    networkSection: {
 
         marginTop: 30,
         marginLeft: "5%"
     },
 
-    heading: {
+    networkHeading: {
         
         fontFamily: "poppins_bold",
         color: constants.primary,
         fontSize: 24,
-        // lineHeight: 26,
-        lineHeight: 30,
-        marginTop: 30,
-        width: "70%"
-        // marginBottom: 0
+        lineHeight: 25,
+        marginBottom: 0
     },
 
     bottom: {

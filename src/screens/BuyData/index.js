@@ -3,16 +3,17 @@ import { useNavigation } from "@react-navigation/native";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBalance } from "../../providers/reducers/userReducer";
 import { useState } from "react";
 import InputText from "../../components/InputText";
 import DropDown from "../../components/DropDown";
 import ContinueButton from "../../components/ContinueButton";
-import * as constants from "../../utility/constants";
-import { styles } from "./styles";
 import { DB_ENDPOINT } from "@env";
+import { updateBalance, storeTransaction } from "../../providers/reducers/userReducer";
 import { previousScreen, currentScreen } from "../../providers/reducers/screenReducer";
 import { toggleState } from "../../providers/reducers/ozowReducer";
+import * as utility from "../../utility/utility";
+import * as constants from "../../utility/constants";
+import { styles } from "./styles";
 
   
 export default function BuyData() {
@@ -50,6 +51,7 @@ export default function BuyData() {
                            setText={setAmount}
                            focused={amountFocused}
                            numbers={true}
+                           balance={user.balance}
                            setFocused={setAmountFocused} />
 
             </View>
@@ -84,11 +86,36 @@ export default function BuyData() {
 
             <View style={styles.bottom}>
 
-                <ContinueButton active={amount && (parseFloat(amount) > 0) && number && (number.length === 10) && network ? true : false}
+                <ContinueButton active={amount && (parseFloat(amount) > 0) && (parseFloat(amount) <= user.balance) && number && (number.length === 10) && network ? true : false}
                                 pressAction={() => { 
                                                         dispatch(toggleState(false));
-                                                        dispatch(updateBalance(user.balance - parseFloat(amount)));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });                                                        
+
+                                                        const uuid = utility.uuid(10);
+                                                        const status = ["Paid", "Failed", "Pending"][Math.floor(Math.random()*3)];
+                                                        const currentDate = new Date();
+                                                        const options = { day: "numeric",
+                                                                          month: "long",
+                                                                          year: "numeric",
+                                                                          hour: "numeric",
+                                                                          minute: "numeric",
+                                                                          hour12: false };
+
+                                                        const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
+
+                                                        
+                                                        dispatch(updateBalance(parseFloat(user.balance - parseFloat(amount))));
+                                                        dispatch(storeTransaction({ direction: "from", reference: "Data",
+                                                                                    category: "internet",
+                                                                                    amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                    status: status, id: uuid }));
+
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: "Data",
+                                                                                                                                       category: "internet",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: parseFloat(user.balance - parseFloat(amount)) });                                                        
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/wifi.json"),
