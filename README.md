@@ -107,6 +107,8 @@ I don't have a macbook, so I could only develop the app for Android devices
 - cloud functions (firebase)
 - state management (redux)
 - data caching (async storage)
+- api integration
+- data visualization
 - system architecture
 - ci pipeline
 - screen navigation
