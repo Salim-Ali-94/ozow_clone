@@ -1,6 +1,10 @@
 # ozow_clone
 full-stack project cloning the ozow.me app using react native (cli)
 
+# app demo
+
+https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/68997f01-d469-4cad-bba0-c96b43d3cf0c
+
 # progress images
 
 # home 1
@@ -14,7 +18,7 @@ full-stack project cloning the ozow.me app using react native (cli)
 # transactions
 ![Screenshot_1701756702](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/7f187a8b-63a6-4ccd-89e8-f341026008c1)
 # referrals
-![Screenshot_1701756722](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/7de43406-5aa7-4674-b975-e835e59cf034)
+![referrals](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/039ddc2a-81bc-4f6b-b808-7eb292c5fdc8)
 # services 1
 ![Screenshot_1701756731](https://github.com/Salim-Ali-94/ozow_clone/assets/75537889/34f46c48-0127-49c0-b02b-9150a54878a9)
 # services 2
