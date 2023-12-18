@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
 
     card: {
         
-        backgroundColor: constants.secondary,
+        // backgroundColor: constants.secondary,
+        backgroundColor: constants.primary,
         padding: 20,
         width: "90%",
         height: 320,

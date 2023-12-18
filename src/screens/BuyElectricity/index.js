@@ -83,7 +83,7 @@ export default function BuyElectricity() {
                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
 
                                                         
-                                                        dispatch(updateBalance(user.balance - parseFloat(amount) / 10));
+                                                        dispatch(updateBalance(parseFloat(user.balance - parseFloat(amount) / 10)));
                                                         dispatch(storeTransaction({ direction: "from", reference: "Electricity",
                                                                                     category: "electricity",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
@@ -94,7 +94,7 @@ export default function BuyElectricity() {
                                                                                                                                        amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                                                                        status: status, id: uuid }});
 
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) / 10 });
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: parseFloat(user.balance - parseFloat(amount) / 10) });
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/electricity.json"),

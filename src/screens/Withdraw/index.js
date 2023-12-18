@@ -107,13 +107,19 @@ export default function Withdraw() {
 
                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
 
-                                                        
-                                                        dispatch(updateBalance(user.balance - parseFloat(amount)));
+                                                        dispatch(updateBalance(parseFloat(user.balance - parseFloat(amount))));
                                                         dispatch(storeTransaction({ direction: "from", reference: "Withdraw",
                                                                                     category: "withdraw",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                     status: status, id: uuid }));
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });                                                            
+
+                                                        axios.patch(DB_ENDPOINT + "registerTransaction", { id: user.id, transaction: { direction: "from", reference: "Withdraw",
+                                                                                                                                       category: "withdraw",
+                                                                                                                                       amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
+                                                                                                                                       status: status, id: uuid }});
+
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: parseFloat(user.balance - parseFloat(amount)) });                                                            
+
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/authenticating.json"),

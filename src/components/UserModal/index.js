@@ -36,24 +36,25 @@ export default function UserModal({ open, setOpen, name, setName, password, setP
 
                     <Pressable onPress={async () => { if ((name !== "") && (password !== "")) {
 
-                                                            let check = axios.get(DB_ENDPOINT + "findUser", { params: { name: name, password: utility.encrypt(password, KEY) } });
+                                                            let check = await axios.get(DB_ENDPOINT + "findUser", { params: { name: name, password: utility.encrypt(password, KEY) } });
 
                                                             if (check.status === 200) {
 
                                                                 if (Object.keys(check.data).length === 0) {
-    
+                                                                    
                                                                     let person = { ...constants.user };
                                                                     person.name = name;
                                                                     person.password = utility.encrypt(password, KEY);
                                                                     dispatch(assignUser(person));
-                                                                    await AsyncStorage.setItem("user", JSON.stringify(person));
+                                                                    AsyncStorage.setItem("user", JSON.stringify(person));
                                                                     axios.post(DB_ENDPOINT + "storeUser", person);
 
                                                                 } else {
 
                                                                     let person = check.data;
                                                                     dispatch(assignUser(person));
-                                                                    await AsyncStorage.setItem("user", JSON.stringify(person));
+                                                                    // await AsyncStorage.setItem("user", JSON.stringify(person));
+                                                                    AsyncStorage.setItem("user", JSON.stringify(person));
 
                                                                 }
 
@@ -63,7 +64,8 @@ export default function UserModal({ open, setOpen, name, setName, password, setP
                                                                 person.name = name;
                                                                 person.password = utility.encrypt(password, KEY);
                                                                 dispatch(assignUser(person));
-                                                                await AsyncStorage.setItem("user", JSON.stringify(person));
+                                                                // await AsyncStorage.setItem("user", JSON.stringify(person));
+                                                                AsyncStorage.setItem("user", JSON.stringify(person));
                                                                 axios.post(DB_ENDPOINT + "storeUser", person);
 
                                                             }

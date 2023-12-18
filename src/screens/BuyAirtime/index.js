@@ -102,7 +102,7 @@ export default function BuyAirtime() {
 
                                                         const formattedDateTime = new Intl.DateTimeFormat("en-GB", options).format(currentDate);
 
-                                                        dispatch(updateBalance(user.balance - parseFloat(amount)));
+                                                        dispatch(updateBalance(parseFloat(user.balance - parseFloat(amount))));
                                                         dispatch(storeTransaction({ direction: "from", reference: "Airtime",
                                                                                     category: "airtime",
                                                                                     amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
@@ -113,7 +113,7 @@ export default function BuyAirtime() {
                                                                                                                                        amount: parseFloat(parseFloat(amount).toFixed(2)), date: formattedDateTime,
                                                                                                                                        status: status, id: uuid }});
 
-                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: user.balance - parseFloat(amount) });
+                                                        axios.patch(DB_ENDPOINT + "updateBalance", { id: user.id, balance: parseFloat(user.balance - parseFloat(amount)) });
                                                         dispatch(previousScreen(screen.screen));
                                                         dispatch(currentScreen("Confirmation"));
                                                         navigation.navigate("Confirmation", { animation: require("../../assets/animations/phone.json"),
